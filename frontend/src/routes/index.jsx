@@ -42,10 +42,13 @@ const AdminDashboard = lazy(() => import('../pages/Admin/AdminDashboard'));
 const AdminHomepageSettingsView = lazy(() => import('../pages/Admin/AdminHomepageSettingsView'));
 const AdminSubmissionsView = lazy(() => import('../pages/Admin/AdminSubmissionsView'));
 const AdminResourcesView = lazy(() => import('../pages/Admin/AdminResourcesView'));
+const AdminVivaView = lazy(() => import('../pages/Admin/AdminVivaView'));
 const AdminOpportunitiesView = lazy(() => import('../pages/Admin/AdminOpportunitiesView'));
 const AdminCatalogView = lazy(() => import('../pages/Admin/AdminCatalogView'));
 const AdminSubscribersView = lazy(() => import('../pages/Admin/AdminSubscribersView'));
 const AdminPollsView = lazy(() => import('../pages/Admin/AdminPollsView'));
+
+const UniversalVivaPage = lazy(() => import('../pages/Viva/UniversalVivaPage'));
 
 export const router = createBrowserRouter([
   // ── Public app ─────────────────────────────────────────────
@@ -58,6 +61,7 @@ export const router = createBrowserRouter([
       { path: 'semesters', element: withSuspense(Semesters) },
       { path: 'semesters/:id', element: withSuspense(SemesterDetails) },
       { path: 'subject/:code', element: withSuspense(SubjectDetails) },
+      { path: 'subject/:code/viva', element: withSuspense(UniversalVivaPage) },
       { path: 'opportunities', element: withSuspense(Opportunities) },
       { path: 'community', element: withSuspense(Community) },
       { path: 'contact', element: withSuspense(Contact) },
@@ -86,6 +90,7 @@ export const router = createBrowserRouter([
       { path: 'submissions', element: withSuspense(AdminSubmissionsView) },
       { path: 'uploads', element: withSuspense(AdminSubmissionsView) },
       { path: 'resources', element: withSuspense(AdminResourcesView) },
+      { path: 'viva', element: withSuspense(AdminVivaView) },
       { path: 'opportunities', element: withSuspense(AdminOpportunitiesView) },
       { path: 'polls', element: withSuspense(AdminPollsView) },
       { path: 'referendums', element: withSuspense(AdminPollsView) },

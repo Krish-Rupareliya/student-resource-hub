@@ -233,6 +233,13 @@ export default function AdminDashboard() {
             <span>Resource Catalog</span>
           </Link>
           <Link
+            to="/admin/viva"
+            className="px-5 py-3 rounded-full bg-[#FEF08A] hover:bg-[#FDE047] text-[#1A1A1A] font-black text-xs sm:text-sm border-2 border-[#1A1A1A] shadow-[3px_3px_0px_#1A1A1A] hover:translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">quiz</span>
+            <span>Viva Questions</span>
+          </Link>
+          <Link
             to="/admin/opportunities"
             className="px-5 py-3 rounded-full bg-[#B3D8A8] hover:bg-[#9ecc92] text-[#1A1A1A] font-black text-xs sm:text-sm border-2 border-[#1A1A1A] shadow-[3px_3px_0px_#1A1A1A] hover:translate-x-0.5 hover:-translate-y-0.5 transition-all flex items-center gap-2"
           >

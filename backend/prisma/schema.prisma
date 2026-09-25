@@ -73,10 +73,40 @@ model Subject {
   path        String?    @db.VarChar(100)
   sortOrder   Int        @default(0)
   resources   Resource[]
+  vivaQuestions VivaQuestion[]
   semester    Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
 
   @@index([semesterId])
   @@map("subjects")
+}
+
+model VivaQuestion {
+  id                String       @id @default(uuid())
+  subjectId         String
+  unitId            String?      @db.VarChar(100)
+  section           String       @db.VarChar(200)
+  category          String       @default("theory") @db.VarChar(50)
+  questionNumber    String?      @db.VarChar(50)
+  question          String       @db.Text
+  shortAnswer       String?      @db.Text
+  detailedAnswer    String       @db.LongText
+  difficulty        String       @default("basic") @db.VarChar(30)
+  tags              String?      @db.Text
+  followUpQuestions String?      @db.LongText
+  quickRevision     String?      @db.Text
+  diagram           String?      @db.LongText
+  imageUrl          String?      @db.VarChar(500)
+  source            String?      @db.Text
+  isPublished       Boolean      @default(true)
+  sortOrder         Int          @default(0)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  subject           Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@index([subjectId])
+  @@index([unitId])
+  @@index([isPublished])
+  @@map("viva_questions")
 }
 
 model Resource {

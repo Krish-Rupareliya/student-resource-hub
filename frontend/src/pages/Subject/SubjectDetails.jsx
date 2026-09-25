@@ -202,13 +202,23 @@ function SubjectDetails() {
                     {resourcesLoading ? '...' : totalResourcesCount}
                   </span>
                 </div>
-                <button
-                  onClick={() => setShowUpload(true)}
-                  className="btn-black-yellow px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press shadow-xs cursor-pointer w-full sm:w-auto"
-                >
-                  <span className="material-symbols-outlined text-[18px]">upload_file</span>
-                  Contribute
-                </button>
+                <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap sm:flex-nowrap">
+                  <Link
+                    to={`/subject/${(subject.code || code).toLowerCase()}/viva`}
+                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press shadow-xs cursor-pointer w-full sm:w-auto bg-[#F6E27B] text-black border-2 border-black hover:bg-amber-400 transition"
+                    title="Open Viva Questions & Solutions platform"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">quiz</span>
+                    Viva Prep
+                  </Link>
+                  <button
+                    onClick={() => setShowUpload(true)}
+                    className="btn-black-yellow px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press shadow-xs cursor-pointer w-full sm:w-auto"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">upload_file</span>
+                    Contribute
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -231,8 +241,43 @@ function SubjectDetails() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {categories.map((cat, idx) => {
+              const isViva = cat.dbType === 'Viva Questions';
+              const vivaUrl = `/subject/${(subject?.code || code).toLowerCase()}/viva`;
               const isSelected = selectedCategory === cat.dbType;
               const catCount = resources.filter(r => r.resourceType === cat.dbType).length;
+
+              if (isViva) {
+                return (
+                  <Link
+                    key={idx}
+                    to={vivaUrl}
+                    className="relative p-3.5 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[24px] text-left flex flex-col justify-between min-h-[140px] sm:min-h-[180px] transition-all duration-300 cursor-pointer select-none group border-2 bg-gradient-to-br from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200 text-black border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_rgba(0,0,0,1)] hover:-translate-y-1"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2.5 sm:mb-4">
+                        <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center border-2 border-black bg-amber-400 text-black shadow-[2px_2px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
+                          <span className="material-symbols-outlined text-[20px] sm:text-[26px]">quiz</span>
+                        </div>
+                        <span className="text-[10px] sm:text-xs font-black px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border-2 bg-[#0F172A] text-[#FBBF24] border-black">
+                          Oral Exam Prep ↗
+                        </span>
+                      </div>
+                      <h3 className="font-black text-base sm:text-xl mb-1 sm:mb-2 tracking-tight line-clamp-1 text-black">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm font-medium mb-3 sm:mb-6 leading-relaxed line-clamp-2 text-gray-700">
+                        Interactive syllabus dossiers, examiner punchlines, diagrams, and quick-recall cards.
+                      </p>
+                    </div>
+                    <div className="pt-2.5 sm:pt-4 border-t border-black/10 flex items-center justify-between text-xs sm:text-sm font-black text-black group-hover:text-amber-800">
+                      <span className="tracking-wide">Launch Viva Platform</span>
+                      <span className="material-symbols-outlined text-[16px] sm:text-[18px] group-hover:translate-x-1.5 transition-transform duration-200">
+                        arrow_forward
+                      </span>
+                    </div>
+                  </Link>
+                );
+              }
 
               return (
                 <motion.button

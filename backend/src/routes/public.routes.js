@@ -7,6 +7,7 @@ const { body, query } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 
 const publicController = require('../controllers/public.controller');
+const vivaController = require('../controllers/viva.controller');
 const { handleValidationErrors } = require('../middlewares/validate.middleware');
 const { studentUpload } = require('../config/multer');
 
@@ -28,6 +29,9 @@ const submissionLimiter = rateLimit({
 
 // ─── GET /api/categories/semesters ───────────────────────────
 router.get('/categories/semesters', publicController.getSemesters);
+
+// ─── GET /api/viva/:subjectCode ───────────────────────────────
+router.get('/viva/:subjectCode', vivaController.getSubjectViva);
 
 // ─── GET /api/resources ───────────────────────────────────────
 router.get(

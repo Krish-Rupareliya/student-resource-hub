@@ -383,6 +383,73 @@ export async function updateAdminCommunityGroups(groupsData) {
 export const reviewAdminUpload = reviewUpload;
 export const reviewAdminRequest = reviewRequest;
 
+// ─── Viva Questions & Answers Management ──────────────────────
+
+// GET /api/admin/viva
+export async function getAdminVivaQuestions(params = {}) {
+  const qs = new URLSearchParams();
+  Object.entries(params).forEach(([k, v]) => {
+    if (v !== undefined && v !== null && v !== '' && v !== 'all') {
+      qs.set(k, v);
+    }
+  });
+  const queryString = qs.toString();
+  return fetchFromApi(`admin/viva${queryString ? `?${queryString}` : ''}`);
+}
+
+// GET /api/admin/viva/:id
+export async function getAdminVivaQuestion(id) {
+  return fetchFromApi(`admin/viva/${id}`);
+}
+
+// POST /api/admin/viva
+export async function createAdminVivaQuestion(data) {
+  return fetchFromApi('admin/viva', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+// PUT /api/admin/viva/:id
+export async function updateAdminVivaQuestion(id, data) {
+  return fetchFromApi(`admin/viva/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+// DELETE /api/admin/viva/:id
+export async function deleteAdminVivaQuestion(id) {
+  return fetchFromApi(`admin/viva/${id}`, { method: 'DELETE' });
+}
+
+// POST /api/admin/viva/bulk-delete
+export async function bulkDeleteVivaQuestions(payload) {
+  const body = Array.isArray(payload) ? { ids: payload } : payload;
+  return fetchFromApi('admin/viva/bulk-delete', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+// PATCH /api/admin/viva/:id/toggle
+export async function togglePublishVivaQuestion(id) {
+  return fetchFromApi(`admin/viva/${id}/toggle`, { method: 'PATCH' });
+}
+
+// POST /api/admin/viva/bulk-import
+export async function bulkImportVivaQuestions(payload) {
+  return fetchFromApi('admin/viva/bulk-import', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+// GET /api/admin/viva/sample-json
+export async function getSampleVivaJson() {
+  return fetchFromApi('admin/viva/sample-json');
+}
+
 
 
 
