@@ -1,8 +1,17 @@
 {
   "name": "student-resource-hub-root",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "if [ -d frontend ]; then (cd frontend && npm run build); else npm run build; fi",
-    "vercel-build": "if [ -d frontend ]; then (cd frontend && npm install && npm run build); else npm run build; fi"
+    "vercel-build": "if [ -d frontend ]; then (cd frontend && npm install && npm run build); else npm run build; fi",
+    "ralph": "node tools/ralph/ralph.js",
+    "ralph:status": "node tools/ralph/cli.js status",
+    "ralph:validate": "node tools/ralph/cli.js validate",
+    "ralph:init": "node tools/ralph/cli.js init",
+    "ralph:convert": "node tools/ralph/cli.js convert",
+    "ralph:archive": "node tools/ralph/cli.js archive",
+    "ralph:ps1": "powershell -ExecutionPolicy Bypass -File tools/ralph/ralph.ps1",
+    "ralph:sh": "bash tools/ralph/ralph.sh"
   }
 }

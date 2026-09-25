@@ -35,3 +35,16 @@ backend/.env
 *.njsproj
 *.sln
 *.sw?
+
+# Agents, Skills & Autonomous Loops (Do Not Push)
+.agents/
+tools/ralph/
+graphify-out/
+.mcp.json
+pinte.md
+svg-avoid.md
+
+# Unused external templates & assets
+frontend/public/lofty/
+frontend/public/assets/
+

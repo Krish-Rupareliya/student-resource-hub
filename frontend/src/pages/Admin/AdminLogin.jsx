@@ -1,71 +1,79 @@
-// ─── pages/Admin/AdminLogin.jsx ───────────────────────────────
-// The admin sign-in page. On successful login redirects to /admin/dashboard.
+// src/pages/Admin/AdminLogin.jsx
+// Staff & Admin Sign In.
+// Signature Neo-Brutalist Yellow & Slate Theme.
 
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Navigate, Link } from 'react-router-dom';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
 export default function AdminLogin() {
-  const { login } = useAdminAuth();
+  const { admin, login } = useAdminAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+
+  // Already logged in → redirect to dashboard
+  if (admin) {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
     setLoading(true);
+
     try {
-      await login(email.trim(), password);
+      await login(email, password);
       navigate('/admin/dashboard', { replace: true });
     } catch (err) {
-      setError(err.message || 'Invalid credentials. Please try again.');
+      setError(err.message || 'Invalid email or password.');
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-tertiary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative w-full max-w-md mx-auto">
+    <div className="min-h-screen bg-[#F7F2E7] flex items-center justify-center p-4 font-sans selection:bg-[#F6E27B] selection:text-[#1A1A1A]">
+      <div className="w-full max-w-md">
         {/* Card */}
-        <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl">
+        <div className="bg-white border-3 border-[#1A1A1A] rounded-[28px] p-6 sm:p-8 shadow-[8px_8px_0px_#1A1A1A] relative overflow-hidden">
+          {/* Decorative Corner Accent */}
+          <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#F6E27B] border-2 border-[#1A1A1A] pointer-events-none opacity-80" />
+
           {/* Header */}
-          <div className="text-center mb-6 sm:mb-8">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
-              <span className="material-symbols-outlined text-primary text-2xl sm:text-3xl">admin_panel_settings</span>
+          <div className="text-center mb-8 relative z-10">
+            <div className="w-16 h-16 bg-[#F6E27B] border-3 border-[#1A1A1A] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-[4px_4px_0px_#1A1A1A]">
+              <span className="material-symbols-outlined text-[#1A1A1A] text-[32px]">shield_person</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-on-surface mb-1">Admin Portal</h1>
-            <p className="text-on-surface-variant text-xs sm:text-sm">Student Resource Hub — Staff Access</p>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#1A1A1A] text-white text-[10px] font-black uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B3D8A8] animate-pulse" />
+              <span>CampusAdmin OS</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">Admin Portal</h1>
+            <p className="text-xs sm:text-sm font-bold text-[#1A1A1A]/70 mt-1">Student Resource Hub — Staff Access</p>
           </div>
 
           {/* Error banner */}
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-error/10 border border-error/20 flex items-start gap-3">
-              <span className="material-symbols-outlined text-error text-[20px] mt-0.5 shrink-0">error</span>
-              <p className="text-error text-sm font-medium">{error}</p>
+            <div className="mb-6 p-4 rounded-2xl bg-[#FBCFE8] border-2 border-[#1A1A1A] text-[#1A1A1A] flex items-start gap-3 shadow-[2px_2px_0px_#1A1A1A]">
+              <span className="material-symbols-outlined text-[#E11D48] text-[20px] mt-0.5 shrink-0">error</span>
+              <p className="text-xs sm:text-sm font-black">{error}</p>
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
             {/* Email */}
             <div>
-              <label htmlFor="admin-email" className="block text-sm font-semibold text-on-surface mb-2">
-                Email Address
+              <label htmlFor="admin-email" className="block text-xs font-black uppercase text-[#1A1A1A] mb-1.5">
+                Admin Email Address
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[20px]">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#1A1A1A]/50 text-[18px]">
                   alternate_email
                 </span>
                 <input
@@ -76,18 +84,18 @@ export default function AdminLogin() {
                   placeholder="admin@campus.edu"
                   required
                   autoComplete="email"
-                  className="w-full pl-10 pr-4 py-3 bg-surface-container border border-outline-variant/30 rounded-xl text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-[#F7F2E7] border-2 border-[#1A1A1A] rounded-2xl text-[#1A1A1A] placeholder:text-[#1A1A1A]/40 focus:outline-none focus:bg-white text-xs sm:text-sm font-extrabold shadow-[2px_2px_0px_#1A1A1A] transition-all"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="admin-password" className="block text-sm font-semibold text-on-surface mb-2">
+              <label htmlFor="admin-password" className="block text-xs font-black uppercase text-[#1A1A1A] mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[20px]">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#1A1A1A]/50 text-[18px]">
                   lock
                 </span>
                 <input
@@ -95,18 +103,18 @@ export default function AdminLogin() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="••••••••••••"
                   required
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-12 py-3 bg-surface-container border border-outline-variant/30 rounded-xl text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm"
+                  className="w-full pl-10 pr-11 py-3 bg-[#F7F2E7] border-2 border-[#1A1A1A] rounded-2xl text-[#1A1A1A] placeholder:text-[#1A1A1A]/40 focus:outline-none focus:bg-white text-xs sm:text-sm font-extrabold shadow-[2px_2px_0px_#1A1A1A] transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors cursor-pointer"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  <span className="material-symbols-outlined text-[20px]">
+                  <span className="material-symbols-outlined text-[18px]">
                     {showPassword ? 'visibility_off' : 'visibility'}
                   </span>
                 </button>
@@ -117,35 +125,32 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-primary text-on-primary hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-sm hover:shadow-md"
+              className="w-full mt-2 flex items-center justify-center gap-2 bg-[#F6E27B] hover:bg-[#ebd35d] text-[#1A1A1A] border-3 border-[#1A1A1A] px-6 py-3.5 rounded-full font-black text-xs sm:text-sm shadow-[4px_4px_0px_#1A1A1A] hover:translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed transition-all cursor-pointer"
             >
               {loading ? (
                 <>
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                  </svg>
-                  Signing in…
+                  <span className="w-4 h-4 border-2 border-[#1A1A1A] border-t-transparent rounded-full animate-spin" />
+                  <span>Verifying Credentials…</span>
                 </>
               ) : (
                 <>
                   <span className="material-symbols-outlined text-[18px]">login</span>
-                  Sign In
+                  <span>Sign In to Admin Console</span>
                 </>
               )}
             </button>
           </form>
 
           {/* Footer */}
-          <div className="mt-6 pt-6 border-t border-outline-variant/10 text-center">
-            <Link to="/" className="text-xs text-on-surface-variant hover:text-primary transition-colors">
+          <div className="mt-6 pt-5 border-t-2 border-[#1A1A1A]/10 text-center relative z-10">
+            <Link to="/" className="text-xs font-black text-[#1A1A1A]/70 hover:text-[#1A1A1A] underline transition-colors">
               ← Back to Student Resource Hub
             </Link>
           </div>
         </div>
 
-        <p className="text-center text-xs text-on-surface-variant/50 mt-4">
-          Restricted access — authorized staff only
+        <p className="text-center text-xs font-extrabold text-[#1A1A1A]/60 mt-4">
+          🔒 Secure HttpOnly session with Backend Proxy Isolation
         </p>
       </div>
     </div>

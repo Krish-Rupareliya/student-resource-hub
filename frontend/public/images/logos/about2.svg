@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 460" width="100%" height="100%" style="background: transparent; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Sharp Brutalist Hard Drop Shadow -->
+    <filter id="hard-shadow-lg" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+    <filter id="hard-shadow-md" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+    <filter id="hard-shadow-sm" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+  </defs>
+
+  <!-- ================= RETRO SPARKLES & STARS ================= -->
+  <!-- Sparkle Top Left -->
+  <g transform="translate(45, 30) rotate(12)">
+    <path d="M12 0 L15 9 L24 12 L15 15 L12 24 L9 15 L0 12 L9 9 Z" fill="#FFD000" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <!-- Sparkle Mid Right -->
+  <g transform="translate(490, 180) rotate(-18)">
+    <path d="M10 0 L13 7 L20 10 L13 13 L10 20 L7 13 L0 10 L7 7 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <!-- Tiny Star Bottom Right -->
+  <g transform="translate(470, 390) rotate(25)">
+    <path d="M8 0 L10 6 L16 8 L10 10 L8 16 L6 10 L0 8 L6 6 Z" fill="#FFD000" stroke="#000000" stroke-width="2"/>
+  </g>
+
+  <!-- ================= 1. DIGITAL CLOCK BADGE (TOP) ================= -->
+  <!-- "02:15 AM • NIGHT BEFORE FINALS" -->
+  <g transform="translate(50, 40)" filter="url(#hard-shadow-lg)">
+    <!-- Container -->
+    <rect x="0" y="0" width="410" height="66" rx="14" fill="#121214" stroke="#000000" stroke-width="4.5"/>
+    
+    <!-- Red glowing digital clock pill -->
+    <rect x="14" y="11" width="135" height="44" rx="8" fill="#1E1E22" stroke="#FF4D4D" stroke-width="2"/>
+    <text x="81" y="39" fill="#FF453A" font-family="'Courier New', Courier, monospace, monospace" font-size="21" font-weight="900" letter-spacing="1" text-anchor="middle">02:15 AM</text>
+    <circle cx="138" cy="22" r="3" fill="#FF453A"/>
+    
+    <!-- Bullet dot -->
+    <circle cx="166" cy="33" r="4" fill="#71717A"/>
+
+    <!-- Subtitle text -->
+    <text x="184" y="38" fill="#F4F4F5" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="900" letter-spacing="1">NIGHT BEFORE FINALS</text>
+
+    <!-- Glowing Moon Badge -->
+    <g transform="translate(362, 19)">
+      <path d="M16 3 C9 4 4 10 5 18 C6 25 12 30 20 29 C22 29 24 28 25 27 C20 26 16 22 16 16 C16 11 18 6 22 4 C20 3 18 3 16 3 Z" fill="#FACC15" stroke="#EAB308" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- ================= 2. GOOGLE DRIVE ACCESS DENIED POPUP ================= -->
+  <g transform="translate(70, 135) rotate(-1)" filter="url(#hard-shadow-lg)">
+    <!-- Main alert card -->
+    <rect x="0" y="0" width="400" height="84" rx="14" fill="#FFFFFF" stroke="#000000" stroke-width="4.5"/>
+    
+    <!-- Warning Icon Pill -->
+    <g transform="translate(18, 18)">
+      <rect x="0" y="0" width="46" height="46" rx="10" fill="#FEF08A" stroke="#000000" stroke-width="3"/>
+      <!-- Warning triangle -->
+      <path d="M23 10 L35 34 L11 34 Z" fill="#EAB308" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="23" cy="24" r="1.8" fill="#000000"/>
+      <rect x="21.8" y="27.5" width="2.4" height="3" rx="1" fill="#000000"/>
+    </g>
+
+    <!-- Alert Title and Subtext -->
+    <text x="76" y="37" fill="#000000" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="900" letter-spacing="0.2">Google Drive: Access Denied</text>
+    <text x="76" y="56" fill="#EF4444" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" font-weight="800">You need permission. Request sent?</text>
+
+    <!-- Broken Chain Link Icon on Far Right -->
+    <g transform="translate(340, 22)">
+      <rect x="0" y="0" width="40" height="40" rx="8" fill="#F4F4F5" stroke="#000000" stroke-width="2.5"/>
+      <path d="M12 18 L18 12 M15 15 L21 9" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22 28 L28 22 M19 25 L25 19" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+      <!-- Lightning break lines -->
+      <path d="M19 13 L21 16 L18 19 L21 21" stroke="#000000" stroke-width="2" stroke-linejoin="round" fill="none"/>
+    </g>
+  </g>
+
+  <!-- ================= 3. FRANTIC WHATSAPP GROUP CHAT BUBBLE ================= -->
+  <g transform="translate(20, 240) rotate(1)" filter="url(#hard-shadow-lg)">
+    <!-- Speech bubble body -->
+    <path d="M18 0 L360 0 C370 0 378 8 378 18 L378 68 C378 78 370 86 360 86 L40 86 L14 104 L18 86 C8 86 0 78 0 68 L0 18 C0 8 8 0 18 0 Z" fill="#FFFFFF" stroke="#000000" stroke-width="4.5" stroke-linejoin="round"/>
+
+    <!-- Sender Tag -->
+    <g transform="translate(18, 12)">
+      <rect x="0" y="0" width="138" height="20" rx="6" fill="#22C55E" stroke="#000000" stroke-width="2"/>
+      <text x="69" y="14" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="900" letter-spacing="0.5" text-anchor="middle">ECE_FINAL_SEM_GRP</text>
+    </g>
+    <text x="164" y="27" fill="#71717A" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700">02:14 AM</text>
+
+    <!-- Urgent Message Text -->
+    <text x="18" y="54" fill="#111111" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800">
+      "GUYS please send Unit 3 notes ASAP!! 😭🙏"
+    </text>
+    <text x="18" y="74" fill="#6B7280" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700">
+      Drive link expired • 18 students typing...
+    </text>
+  </g>
+
+  <!-- Floating Urgent "HELP!" Reaction Tag -->
+  <g transform="translate(365, 230) rotate(12)" filter="url(#hard-shadow-sm)">
+    <rect x="0" y="0" width="70" height="32" rx="16" fill="#FF5236" stroke="#000000" stroke-width="3"/>
+    <text x="35" y="20" fill="#FFFFFF" font-family="'Impact', 'Arial Black', sans-serif" font-size="13" font-weight="900" letter-spacing="1" text-anchor="middle">HELP! 🔥</text>
+  </g>
+
+  <!-- ================= 4. FILE CORRUPTED / 404 NOT FOUND CARD ================= -->
+  <g transform="translate(95, 345) rotate(-2)" filter="url(#hard-shadow-lg)">
+    <!-- Broken file container -->
+    <rect x="0" y="0" width="375" height="82" rx="14" fill="#FFFFFF" stroke="#000000" stroke-width="4.5"/>
+
+    <!-- Red Hazard Stamp on File Left -->
+    <g transform="translate(16, 15)">
+      <rect x="0" y="0" width="50" height="52" rx="10" fill="#FEE2E2" stroke="#000000" stroke-width="3"/>
+      <!-- File doc outline -->
+      <path d="M14 10 L30 10 L36 17 L36 42 L14 42 Z" fill="#FFFFFF" stroke="#EF4444" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="18" y1="24" x2="31" y2="24" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+      <!-- Red Cross -->
+      <line x1="20" y1="28" x2="30" y2="38" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+      <line x1="30" y1="28" x2="20" y2="38" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- Corrupted File Name and Status -->
+    <text x="78" y="36" fill="#111111" font-family="'Courier New', Courier, monospace" font-size="14.5" font-weight="900" letter-spacing="0.5">FILE_CORRUPTED.pdf</text>
+    
+    <!-- 404 badge -->
+    <g transform="translate(78, 47)">
+      <rect x="0" y="0" width="105" height="22" rx="6" fill="#EF4444" stroke="#000000" stroke-width="2"/>
+      <text x="52" y="15" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="900" letter-spacing="0.8" text-anchor="middle">404 NOT FOUND</text>
+    </g>
+
+    <!-- Expired Warning Tag -->
+    <text x="194" y="62" fill="#71717A" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700">0 KB / Link Dead</text>
+  </g>
+
+  <!-- Hazard Exclamation Burst Badge 1 -->
+  <g transform="translate(435, 335) rotate(16)" filter="url(#hard-shadow-md)">
+    <!-- Jagged / Starburst Sticker -->
+    <path d="M22 0 L27 8 L36 5 L35 14 L44 18 L38 25 L43 33 L34 34 L33 43 L25 39 L19 46 L17 37 L8 38 L11 29 L3 24 L10 18 L6 10 L15 11 L17 2 Z" fill="#FACC15" stroke="#000000" stroke-width="3" stroke-linejoin="round"/>
+    <text x="23" y="28" fill="#000000" font-family="'Impact', 'Arial Black', sans-serif" font-size="20" font-weight="900" text-anchor="middle">!</text>
+  </g>
+
+  <!-- Hazard Triangle Badge (Bottom Left overlap) -->
+  <g transform="translate(50, 380) rotate(-14)" filter="url(#hard-shadow-md)">
+    <path d="M26 4 L50 44 L2 44 Z" fill="#FFCC00" stroke="#000000" stroke-width="3.5" stroke-linejoin="round"/>
+    <line x1="26" y1="18" x2="26" y2="30" stroke="#000000" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="26" cy="37" r="2.8" fill="#000000"/>
+  </g>
+</svg>

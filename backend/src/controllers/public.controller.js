@@ -11,6 +11,7 @@ const { sendSuccess, sendError } = require('../utils/response');
 // GET /api/categories/semesters
 async function getSemesters(req, res, next) {
   try {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     const data = await publicService.getSemesters();
     return sendSuccess(res, data);
   } catch (err) {
@@ -21,6 +22,7 @@ async function getSemesters(req, res, next) {
 // GET /api/resources?subjectCode=CS101&resourceType=notes
 async function getResources(req, res, next) {
   try {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     const { subjectCode, resourceType } = req.query;
     const data = await publicService.getResources({ subjectCode, resourceType });
     return sendSuccess(res, data);
@@ -32,6 +34,7 @@ async function getResources(req, res, next) {
 // GET /api/resources/:id
 async function getResourceById(req, res, next) {
   try {
+    res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
     const { id } = req.params;
     let data = await publicService.getResourceById(id);
     if (!data) {
@@ -63,6 +66,7 @@ async function getResourceById(req, res, next) {
 // GET /api/opportunities
 async function getOpportunities(req, res, next) {
   try {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     const data = await publicService.getOpportunities();
     return sendSuccess(res, data);
   } catch (err) {
@@ -143,6 +147,66 @@ async function subscribe(req, res, next) {
   }
 }
 
+// GET /api/poll/active
+async function getActivePoll(req, res, next) {
+  try {
+    res.setHeader('Cache-Control', 'public, max-age=10, stale-while-revalidate=20');
+    const poll = await publicService.getActivePoll();
+    return sendSuccess(res, poll, 200, 'Active poll retrieved successfully');
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// POST /api/poll/:pollId/vote
+async function castVote(req, res, next) {
+  try {
+    const { pollId } = req.params;
+    const { optionId } = req.body;
+
+    if (!optionId) {
+      return res.status(400).json({ success: false, message: 'optionId is required' });
+    }
+
+    const updatedPoll = await publicService.castVote(pollId, optionId);
+    return sendSuccess(res, updatedPoll, 200, 'Vote cast successfully');
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// GET /api/settings/homepage
+async function getHomepageSettings(req, res, next) {
+  try {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
+    const settings = await publicService.getHomepageSettings();
+    return sendSuccess(res, settings, 200, 'Homepage settings retrieved successfully');
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// GET /api/stats/overview
+async function getOverviewStats(req, res, next) {
+  try {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
+    const stats = await publicService.getOverviewStats();
+    return sendSuccess(res, stats, 200, 'Overview stats retrieved successfully');
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// GET /api/announcements
+async function getAnnouncements(req, res, next) {
+  try {
+    res.setHeader('Cache-Control', 'public, max-age=15, stale-while-revalidate=30');
+    const announcements = await publicService.getAnnouncements();
+    return sendSuccess(res, announcements, 200, 'Announcements retrieved successfully');
+  } catch (err) {
+    return next(err);
+  }
+}
 
 module.exports = {
   getSemesters,
@@ -152,4 +216,10 @@ module.exports = {
   submitUpload,
   submitRequest,
   subscribe,
+  getActivePoll,
+  castVote,
+  getHomepageSettings,
+  getOverviewStats,
+  getAnnouncements,
 };
+

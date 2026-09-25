@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUp } from 'lucide-react';
+import {
+  WhatsAppIcon,
+  TelegramIcon,
+  SocialStickerButton,
+} from '../common/BrandIcons';
 import { subscribeNewsletter } from '../../services/subscribers/subscribersApi';
+import { getPublicHomepageSettings } from '../../services/settings/settingsApi';
 import { ToastContainer, useToast } from '../ui/Toast';
 
 function Footer() {
@@ -8,6 +15,29 @@ function Footer() {
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [message, setMessage] = useState('');
   const { toasts, addToast, removeToast } = useToast();
+
+  const [communityLinks, setCommunityLinks] = useState({
+    whatsapp: 'https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB',
+    telegram: 'https://t.me/+fP4hKU69AQIwZjI1',
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    getPublicHomepageSettings()
+      .then((settings) => {
+        if (isMounted && settings?.communityGroups) {
+          const groups = settings.communityGroups;
+          setCommunityLinks({
+            whatsapp: groups.whatsappSem1_4 || groups.whatsappSem5_8 || 'https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB',
+            telegram: groups.telegramMain || 'https://t.me/+fP4hKU69AQIwZjI1',
+          });
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -54,16 +84,16 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full bg-[#0D1527] text-white pt-16 pb-8 relative z-10 border-t border-slate-800">
+    <footer className="w-full bg-[#0D1527] text-white pt-16 pb-8 relative z-10 border-t-2 border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-800">
           
-          {/* Column 1: Brand Info */}
+          {/* Column 1: Brand Info & Pinterest Neo-Brutalist Sticker Socials */}
           <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-400 text-hub-navy font-black text-lg flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-amber-400 text-[#111111] font-black text-lg flex items-center justify-center border-2 border-[#111111] shadow-[3px_3px_0px_#FACC15] rotate-[-2deg]">
                 CH
               </div>
               <div className="flex flex-col">
@@ -77,47 +107,29 @@ function Footer() {
             </Link>
 
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-              Everything a student needs to learn, grow, and succeed — in one platform.
+              Everything a student needs to learn, grow, and succeed — in one unified campus repository.
             </p>
 
-            {/* Social Icons */}
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-amber-400 hover:text-hub-navy text-gray-300 flex items-center justify-center transition-colors text-sm"
-              >
-                <span className="material-symbols-outlined text-lg">code</span>
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-amber-400 hover:text-hub-navy text-gray-300 flex items-center justify-center transition-colors text-sm"
-              >
-                <span className="material-symbols-outlined text-lg">work</span>
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-amber-400 hover:text-hub-navy text-gray-300 flex items-center justify-center transition-colors text-sm"
-              >
-                <span className="material-symbols-outlined text-lg">play_circle</span>
-              </a>
-              <a
-                href="https://telegram.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram"
-                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-amber-400 hover:text-hub-navy text-gray-300 flex items-center justify-center transition-colors text-sm"
-              >
-                <span className="material-symbols-outlined text-lg">send</span>
-              </a>
+            {/* Pinterest Neo-Brutalist Sticker Social Badges */}
+            <div className="flex items-center gap-2.5 pt-3 flex-wrap">
+              <SocialStickerButton
+                href={communityLinks.whatsapp}
+                icon={WhatsAppIcon}
+                label="WhatsApp Community"
+                bgColor="bg-[#25D366]"
+                hoverBg="hover:bg-[#1faa4e]"
+                textColor="text-slate-950"
+                rotate="rotate-[-3deg]"
+              />
+              <SocialStickerButton
+                href={communityLinks.telegram}
+                icon={TelegramIcon}
+                label="Telegram Channel"
+                bgColor="bg-[#229ED9]"
+                hoverBg="hover:bg-[#1a84b8]"
+                textColor="text-white"
+                rotate="rotate-[2.5deg]"
+              />
             </div>
           </div>
 
@@ -207,9 +219,9 @@ function Footer() {
           <button
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="w-9 h-9 rounded-full bg-amber-400 text-hub-navy hover:bg-amber-300 font-bold flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+            className="w-10 h-10 rounded-2xl bg-amber-400 text-[#111111] hover:bg-amber-300 font-bold flex items-center justify-center border-2 border-[#111111] shadow-[2.5px_2.5px_0px_#111111] transition-transform hover:scale-110 active:scale-95 cursor-pointer"
           >
-            <span className="material-symbols-outlined text-lg">arrow_upward</span>
+            <ArrowUp className="w-5 h-5 stroke-[2.5]" />
           </button>
         </div>
 

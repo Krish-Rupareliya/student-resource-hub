@@ -26,6 +26,19 @@ router.get(
   adminController.getUploads
 );
 
+// POST /api/admin/uploads/bulk-review (bulk approve/reject student uploads)
+router.post(
+  '/uploads/bulk-review',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    body('ids').isArray({ min: 1 }).withMessage('ids must be a non-empty array'),
+    body('ids.*').isUUID().withMessage('each id must be a valid UUID'),
+    body('action').notEmpty().isIn(['APPROVED', 'REJECTED']),
+  ],
+  handleValidationErrors,
+  adminController.bulkReviewUploads
+);
+
 // PATCH /api/admin/uploads/:id
 router.patch(
   '/uploads/:id',
@@ -133,9 +146,27 @@ router.get('/opportunities', adminController.getOpportunities);
 router.post(
   '/opportunities',
   requireRole('ADMIN', 'MODERATOR'),
-  [body('title').notEmpty().isString().trim()],
+  [
+    body('title').notEmpty().isString().trim(),
+    body('link').optional({ nullable: true }).isString().trim(),
+    body('deadline').optional({ nullable: true }).isString().trim(),
+  ],
   handleValidationErrors,
   adminController.createOpportunity
+);
+
+// PUT /api/admin/opportunities/:id
+router.put(
+  '/opportunities/:id',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    param('id').isUUID(),
+    body('title').optional().isString().trim(),
+    body('link').optional({ nullable: true }).isString().trim(),
+    body('deadline').optional({ nullable: true }).isString().trim(),
+  ],
+  handleValidationErrors,
+  adminController.updateOpportunity
 );
 
 // PATCH /api/admin/opportunities/:id/toggle
@@ -158,13 +189,158 @@ router.post(
   adminController.createAnnouncement
 );
 
+// PUT /api/admin/announcements/:id
+router.put(
+  '/announcements/:id',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    param('id').isUUID(),
+    body('text').optional().isString().trim(),
+  ],
+  handleValidationErrors,
+  adminController.updateAnnouncement
+);
+
 // PATCH /api/admin/announcements/:id/toggle
 router.patch('/announcements/:id/toggle', requireRole('ADMIN', 'MODERATOR'), adminController.toggleAnnouncement);
 
 // DELETE /api/admin/announcements/:id
 router.delete('/announcements/:id', requireRole('ADMIN'), adminController.deleteAnnouncement);
 
+// ─── Subscribers (Newsletter Audience) ────────────────────────
+// GET /api/admin/subscribers
+router.get('/subscribers', adminController.getSubscribers);
+
+// DELETE /api/admin/subscribers/:id
+router.delete('/subscribers/:id', requireRole('ADMIN'), adminController.deleteSubscriber);
+
+// ─── Polls / Referendums ─────────────────────────────────────
+// GET /api/admin/polls
+router.get('/polls', adminController.getPolls);
+
+// POST /api/admin/polls
+router.post(
+  '/polls',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    body('title').notEmpty().withMessage('title is required').isString().trim(),
+    body('options').isArray({ min: 2 }).withMessage('At least 2 options are required'),
+    body('options.*.text').notEmpty().withMessage('Option text is required'),
+  ],
+  handleValidationErrors,
+  adminController.createPoll
+);
+
+// PUT /api/admin/polls/:id
+router.put(
+  '/polls/:id',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    param('id').isUUID(),
+    body('title').optional().isString().trim(),
+  ],
+  handleValidationErrors,
+  adminController.updatePoll
+);
+
+// PATCH /api/admin/polls/:id/toggle
+router.patch(
+  '/polls/:id/toggle',
+  requireRole('ADMIN', 'MODERATOR'),
+  [param('id').isUUID()],
+  handleValidationErrors,
+  adminController.togglePoll
+);
+
+// POST /api/admin/polls/:id/sync-votes
+router.post(
+  '/polls/:id/sync-votes',
+  requireRole('ADMIN', 'MODERATOR'),
+  [
+    param('id').isUUID(),
+    body('optionVotes').isArray().withMessage('optionVotes must be an array'),
+  ],
+  handleValidationErrors,
+  adminController.syncPollVotes
+);
+
+// DELETE /api/admin/polls/:id
+router.delete(
+  '/polls/:id',
+  requireRole('ADMIN'),
+  [param('id').isUUID()],
+  handleValidationErrors,
+  adminController.deletePoll
+);
+
+// ─── Telemetry & Analytics ────────────────────────────────────
+// GET /api/admin/analytics/dashboard
+router.get(
+  '/analytics/dashboard',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.getDashboardAnalytics
+);
+
+// ─── Homepage Settings (Live Semester Clock & Trending) ──────
+// GET /api/admin/settings/homepage
+router.get(
+  '/settings/homepage',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.getHomepageSettings
+);
+
+// PUT /api/admin/settings/homepage
+router.put(
+  '/settings/homepage',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateHomepageSettings
+);
+
+// PUT /api/admin/settings/live-clock
+router.put(
+  '/settings/live-clock',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateLiveClock
+);
+
+// PUT /api/admin/settings/trending
+router.put(
+  '/settings/trending',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateTrending
+);
+
+// POST /api/admin/settings/upload-pack-file (Admin uploads study pack PDF / files)
+router.post(
+  '/settings/upload-pack-file',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminUpload.single('file'),
+  adminController.uploadPackFile
+);
+
+// PUT /api/admin/settings/video
+router.put(
+  '/settings/video',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateVideo
+);
+
+// PUT /api/admin/settings/learning-platforms
+router.put(
+  '/settings/learning-platforms',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateLearningPlatforms
+);
+
+// PUT /api/admin/settings/community-groups
+router.put(
+  '/settings/community-groups',
+  requireRole('ADMIN', 'MODERATOR'),
+  adminController.updateCommunityGroups
+);
+
 // ─── Academic Catalog (Departments / Semesters / Subjects) ────
 router.use('/catalog', require('./catalog.routes'));
 
 module.exports = router;
+

@@ -34,7 +34,7 @@ function getFileIcon(name) {
   return 'draft';
 }
 
-export default function UploadResourceModal({ subjectCode, onClose, onSuccess }) {
+export default function UploadResourceModal({ isOpen = true, subjectCode, onClose, onSuccess }) {
   const [form, setForm] = useState({
     subjectCode: subjectCode || '',
     title: '',
@@ -110,6 +110,8 @@ export default function UploadResourceModal({ subjectCode, onClose, onSuccess })
   };
 
   const isLoading = status === 'uploading';
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-3 sm:p-4">

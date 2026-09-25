@@ -659,19 +659,19 @@ function SubjectModal({ mode, initial, semesterName, onClose, onSave }) {
 // ─── Shared Modal Shell ───────────────────────────────────────
 function ModalShell({ title, icon, onClose, children }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 backdrop-blur-sm p-3 sm:p-4">
-      <div className="bg-surface-container-lowest rounded-2xl shadow-2xl w-[95%] sm:w-full sm:max-w-lg border border-outline-variant/20 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-3 sm:p-4 font-sans">
+      <div className="bg-white border-3 border-slate-900 rounded-3xl shadow-[6px_6px_0px_#0F172A] w-[95%] sm:w-full sm:max-w-lg max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center gap-3 px-4 py-4 sm:px-6 sm:py-5 border-b border-outline-variant/15">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-primary text-[20px]">{icon}</span>
+        <div className="flex items-center gap-3 px-5 py-4 border-b-2 border-slate-900 bg-[#FFFBEB]">
+          <div className="w-10 h-10 rounded-xl bg-amber-400 border-2 border-slate-900 flex items-center justify-center shrink-0 shadow-[2px_2px_0px_#0F172A]">
+            <span className="material-symbols-outlined text-slate-950 text-[22px]">{icon}</span>
           </div>
-          <h2 className="text-base sm:text-lg font-bold text-on-surface flex-1">{title}</h2>
-          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container transition text-on-surface-variant cursor-pointer">
-            <span className="material-symbols-outlined text-[20px]">close</span>
+          <h2 className="text-base sm:text-lg font-black text-slate-950 flex-1">{title}</h2>
+          <button onClick={onClose} className="w-8 h-8 rounded-xl border-2 border-slate-900 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
-        <div className="px-4 py-4 sm:px-6 sm:py-5">{children}</div>
+        <div className="p-5 sm:p-6">{children}</div>
       </div>
     </div>
   );
@@ -679,20 +679,20 @@ function ModalShell({ title, icon, onClose, children }) {
 
 function ModalFooter({ saving, onCancel, saveLabel }) {
   return (
-    <div className="flex gap-2 sm:gap-3 justify-end pt-2">
+    <div className="flex gap-2 sm:gap-3 justify-end pt-3 border-t border-slate-200 mt-4">
       <button
         type="button"
         onClick={onCancel}
-        className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-surface-container border border-outline-variant/30 text-on-surface hover:bg-surface-container-high transition cursor-pointer"
+        className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 text-slate-700 hover:border-slate-900 hover:bg-slate-50 transition cursor-pointer"
       >
         Cancel
       </button>
       <button
         type="submit"
         disabled={saving}
-        className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 disabled:opacity-60 transition flex items-center gap-2 cursor-pointer"
+        className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black bg-amber-400 text-slate-950 border-2 border-slate-900 hover:bg-amber-500 shadow-[2px_2px_0px_#0F172A] disabled:opacity-60 transition flex items-center gap-2 cursor-pointer"
       >
-        {saving && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+        {saving && <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />}
         {saving ? 'Saving…' : saveLabel}
       </button>
     </div>
@@ -879,42 +879,48 @@ export default function AdminCatalogView() {
 
   // ── Render ─────────────────────────────────────────────────
   return (
-    <div className="p-4 sm:p-6 md:p-8 w-full max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 md:p-8 w-full max-w-7xl mx-auto font-sans">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-on-surface mb-1">Academic Catalog</h1>
-          <p className="text-on-surface-variant text-xs sm:text-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black uppercase tracking-wider mb-2">
+            <span className="material-symbols-outlined text-[16px]">domain</span>
+            <span>Academic Structure</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-tight">
+            Academic Catalog
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium mt-1">
             Manage branches, semesters, and subjects in real-time.
           </p>
         </div>
         <button
           onClick={() => setModal({ type: 'dept', mode: 'create', target: null })}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-on-primary font-semibold text-xs sm:text-sm hover:bg-primary/90 transition shadow-sm cursor-pointer"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-amber-400 text-slate-950 border-2 border-slate-900 font-black text-xs sm:text-sm hover:bg-amber-500 shadow-[3px_3px_0px_#0F172A] hover:translate-x-0.5 hover:-translate-y-0.5 transition-all cursor-pointer"
         >
-          <span className="material-symbols-outlined text-[18px] sm:text-[20px]">add</span>
-          Add Branch
+          <span className="material-symbols-outlined text-[20px]">add</span>
+          <span>Add New Branch</span>
         </button>
       </div>
 
       {/* Loading */}
       {loading && (
         <div className="flex items-center justify-center py-20 sm:py-24">
-          <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-slate-200 border-t-amber-400 rounded-full animate-spin" />
         </div>
       )}
 
       {/* Empty state */}
       {!loading && departments.length === 0 && (
-        <div className="text-center py-24">
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <span className="material-symbols-outlined text-primary text-[36px]">account_tree</span>
+        <div className="text-center py-20 bg-white border-2 border-slate-900 rounded-3xl p-8 shadow-[4px_4px_0px_#0F172A]">
+          <div className="w-16 h-16 rounded-2xl bg-amber-100 border-2 border-slate-900 flex items-center justify-center mx-auto mb-4 shadow-[2px_2px_0px_#0F172A]">
+            <span className="material-symbols-outlined text-slate-950 text-[36px]">account_tree</span>
           </div>
-          <h3 className="text-lg font-bold text-on-surface mb-2">No branches yet</h3>
-          <p className="text-on-surface-variant text-sm mb-6">Start by creating your first department branch.</p>
+          <h3 className="text-lg font-black text-slate-950 mb-1">No branches yet</h3>
+          <p className="text-slate-500 text-xs sm:text-sm mb-6 font-medium">Start by creating your first department branch.</p>
           <button
             onClick={() => setModal({ type: 'dept', mode: 'create', target: null })}
-            className="px-5 py-2.5 rounded-2xl bg-primary text-on-primary font-semibold text-sm hover:bg-primary/90 transition"
+            className="px-6 py-2.5 rounded-xl bg-amber-400 text-slate-950 border-2 border-slate-900 font-black text-xs sm:text-sm hover:bg-amber-500 shadow-[2px_2px_0px_#0F172A] transition"
           >
             Add First Branch
           </button>
@@ -927,9 +933,9 @@ export default function AdminCatalogView() {
           {departments.map(dept => {
             const deptExpanded = expanded[`d-${dept.id}`] ?? true;
             return (
-              <div key={dept.id} className="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl overflow-hidden shadow-sm">
+              <div key={dept.id} className="bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[3px_3px_0px_#0F172A]">
                 {/* Department Row */}
-                <div className="flex items-center gap-2 sm:gap-3 px-3 py-3 sm:px-5 sm:py-4 bg-surface-container/50">
+                <div className="flex items-center gap-2 sm:gap-3 px-3 py-3 sm:px-5 sm:py-4 bg-[#FFFBEB] border-b-2 border-slate-900">
                   <button
                     onClick={() => toggleExpand(`d-${dept.id}`)}
                     className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-surface-container transition shrink-0 cursor-pointer"

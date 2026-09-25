@@ -109,14 +109,14 @@ const SUBJECT_STYLES = [
 
 const ANNOUNCEMENTS = [
   {
-    text: '🎓 Mid-semester exam timetable for Semester 5 has been released. Check the notice board for details.',
+    text: 'Mid-semester exam timetable for Semester 5 has been released. Check the notice board for details.',
     badge: 'Exam Alert',
     color: 'bg-red-100 text-red-700',
     deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
     isActive: true,
   },
   {
-    text: '📚 New study materials for Data Structures (Semester 2) have been uploaded by seniors. Explore the resources tab!',
+    text: 'New study materials for Data Structures (Semester 2) have been uploaded by seniors. Explore the resources tab!',
     badge: 'New Content',
     color: 'bg-green-100 text-green-700',
     deadline: null,

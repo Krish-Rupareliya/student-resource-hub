@@ -9,8 +9,12 @@ export default function ScrollToTop() {
   const { pathname, search } = useLocation();
 
   useEffect(() => {
-    // Reset browser window scroll position to top
-    window.scrollTo(0, 0);
+    // Reset browser window scroll position to top via Lenis if available
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
 
     // Also reset scroll position for any scrollable main container (e.g. Admin layout)
     const mainElement = document.querySelector('main');

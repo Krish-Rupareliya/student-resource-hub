@@ -17,17 +17,29 @@ html {
 }
 
 html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-*::-webkit-scrollbar {
+body::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
   width: 0;
   height: 0;
 }
 
+/* Universal no-scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
 body {
   font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-  @apply text-hub-navy bg-hub-cream;
+  color: #0F172A;
+  background-color: #FDFBF7;
 }
 
 /* UI/UX Pro Max Glassmorphism & Soft UI Evolution Utilities */
@@ -289,6 +301,72 @@ body {
   animation-play-state: paused;
 }
 
+/* Scrollbar removal utilities */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Page entrance */
+body {
+  animation: loftyPageFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes loftyPageFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Floating animation */
+@keyframes loftyFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.8deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.lofty-float {
+  animation: loftyFloat 6s ease-in-out infinite !important;
+}
+
+.lofty-float-slow {
+  animation: loftyFloat 10s ease-in-out infinite !important;
+}
+
+.lofty-float-fast {
+  animation: loftyFloat 3.5s ease-in-out infinite !important;
+}
+
+/* Pulse animation */
+@keyframes loftyPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.92;
+  }
+}
+
+.lofty-pulse {
+  animation: loftyPulse 4s ease-in-out infinite;
+}
+
 /* Floating effect for anti-gravity feel */
 .floating-icon {
     animation: smoothFloat 12s ease-in-out infinite;
@@ -298,4 +376,304 @@ body {
 @keyframes smoothFloat {
     0%, 100% { transform: translateY(0px) scale(1); }
     50% { transform: translateY(-15px) scale(1.02); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NEUBRUTALISM / HEALTHCARE SAAS ADMIN DESIGN TOKENS
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --nb-bg: #F7F2E7;
+  --nb-sidebar: #1A1A1A;
+  --nb-yellow: #F6E27B;
+  --nb-pink: #FBCFE8;
+  --nb-green: #B3D8A8;
+  --nb-lavender: #BFACE8;
+  --nb-dark: #1A1A1A;
+}
+
+.nb-card {
+  background: #FFFFFF;
+  border: 2.5px solid #1A1A1A;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nb-card-interactive:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #1A1A1A;
+}
+
+.nb-card-yellow {
+  background: #F6E27B;
+  border: 2.5px solid #1A1A1A;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.nb-card-pink {
+  background: #FBCFE8;
+  border: 2.5px solid #1A1A1A;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.nb-card-green {
+  background: #B3D8A8;
+  border: 2.5px solid #1A1A1A;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.nb-card-lavender {
+  background: #BFACE8;
+  border: 2.5px solid #1A1A1A;
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.nb-btn-black {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border: 2px solid #1A1A1A;
+  border-radius: 9999px;
+  font-weight: 800;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0px rgba(26, 26, 26, 0.4);
+}
+
+.nb-btn-black:hover {
+  background: #2D2D2D;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #1A1A1A;
+}
+
+.nb-btn-black:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px #1A1A1A;
+}
+
+.nb-pill {
+  border: 2px solid #1A1A1A;
+  border-radius: 9999px;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px #1A1A1A;
+}
+
+/* ── Playful Neo-Brutalism / Y2K Digital Pop Styles ── */
+.font-display-pop {
+  font-family: 'Bebas Neue', 'Anton', Impact, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sticker-pop {
+  border: 2px solid #111111;
+  box-shadow: 3px 3px 0px #111111;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sticker-pop:hover {
+  transform: scale(1.06) rotate(0deg) !important;
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.pop-card {
+  border: 2px solid #111111;
+  border-radius: 28px;
+  box-shadow: 5px 5px 0px #111111;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px #111111;
+}
+
+/* ── Custom Neubrutalist Admin Scrollbar ── */
+.admin-scrollbar,
+.custom-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: #1A1A1A #EDE8DC !important;
+}
+
+.admin-scrollbar::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+  display: block !important;
+  width: 7px !important;
+  height: 7px !important;
+}
+
+.admin-scrollbar::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #EDE8DC !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(26, 26, 26, 0.2) !important;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #1A1A1A !important;
+  border-radius: 9999px !important;
+  border: 1px solid #EDE8DC !important;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #F6E27B !important;
+}
+
+/* ── Astryx Design System Keyframe Animations ── */
+@keyframes x188b6p3-B {
+  from {
+    color: inherit;
+  }
+  to {
+    color: transparent;
+  }
+}
+
+@keyframes x13kz0yu-B {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+@keyframes x18re5ia-B {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes xgnty7z-B {
+  0% {
+    opacity: .25;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes xtut5q7-B {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes x1k48ry3-B {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes x11lauxq-B {
+  from {
+    opacity: 0;
+    transform: translate(var(--dialog-dir-x,0px),var(--dialog-dir-y,16px)) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0,0) scale(1);
+  }
+}
+
+@keyframes xu7jd1z-B {
+  from {
+    opacity: 0;
+    transform: translateX(var(--spacing-2)) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes xwmkjkf-B {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--spacing-2))) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes x1ahk7ht-B {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-2)) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes xv1hr86-B {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--spacing-2))) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes x1b6yrix-B {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-2));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes xiylxmw-B {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--spacing-2)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes xqng64z-B {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes xr3m334-B {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
 }

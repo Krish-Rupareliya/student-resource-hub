@@ -109,6 +109,8 @@ model Opportunity {
   category    String?  @db.VarChar(50)
   tag         String?  @db.VarChar(50)
   pinBg       String?  @db.VarChar(50)
+  link        String?  @db.VarChar(500)
+  deadline    String?  @db.VarChar(100)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -170,6 +172,45 @@ model Subscriber {
   subscribedAt DateTime @default(now())
 
   @@map("subscribers")
+}
+
+model Poll {
+  id              String       @id @default(uuid())
+  title           String
+  description     String?      @db.Text
+  badgeLabel      String?      @default("Campus Referendum Box") @db.VarChar(100)
+  statusTopDemand String?      @db.VarChar(100)
+  statusVaultDrop String?      @db.VarChar(100)
+  statusResolved  String?      @db.VarChar(100)
+  options         PollOption[]
+  isActive        Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([isActive])
+  @@map("polls")
+}
+
+model PollOption {
+  id        String   @id @default(uuid())
+  pollId    String
+  text      String
+  icon      String?  @default("description") @db.VarChar(50)
+  votes     Int      @default(0)
+  sortOrder Int      @default(0)
+  poll      Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+
+  @@index([pollId])
+  @@map("poll_options")
+}
+
+model SiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique @db.VarChar(100)
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
 }
 
 enum Role {

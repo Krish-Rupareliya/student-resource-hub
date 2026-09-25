@@ -13,7 +13,7 @@ function ComingSoon() {
   const deptName = DEPT_NAMES[deptCode] || `${deptCode} Department`;
 
   return (
-    <div className="bg-[#FDFBF7] text-hub-navy font-poppins min-h-[80vh] relative overflow-hidden flex items-center justify-center py-16 px-4 selection:bg-amber-300 selection:text-hub-navy">
+    <div className="pt-24 pb-20 bg-[#FDFBF7] text-hub-navy font-poppins min-h-[85vh] relative overflow-hidden flex flex-col items-center justify-center px-4 selection:bg-amber-300 selection:text-hub-navy">
       {/* Background Decor SVG Vector Layers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Top-right dots matrix */}
@@ -29,65 +29,56 @@ function ComingSoon() {
         <div className="absolute bottom-[20%] right-[10%] w-8 h-8 rounded-full border-2 border-amber-400 opacity-50" />
       </div>
 
-      <div className="relative z-10 max-w-2xl w-full mx-auto text-center space-y-8">
-        {/* Animated Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FEF3D6] border border-amber-300/80 text-hub-navy text-xs font-extrabold uppercase tracking-widest shadow-sm animate-bounce">
-          <span>🚀</span>
-          <span>Coming Soon</span>
-        </div>
-
-        {/* Icon & Department Badge */}
-        <div className="relative inline-block">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white border-2 border-amber-200 shadow-xl flex items-center justify-center mx-auto text-amber-500 transform hover:scale-105 transition-transform duration-300">
-            <span className="material-symbols-outlined text-5xl sm:text-6xl">
-              {deptCode === 'IT' ? 'dns' : 'laptop_mac'}
-            </span>
+      <div className="relative z-10 max-w-4xl w-full mx-auto space-y-8">
+        <div className="bg-white/90 backdrop-blur-sm border-2 border-slate-900 rounded-3xl p-8 sm:p-12 shadow-[4px_4px_0px_#0F172A] text-center space-y-6 max-w-2xl mx-auto">
+          {/* Animated Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FEF3D6] border-2 border-slate-900 text-slate-950 text-xs font-black uppercase tracking-widest shadow-[2px_2px_0px_#0F172A] animate-bounce">
+            <span>🚀</span>
+            <span>Department Queue</span>
           </div>
-          <span className="absolute -bottom-2 right-0 bg-hub-navy text-amber-400 text-[10px] font-black px-2.5 py-1 rounded-full border border-amber-300 uppercase">
-            Closed
-          </span>
-        </div>
 
-        {/* Main Title */}
-        <div className="space-y-3">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-hub-navy tracking-tight leading-tight">
-            {deptName}
-          </h1>
-          <p className="text-amber-600 font-bold text-lg sm:text-xl">
-            Study Materials Under Preparation
+          {/* Icon & Department Badge */}
+          <div className="relative inline-block">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-amber-100 border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A] flex items-center justify-center mx-auto text-amber-700">
+              <span className="material-symbols-outlined text-4xl sm:text-5xl">
+                {deptCode === 'IT' ? 'dns' : 'laptop_mac'}
+              </span>
+            </div>
+          </div>
+
+          {/* Main Title */}
+          <div className="space-y-2">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight leading-tight">
+              {deptName}
+            </h1>
+            <p className="text-amber-600 font-extrabold text-sm sm:text-base">
+              Study Materials &amp; PYQs Under Preparation
+            </p>
+          </div>
+
+          {/* Description */}
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto font-medium">
+            We are currently organizing and verifying high-quality handwritten notes, semester question papers (PYQs), and laboratory manuals for <span className="font-bold text-slate-900">{deptName}</span>. In the meantime, Computer Engineering resources are active and open!
           </p>
-        </div>
 
-        {/* Description */}
-        <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-medium">
-          We are currently organizing and verifying high-quality notes, previous year question papers (PYQs), and lab manuals for <span className="font-semibold text-hub-navy">{deptName}</span>. This department will be unlocked soon!
-        </p>
+          {/* Action Cards / Buttons */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/semesters"
+              className="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 font-black px-6 py-3 rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A] hover:shadow-[1px_1px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-xs sm:text-sm inline-flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-lg leading-none">memory</span>
+              <span>Explore Active CE Semesters</span>
+            </Link>
 
-        {/* Action Cards / Buttons */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            to="/semesters"
-            className="w-full sm:w-auto bg-hub-navy hover:bg-slate-800 text-white font-bold px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm inline-flex items-center justify-center gap-2"
-          >
-            <span className="material-symbols-outlined text-lg leading-none">memory</span>
-            <span>Explore Computer Engineering (CE)</span>
-          </Link>
-
-          <Link
-            to="/contact"
-            className="w-full sm:w-auto border-2 border-hub-navy text-hub-navy hover:bg-hub-navy/5 font-bold px-7 py-3.5 rounded-full transition-all duration-300 text-sm inline-flex items-center justify-center gap-2"
-          >
-            <span className="material-symbols-outlined text-lg leading-none">mail</span>
-            <span>Request Resource</span>
-          </Link>
-        </div>
-
-        {/* Back to Home Link */}
-        <div className="pt-2">
-          <Link to="/resources" className="text-xs font-bold text-gray-500 hover:text-amber-600 transition-colors inline-flex items-center gap-1">
-            <span className="material-symbols-outlined text-sm">arrow_back</span>
-            Back to All Resources
-          </Link>
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-900 font-bold px-6 py-3 rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A] hover:shadow-[1px_1px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-xs sm:text-sm inline-flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-lg leading-none">mail</span>
+              <span>Request Subject Notes</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

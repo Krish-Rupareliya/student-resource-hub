@@ -1,5 +1,6 @@
-// ─── pages/Admin/AdminResourcesView.jsx ──────────────────────
-// Manage all published resources: search, add (URL or file), edit, soft-delete.
+// src/pages/Admin/AdminResourcesView.jsx
+// Manage all published resources: search, add (URL or file via Drive Proxy), edit, soft-delete.
+// Signature Neo-Brutalist Yellow & Slate Theme.
 
 import { useState, useEffect, useCallback } from 'react';
 import {
@@ -15,12 +16,18 @@ const buildViewUrl = (id) => `${API_BASE_URL}/resources/${id}/view`;
 
 function Modal({ title, onClose, children }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-[95%] sm:w-full sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto mx-auto">
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-outline-variant/10">
-          <h2 className="text-base sm:text-lg font-bold text-on-surface">{title}</h2>
-          <button onClick={onClose} className="text-on-surface-variant hover:text-on-surface transition-colors p-1">
-            <span className="material-symbols-outlined text-[20px]">close</span>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-xs font-sans">
+      <div className="bg-white border-3 border-slate-900 rounded-3xl shadow-[6px_6px_0px_#0F172A] w-[95%] sm:w-full sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto mx-auto">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b-2 border-slate-900 bg-[#FFFBEB]">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-amber-500 text-[24px]">folder_open</span>
+            <h2 className="text-base sm:text-lg font-black text-slate-950">{title}</h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-xl border-2 border-slate-900 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
         <div className="p-4 sm:p-6">{children}</div>
@@ -55,7 +62,6 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
       if (s) {
         setSearchQuery(`[${s.code}] ${s.title}`);
         
-        // Find the semester for this subject
         const sem = semesters.find(se => se.id === s.semesterId);
         if (sem) {
           if (!selectedSemester) setSelectedSemester(sem.id);
@@ -115,12 +121,16 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      {err && <p className="text-sm text-error bg-error/10 rounded-xl p-3">{err}</p>}
+    <form onSubmit={handleSubmit} className="space-y-4 font-sans">
+      {err && (
+        <div className="p-3 bg-rose-50 border-2 border-rose-300 rounded-xl text-xs font-bold text-rose-900">
+          {err}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-on-surface mb-1.5">Branch (Dept)</label>
+          <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Branch (Department)</label>
           <select 
             value={selectedDepartment} 
             onChange={(e) => { 
@@ -129,7 +139,7 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
               set('subjectId', ''); 
               setSearchQuery(''); 
             }}
-            className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+            className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900 cursor-pointer"
           >
             <option value="">All Branches</option>
             {departments.map((d) => (
@@ -139,7 +149,7 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-on-surface mb-1.5">Semester</label>
+          <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Semester</label>
           <select 
             value={selectedSemester} 
             onChange={(e) => { 
@@ -147,7 +157,7 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
               set('subjectId', ''); 
               setSearchQuery(''); 
             }}
-            className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+            className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900 cursor-pointer"
           >
             <option value="">All Semesters</option>
             {allowedSemesters.map((s) => (
@@ -161,11 +171,11 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
       </div>
 
       <div className="relative">
-        <label className="block text-sm font-medium text-on-surface mb-1.5">Subject *</label>
+        <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Subject <span className="text-rose-500">*</span></label>
         <div className="relative">
           <input
             type="text"
-            placeholder="Search subject..."
+            placeholder="Type subject name or code..."
             value={searchQuery}
             onChange={(e) => { 
               setSearchQuery(e.target.value); 
@@ -174,10 +184,10 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
             }}
             onFocus={() => setIsDropdownOpen(true)}
             onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+            className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900"
           />
           {isDropdownOpen && (
-            <div className="absolute z-10 w-full mt-1.5 bg-white border border-outline-variant/30 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+            <div className="absolute z-20 w-full mt-1.5 bg-white border-2 border-slate-900 rounded-xl shadow-xl max-h-60 overflow-y-auto">
               {filteredSubjects.length > 0 ? (
                 filteredSubjects.map((s) => (
                   <div
@@ -187,20 +197,19 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
                       setSearchQuery(`[${s.code}] ${s.title}`); 
                       setIsDropdownOpen(false); 
                       
-                      // Auto-select department and semester
                       const sem = semesters.find(se => se.id === s.semesterId);
                       if (sem) {
                         setSelectedSemester(sem.id);
                         setSelectedDepartment(sem.departmentId);
                       }
                     }}
-                    className="px-4 py-2.5 hover:bg-surface-container cursor-pointer text-sm border-b border-outline-variant/10 last:border-0 transition-colors"
+                    className="px-4 py-2.5 hover:bg-amber-50 cursor-pointer text-xs sm:text-sm border-b border-slate-100 last:border-0 transition-colors"
                   >
-                    <span className="font-semibold text-primary">[{s.code}]</span> {s.title}
+                    <span className="font-mono font-bold text-amber-600">[{s.code}]</span> <span className="font-semibold text-slate-900">{s.title}</span>
                   </div>
                 ))
               ) : (
-                <div className="px-4 py-3 text-sm text-on-surface-variant">No subjects found</div>
+                <div className="px-4 py-3 text-xs text-slate-500 font-medium">No subjects found</div>
               )}
             </div>
           )}
@@ -208,58 +217,95 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-on-surface mb-1.5">Title</label>
-        <input value={form.title} onChange={(e) => set('title', e.target.value)} required placeholder="e.g. DAA Unit 1 Notes"
-          className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow" />
+        <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Resource Title <span className="text-rose-500">*</span></label>
+        <input
+          value={form.title}
+          onChange={(e) => set('title', e.target.value)}
+          required
+          placeholder="e.g. Design & Analysis of Algorithms Unit 1 Complete Notes"
+          className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900"
+        />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-on-surface mb-1.5">Resource Type</label>
-        <select value={form.resourceType} onChange={(e) => set('resourceType', e.target.value)}
-          className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow">
+        <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Resource Type</label>
+        <select
+          value={form.resourceType}
+          onChange={(e) => set('resourceType', e.target.value)}
+          className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900 cursor-pointer"
+        >
           {RESOURCE_TYPES.map((t) => <option key={t}>{t}</option>)}
         </select>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-on-surface mb-1.5">Description</label>
-        <textarea value={form.description} onChange={(e) => set('description', e.target.value)} rows={3} placeholder="Optional description…"
-          className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none transition-shadow" />
+        <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Description (Optional)</label>
+        <textarea
+          value={form.description}
+          onChange={(e) => set('description', e.target.value)}
+          rows={3}
+          placeholder="Details about syllabus coverage, professor notes, or exam relevance..."
+          className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900 resize-none"
+        />
       </div>
 
       {!initial && (
         <div className="pt-1">
-          <div className="flex gap-2 bg-surface-container p-1 rounded-xl mb-4">
+          <div className="flex gap-2 bg-slate-100 p-1 rounded-xl mb-4 border border-slate-300">
             {['url', 'file'].map((m) => (
-              <button key={m} type="button" onClick={() => set('uploadMode', m)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${form.uploadMode === m ? 'bg-white shadow text-primary' : 'text-on-surface-variant'}`}>
-                {m === 'url' ? 'Link URL' : 'Upload File'}
+              <button
+                key={m}
+                type="button"
+                onClick={() => set('uploadMode', m)}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                  form.uploadMode === m ? 'bg-amber-400 text-slate-950 border border-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-950'
+                }`}
+              >
+                {m === 'url' ? 'Link URL' : 'Upload to Google Drive'}
               </button>
             ))}
           </div>
 
           {form.uploadMode === 'url' ? (
             <div>
-              <label className="block text-sm font-medium text-on-surface mb-1.5">File URL</label>
-              <input value={form.fileUrl} onChange={(e) => set('fileUrl', e.target.value)} required={form.uploadMode === 'url'} placeholder="https://…"
-                className="w-full border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow" />
+              <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">File / Document URL</label>
+              <input
+                value={form.fileUrl}
+                onChange={(e) => set('fileUrl', e.target.value)}
+                required={form.uploadMode === 'url'}
+                placeholder="https://..."
+                className="w-full border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 font-medium focus:outline-none focus:border-slate-900"
+              />
             </div>
           ) : (
             <div>
-              <label className="block text-sm font-medium text-on-surface mb-1.5">File</label>
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} required={form.uploadMode === 'file'}
-                className="w-full text-sm text-on-surface-variant file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary file:font-semibold file:text-sm cursor-pointer hover:file:bg-primary/20 transition-all" />
+              <label className="block text-xs font-black uppercase text-slate-700 mb-1.5">Select PDF or Document</label>
+              <input
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}
+                required={form.uploadMode === 'file'}
+                className="w-full text-xs sm:text-sm text-slate-700 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-2 file:border-slate-900 file:bg-amber-400 file:text-slate-950 file:font-black file:text-xs cursor-pointer"
+              />
             </div>
           )}
         </div>
       )}
 
-      <div className="flex justify-end gap-3 pt-4 border-t border-outline-variant/10 mt-6">
-        <button type="button" onClick={() => onClose(false)} className="px-5 py-2.5 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">Cancel</button>
-        <button type="submit" disabled={saving}
-          className="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:bg-primary/90 disabled:opacity-60 transition-all shadow-sm">
-          {saving ? <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> : null}
-          {initial ? 'Save Changes' : 'Publish Resource'}
+      <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 mt-6">
+        <button
+          type="button"
+          onClick={() => onClose(false)}
+          className="px-5 py-2.5 text-xs font-bold text-slate-600 hover:text-slate-950 border border-slate-300 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={saving}
+          className="flex items-center gap-2 px-6 py-2.5 bg-amber-400 text-slate-950 border-2 border-slate-900 rounded-xl text-xs sm:text-sm font-black hover:bg-amber-500 shadow-[2px_2px_0px_#0F172A] disabled:opacity-50 transition-all cursor-pointer"
+        >
+          {saving && <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />}
+          <span>{initial ? 'Save Changes' : 'Publish Resource'}</span>
         </button>
       </div>
     </form>
@@ -277,7 +323,6 @@ export default function AdminResourcesView() {
   const [showCreate, setShowCreate] = useState(false);
   const [editItem, setEditItem] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
-  // { id, title } of the resource pending hard-delete confirmation
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   const loadSubjects = useCallback(async () => {
@@ -351,83 +396,115 @@ export default function AdminResourcesView() {
   }
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 w-full max-w-7xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+    <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 font-sans">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-on-surface mb-1">Resources</h1>
-          <p className="text-on-surface-variant text-xs sm:text-sm">Manage all published study materials.</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border-2 border-slate-900 text-slate-950 text-xs font-black uppercase tracking-wider mb-2 shadow-[2px_2px_0px_#0F172A]">
+            <span className="material-symbols-outlined text-[16px] text-amber-600">folder_special</span>
+            <span>Study Catalog Management</span>
+          </div>
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
+            Resources Repository
+          </h1>
+          <p className="text-xs sm:text-sm font-bold text-slate-600 mt-1">
+            Search, edit, preview, and publish verified materials.
+          </p>
         </div>
-        <button onClick={() => setShowCreate(true)}
-          className="flex items-center justify-center gap-2 bg-primary text-on-primary px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold hover:bg-primary/90 shadow-sm transition-all cursor-pointer w-full sm:w-auto">
-          <span className="material-symbols-outlined text-[18px]">add</span> Add Resource
+
+        <button
+          onClick={() => setShowCreate(true)}
+          className="flex items-center justify-center gap-2 bg-amber-400 text-slate-950 border-2 border-slate-900 px-5 py-3 rounded-2xl text-xs sm:text-sm font-black hover:bg-amber-500 shadow-[3px_3px_0px_#0F172A] hover:translate-x-0.5 hover:-translate-y-0.5 transition-all cursor-pointer w-full sm:w-auto"
+        >
+          <span className="material-symbols-outlined text-[20px]">add</span>
+          <span>Add New Resource</span>
         </button>
       </div>
 
-      {/* Search */}
-      <div className="relative mb-6 w-full max-w-sm">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
-        <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by title…"
-          className="w-full pl-9 pr-4 py-2.5 border border-outline-variant/30 rounded-xl text-xs sm:text-sm bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary/30" />
+      {/* Search Bar */}
+      <div className="relative max-w-md">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[20px]">
+          search
+        </span>
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by title, subject, or keywords..."
+          className="w-full pl-11 pr-4 py-3 border-2 border-slate-300 bg-white rounded-2xl text-xs sm:text-sm font-bold focus:outline-none focus:border-slate-900 shadow-2xs"
+        />
       </div>
 
-      {error && <div className="mb-4 p-4 bg-error/10 border border-error/20 rounded-xl text-error text-xs sm:text-sm">{error}</div>}
+      {error && (
+        <div className="p-4 bg-rose-50 border-2 border-rose-300 rounded-2xl text-rose-950 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-[2px_2px_0px_#0F172A]">
+          <span className="material-symbols-outlined text-[20px] text-rose-600">error</span>
+          <span>{error}</span>
+        </div>
+      )}
 
       {loading && (
         <div className="grid grid-cols-1 gap-3">
-          {Array.from({ length: 5 }).map((_, i) => <div key={i} className="h-20 bg-surface-container rounded-2xl animate-pulse" />)}
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="h-20 bg-white border-2 border-slate-200 rounded-2xl animate-pulse" />
+          ))}
         </div>
       )}
 
       {!loading && resources.length === 0 && !error && (
-        <div className="text-center py-16 sm:py-20 text-on-surface-variant">
-          <span className="material-symbols-outlined text-5xl sm:text-6xl text-gray-300 block mb-3">folder_off</span>
-          <p className="font-semibold text-xs sm:text-sm">No resources found</p>
+        <div className="text-center py-16 sm:py-20 bg-white border-3 border-slate-900 rounded-3xl p-8 shadow-[4px_4px_0px_#0F172A]">
+          <span className="material-symbols-outlined text-5xl text-slate-300 block mb-3">folder_off</span>
+          <p className="font-black text-slate-900 text-base">No resources found</p>
+          <p className="text-xs font-bold text-slate-500 mt-1">Try adjusting your search query or upload new materials.</p>
         </div>
       )}
 
       {!loading && resources.length > 0 && (
         <div className="space-y-3">
           {resources.map((r) => (
-            <div key={r.id} className="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${r.isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-400'}`}>
-                  <span className="material-symbols-outlined text-[18px]">description</span>
+            <div
+              key={r.id}
+              className="bg-white border-2 border-slate-900 rounded-2xl p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 shadow-[3px_3px_0px_#0F172A] hover:translate-x-0.5 hover:-translate-y-0.5 transition-transform"
+            >
+              <div className="flex items-center gap-3 w-full sm:w-auto flex-1 min-w-0">
+                <div className={`w-10 h-10 rounded-xl border-2 border-slate-900 flex items-center justify-center shrink-0 shadow-[2px_2px_0px_#0F172A] ${r.isActive ? 'bg-amber-100 text-slate-950' : 'bg-slate-100 text-slate-400'}`}>
+                  <span className="material-symbols-outlined text-[20px]">description</span>
                 </div>
-                <div className="flex-1 min-w-0 sm:hidden">
-                  <p className="font-semibold text-on-surface truncate text-sm">{r.title}</p>
-                  <p className="text-xs text-on-surface-variant">
-                    {r.subject?.code} · {r.resourceType} · {r.isActive ? <span className="text-green-600">Active</span> : <span className="text-gray-400">Inactive</span>}
+                <div className="flex-1 min-w-0">
+                  <p className="font-black text-slate-950 truncate text-sm sm:text-base">{r.title}</p>
+                  <p className="text-xs text-slate-600 font-bold mt-0.5 flex items-center gap-2">
+                    <span className="font-mono font-black text-slate-900 bg-amber-400 px-1.5 py-0.2 rounded border border-slate-900">{r.subject?.code || 'N/A'}</span>
+                    <span>• {r.resourceType}</span>
+                    <span>• {r.isActive ? <span className="text-emerald-700 font-bold">Active</span> : <span className="text-slate-400">Inactive</span>}</span>
                   </p>
                 </div>
               </div>
 
-              <div className="flex-1 min-w-0 hidden sm:block">
-                <p className="font-semibold text-on-surface truncate text-sm">{r.title}</p>
-                <p className="text-xs text-on-surface-variant">
-                  {r.subject?.code} · {r.resourceType} · {r.isActive ? <span className="text-green-600">Active</span> : <span className="text-gray-400">Inactive</span>}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-outline-variant/10 w-full sm:w-auto justify-end">
+              <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 w-full sm:w-auto justify-end">
                 {(r.fileUrl || r.driveFileId) && (
-                  <a href={buildViewUrl(r.id)} target="_blank" rel="noopener noreferrer" title="View file"
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all">
-                    <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  <a
+                    href={buildViewUrl(r.id)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View file stream"
+                    className="p-2 rounded-xl border-2 border-slate-900 bg-slate-50 hover:bg-amber-100 text-slate-900 transition-colors shadow-2xs"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">open_in_new</span>
                   </a>
                 )}
-                <button onClick={() => setEditItem(r)} title="Edit"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all">
-                  <span className="material-symbols-outlined text-[16px]">edit</span>
+                <button
+                  onClick={() => setEditItem(r)}
+                  title="Edit details"
+                  className="p-2 rounded-xl border-2 border-slate-900 bg-slate-50 hover:bg-amber-100 text-slate-900 transition-colors shadow-2xs cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[18px]">edit</span>
                 </button>
                 <button
                   onClick={() => setConfirmDelete({ id: r.id, title: r.title })}
                   disabled={deletingId === r.id}
                   title="Delete permanently"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-error/10 hover:text-error transition-all disabled:opacity-40"
+                  className="p-2 rounded-xl border-2 border-rose-300 bg-rose-50 hover:bg-rose-500 hover:text-white text-rose-700 transition-colors shadow-2xs cursor-pointer disabled:opacity-40"
                 >
                   {deletingId === r.id
-                    ? <svg className="animate-spin h-3.5 w-3.5 text-error" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-                    : <span className="material-symbols-outlined text-[16px]">delete</span>
+                    ? <span className="w-4 h-4 border-2 border-rose-600 border-t-transparent rounded-full animate-spin inline-block" />
+                    : <span className="material-symbols-outlined text-[18px]">delete</span>
                   }
                 </button>
               </div>
@@ -437,71 +514,67 @@ export default function AdminResourcesView() {
       )}
 
       {showCreate && (
-        <Modal title="Add New Resource" onClose={(saved) => { setShowCreate(false); if (saved) load(); }}>
+        <Modal title="Add New Study Resource" onClose={(saved) => { setShowCreate(false); if (saved) load(); }}>
           <ResourceForm departments={departments} semesters={semesters} subjects={subjects} onSubmit={handleCreate} onClose={(saved) => { setShowCreate(false); if (saved) load(); }} />
         </Modal>
       )}
 
       {editItem && (
-        <Modal title="Edit Resource" onClose={(saved) => { setEditItem(null); if (saved) load(); }}>
+        <Modal title="Edit Study Resource" onClose={(saved) => { setEditItem(null); if (saved) load(); }}>
           <ResourceForm departments={departments} semesters={semesters} subjects={subjects} onSubmit={handleEdit} initial={editItem} onClose={(saved) => { setEditItem(null); if (saved) load(); }} />
         </Modal>
       )}
 
       {/* ── Drive Delete Confirmation Modal ───────────────── */}
       {confirmDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-[95%] sm:w-full sm:max-w-md overflow-hidden mx-auto">
-            {/* Yellow header */}
-            <div className="bg-amber-400 px-4 sm:px-6 py-4 sm:py-5 flex items-center gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/10 flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-black text-[20px] sm:text-[22px]">warning</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-xs font-sans">
+          <div className="bg-white border-3 border-slate-900 rounded-3xl shadow-[6px_6px_0px_#0F172A] w-[95%] sm:w-full sm:max-w-md overflow-hidden mx-auto">
+            {/* Header */}
+            <div className="bg-amber-400 border-b-2 border-slate-900 px-5 py-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-slate-950 flex items-center justify-center shrink-0">
+                <span className="material-symbols-outlined text-amber-400 text-[22px]">warning</span>
               </div>
               <div>
-                <h2 className="text-base sm:text-lg font-black text-black leading-tight">Permanent Delete</h2>
-                <p className="text-xs font-semibold text-black/60">This action cannot be undone</p>
+                <h2 className="text-base font-black text-slate-950 leading-tight">Permanent Removal</h2>
+                <p className="text-xs font-bold text-slate-800">Database &amp; Drive Storage Purge</p>
               </div>
             </div>
 
             {/* Body */}
-            <div className="p-4 sm:p-6 space-y-4">
-              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                You are about to permanently delete:
+            <div className="p-5 sm:p-6 space-y-4">
+              <p className="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
+                You are about to permanently remove this resource from the student hub:
               </p>
-              <div className="bg-amber-50 border-2 border-amber-300 rounded-xl px-4 py-3">
-                <p className="font-bold text-black text-xs sm:text-sm truncate">{confirmDelete.title}</p>
+              <div className="bg-amber-50 border-2 border-slate-900 rounded-xl px-4 py-3 shadow-[2px_2px_0px_#0F172A]">
+                <p className="font-black text-slate-950 text-xs sm:text-sm truncate">{confirmDelete.title}</p>
               </div>
-              <div className="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 flex gap-2">
-                <span className="material-symbols-outlined text-red-500 text-[18px] shrink-0 mt-0.5">cloud_off</span>
-                <p className="text-xs text-red-700 leading-relaxed">
-                  <strong>Warning:</strong> This will permanently delete the file from both
-                  the website database <em>and</em> your Google Drive storage.
+              <div className="bg-rose-50 border-2 border-rose-300 rounded-xl p-3 flex gap-2.5">
+                <span className="material-symbols-outlined text-rose-600 text-[20px] shrink-0 mt-0.5">cloud_off</span>
+                <p className="text-xs text-rose-900 font-bold leading-relaxed">
+                  <strong>Notice:</strong> This action permanently deletes file metadata from the database and deletes the file from connected Google Drive storage.
                 </p>
               </div>
             </div>
 
             {/* Actions */}
-            <div className="px-4 sm:px-6 pb-4 sm:pb-6 flex gap-3">
+            <div className="px-5 sm:px-6 pb-5 sm:pb-6 flex gap-3">
               <button
                 onClick={() => setConfirmDelete(null)}
-                className="flex-1 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 text-xs sm:text-sm font-bold text-gray-600 hover:border-gray-400 hover:text-black transition-all"
+                className="flex-1 py-2.5 rounded-xl border-2 border-slate-300 text-xs sm:text-sm font-bold text-slate-700 hover:border-slate-900 hover:bg-slate-50 transition-all cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDelete(confirmDelete.id)}
                 disabled={deletingId === confirmDelete.id}
-                className="flex-1 py-2.5 sm:py-3 rounded-xl bg-black text-amber-400 text-xs sm:text-sm font-black hover:bg-gray-900 disabled:opacity-60 transition-all flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 rounded-xl bg-rose-600 border-2 border-slate-900 text-white text-xs sm:text-sm font-black hover:bg-rose-700 shadow-[2px_2px_0px_#0F172A] disabled:opacity-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {deletingId === confirmDelete.id ? (
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                  </svg>
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <span className="material-symbols-outlined text-[18px]">delete_forever</span>
                 )}
-                {deletingId === confirmDelete.id ? 'Deleting…' : 'Delete Forever'}
+                <span>{deletingId === confirmDelete.id ? 'Deleting…' : 'Delete File'}</span>
               </button>
             </div>
           </div>

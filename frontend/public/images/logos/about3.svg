@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 460" width="100%" height="100%" style="background: transparent; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Sharp Brutalist Hard Drop Shadow Filters -->
+    <filter id="hard-shadow-lg" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+    <filter id="hard-shadow-md" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+    <filter id="hard-shadow-sm" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#000000" flood-opacity="1" />
+    </filter>
+  </defs>
+
+  <!-- ================= RETRO SPARKLES & STARS ================= -->
+  <!-- Top Left Star -->
+  <g transform="translate(38, 25) rotate(15)">
+    <path d="M12 0 L15 9 L24 12 L15 15 L12 24 L9 15 L0 12 L9 9 Z" fill="#FACC15" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <!-- Top Right Sparkle -->
+  <g transform="translate(495, 45) rotate(-12)">
+    <path d="M10 0 L13 7 L20 10 L13 13 L10 20 L7 13 L0 10 L7 7 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <!-- Bottom Left Star -->
+  <g transform="translate(35, 400) rotate(-20)">
+    <path d="M9 0 L11 7 L18 9 L11 11 L9 18 L7 11 L0 9 L7 7 Z" fill="#22C55E" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+  </g>
+  <!-- Bottom Right Star -->
+  <g transform="translate(492, 385) rotate(24)">
+    <path d="M11 0 L14 8 L22 11 L14 14 L11 22 L8 14 L0 11 L8 8 Z" fill="#FACC15" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= 1. ENGINE STATUS TOP BAR ================= -->
+  <g transform="translate(55, 36)" filter="url(#hard-shadow-lg)">
+    <!-- Container -->
+    <rect x="0" y="0" width="430" height="64" rx="14" fill="#121214" stroke="#000000" stroke-width="4.5"/>
+    
+    <!-- Status pill with pulsing green indicator -->
+    <rect x="14" y="12" width="146" height="40" rx="8" fill="#1E1E24" stroke="#22C55E" stroke-width="2"/>
+    <circle cx="32" cy="32" r="5" fill="#22C55E"/>
+    <text x="46" y="37" fill="#4ADE80" font-family="'Courier New', Courier, monospace" font-size="13" font-weight="900" letter-spacing="1">STATUS: 200 OK</text>
+    
+    <!-- Divider -->
+    <circle cx="178" cy="32" r="3.5" fill="#52525B"/>
+
+    <!-- Terminal Prompt & Uptime -->
+    <text x="194" y="37" fill="#F4F4F5" font-family="system-ui, -apple-system, sans-serif" font-size="13.5" font-weight="900" letter-spacing="0.5">VAULT ENGINE ACTIVE</text>
+    
+    <!-- Lightning Bolt Badge -->
+    <g transform="translate(382, 17)">
+      <rect x="0" y="0" width="30" height="30" rx="6" fill="#FACC15" stroke="#000000" stroke-width="2"/>
+      <path d="M16 4 L9 16 L15 16 L14 26 L22 13 L16 13 Z" fill="#000000"/>
+    </g>
+  </g>
+
+  <!-- ================= 2. MAIN OCR & SYLLABUS AUDIT CARD ================= -->
+  <g transform="translate(40, 126) rotate(-1)" filter="url(#hard-shadow-lg)">
+    <!-- Main audit card box -->
+    <rect x="0" y="0" width="460" height="152" rx="18" fill="#FFFFFF" stroke="#000000" stroke-width="4.5"/>
+    
+    <!-- Header strip inside card -->
+    <rect x="0" y="0" width="460" height="42" rx="14" fill="#F4F4F5" stroke="#000000" stroke-width="3"/>
+    
+    <!-- Window dot buttons -->
+    <circle cx="22" cy="21" r="5" fill="#EF4444" stroke="#000000" stroke-width="1.5"/>
+    <circle cx="38" cy="21" r="5" fill="#FACC15" stroke="#000000" stroke-width="1.5"/>
+    <circle cx="54" cy="21" r="5" fill="#22C55E" stroke="#000000" stroke-width="1.5"/>
+
+    <text x="76" y="26" fill="#18181B" font-family="'Courier New', Courier, monospace" font-size="12" font-weight="800">4-STAGE PIPELINE // OCR_INDEX_DAEMON</text>
+
+    <!-- Course Tag Pill -->
+    <g transform="translate(332, 8)">
+      <rect x="0" y="0" width="114" height="26" rx="6" fill="#FEF08A" stroke="#000000" stroke-width="2"/>
+      <text x="57" y="17" fill="#000000" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="900" text-anchor="middle">CODE: CE0401</text>
+    </g>
+
+    <!-- Audit Step 1: SHA-256 Buffer Audit -->
+    <g transform="translate(20, 56)">
+      <rect x="0" y="0" width="28" height="28" rx="6" fill="#DCFCE7" stroke="#000000" stroke-width="2"/>
+      <path d="M8 14 L12 18 L20 10" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="38" y="19" fill="#09090B" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800">SHA-256 Integrity Audit:</text>
+      <text x="212" y="19" fill="#16A34A" font-family="'Courier New', Courier, monospace" font-size="12.5" font-weight="900">VERIFIED</text>
+    </g>
+
+    <!-- Audit Step 2: Clean OCR Readability -->
+    <g transform="translate(20, 89)">
+      <rect x="0" y="0" width="28" height="28" rx="6" fill="#DCFCE7" stroke="#000000" stroke-width="2"/>
+      <path d="M8 14 L12 18 L20 10" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="38" y="19" fill="#09090B" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800">OCR Readability Score:</text>
+      <text x="204" y="19" fill="#2563EB" font-family="'Courier New', Courier, monospace" font-size="12.5" font-weight="900">99.4% (CLEAR)</text>
+    </g>
+
+    <!-- Audit Step 3: University Syllabus Match -->
+    <g transform="translate(20, 122)">
+      <rect x="0" y="0" width="28" height="28" rx="6" fill="#DCFCE7" stroke="#000000" stroke-width="2"/>
+      <path d="M8 14 L12 18 L20 10" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="38" y="18" fill="#09090B" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800">Curriculum Matcher:</text>
+      <text x="188" y="18" fill="#D97706" font-family="'Courier New', Courier, monospace" font-size="12.5" font-weight="900">100% UNIT MAP</text>
+    </g>
+
+    <!-- Large Shield Security Seal on Right -->
+    <g transform="translate(365, 52)" filter="url(#hard-shadow-sm)">
+      <rect x="0" y="0" width="80" height="88" rx="14" fill="#2563EB" stroke="#000000" stroke-width="3.5"/>
+      <!-- Shield icon -->
+      <path d="M40 16 L62 26 C62 52 40 68 40 68 C40 68 18 52 18 26 Z" fill="#FACC15" stroke="#000000" stroke-width="3" stroke-linejoin="round"/>
+      <!-- Inner checkmark -->
+      <path d="M30 42 L37 49 L50 34" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="40" y="80" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="900" letter-spacing="1" text-anchor="middle">PASSED</text>
+    </g>
+  </g>
+
+  <!-- ================= 3. BACKEND PROXY GATEWAY CARD ================= -->
+  <g transform="translate(30, 305) rotate(1.2)" filter="url(#hard-shadow-lg)">
+    <!-- Container -->
+    <rect x="0" y="0" width="480" height="114" rx="16" fill="#FEF08A" stroke="#000000" stroke-width="4.5"/>
+    
+    <!-- Lock Shield Icon Badge -->
+    <g transform="translate(18, 18)">
+      <rect x="0" y="0" width="54" height="54" rx="12" fill="#111111" stroke="#000000" stroke-width="3"/>
+      <!-- Padlock graphic -->
+      <rect x="14" y="24" width="26" height="22" rx="4" fill="#FACC15" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M20 24 L20 18 C20 14 27 14 27 18 L27 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="27" cy="33" r="2.5" fill="#111111"/>
+    </g>
+
+    <!-- Title and Subtitle -->
+    <text x="86" y="38" fill="#000000" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="900" letter-spacing="0.2">
+      SECURE BACKEND PROXY GATEWAY
+    </text>
+    <text x="86" y="58" fill="#451A03" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800">
+      Direct Database Access: Revoked • Row-Level Security Enforced
+    </text>
+
+    <!-- Metric Badges Row -->
+    <g transform="translate(86, 72)">
+      <!-- Metric 1: Latency -->
+      <rect x="0" y="0" width="112" height="26" rx="6" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+      <circle cx="12" cy="13" r="3.5" fill="#22C55E"/>
+      <text x="22" y="17" fill="#000000" font-family="'Courier New', Courier, monospace" font-size="11" font-weight="900">PING: 18ms</text>
+
+      <!-- Metric 2: Zero Leaks -->
+      <rect x="122" y="0" width="124" height="26" rx="6" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+      <path d="M132 17 L137 10 L141 14 L146 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="150" y="17" fill="#000000" font-family="'Courier New', Courier, monospace" font-size="11" font-weight="900">0 EXPOSED KEYS</text>
+
+      <!-- Metric 3: Encryption -->
+      <rect x="256" y="0" width="120" height="26" rx="6" fill="#111111" stroke="#000000" stroke-width="2"/>
+      <text x="316" y="17" fill="#FACC15" font-family="'Courier New', Courier, monospace" font-size="11" font-weight="900" text-anchor="middle">TLS 1.3 AES-GCM</text>
+    </g>
+  </g>
+</svg>

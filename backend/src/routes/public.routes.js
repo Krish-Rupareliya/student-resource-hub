@@ -124,4 +124,33 @@ router.post(
   publicController.subscribe
 );
 
+// ─── Referendum & Polls ───────────────────────────────────────
+// GET /api/poll/active
+router.get('/poll/active', publicController.getActivePoll);
+
+// POST /api/poll/:pollId/vote
+router.post(
+  '/poll/:pollId/vote',
+  [
+    body('optionId')
+      .notEmpty().withMessage('optionId is required')
+      .isString().trim(),
+  ],
+  handleValidationErrors,
+  publicController.castVote
+);
+
+// ─── Homepage Settings (Public Live Clock & Trending) ────────
+// GET /api/settings/homepage
+router.get('/settings/homepage', publicController.getHomepageSettings);
+
+// ─── Public Platform Stats Overview ──────────────────────────
+// GET /api/stats/overview
+router.get('/stats/overview', publicController.getOverviewStats);
+
+// ─── Public Announcements & Ticker Tape ───────────────────────
+// GET /api/announcements
+router.get('/announcements', publicController.getAnnouncements);
+
 module.exports = router;
+

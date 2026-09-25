@@ -104,23 +104,9 @@ function Contact() {
         <div className="absolute top-[30%] -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-sky-300/25 via-indigo-300/15 to-transparent rounded-full blur-3xl opacity-65" />
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* ─── BREADCRUMB ─── */}
-        <nav aria-label="Breadcrumb" className="pt-6 pb-2">
-          <ol className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-500">
-            <li>
-              <Link to="/" className="hover:text-slate-900 transition-colors flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px] text-amber-500">home</span>
-                <span>Home</span>
-              </Link>
-            </li>
-            <li className="text-slate-300 select-none">/</li>
-            <li className="text-slate-900 font-bold">Request a Resource</li>
-          </ol>
-        </nav>
-
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 pt-6">
         {/* ─── HERO HEADER ─── */}
-        <section className="pt-6 pb-10 text-center max-w-3xl mx-auto">
+        <section className="pt-4 pb-6 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0" />
             <span>24-Hour Fulfillment Desk</span>
@@ -138,19 +124,29 @@ function Contact() {
             Submit your subject request below. Our network of student contributors, seniors, and coordinators will track down and verify the material for you.
           </p>
 
-          {/* Quick Metrics Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-700">
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-              <span className="material-symbols-outlined text-amber-500 text-[18px]">bolt</span>
-              <span>Avg Resolution: &lt; 18h</span>
+          {/* Quick Instant Channels Alert Bar */}
+          <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-bold text-amber-950 max-w-2xl mx-auto shadow-2xs">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-amber-600 text-[20px]">bolt</span>
+              <span>Need urgent mid-sem exam papers in under 5 minutes?</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-              <span className="material-symbols-outlined text-emerald-500 text-[18px]">task_alt</span>
-              <span>100% Free &amp; Verified</span>
-            </div>
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-              <span className="material-symbols-outlined text-sky-500 text-[18px]">group</span>
-              <span>500+ Student Network</span>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 rounded-xl bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-black text-[11px] border border-slate-900 shadow-2xs"
+              >
+                WhatsApp ↗
+              </a>
+              <a
+                href="https://t.me/+fP4hKU69AQIwZjI1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 rounded-xl bg-sky-400 hover:bg-sky-500 text-slate-950 font-black text-[11px] border border-slate-900 shadow-2xs"
+              >
+                Telegram ↗
+              </a>
             </div>
           </div>
         </section>
@@ -387,13 +383,23 @@ function Contact() {
 
                 <div className="space-y-3">
                   <a
-                    href="https://chat.whatsapp.com"
+                    href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-3.5 px-5 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
                   >
                     <span className="material-symbols-outlined text-[18px]">chat</span>
                     <span>Join WhatsApp Student Community</span>
+                  </a>
+
+                  <a
+                    href="https://t.me/+fP4hKU69AQIwZjI1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-5 rounded-2xl bg-[#229ED9] hover:bg-[#1d8bc0] text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">send</span>
+                    <span>Join Telegram Channel</span>
                   </a>
 
                   <Link

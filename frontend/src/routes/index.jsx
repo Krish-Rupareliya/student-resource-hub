@@ -39,10 +39,13 @@ function DepartmentRouteHandler() {
 // ─── Admin pages (Separated into isolated admin chunks) ───────
 const AdminLogin = lazy(() => import('../pages/Admin/AdminLogin'));
 const AdminDashboard = lazy(() => import('../pages/Admin/AdminDashboard'));
+const AdminHomepageSettingsView = lazy(() => import('../pages/Admin/AdminHomepageSettingsView'));
 const AdminSubmissionsView = lazy(() => import('../pages/Admin/AdminSubmissionsView'));
 const AdminResourcesView = lazy(() => import('../pages/Admin/AdminResourcesView'));
 const AdminOpportunitiesView = lazy(() => import('../pages/Admin/AdminOpportunitiesView'));
 const AdminCatalogView = lazy(() => import('../pages/Admin/AdminCatalogView'));
+const AdminSubscribersView = lazy(() => import('../pages/Admin/AdminSubscribersView'));
+const AdminPollsView = lazy(() => import('../pages/Admin/AdminPollsView'));
 
 export const router = createBrowserRouter([
   // ── Public app ─────────────────────────────────────────────
@@ -78,11 +81,16 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/admin/dashboard" replace /> },
       { path: 'dashboard', element: withSuspense(AdminDashboard) },
+      { path: 'homepage-settings', element: withSuspense(AdminHomepageSettingsView) },
+      { path: 'settings/homepage', element: withSuspense(AdminHomepageSettingsView) },
       { path: 'submissions', element: withSuspense(AdminSubmissionsView) },
       { path: 'uploads', element: withSuspense(AdminSubmissionsView) },
       { path: 'resources', element: withSuspense(AdminResourcesView) },
       { path: 'opportunities', element: withSuspense(AdminOpportunitiesView) },
+      { path: 'polls', element: withSuspense(AdminPollsView) },
+      { path: 'referendums', element: withSuspense(AdminPollsView) },
       { path: 'catalog', element: withSuspense(AdminCatalogView) },
+      { path: 'subscribers', element: withSuspense(AdminSubscribersView) },
       { path: '*', element: withSuspense(NotFound) },
     ],
   },

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 function NotFound() {
   return (
-    <div className="pt-20 min-h-screen bulletin-board-bg relative flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center selection:bg-amber-300 selection:text-black overflow-hidden">
+    <div className="pt-24 pb-20 min-h-screen bulletin-board-bg relative flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center selection:bg-amber-300 selection:text-black overflow-hidden">
       
       {/* ─── Ambient Theme Background Glow & Decor ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -31,25 +31,25 @@ function NotFound() {
         initial={{ opacity: 0, y: 20, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="relative z-10 my-12 bg-white/85 backdrop-blur-md border-[2.5px] border-black rounded-3xl p-8 sm:p-12 shadow-[0_16px_40px_rgba(0,0,0,0.12)] max-w-md w-full space-y-6"
+        className="relative z-10 my-8 bg-white/90 backdrop-blur-md border-2 border-slate-900 rounded-3xl p-8 sm:p-12 shadow-[4px_4px_0px_#0F172A] max-w-md w-full space-y-6"
       >
         {/* Animated Icon Badge */}
         <div className="relative inline-flex items-center justify-center">
-          <div className="w-24 h-24 rounded-2xl bg-amber-100 border-[2.5px] border-black flex items-center justify-center shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-3">
-            <span className="material-symbols-outlined text-6xl text-amber-600 font-extrabold animate-bounce">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-amber-100 border-2 border-slate-900 flex items-center justify-center shadow-[3px_3px_0px_#0F172A] transform -rotate-3">
+            <span className="material-symbols-outlined text-5xl sm:text-6xl text-amber-600 font-extrabold animate-bounce">
               folder_off
             </span>
           </div>
-          <span className="absolute -top-2 -right-3 bg-black text-amber-300 font-black text-xs px-2.5 py-1 rounded-full border border-black uppercase tracking-wider shadow-xs">
+          <span className="absolute -top-2 -right-3 bg-slate-900 text-amber-300 font-black text-xs px-2.5 py-1 rounded-full border border-slate-900 uppercase tracking-wider shadow-xs">
             404
           </span>
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight italic font-display-lg">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
             Page Not Found
           </h1>
-          <p className="text-sm sm:text-base text-black/75 max-w-sm mx-auto font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto font-medium leading-relaxed">
             The study resource or page you are looking for has been moved or doesn't exist. Let's get you back on track!
           </p>
         </div>
@@ -57,7 +57,7 @@ function NotFound() {
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             to="/"
-            className="btn-black-yellow w-full sm:w-auto px-7 py-3 rounded-xl font-black shadow-[3px_3px_0px_rgba(0,0,0,1)] inline-flex items-center justify-center gap-2 active-press text-sm cursor-pointer"
+            className="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 px-6 py-3 rounded-xl font-black border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A] hover:shadow-[1px_1px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">home</span>
             Go Back Home
@@ -65,10 +65,10 @@ function NotFound() {
           
           <Link
             to="/semesters"
-            className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold bg-white text-black border-2 border-black hover:bg-gray-50 shadow-[3px_3px_0px_rgba(0,0,0,0.2)] inline-flex items-center justify-center gap-2 active-press text-sm cursor-pointer transition-all"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A] hover:shadow-[1px_1px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">folder</span>
-            View Semesters
+            All Semesters
           </Link>
         </div>
       </motion.div>

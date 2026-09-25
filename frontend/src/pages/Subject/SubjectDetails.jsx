@@ -5,7 +5,6 @@ import { useSubjectResources } from '../../hooks/useResources';
 import { getSubjectByCode } from '../../services/resources/resourcesApi';
 import { ErrorState } from '../../components/ui/ErrorState';
 import UploadResourceModal from '../../components/resources/UploadResourceModal';
-
 import { API_BASE_URL } from '../../lib/api';
 
 // Backend proxy base — never expose raw Drive URLs to the browser
@@ -74,7 +73,7 @@ function SubjectDetails() {
       icon: 'description',
       title: 'Previous Year Papers',
       dbType: 'Previous Year Papers',
-      desc: 'Past GTU & university exam papers',
+      desc: 'Past Indus & university exam papers',
       accentColor: '#38BDF8',
       badgeBg: 'bg-sky-100 text-sky-900 border-sky-300',
       activeGradient: 'from-sky-400 to-sky-500 text-black',
@@ -110,7 +109,7 @@ function SubjectDetails() {
       icon: 'list_alt',
       title: 'Syllabus',
       dbType: 'Syllabus',
-      desc: 'Official GTU course syllabus document',
+      desc: 'Official Indus course syllabus document',
       accentColor: '#22D3EE',
       badgeBg: 'bg-cyan-100 text-cyan-900 border-cyan-300',
       activeGradient: 'from-cyan-400 to-cyan-500 text-black',
@@ -150,30 +149,6 @@ function SubjectDetails() {
         {/* ─── Top Hero / Header Section ─── */}
         <section className="mb-8 sm:mb-10">
           <div className="bg-white/90 backdrop-blur-md border-2 border-black rounded-[28px] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.9)] relative overflow-hidden">
-            
-            {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 mb-4 sm:mb-6 text-xs sm:text-sm text-gray-600 overflow-x-auto whitespace-nowrap pb-1 no-scrollbar flex-wrap">
-              <Link to="/" className="hover:text-amber-600 font-bold transition-colors">Home</Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              <Link to="/resources" className="hover:text-amber-600 font-bold transition-colors">Resources</Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              <Link to="/semesters" className="hover:text-amber-600 font-bold transition-colors">
-                {subject.department?.code || 'CE'}
-              </Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              {subject.semester?.id && (
-                <>
-                  <Link to={`/semesters/${subject.semester.id}`} className="hover:text-amber-600 font-bold transition-colors">
-                    Semester {subject.semester?.semesterNumber || ''}
-                  </Link>
-                  <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-                </>
-              )}
-              <span className="text-black font-black bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-lg">
-                {subject.title}
-              </span>
-            </nav>
-
             {/* Main Header Content Grid */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               
@@ -214,7 +189,7 @@ function SubjectDetails() {
 
                   {/* Subtitle */}
                   <p className="text-xs sm:text-sm md:text-base text-gray-700 font-medium max-w-2xl leading-relaxed">
-                    Select a resource category below to explore handwritten notes, GTU papers, lab manuals, and question banks.
+                    Select a resource category below to explore handwritten notes, Indus papers, lab manuals, and question banks.
                   </p>
                 </div>
               </div>

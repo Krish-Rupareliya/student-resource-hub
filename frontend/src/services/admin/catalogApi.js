@@ -1,6 +1,13 @@
 // src/services/admin/catalogApi.js
 // All catalog CRUD calls — goes through the backend proxy (never direct DB).
 import { fetchFromApi } from '../../lib/api';
+import { clearCatalogCache } from '../resources/resourcesApi';
+import { clearMemoryCache } from '../../hooks/useFetch';
+
+function invalidateCatalog() {
+  clearCatalogCache();
+  clearMemoryCache();
+}
 
 // ─── Departments ──────────────────────────────────────────────
 
@@ -10,76 +17,97 @@ export function getAdminDepartments() {
 }
 
 /** Create a new department/branch. */
-export function createDepartment(data) {
-  return fetchFromApi('admin/catalog/departments', {
+export async function createDepartment(data) {
+  const result = await fetchFromApi('admin/catalog/departments', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Edit an existing department. */
-export function updateDepartment(id, data) {
-  return fetchFromApi(`admin/catalog/departments/${id}`, {
+export async function updateDepartment(id, data) {
+  const result = await fetchFromApi(`admin/catalog/departments/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Delete a department (only succeeds if it has no semesters). */
-export function deleteDepartment(id) {
-  return fetchFromApi(`admin/catalog/departments/${id}`, { method: 'DELETE' });
+export async function deleteDepartment(id) {
+  const result = await fetchFromApi(`admin/catalog/departments/${id}`, { method: 'DELETE' });
+  invalidateCatalog();
+  return result;
 }
 
 // ─── Semesters ────────────────────────────────────────────────
 
 /** Create a semester under a given department. */
-export function createSemester(data) {
-  return fetchFromApi('admin/catalog/semesters', {
+export async function createSemester(data) {
+  const result = await fetchFromApi('admin/catalog/semesters', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Edit semester metadata. */
-export function updateSemester(id, data) {
-  return fetchFromApi(`admin/catalog/semesters/${id}`, {
+export async function updateSemester(id, data) {
+  const result = await fetchFromApi(`admin/catalog/semesters/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Delete a semester (only succeeds if it has no subjects). */
-export function deleteSemester(id) {
-  return fetchFromApi(`admin/catalog/semesters/${id}`, { method: 'DELETE' });
+export async function deleteSemester(id) {
+  const result = await fetchFromApi(`admin/catalog/semesters/${id}`, { method: 'DELETE' });
+  invalidateCatalog();
+  return result;
 }
 
 /**
  * Cascade-delete a semester along with ALL its subjects + resources.
  * Also triggers backend Drive cleanup for every resource file.
  */
-export function deleteSemesterCascade(id) {
-  return fetchFromApi(`admin/catalog/semesters/${id}/cascade`, { method: 'DELETE' });
+export async function deleteSemesterCascade(id) {
+  const result = await fetchFromApi(`admin/catalog/semesters/${id}/cascade`, { method: 'DELETE' });
+  invalidateCatalog();
+  return result;
 }
 
 // ─── Subjects ─────────────────────────────────────────────────
 
 /** Create a subject under a given semester. */
-export function createSubject(data) {
-  return fetchFromApi('admin/catalog/subjects', {
+export async function createSubject(data) {
+  const result = await fetchFromApi('admin/catalog/subjects', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Edit subject metadata. */
-export function updateSubject(id, data) {
-  return fetchFromApi(`admin/catalog/subjects/${id}`, {
+export async function updateSubject(id, data) {
+  const result = await fetchFromApi(`admin/catalog/subjects/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
+  invalidateCatalog();
+  return result;
 }
 
 /** Delete a subject (only succeeds if it has no active resources). */
-export function deleteSubject(id) {
-  return fetchFromApi(`admin/catalog/subjects/${id}`, { method: 'DELETE' });
+export async function deleteSubject(id) {
+  const result = await fetchFromApi(`admin/catalog/subjects/${id}`, { method: 'DELETE' });
+  invalidateCatalog();
+  return result;
 }
+

@@ -29,8 +29,6 @@ function SemesterDetails() {
         <div className="absolute top-[20%] right-[-8%] w-[420px] h-[420px] bg-sky-100/45 rounded-full blur-3xl opacity-70" />
         <div className="absolute bottom-[10%] left-[15%] w-[450px] h-[450px] bg-purple-100/35 rounded-full blur-3xl opacity-65" />
 
-
-
         {/* Subtle Accent Rings */}
         <div className="hidden md:block absolute top-[20%] left-[46%] w-5 h-5 rounded-full border-2 border-black/15 opacity-60" />
         <div className="hidden md:block absolute top-[48%] right-[6%] w-6 h-6 rounded-full border-2 border-black/15 opacity-60" />
@@ -38,21 +36,8 @@ function SemesterDetails() {
 
       <main className="relative z-10">
         {/* Header Section Container Box */}
-        <section className="relative pt-6 sm:pt-10 pb-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative pt-6 sm:pt-10 pb-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="bg-white/90 backdrop-blur-md border-2 border-black rounded-[28px] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.9)] relative overflow-hidden">
-            
-            {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 mb-4 sm:mb-6 text-xs sm:text-sm text-gray-600 overflow-x-auto whitespace-nowrap pb-1 no-scrollbar flex-wrap">
-              <Link to="/" className="hover:text-amber-600 font-bold transition-colors">Home</Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              <Link to="/resources" className="hover:text-amber-600 font-bold transition-colors">Resources</Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              <Link to="/semesters" className="hover:text-amber-600 font-bold transition-colors">Computer Engineering</Link>
-              <span className="material-symbols-outlined text-[14px] text-gray-400">chevron_right</span>
-              <span className="text-black font-black bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-lg">
-                {loading ? '...' : (semester?.name ?? `Semester ${semesterId}`)}
-              </span>
-            </nav>
 
             {/* Main Header Content Grid */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -114,8 +99,8 @@ function SemesterDetails() {
         </section>
 
         {/* The "Bulletin Board" Grid Section */}
-        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
-
+        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 relative space-y-8">
+          
           {/* Subjects Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 sm:gap-x-6 sm:gap-y-8 relative z-10 max-w-7xl mx-auto justify-items-center">
             {/* Loading skeletons */}

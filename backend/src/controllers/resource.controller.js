@@ -85,7 +85,7 @@ async function proxyResource(req, res, dispositionType) {
       'Content-Disposition',
       `${dispositionType}; filename="${encodeURIComponent(finalFilename)}"`,
     );
-    res.setHeader('Cache-Control', 'private, max-age=300');
+    res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
 
     let driveStream;
     try {
@@ -138,7 +138,7 @@ async function proxyResource(req, res, dispositionType) {
     'Content-Disposition',
     `${dispositionType}; filename="${safeTitle}${ext}"`,
   );
-  res.setHeader('Cache-Control', 'private, max-age=300');
+  res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
 
   const localStream = fs.createReadStream(absolutePath);
   localStream.on('error', (e) => {

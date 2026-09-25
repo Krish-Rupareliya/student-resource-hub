@@ -5,6 +5,7 @@
 
 const prisma       = require('../config/prisma');
 const driveService = require('./drive.service');
+const { clearPublicCache } = require('./public.service');
 
 // ─── Helpers ──────────────────────────────────────────────────
 
@@ -70,7 +71,9 @@ async function createDepartment({ code, name }) {
   const existing = await prisma.department.findUnique({ where: { code: upper } });
   if (existing) throw conflict(`Department code "${upper}" is already taken`);
 
-  return prisma.department.create({ data: { code: upper, name: name.trim() } });
+  const created = await prisma.department.create({ data: { code: upper, name: name.trim() } });
+  clearPublicCache('catalog');
+  return created;
 }
 
 /**
@@ -94,7 +97,9 @@ async function updateDepartment(id, { code, name }) {
     updateData.code = upper;
   }
 
-  return prisma.department.update({ where: { id }, data: updateData });
+  const updated = await prisma.department.update({ where: { id }, data: updateData });
+  clearPublicCache('catalog');
+  return updated;
 }
 
 /**
@@ -113,7 +118,9 @@ async function deleteDepartment(id) {
     );
   }
 
-  return prisma.department.delete({ where: { id } });
+  const deleted = await prisma.department.delete({ where: { id } });
+  clearPublicCache('catalog');
+  return deleted;
 }
 
 // ─── Semesters ────────────────────────────────────────────────
@@ -134,7 +141,7 @@ async function createSemester({ departmentId, semesterNumber, name, description,
     throw conflict(`Semester ${semesterNumber} already exists in "${dept.name}"`);
   }
 
-  return prisma.semester.create({
+  const created = await prisma.semester.create({
     data: {
       departmentId: Number(departmentId),
       semesterNumber: Number(semesterNumber),
@@ -144,6 +151,8 @@ async function createSemester({ departmentId, semesterNumber, name, description,
       pinColor: pinColor || null,
     },
   });
+  clearPublicCache('catalog');
+  return created;
 }
 
 /**
@@ -163,7 +172,9 @@ async function updateSemester(id, { semesterNumber, name, description, bgColor, 
   if (pinColor !== undefined) updateData.pinColor = pinColor || null;
   if (sortOrder !== undefined) updateData.sortOrder = Number(sortOrder);
 
-  return prisma.semester.update({ where: { id: Number(id) }, data: updateData });
+  const updated = await prisma.semester.update({ where: { id: Number(id) }, data: updateData });
+  clearPublicCache('catalog');
+  return updated;
 }
 
 /**
@@ -182,7 +193,9 @@ async function deleteSemester(id) {
     );
   }
 
-  return prisma.semester.delete({ where: { id: Number(id) } });
+  const deleted = await prisma.semester.delete({ where: { id: Number(id) } });
+  clearPublicCache('catalog');
+  return deleted;
 }
 
 /**
@@ -228,6 +241,9 @@ async function deleteSemesterCascade(id) {
     prisma.semester.delete({     where: { id: numId } }),
   ]);
 
+  clearPublicCache('catalog');
+  clearPublicCache('resources');
+
   return {
     semesterId:       numId,
     subjectsDeleted:  subjects.length,
@@ -249,7 +265,7 @@ async function createSubject({ semesterId, code, title, shortForm, description, 
   const dup = await prisma.subject.findUnique({ where: { code: upper } });
   if (dup) throw conflict(`Subject code "${upper}" is already taken`);
 
-  return prisma.subject.create({
+  const created = await prisma.subject.create({
     data: {
       semesterId: Number(semesterId),
       code: upper,
@@ -263,6 +279,8 @@ async function createSubject({ semesterId, code, title, shortForm, description, 
       path: path || null,
     },
   });
+  clearPublicCache('catalog');
+  return created;
 }
 
 /**
@@ -294,7 +312,9 @@ async function updateSubject(id, { code, title, shortForm, description, icon, bg
     updateData.code = upper;
   }
 
-  return prisma.subject.update({ where: { id }, data: updateData });
+  const updated = await prisma.subject.update({ where: { id }, data: updateData });
+  clearPublicCache('catalog');
+  return updated;
 }
 
 /**
@@ -313,7 +333,9 @@ async function deleteSubject(id) {
     );
   }
 
-  return prisma.subject.delete({ where: { id } });
+  const deleted = await prisma.subject.delete({ where: { id } });
+  clearPublicCache('catalog');
+  return deleted;
 }
 
 module.exports = {

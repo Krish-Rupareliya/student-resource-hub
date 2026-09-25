@@ -52,6 +52,8 @@ export function useOpportunitySubmit() {
     title: '',
     description: '',
     category: 'Internships',
+    link: '',
+    deadline: '',
     submitterEmail: '',
   });
   const [status, setStatus] = useState('idle');
@@ -70,7 +72,7 @@ export function useOpportunitySubmit() {
 
     if (success) {
       setStatus('success');
-      setFormData({ title: '', description: '', category: 'Internships', submitterEmail: '' });
+      setFormData({ title: '', description: '', category: 'Internships', link: '', deadline: '', submitterEmail: '' });
     } else {
       setStatus('error');
       setErrorMessage(error);

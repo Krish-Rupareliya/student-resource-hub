@@ -16,6 +16,15 @@ let lastCatalogFetchTime = 0;
 let inFlightCatalogPromise = null;
 const CATALOG_CACHE_TTL = 60000;
 
+/**
+ * Clear the in-memory catalog cache so subsequent reads fetch fresh data.
+ */
+export function clearCatalogCache() {
+  cachedCatalog = null;
+  lastCatalogFetchTime = 0;
+  inFlightCatalogPromise = null;
+}
+
 export async function fetchSemestersCatalog(forceRefresh = false) {
   const now = Date.now();
   if (!forceRefresh && cachedCatalog && now - lastCatalogFetchTime < CATALOG_CACHE_TTL) {
