@@ -6,6 +6,50 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { semestersData } from '../../data/semestersData';
+import { fetchSemestersCatalog } from '../../services/resources/resourcesApi';
+
+/**
+ * Extract dynamic aliases from a subject:
+ * 1. Live database shortForm tokens (supports comma, slash, or pipe separated, e.g. "DBMS, DMS" or "OS / OPSYS")
+ * 2. Algorithmic acronym from subject title (filtering stopwords like 'and', 'of', '&')
+ * 3. Path slug
+ * Zero static hardcoded tables — 100% dynamic, future-safe for any admin changes.
+ */
+export function extractDynamicSubjectAliases(sub) {
+  if (!sub) return [];
+  const aliases = [];
+
+  // 1. Admin-configured short forms from database (highest priority)
+  if (sub.shortForm && typeof sub.shortForm === 'string') {
+    const tokens = sub.shortForm
+      .split(/[,/|]/)
+      .map((t) => t.trim().toUpperCase())
+      .filter(Boolean);
+    tokens.forEach((tok) => {
+      if (!aliases.includes(tok)) aliases.push(tok);
+    });
+  }
+
+  // 2. Dynamic Algorithmic Acronym from Title (future-proof fallback for any subject)
+  if (sub.title && typeof sub.title === 'string') {
+    const words = sub.title
+      .split(/[\s-]+/)
+      .filter((w) => !['and', 'of', '&', 'for', 'in', 'with', 'to', 'the', 'a', 'an'].includes(w.toLowerCase()));
+    const acronym = words.map((w) => w[0]).join('').toUpperCase();
+    if (acronym.length >= 2 && !aliases.includes(acronym)) {
+      aliases.push(acronym);
+    }
+  }
+
+  // 3. Path slug
+  const pathSlug = (sub.path || '').replace('/subject/', '').trim().toUpperCase();
+  if (pathSlug && !aliases.includes(pathSlug)) {
+    aliases.push(pathSlug);
+  }
+
+  return aliases;
+}
+
 
 const MAIN_PAGES = [
   { id: 'page-home', title: 'Home', subtitle: 'Main landing page & search portal', path: '/', icon: 'home', category: 'Pages' },
@@ -53,61 +97,148 @@ const itemVariants = {
 export default function CommandPalette({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [liveCatalog, setLiveCatalog] = useState(null);
   const inputRef = useRef(null);
   const itemRefs = useRef([]);
   const navigate = useNavigate();
 
+  // Load live catalog dynamically whenever the command palette is opened or mounted
+  useEffect(() => {
+    let isMounted = true;
+    fetchSemestersCatalog()
+      .then((data) => {
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          setLiveCatalog(data);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen]);
+
   // Aggregate all searchable items
   const allItems = useMemo(() => {
     const items = [];
+    const seenSubjects = new Set();
 
-    // Semesters
-    semestersData.forEach((sem) => {
-      items.push({
-        id: `sem-${sem.id}`,
-        title: sem.name,
-        subtitle: `${sem.subjects.length} core engineering subjects`,
-        path: `/semesters/${sem.id}`,
-        icon: 'menu_book',
-        category: 'Semesters',
-      });
+    if (liveCatalog && liveCatalog.length > 0) {
+      liveCatalog.forEach((dept) => {
+        if (!dept.semesters) return;
+        dept.semesters.forEach((sem) => {
+          items.push({
+            id: `sem-${sem.id}`,
+            title: `${dept.code} · ${sem.name}`,
+            subtitle: `${sem.subjects?.length || 0} core engineering subjects`,
+            path: `/semesters/${sem.id}`,
+            icon: 'menu_book',
+            category: 'Semesters',
+          });
 
-      // Subjects within semester
-      sem.subjects.forEach((sub) => {
-        items.push({
-          id: `sub-${sub.code}`,
-          title: `${sub.title} (${sub.code})`,
-          subtitle: `${sem.name} · ${sub.description}`,
-          path: `/subject/${sub.code}`,
-          icon: 'description',
-          category: 'Subjects',
+          sem.subjects?.forEach((sub) => {
+            if (seenSubjects.has(sub.code)) return;
+            seenSubjects.add(sub.code);
+
+            const aliases = extractDynamicSubjectAliases(sub);
+            const displayShort = (sub.shortForm ? sub.shortForm.split(/[,/|]/)[0].trim() : '') || aliases[0] || '';
+
+            items.push({
+              id: `sub-${sub.code}`,
+              code: sub.code,
+              shortForm: displayShort,
+              aliases,
+              title: `${sub.title} (${sub.code})`,
+              subtitle: `${sem.name} · ${sub.description || 'Verified study materials and question banks'}`,
+              path: sub.path || `/subject/${sub.code}`,
+              icon: 'description',
+              category: 'Subjects',
+            });
+          });
         });
       });
-    });
+    } else {
+      // Fallback to static catalog
+      semestersData.forEach((sem) => {
+        items.push({
+          id: `sem-${sem.id}`,
+          title: sem.name,
+          subtitle: `${sem.subjects.length} core engineering subjects`,
+          path: `/semesters/${sem.id}`,
+          icon: 'menu_book',
+          category: 'Semesters',
+        });
+
+        sem.subjects.forEach((sub) => {
+          if (seenSubjects.has(sub.code)) return;
+          seenSubjects.add(sub.code);
+
+          const aliases = extractDynamicSubjectAliases(sub);
+          const displayShort = (sub.shortForm ? sub.shortForm.split(/[,/|]/)[0].trim() : '') || aliases[0] || '';
+
+          items.push({
+            id: `sub-${sub.code}`,
+            code: sub.code,
+            shortForm: displayShort,
+            aliases,
+            title: `${sub.title} (${sub.code})`,
+            subtitle: `${sem.name} · ${sub.description || 'Verified study materials and question banks'}`,
+            path: `/subject/${sub.code}`,
+            icon: 'description',
+            category: 'Subjects',
+          });
+        });
+      });
+    }
 
     // Pages & Actions
     items.push(...MAIN_PAGES);
     items.push(...QUICK_ACTIONS);
 
     return items;
-  }, []);
+  }, [liveCatalog]);
 
-  // Filter based on query
+  // Filter based on query with short-form, alias, code and title matching
   const filtered = useMemo(() => {
     if (!query.trim()) {
       return [
         ...MAIN_PAGES.slice(0, 4),
-        ...allItems.filter((i) => i.category === 'Semesters'),
+        ...allItems.filter((i) => i.category === 'Semesters').slice(0, 4),
         ...QUICK_ACTIONS,
       ];
     }
     const q = query.toLowerCase().trim();
-    return allItems.filter(
-      (item) =>
+    const cleanQ = q.replace(/[-\s_]/g, '');
+
+    return allItems.filter((item) => {
+      if (item.category === 'Subjects') {
+        const titleLower = item.title.toLowerCase();
+        const titleClean = titleLower.replace(/[-\s_]/g, '');
+        const codeLower = (item.code || '').toLowerCase();
+        const codeClean = codeLower.replace(/[-\s_]/g, '');
+        const shortLower = (item.shortForm || '').toLowerCase();
+        const shortClean = shortLower.replace(/[-\s_]/g, '');
+
+        if (titleLower.includes(q) || titleClean.includes(cleanQ)) return true;
+        if (codeLower.includes(q) || codeClean.includes(cleanQ)) return true;
+        if (shortLower.includes(q) || shortClean.includes(cleanQ)) return true;
+
+        if (item.aliases && item.aliases.some((a) => {
+          const aLower = a.toLowerCase();
+          return aLower.includes(q) || aLower.replace(/[-\s_]/g, '').includes(cleanQ) || q === aLower;
+        })) {
+          return true;
+        }
+
+        if (item.subtitle && item.subtitle.toLowerCase().includes(q)) return true;
+        return false;
+      }
+
+      return (
         item.title.toLowerCase().includes(q) ||
-        item.subtitle.toLowerCase().includes(q) ||
+        item.subtitle?.toLowerCase().includes(q) ||
         item.category.toLowerCase().includes(q)
-    ).slice(0, 10);
+      );
+    }).slice(0, 12);
   }, [query, allItems]);
 
   // Focus input when opened
@@ -253,9 +384,16 @@ export default function CommandPalette({ isOpen, onClose }) {
                         <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-black text-slate-950 truncate">
-                          {item.title}
-                        </p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-xs sm:text-sm font-black text-slate-950 truncate">
+                            {item.title}
+                          </p>
+                          {item.shortForm && (
+                            <span className="text-[10px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 shrink-0">
+                              {item.shortForm}
+                            </span>
+                          )}
+                        </div>
                         <p className={`text-[11px] truncate font-medium transition-colors ${isSelected ? 'text-slate-900' : 'text-slate-500'}`}>
                           {item.subtitle}
                         </p>
@@ -299,8 +437,9 @@ export default function CommandPalette({ isOpen, onClose }) {
                 Select
               </span>
             </div>
-            <span className="text-amber-800 font-extrabold flex items-center gap-1">
-              ⚡ CampusHub Quick Command
+            <span className="text-amber-800 font-extrabold flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-[14px]">bolt</span>
+              <span>CampusHub Quick Command</span>
             </span>
           </div>
         </motion.div>

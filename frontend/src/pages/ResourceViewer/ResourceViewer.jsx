@@ -272,7 +272,7 @@ function ResourceViewer() {
         </aside>
 
         {/* ── Main Viewer Area ──────────────────────────────── */}
-        <main className="flex-1 overflow-hidden relative bg-black">
+        <div className="flex-1 overflow-hidden relative bg-black">
           {!resource.fileUrl && !resource.driveFileId ? (
             <EmptyViewer message="No file is attached to this resource." />
           ) : resourceIsImage && !hasDriveFile ? (
@@ -311,7 +311,7 @@ function ResourceViewer() {
           ) : (
             <FallbackViewer viewUrl={viewUrl} downloadUrl={downloadUrl} isUnknownType />
           )}
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -126,17 +126,17 @@ function HeroSection() {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 w-full sm:w-auto">
               <Link
                 to="/resources"
-                className="bg-hub-navy hover:bg-slate-800 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2.5 text-sm sm:text-base border border-hub-navy cursor-pointer"
+                className="bg-hub-navy hover:bg-slate-800 text-white font-bold px-6 sm:px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 text-sm sm:text-base border border-hub-navy cursor-pointer w-full sm:w-auto text-center"
               >
                 <span>Explore Resources</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
               <Link
                 to="/semesters"
-                className="bg-white hover:bg-amber-50 text-hub-navy font-bold px-8 py-3.5 rounded-full shadow-sm hover:shadow-md border-2 border-amber-300 transition-all duration-300 hover:-translate-y-0.5 text-sm sm:text-base cursor-pointer"
+                className="bg-white hover:bg-amber-50 text-hub-navy font-bold px-6 sm:px-8 py-3.5 rounded-full shadow-sm hover:shadow-md border-2 border-amber-300 transition-all duration-300 hover:-translate-y-0.5 text-sm sm:text-base cursor-pointer text-center w-full sm:w-auto"
               >
                 Explore Semesters
               </Link>
@@ -163,37 +163,37 @@ function HeroSection() {
             )}
 
             {/* Hero Stats Cards Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
-              <div className="flex flex-col items-center sm:items-start p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2 shadow-xs">
-                  <Bookmark className="w-5 h-5 text-amber-600" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 pt-2">
+              <div className="flex flex-col items-center sm:items-start p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-1.5 sm:mb-2 shadow-xs">
+                  <Bookmark className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                 </div>
-                <span className="text-2xl font-black text-hub-navy leading-none">{stats.displayResources}</span>
-                <span className="text-xs font-semibold text-gray-500 mt-1">Resources</span>
+                <span className="text-xl sm:text-2xl font-black text-hub-navy leading-none">{stats.displayResources}</span>
+                <span className="text-[11px] sm:text-xs font-semibold text-gray-500 mt-1">Resources</span>
               </div>
 
-              <div className="flex flex-col items-center sm:items-start p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2 shadow-xs">
-                  <Users className="w-5 h-5 text-amber-600" />
+              <div className="flex flex-col items-center sm:items-start p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-1.5 sm:mb-2 shadow-xs">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                 </div>
-                <span className="text-2xl font-black text-hub-navy leading-none">{stats.displayStudents}</span>
-                <span className="text-xs font-semibold text-gray-500 mt-1">Students</span>
+                <span className="text-xl sm:text-2xl font-black text-hub-navy leading-none">{stats.displayStudents}</span>
+                <span className="text-[11px] sm:text-xs font-semibold text-gray-500 mt-1">Students</span>
               </div>
 
-              <div className="flex flex-col items-center sm:items-start p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2 shadow-xs">
-                  <GraduationCap className="w-5 h-5 text-amber-600" />
+              <div className="flex flex-col items-center sm:items-start p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-1.5 sm:mb-2 shadow-xs">
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                 </div>
-                <span className="text-2xl font-black text-hub-navy leading-none">{stats.displaySubjects}</span>
-                <span className="text-xs font-semibold text-gray-500 mt-1">Subjects</span>
+                <span className="text-xl sm:text-2xl font-black text-hub-navy leading-none">{stats.displaySubjects}</span>
+                <span className="text-[11px] sm:text-xs font-semibold text-gray-500 mt-1">Subjects</span>
               </div>
 
-              <div className="flex flex-col items-center sm:items-start p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2 shadow-xs">
-                  <Briefcase className="w-5 h-5 text-amber-600" />
+              <div className="flex flex-col items-center sm:items-start p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-xs border border-amber-200/60 shadow-xs transition-transform duration-300 hover:-translate-y-1">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-1.5 sm:mb-2 shadow-xs">
+                  <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                 </div>
-                <span className="text-2xl font-black text-hub-navy leading-none">{stats.displayOpportunities}</span>
-                <span className="text-xs font-semibold text-gray-500 mt-1">Opportunities</span>
+                <span className="text-xl sm:text-2xl font-black text-hub-navy leading-none">{stats.displayOpportunities}</span>
+                <span className="text-[11px] sm:text-xs font-semibold text-gray-500 mt-1">Opportunities</span>
               </div>
             </div>
 

@@ -351,11 +351,11 @@ STUDY INSTRUCTIONS:
                   </ul>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-end gap-2.5 pt-2">
+                <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-2">
                   <button
                     type="button"
                     onClick={() => setActivePreviewPack(null)}
-                    className="px-4 py-2.5 text-xs font-black uppercase text-gray-700 hover:text-black cursor-pointer"
+                    className="px-4 py-2.5 text-xs font-black uppercase text-gray-700 hover:text-black cursor-pointer text-center"
                   >
                     Close
                   </button>
@@ -364,7 +364,7 @@ STUDY INSTRUCTIONS:
                       href={activePreviewPack.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white hover:bg-slate-100 text-[#0F172A] px-4 py-2.5 text-xs font-black uppercase rounded-xl border-[2px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center gap-1.5 cursor-pointer"
+                      className="bg-white hover:bg-slate-100 text-[#0F172A] px-4 py-2.5 text-xs font-black uppercase rounded-xl border-[2px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-[15px]">open_in_new</span>
                       <span>View PDF</span>
@@ -376,7 +376,7 @@ STUDY INSTRUCTIONS:
                       handleDownload(activePreviewPack);
                       setActivePreviewPack(null);
                     }}
-                    className="bg-[#FF5722] hover:bg-[#E64A19] text-white px-5 py-2.5 text-xs font-black uppercase rounded-xl border-[2px] border-[#0F172A] shadow-[3px_3px_0_#0F172A] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="bg-[#FF5722] hover:bg-[#E64A19] text-white px-5 py-2.5 text-xs font-black uppercase rounded-xl border-[2px] border-[#0F172A] shadow-[3px_3px_0_#0F172A] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     <span className="material-symbols-outlined text-[16px]">download</span>
                     <span>Download Full Pack</span>

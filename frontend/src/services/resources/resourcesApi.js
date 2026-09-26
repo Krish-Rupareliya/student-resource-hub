@@ -110,20 +110,70 @@ export async function getResourceById(id) {
 }
 
 export async function getSubjectByCode(subjectCode) {
+  if (!subjectCode) return null;
+  const target = subjectCode.toLowerCase().trim();
+  const cleanTarget = target.replace(/[-\s_]/g, '');
+
+  const matches = (s) => {
+    const sCode = s.code.toLowerCase();
+    const sPath = (s.path || '').toLowerCase();
+
+    // 1. Direct or sanitized code match
+    if (sCode === target || sCode.replace(/[-\s_]/g, '') === cleanTarget) {
+      return true;
+    }
+
+    // 2. Dynamic shortForm tokens (supports multi-alias e.g. "DBMS, DMS" or "OPER-SYS / OS")
+    if (s.shortForm) {
+      const tokens = s.shortForm
+        .split(/[,/|]/)
+        .map((t) => t.trim().toLowerCase())
+        .filter(Boolean);
+      for (const tok of tokens) {
+        if (tok === target || tok.replace(/[-\s_]/g, '') === cleanTarget) {
+          return true;
+        }
+      }
+    }
+
+    // 3. Path slug match
+    if (sPath === `/subject/${target}` || sPath.endsWith(`/${target}`)) {
+      return true;
+    }
+
+    // 4. Dynamic algorithmic acronym from title (stopword filtered)
+    if (s.title) {
+      const words = s.title
+        .split(/[\s-]+/)
+        .filter((w) => !['and', 'of', '&', 'for', 'in', 'with', 'to', 'the', 'a', 'an'].includes(w.toLowerCase()));
+      const acronym = words.map((w) => w[0]).join('').toLowerCase();
+      if (acronym.length >= 2 && (acronym === target || acronym === cleanTarget)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   try {
     const data = await fetchSemestersCatalog();
-    // Find the subject across all departments and semesters
     for (const dept of data) {
       if (!dept.semesters) continue;
       for (const sem of dept.semesters) {
         if (!sem.subjects) continue;
-        const subject = sem.subjects.find((s) =>
-          s.code.toLowerCase() === subjectCode.toLowerCase() ||
-          s.path === `/subject/${subjectCode.toLowerCase()}`
-        );
+        const subject = sem.subjects.find(matches);
         if (subject) {
           return { ...subject, semester: sem, department: dept };
         }
+      }
+    }
+
+    // Static fallback if not matched in live catalog
+    for (const sem of semestersData) {
+      if (!sem.subjects) continue;
+      const subject = sem.subjects.find(matches);
+      if (subject) {
+        return { ...subject, semester: sem, department: { code: 'CE', name: 'Computer Engineering' } };
       }
     }
     return null;
@@ -136,6 +186,40 @@ export async function getSubjectByCode(subjectCode) {
 export async function searchAllSubjects(query) {
   if (!query || query.trim() === '') return [];
   const lowerQuery = query.toLowerCase().trim();
+  const cleanQuery = lowerQuery.replace(/[-\s_]/g, '');
+
+  const matchSubject = (s) => {
+    const codeMatch = s.code.toLowerCase().includes(lowerQuery) || s.code.toLowerCase().replace(/[-\s_]/g, '').includes(cleanQuery);
+    const titleMatch = s.title.toLowerCase().includes(lowerQuery);
+
+    let shortFormMatch = false;
+    if (s.shortForm) {
+      const tokens = s.shortForm
+        .split(/[,/|]/)
+        .map((t) => t.trim().toLowerCase())
+        .filter(Boolean);
+      shortFormMatch = tokens.some(
+        (tok) =>
+          tok.includes(lowerQuery) ||
+          tok.replace(/[-\s_]/g, '').includes(cleanQuery) ||
+          lowerQuery.includes(tok)
+      );
+    }
+
+    // Word boundary and acronym matching
+    const words = s.title.split(/[\s-]+/);
+    const acronym = words.map((w) => w[0]).join('').toLowerCase();
+    const filteredWords = words.filter((w) => !['and', 'of', '&', 'for', 'in', 'with', 'to', 'the', 'a', 'an'].includes(w.toLowerCase()));
+    const strictAcronym = filteredWords.map((w) => w[0]).join('').toLowerCase();
+    const pathSlug = (s.path || '').replace('/subject/', '').toLowerCase();
+
+    const aliasMatch =
+      acronym.includes(lowerQuery) ||
+      strictAcronym.includes(lowerQuery) ||
+      pathSlug.includes(lowerQuery);
+
+    return codeMatch || titleMatch || shortFormMatch || aliasMatch;
+  };
 
   try {
     const data = await fetchSemestersCatalog();
@@ -151,21 +235,7 @@ export async function searchAllSubjects(query) {
       }
     }
 
-    return allSubjects.filter(s => {
-      const codeMatch = s.code.toLowerCase().includes(lowerQuery);
-      const titleMatch = s.title.toLowerCase().includes(lowerQuery);
-      const shortFormMatch = s.shortForm ? s.shortForm.toLowerCase().includes(lowerQuery) : false;
-
-      // Attempt alias matching (e.g. Design and Analysis of Algorithms -> DAA)
-      const words = s.title.split(' ');
-      const acronym = words.map(w => w[0]).join('').toLowerCase();
-      const filteredWords = words.filter(w => !['and', 'of', '&'].includes(w.toLowerCase()));
-      const strictAcronym = filteredWords.map(w => w[0]).join('').toLowerCase();
-
-      const aliasMatch = acronym.includes(lowerQuery) || strictAcronym.includes(lowerQuery);
-
-      return codeMatch || titleMatch || shortFormMatch || aliasMatch;
-    });
+    return allSubjects.filter(matchSubject);
   } catch (err) {
     console.warn(`[resourcesApi] searchAllSubjects failed, using fallback:`, err.message);
     const allSubjects = [];
@@ -176,19 +246,6 @@ export async function searchAllSubjects(query) {
       }
     }
 
-    return allSubjects.filter(s => {
-      const codeMatch = s.code.toLowerCase().includes(lowerQuery);
-      const titleMatch = s.title.toLowerCase().includes(lowerQuery);
-      const shortFormMatch = s.shortForm ? s.shortForm.toLowerCase().includes(lowerQuery) : false;
-
-      const words = s.title.split(' ');
-      const acronym = words.map(w => w[0]).join('').toLowerCase();
-      const filteredWords = words.filter(w => !['and', 'of', '&'].includes(w.toLowerCase()));
-      const strictAcronym = filteredWords.map(w => w[0]).join('').toLowerCase();
-
-      const aliasMatch = acronym.includes(lowerQuery) || strictAcronym.includes(lowerQuery);
-
-      return codeMatch || titleMatch || shortFormMatch || aliasMatch;
-    });
+    return allSubjects.filter(matchSubject);
   }
 }

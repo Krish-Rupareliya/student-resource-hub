@@ -33,7 +33,7 @@ function ComingSoon() {
         <div className="bg-white/90 backdrop-blur-sm border-2 border-slate-900 rounded-3xl p-8 sm:p-12 shadow-[4px_4px_0px_#0F172A] text-center space-y-6 max-w-2xl mx-auto">
           {/* Animated Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FEF3D6] border-2 border-slate-900 text-slate-950 text-xs font-black uppercase tracking-widest shadow-[2px_2px_0px_#0F172A] animate-bounce">
-            <span>🚀</span>
+            <span className="material-symbols-outlined text-[15px] text-amber-700">rocket_launch</span>
             <span>Department Queue</span>
           </div>
 

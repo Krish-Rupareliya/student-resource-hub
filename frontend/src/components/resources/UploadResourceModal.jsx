@@ -145,7 +145,7 @@ export default function UploadResourceModal({ isOpen = true, subjectCode, onClos
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-black mb-2 sm:mb-3">Submitted Successfully!</h3>
             <p className="text-sm font-medium text-gray-600 max-w-sm">
-              Your resource has been sent for admin review. It will appear once approved — thank you! 🎉
+              Your resource has been sent for admin review. It will appear once approved — thank you!
             </p>
           </div>
         )}

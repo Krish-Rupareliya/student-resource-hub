@@ -88,7 +88,7 @@ export default function StudyBuddyWidget({ onOpenRequestModal }) {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-[120] font-sans">
+    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-[120] font-sans">
       {/* Floating Popover Window */}
       <AnimatePresence>
         {isOpen && (
@@ -97,30 +97,32 @@ export default function StudyBuddyWidget({ onOpenRequestModal }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="mb-3 w-[90vw] max-w-[340px] bg-[#FFFDF5] border-3 border-slate-900 rounded-3xl shadow-[6px_6px_0px_#0F172A] overflow-hidden"
+            className="mb-3 w-[calc(100vw-24px)] max-w-[340px] bg-[#FFFDF5] border-3 border-slate-900 rounded-3xl shadow-[6px_6px_0px_#0F172A] overflow-hidden"
           >
             {/* Header with Tabs */}
             <div className="p-3.5 border-b-2 border-slate-900 bg-[#FFFBEB] flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setActiveTab('timer')}
-                  className={`px-2.5 py-1 text-xs font-black rounded-xl border-2 transition-all cursor-pointer ${
+                  className={`px-2.5 py-1 text-xs font-black rounded-xl border-2 transition-all cursor-pointer inline-flex items-center gap-1 ${
                     activeTab === 'timer'
                       ? 'bg-amber-400 text-slate-950 border-slate-900 shadow-[2px_2px_0px_#0F172A]'
                       : 'bg-white text-slate-600 border-transparent hover:border-slate-300'
                   }`}
                 >
-                  ⏱️ Focus
+                  <span className="material-symbols-outlined text-[14px]">timer</span>
+                  <span>Focus</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('bookmarks')}
-                  className={`px-2.5 py-1 text-xs font-black rounded-xl border-2 transition-all cursor-pointer ${
+                  className={`px-2.5 py-1 text-xs font-black rounded-xl border-2 transition-all cursor-pointer inline-flex items-center gap-1 ${
                     activeTab === 'bookmarks'
                       ? 'bg-amber-400 text-slate-950 border-slate-900 shadow-[2px_2px_0px_#0F172A]'
                       : 'bg-white text-slate-600 border-transparent hover:border-slate-300'
                   }`}
                 >
-                  ⭐ Stash ({bookmarks.length})
+                  <span className="material-symbols-outlined text-[14px]">bookmark</span>
+                  <span>Stash ({bookmarks.length})</span>
                 </button>
               </div>
 
@@ -156,14 +158,14 @@ export default function StudyBuddyWidget({ onOpenRequestModal }) {
                 {completedNotice && (
                   <div className="p-3 bg-emerald-100 border-2 border-emerald-600 rounded-2xl text-emerald-900 text-xs font-bold flex items-center justify-between gap-2 animate-bounce">
                     <div className="flex items-center gap-1.5">
-                      <span>🎉</span>
+                      <span className="material-symbols-outlined text-[16px] text-emerald-700">celebration</span>
                       <span>Great session! Take a short break.</span>
                     </div>
                     <button
                       onClick={() => setCompletedNotice(false)}
                       className="text-emerald-700 hover:text-emerald-900 text-sm font-black p-0.5"
                     >
-                      ✕
+                      <span className="material-symbols-outlined text-[14px]">close</span>
                     </button>
                   </div>
                 )}
@@ -171,9 +173,12 @@ export default function StudyBuddyWidget({ onOpenRequestModal }) {
                 {/* Clock Display */}
                 <div className="p-4 rounded-3xl bg-[#0F172A] text-amber-400 border-2 border-slate-900 shadow-[3px_3px_0px_#0F172A]">
                   <p className="font-mono text-4xl font-black tracking-tight">{formatTime(timeLeft)}</p>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                    {isRunning ? '🔥 Focus In Progress' : '⏸️ Paused'}
-                  </p>
+                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 flex items-center justify-center gap-1">
+                    <span className="material-symbols-outlined text-[12px]">
+                      {isRunning ? 'local_fire_department' : 'pause_circle'}
+                    </span>
+                    <span>{isRunning ? 'Focus In Progress' : 'Paused'}</span>
+                  </div>
                 </div>
 
                 {/* Controls */}
@@ -252,16 +257,18 @@ export default function StudyBuddyWidget({ onOpenRequestModal }) {
               <Link
                 to="/community"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-amber-700 flex items-center gap-1"
+                className="hover:text-amber-700 flex items-center gap-1.5 transition-colors"
               >
-                <span>🎧 Spotify Beats</span>
+                <span className="material-symbols-outlined text-[15px] text-emerald-600">headphones</span>
+                <span>Spotify Beats</span>
               </Link>
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-amber-700 flex items-center gap-1"
+                className="hover:text-amber-700 flex items-center gap-1.5 transition-colors"
               >
-                <span>📢 Request Notes</span>
+                <span className="material-symbols-outlined text-[15px] text-amber-600">campaign</span>
+                <span>Request Notes</span>
               </Link>
             </div>
           </motion.div>

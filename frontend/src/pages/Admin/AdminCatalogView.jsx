@@ -631,12 +631,12 @@ function SubjectModal({ mode, initial, semesterName, onClose, onSave }) {
             </Field>
           </div>
           <div>
-            <Field label="Short Form / Alias">
+            <Field label="Short Forms / Aliases">
               <Input
                 value={form.shortForm}
                 onChange={e => setForm(f => ({ ...f, shortForm: e.target.value.toUpperCase() }))}
-                placeholder="e.g. DMS, OOCWU"
-                maxLength={30}
+                placeholder="e.g. DBMS, DMS or OS, OPSYS"
+                maxLength={100}
               />
             </Field>
           </div>

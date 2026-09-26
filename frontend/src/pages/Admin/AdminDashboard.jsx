@@ -209,7 +209,7 @@ export default function AdminDashboard() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1A1A1A] tracking-tight leading-tight">
-            Good Morning, {admin?.name || 'Administrator'}! 👋
+            Good Morning, {admin?.name || 'Administrator'}!
           </h1>
           <p className="text-xs sm:text-sm font-bold text-[#1A1A1A]/70 max-w-2xl leading-relaxed">
             All system proxies operating normally. You have <strong className="text-[#1A1A1A] underline decoration-wavy decoration-[#F6E27B]">{analytics.kpis.pendingUploads} submissions</strong> pending quality review and <strong className="text-[#1A1A1A]">{analytics.kpis.totalResources} verified materials</strong> published live.

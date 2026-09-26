@@ -149,8 +149,9 @@ export default function AdminLogin() {
           </div>
         </div>
 
-        <p className="text-center text-xs font-extrabold text-[#1A1A1A]/60 mt-4">
-          🔒 Secure HttpOnly session with Backend Proxy Isolation
+        <p className="text-center text-xs font-extrabold text-[#1A1A1A]/60 mt-4 flex items-center justify-center gap-1.5">
+          <span className="material-symbols-outlined text-[15px]">lock</span>
+          <span>Secure HttpOnly session with Backend Proxy Isolation</span>
         </p>
       </div>
     </div>

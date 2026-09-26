@@ -103,7 +103,7 @@ const PINNED_STICKIES = [
   {
     author: 'CampusHub Bot',
     time: '12:30 PM',
-    text: '🚨 University Circular: Summer 2026 Exam Forms deadline extended till March 10th.',
+    text: 'University Circular: Summer 2026 Exam Forms deadline extended till March 10th.',
     tag: '#ExamAlert',
     solution: 'Official Indus University PDF verified & pinned in Announcement Channel',
     color: 'bg-[#DCFCE7] border-[#86EFAC]', // Green sticky
@@ -278,7 +278,7 @@ export default function Community() {
         setActivePoll(serverUpdated);
       }
       localStorage.setItem(`ch_voted_poll_${activePoll.id}`, optionId);
-      addToast({ message: 'Stamped your vote in the Campus Ballot Box! 🗳️', type: 'success' });
+      addToast({ message: 'Stamped your vote in the Campus Ballot Box!', type: 'success' });
     } catch (err) {
       console.error('[Community] Vote error:', err);
       addToast({ message: 'Vote recorded locally! Thanks for participating.', type: 'info' });
@@ -319,7 +319,7 @@ export default function Community() {
         ))}
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 sm:space-y-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-8 sm:space-y-12 relative z-10">
         {/* ══════════════════════════════════════════════════════════════════════════
             HERO CONCEPT: THE CAMPUS QUAD NOTICEBOARD & OFFICIAL STUDENT PASS
         ══════════════════════════════════════════════════════════════════════════ */}
@@ -361,23 +361,24 @@ export default function Community() {
 
               {/* Stamp Reaction Bar */}
               <div className="pt-1">
-                <p className="text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">
-                  📌 Stamp the quad bulletin board:
+                <p className="text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[15px] text-amber-600">push_pin</span>
+                  <span>Stamp the quad bulletin board:</span>
                 </p>
                 <div className="flex flex-wrap items-center gap-2">
                   {[
-                    { key: 'cheer', emoji: '🔥', count: stampCount.cheer, label: 'Hype' },
-                    { key: 'brain', emoji: '💡', count: stampCount.brain, label: 'Solved' },
-                    { key: 'rocket', emoji: '🚀', count: stampCount.rocket, label: 'Boost' },
-                    { key: 'hundred', emoji: '💯', count: stampCount.hundred, label: 'Verified' },
+                    { key: 'cheer', icon: 'local_fire_department', count: stampCount.cheer, label: 'Hype' },
+                    { key: 'brain', icon: 'lightbulb', count: stampCount.brain, label: 'Solved' },
+                    { key: 'rocket', icon: 'rocket_launch', count: stampCount.rocket, label: 'Boost' },
+                    { key: 'hundred', icon: 'verified', count: stampCount.hundred, label: 'Verified' },
                   ].map((s) => (
                     <motion.button
                       key={s.key}
                       whileTap={{ scale: 0.88 }}
-                      onClick={() => handleStamp(s.key, s.emoji)}
+                      onClick={() => handleStamp(s.key, s.label)}
                       className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-[#FEF3D6] border-2 border-[#0F172A] text-xs font-black text-[#0F172A] shadow-[2px_2px_0px_#0F172A] transition-all flex items-center gap-1.5 cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                     >
-                      <span>{s.emoji}</span>
+                      <span className="material-symbols-outlined text-[15px] text-amber-600">{s.icon}</span>
                       <span>{s.count}</span>
                     </motion.button>
                   ))}
@@ -435,7 +436,7 @@ export default function Community() {
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3.5 border-b-2 border-slate-200">
                   <div className="flex items-center gap-2">
-                    <span className="text-xl">📌</span>
+                    <span className="material-symbols-outlined text-xl text-amber-600">push_pin</span>
                     <div>
                       <h2 className="font-black text-sm text-slate-900 uppercase tracking-tight">Quad Noticeboard</h2>
                       <p className="text-[11px] text-slate-500 font-bold">Live pinned peer discussions</p>
@@ -486,8 +487,9 @@ export default function Community() {
 
               {/* Noticeboard Footer */}
               <div className="pt-3 mt-3 border-t-2 border-slate-200 text-center">
-                <span className="text-[11px] font-black text-slate-600 flex items-center justify-center gap-1">
-                  ⚡ Over 120+ peer discussions solved daily on our Quad board
+                <span className="text-[11px] font-black text-slate-600 flex items-center justify-center gap-1.5">
+                  <span className="material-symbols-outlined text-amber-500 text-[15px]">bolt</span>
+                  <span>Over 120+ peer discussions solved daily on our Quad board</span>
                 </span>
               </div>
 
@@ -547,7 +549,8 @@ export default function Community() {
                 </span>
                 <span className="text-xs text-slate-700 font-extrabold flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#1DB954] animate-ping" />
-                  🎧 340+ Students Vibing
+                  <span className="material-symbols-outlined text-[15px] text-[#1DB954]">headphones</span>
+                  <span>340+ Students Vibing</span>
                 </span>
               </div>
 
@@ -614,12 +617,12 @@ export default function Community() {
             </div>
 
             {/* Action Trigger */}
-            <div className="pt-4 mt-4 border-t-2 border-slate-900/10 flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-4 mt-4 border-t-2 border-slate-900/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <a
                 href={`https://open.spotify.com/playlist/${activeCategory.playlistId || '37i9dQZF1DX0XUfTFmNBRM'}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 rounded-2xl bg-[#1DB954] hover:bg-[#1aa34a] text-slate-950 font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer border-2 border-[#0F172A] shadow-[3px_3px_0px_#0F172A] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#1DB954] hover:bg-[#1aa34a] text-slate-950 font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer border-2 border-[#0F172A] shadow-[3px_3px_0px_#0F172A] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 <SpotifyIcon className="w-5 h-5 text-slate-950" />
                 <span>Open &quot;{activeCategory.label}&quot; in Spotify</span>
@@ -628,7 +631,7 @@ export default function Community() {
                 </span>
               </a>
 
-              <span className="text-xs sm:text-sm text-slate-800 font-extrabold">
+              <span className="text-xs sm:text-sm text-slate-800 font-extrabold text-center sm:text-left">
                 Curated for Indus University Peers
               </span>
             </div>
@@ -725,7 +728,7 @@ export default function Community() {
             )}
 
             {/* Live Referendum Impact & Drop Schedule Grid */}
-            <div className="grid grid-cols-3 gap-2.5 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1">
               <div className="bg-[#FEF3D6] p-3 rounded-2xl border-2 border-[#0F172A] shadow-[2px_2px_0px_#0F172A] text-center">
                 <span className="text-[10px] uppercase font-black tracking-wider text-amber-800 block">
                   Top Demand
@@ -756,7 +759,7 @@ export default function Community() {
             <div className="pt-4 border-t-2 border-slate-900/10 flex flex-wrap items-center justify-between gap-3">
               <Link
                 to="/resources"
-                className="px-5 py-2.5 rounded-2xl bg-[#0F172A] hover:bg-slate-800 text-white font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer border-2 border-[#0F172A] shadow-[3px_3px_0px_#0F172A] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#0F172A] hover:bg-slate-800 text-white font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer border-2 border-[#0F172A] shadow-[3px_3px_0px_#0F172A] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 <span className="material-symbols-outlined text-base text-[#FACC15]">folder_special</span>
                 <span>Open Study Resource Vault</span>
@@ -963,7 +966,7 @@ export default function Community() {
           </div>
         </div>
 
-      </main>
+      </div>
     </div>
   );
 }

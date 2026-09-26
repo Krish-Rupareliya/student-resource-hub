@@ -264,7 +264,7 @@ export default function About() {
         </motion.div>
       </motion.div>
 
-      <main className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-14 sm:space-y-18 relative z-10">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-14 sm:space-y-18 relative z-10">
 
         {/* ══════════════════════════════════════════════════════════════════════════
             1. HERO SECTION (Punchy Headline, Scalloped Cap & 4 Metrics)
@@ -338,7 +338,7 @@ export default function About() {
                       className="px-4 py-2.5 rounded-full bg-white hover:bg-gray-50 text-[#111111] font-bold text-xs sm:text-sm border-2 border-[#111111] shadow-[2.5px_2.5px_0px_#111111] hover:shadow-[4px_4px_0px_#111111] active:shadow-none flex items-center gap-2 transition-shadow cursor-pointer select-none"
                     >
                       <Search className="w-4 h-4 stroke-[2.5] text-gray-500" />
-                      <span className="text-gray-600 font-medium">Search or Filter by Semester...</span>
+                      <span className="text-gray-600 font-medium truncate max-w-[200px] sm:max-w-none">Search or Filter by Semester...</span>
                     </Link>
                   </motion.div>
                 </div>
@@ -808,7 +808,7 @@ export default function About() {
           </div>
         </section>
 
-      </main>
+      </div>
 
       {/* ── Circular Lenis Progress Back-To-Top Dial with Spring Physics ── */}
       <AnimatePresence>

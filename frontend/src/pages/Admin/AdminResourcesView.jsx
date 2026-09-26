@@ -84,10 +84,23 @@ function ResourceForm({ departments = [], semesters = [], subjects = [], onSubmi
     return true;
   });
 
-  const filteredSubjects = allowedSubjects.filter(s => 
-    s.code.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    s.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const cleanQuery = searchQuery.toLowerCase().replace(/[-\s_]/g, '');
+  const filteredSubjects = allowedSubjects.filter((s) => {
+    const qLower = searchQuery.toLowerCase();
+    if (s.code.toLowerCase().includes(qLower) || s.code.toLowerCase().replace(/[-\s_]/g, '').includes(cleanQuery)) {
+      return true;
+    }
+    if (s.title.toLowerCase().includes(qLower)) {
+      return true;
+    }
+    if (s.shortForm) {
+      const tokens = s.shortForm.split(/[,/|]/).map((t) => t.trim().toLowerCase()).filter(Boolean);
+      if (tokens.some((tok) => tok.includes(qLower) || tok.replace(/[-\s_]/g, '').includes(cleanQuery))) {
+        return true;
+      }
+    }
+    return false;
+  });
 
   function set(k, v) { setForm((f) => ({ ...f, [k]: v })); }
 

@@ -229,72 +229,567 @@ const RESOURCE_TYPES = [
   'Other',
 ];
 
-const CHAPTER_WEIGHTAGE_DATA = [
+const INDUS_ESE_PAPER_STYLE = [
   {
-    chapter: 'Ch 1: Introduction to OS & System Calls',
-    teachingHours: 5,
-    weightage: '12%',
-    marks: '8 - 10 Marks',
-    questionType: 'Descriptive & Diagrams',
-    frequency: 'Asked Every Winter & Summer',
-    frequentQuestions: [
-      'Q. Explain Dual Mode Operation (User vs Kernel Mode) with neat diagram. (7M)',
-      'Q. Define System Calls and trace steps for open() / read() execution. (4M)',
+    qNumber: 'Q.1',
+    title: 'Question 1: Unit – I Core Theory & Application',
+    unit: 'Unit – I',
+    unitBadge: 'UNIT 1',
+    totalMarks: 20,
+    parts: [
+      {
+        part: 'A',
+        syllabus: 'From Syllabus of Unit – I',
+        taxonomy: 'Remember',
+        taxonomyLevel: 'Bloom: Remember',
+        taxonomyColor: 'emerald',
+        marks: 10,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Direct definitions, fundamental properties, theorem statements, and structured enumeration from Unit 1.',
+      },
+      {
+        part: 'B',
+        syllabus: 'From Syllabus of Unit – I',
+        taxonomy: 'Understanding / Application',
+        taxonomyLevel: 'Bloom: Understanding / Application',
+        taxonomyColor: 'sky',
+        marks: 10,
+        keywords: [
+          'Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast',
+          'Paraphrase', 'Discuss', 'Extrapolate', 'Predict', 'Convert', 'Distinguish',
+          'Solve', 'Use', 'Compute', 'Demonstrate', 'Calculate',
+        ],
+        description: 'Conceptual explanations, comparative analysis, mathematical calculations, and application problems from Unit 1.',
+      },
     ],
   },
   {
-    chapter: 'Ch 2: Process Management & CPU Scheduling',
-    teachingHours: 8,
-    weightage: '20%',
-    marks: '14 - 16 Marks',
-    questionType: 'Numerical & Algorithms',
-    frequency: 'Guaranteed 14 Marks',
-    frequentQuestions: [
-      'Q. Numerical on FCFS, SJF (Preemptive/Non-preemptive), Round Robin with Gantt Chart. (7M)',
-      'Q. Process State Transition Diagram with PCB components detailed description. (7M)',
+    qNumber: 'Q.2',
+    title: 'Question 2: Unit – II Core Theory & Application',
+    unit: 'Unit – II',
+    unitBadge: 'UNIT 2',
+    totalMarks: 20,
+    parts: [
+      {
+        part: 'A',
+        syllabus: 'From Syllabus Unit – II',
+        taxonomy: 'Remember',
+        taxonomyLevel: 'Bloom: Remember',
+        taxonomyColor: 'emerald',
+        marks: 10,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Core definitions, protocol listings, structural taxonomies, and architectural outlines from Unit 2.',
+      },
+      {
+        part: 'B',
+        syllabus: 'From Syllabus Unit – II',
+        taxonomy: 'Understanding / Application',
+        taxonomyLevel: 'Bloom: Understanding / Application',
+        taxonomyColor: 'sky',
+        marks: 10,
+        keywords: [
+          'Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast',
+          'Paraphrase', 'Discuss', 'Extrapolate', 'Predict', 'Convert', 'Distinguish',
+          'Solve', 'Use', 'Compute', 'Demonstrate', 'Calculate',
+        ],
+        description: 'State machine comparisons, workflow explanations, data structure operations, and calculations from Unit 2.',
+      },
     ],
   },
   {
-    chapter: 'Ch 3: Process Synchronization & Deadlocks',
-    teachingHours: 9,
-    weightage: '24%',
-    marks: '16 - 18 Marks',
-    questionType: 'Code, Proofs & Numericals',
-    frequency: 'High Weightage Core',
-    frequentQuestions: [
-      "Q. Explain Peterson's Algorithm solution for Critical Section Problem with C syntax. (7M)",
-      "Q. Numerical on Banker's Algorithm for Deadlock Avoidance (Calculate Need Matrix & Safe Seq). (7M)",
+    qNumber: 'Q.3',
+    title: 'Question 3: Unit – III Core Theory & Application',
+    unit: 'Unit – III',
+    unitBadge: 'UNIT 3',
+    totalMarks: 20,
+    parts: [
+      {
+        part: 'A',
+        syllabus: 'From Syllabus Unit – III',
+        taxonomy: 'Remember',
+        taxonomyLevel: 'Bloom: Remember',
+        taxonomyColor: 'emerald',
+        marks: 10,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Standard terminology, rule declarations, protocol criteria, and fundamental listings from Unit 3.',
+      },
+      {
+        part: 'B',
+        syllabus: 'From Syllabus Unit – III',
+        taxonomy: 'Understanding / Application',
+        taxonomyLevel: 'Bloom: Understanding / Application',
+        taxonomyColor: 'sky',
+        marks: 10,
+        keywords: [
+          'Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast',
+          'Paraphrase', 'Discuss', 'Extrapolate', 'Predict', 'Convert', 'Distinguish',
+          'Solve', 'Use', 'Compute', 'Demonstrate', 'Calculate',
+        ],
+        description: 'Comparative differentiation, execution sequence analysis, performance modeling, and applied problems from Unit 3.',
+      },
     ],
   },
   {
-    chapter: 'Ch 4: Memory Management & Virtual Memory',
-    teachingHours: 8,
-    weightage: '22%',
-    marks: '14 - 16 Marks',
-    questionType: 'Paging Diagrams & Page Replacement',
-    frequency: 'Numericals Repeated 4x',
-    frequentQuestions: [
-      'Q. Numerical on Page Replacement Algorithms (FIFO, LRU, Optimal) calculate Page Faults. (7M)',
-      'Q. Explain Paging hardware with TLB translation lookaside buffer architecture. (7M)',
+    qNumber: 'Q.4',
+    title: 'Question 4: Unit – IV Core Theory & Application',
+    unit: 'Unit – IV',
+    unitBadge: 'UNIT 4',
+    totalMarks: 20,
+    parts: [
+      {
+        part: 'A',
+        syllabus: 'From Syllabus Unit – IV',
+        taxonomy: 'Remember',
+        taxonomyLevel: 'Bloom: Remember',
+        taxonomyColor: 'emerald',
+        marks: 10,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Formal definitions, boundary condition rules, category outlines, and specifications from Unit 4.',
+      },
+      {
+        part: 'B',
+        syllabus: 'From Syllabus Unit – IV',
+        taxonomy: 'Understanding / Application',
+        taxonomyLevel: 'Bloom: Understanding / Application',
+        taxonomyColor: 'sky',
+        marks: 10,
+        keywords: [
+          'Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast',
+          'Paraphrase', 'Discuss', 'Extrapolate', 'Predict', 'Convert', 'Distinguish',
+          'Solve', 'Use', 'Compute', 'Demonstrate', 'Calculate',
+        ],
+        description: 'System diagrams, resource allocation proofs, comparative matrices, and multi-step calculations from Unit 4.',
+      },
     ],
   },
   {
-    chapter: 'Ch 5: File Systems & Disk Scheduling',
-    teachingHours: 6,
-    weightage: '14%',
-    marks: '10 - 12 Marks',
-    questionType: 'Calculations & Tables',
-    frequency: 'Regular Exam Slot',
-    frequentQuestions: [
-      'Q. Numerical on Disk Scheduling (FCFS, SSTF, SCAN, C-SCAN) calculate total head movement. (7M)',
-      'Q. Explain File Allocation Methods (Contiguous, Linked, Indexed) with tradeoffs. (4M/7M)',
+    qNumber: 'Q.5',
+    title: 'Question 5: Analytical Evaluation Box (Answer Any Four)',
+    unit: 'Units I – IV',
+    unitBadge: 'ALL UNITS',
+    totalMarks: 20,
+    instruction: 'Answer Any Four (05*4=20)',
+    instructionDetail: 'Choose 4 questions (05M each). Unit 1 and Unit 2 questions with internal OR options on Unit 3 and Unit 4.',
+    isOptionalQuestion: true,
+    sections: [
+      {
+        partLabel: '5(a)',
+        part: 'A',
+        syllabus: 'From Syllabus Unit – 1',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 5,
+        isOptional: false,
+        hasOrChoice: false,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'Critical analysis, deconstruction, and architectural contrast of Unit 1 concepts.',
+      },
+      {
+        partLabel: '5(b)',
+        part: 'B',
+        syllabus: 'From Syllabus Unit – 2',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 5,
+        isOptional: false,
+        hasOrChoice: false,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'In-depth analysis, algorithm trade-offs, and behavioral breakdown of Unit 2 systems.',
+      },
+      {
+        partLabel: '5(c)',
+        part: 'C / D',
+        syllabus: 'From Syllabus Unit – 3',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 5,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          part: 'C',
+          label: 'Option 1 (Part C)',
+          text: 'From Syllabus Unit – 3 (Bloom’s Taxonomy : Analysis) 05 Marks',
+          keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+          description: 'Protocol dissection, edge case correlation, and structural analysis of Unit 3 methods.',
+        },
+        orOption: {
+          part: 'D',
+          label: 'Option 2 (Part D)',
+          text: 'From Syllabus Unit – 3 (Bloom’s Taxonomy : Analysis) 05 Marks',
+          keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+          description: 'Comparative deconstruction and analytical justification of Unit 3 mechanisms.',
+        },
+      },
+      {
+        partLabel: '5(d)',
+        part: 'E / F',
+        syllabus: 'From Syllabus Unit – 4',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 5,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          part: 'E',
+          label: 'Option 1 (Part E)',
+          text: 'From Syllabus Unit – 4 (Bloom’s Taxonomy : Analysis) 05 Marks',
+          keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+          description: 'System-level analysis, trade-off matrix evaluation, and architectural breakdown of Unit 4.',
+        },
+        orOption: {
+          part: 'F',
+          label: 'Option 2 (Part F)',
+          text: 'From Syllabus Unit – 4 (Bloom’s Taxonomy : Analysis) 05 Marks',
+          keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+          description: 'Advanced breakdown, comparative synthesis, and selection rationale across Unit 4 implementations.',
+        },
+      },
     ],
+    parts: [
+      {
+        part: 'A',
+        syllabus: 'From Syllabus Unit – 1',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'Critical analysis, deconstruction, and architectural contrast of Unit 1 concepts.',
+      },
+      {
+        part: 'B',
+        syllabus: 'From Syllabus Unit – 2',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'In-depth analysis, algorithm trade-offs, and behavioral breakdown of Unit 2 systems.',
+      },
+      {
+        part: 'C',
+        syllabus: 'From Syllabus Unit – 3',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'Protocol dissection, edge case correlation, and structural analysis of Unit 3 methods.',
+      },
+      {
+        part: 'D',
+        syllabus: 'From Syllabus Unit – 3',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'Comparative deconstruction and analytical justification of Unit 3 mechanisms.',
+      },
+      {
+        part: 'E',
+        syllabus: 'From Syllabus Unit – 4',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'System-level analysis, trade-off matrix evaluation, and architectural breakdown of Unit 4.',
+      },
+      {
+        part: 'F',
+        syllabus: 'From Syllabus Unit – 4',
+        taxonomy: 'Analysis',
+        taxonomyLevel: 'Bloom: Analysis',
+        taxonomyColor: 'purple',
+        marks: 5,
+        keywords: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+        description: 'Advanced breakdown, comparative synthesis, and selection rationale across Unit 4 implementations.',
+      },
+    ],
+  },
+];
+
+const BLOOM_TAXONOMY_SUMMARY = [
+  {
+    name: 'Remember',
+    level: 'L1 Cognitive Domain',
+    marks: 40,
+    percentage: '40% of Total Paper',
+    barWidth: 'w-[40%]',
+    badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-400',
+    dotColor: 'bg-emerald-500',
+    description: 'Direct recall of definitions, principles, formulas, laws, and enumerated lists.',
+    paperCoverage: 'Q.1(A) [10M] + Q.2(A) [10M] + Q.3(A) [10M] + Q.4(A) [10M]',
+    keyActionVerbs: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+  },
+  {
+    name: 'Understanding / Application',
+    level: 'L2 & L3 Cognitive Domain',
+    marks: 40,
+    percentage: '40% of Total Paper',
+    barWidth: 'w-[40%]',
+    badgeBg: 'bg-sky-100 text-sky-900 border-sky-400',
+    dotColor: 'bg-sky-500',
+    description: 'Conceptual comprehension, comparisons, derivations, and applied mathematical calculations.',
+    paperCoverage: 'Q.1(B) [10M] + Q.2(B) [10M] + Q.3(B) [10M] + Q.4(B) [10M]',
+    keyActionVerbs: [
+      'Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast',
+      'Paraphrase', 'Discuss', 'Extrapolate', 'Predict', 'Convert', 'Distinguish',
+      'Solve', 'Use', 'Compute', 'Demonstrate', 'Calculate',
+    ],
+  },
+  {
+    name: 'Analysis',
+    level: 'L4 Cognitive Domain',
+    marks: 20,
+    percentage: '20% of Total Paper',
+    barWidth: 'w-[20%]',
+    badgeBg: 'bg-purple-100 text-purple-900 border-purple-400',
+    dotColor: 'bg-purple-500',
+    description: 'Deconstructing complex concepts into sub-elements, comparing architectural trade-offs, and critical correlation.',
+    paperCoverage: 'Q.5: Answer Any 4 out of 6 options (A, B, C, D, E, F) [5M × 4 = 20M]',
+    keyActionVerbs: ['Analyze', 'Compare', 'Contrast', 'Deconstruct', 'Outline', 'Select', 'Separate', 'Correlate', 'Breakdown'],
+  },
+];
+
+const INDUS_MSE_PAPER_STYLE = [
+  {
+    qNumber: 'Q 1',
+    title: 'Question 1: Unit – 1 Knowledge & Fundamental Recall',
+    unit: 'Unit - 1',
+    unitBadge: 'UNIT 1',
+    totalMarks: 8,
+    instruction: 'Unit 1 Foundation Questions (04 + 04 = 08 Marks)',
+    instructionDetail: 'Compulsory sub-question 1(a) plus choice-based sub-question 1(b) with internal OR.',
+    sections: [
+      {
+        partLabel: '1(a)',
+        syllabus: 'Unit - 1 (Cognitive Level – I)',
+        cognitiveLevel: 'Cognitive Level – I',
+        taxonomyName: 'Remember / Recall',
+        taxonomyBadge: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        marks: 4,
+        isOptional: false,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Direct definitions, fundamental laws, core principles, and basic classifications from Unit 1.',
+      },
+      {
+        partLabel: '1(b)',
+        syllabus: 'Unit - 1 (Cognitive Level – I)',
+        cognitiveLevel: 'Cognitive Level – I',
+        taxonomyName: 'Remember / Recall',
+        taxonomyBadge: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        marks: 4,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          label: 'Option 1',
+          text: 'Unit - 1 (Cognitive Level – I) 04',
+          keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+          description: 'Standard conceptual definitions and theorem statements from Unit 1.',
+        },
+        orOption: {
+          label: 'Option 2',
+          text: 'Unit – 1 (Cognitive Level – I) 04',
+          keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+          description: 'Alternative fundamental recall question or listing exercise from Unit 1.',
+        },
+      },
+    ],
+  },
+  {
+    qNumber: 'Q 2',
+    title: 'Question 2: Unit – 2 Theory, Comprehension & Application',
+    unit: 'Unit – 2',
+    unitBadge: 'UNIT 2',
+    totalMarks: 16,
+    instruction: 'Unit 2 Comprehensive Split (04 + 06 + 06 = 16 Marks)',
+    instructionDetail: 'Sub-question 2(a) is compulsory (04M). Sub-questions 2(b) (06M) and 2(c) (06M) each offer an internal OR option.',
+    sections: [
+      {
+        partLabel: '2(a)',
+        syllabus: 'Unit – 2 (Cognitive Level – I)',
+        cognitiveLevel: 'Cognitive Level – I',
+        taxonomyName: 'Remember / Recall',
+        taxonomyBadge: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        marks: 4,
+        isOptional: false,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Core concepts, terminologies, architecture outlines, and specifications from Unit 2.',
+      },
+      {
+        partLabel: '2(b)',
+        syllabus: 'Unit – 2 (Cognitive Level – II)',
+        cognitiveLevel: 'Cognitive Level – II',
+        taxonomyName: 'Understanding / Comprehension',
+        taxonomyBadge: 'bg-sky-100 text-sky-900 border-sky-300',
+        marks: 6,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          label: 'Option 1',
+          text: 'Unit – 2 (Cognitive Level – II) 06',
+          keywords: ['Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast'],
+          description: 'In-depth conceptual explanation, comparative breakdown, or workflow mechanism from Unit 2.',
+        },
+        orOption: {
+          label: 'Option 2',
+          text: 'Unit – 2 (Cognitive Level – II) 06',
+          keywords: ['Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast'],
+          description: 'Alternative descriptive mechanism, comparative distinction table, or system interpretation from Unit 2.',
+        },
+      },
+      {
+        partLabel: '2(c)',
+        syllabus: 'Unit – 2 (Cognitive Level – III)',
+        cognitiveLevel: 'Cognitive Level – III',
+        taxonomyName: 'Application / Problem Solving',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 6,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          label: 'Option 1',
+          text: 'Unit – 2 (Cognitive Level – III) 06',
+          keywords: ['Solve', 'Calculate', 'Compute', 'Demonstrate', 'Apply', 'Implement'],
+          description: 'Practical problem solving, mathematical derivation, or case application from Unit 2.',
+        },
+        orOption: {
+          label: 'Option 2',
+          text: 'Unit – 2 (Cognitive Level – III) 06',
+          keywords: ['Solve', 'Calculate', 'Compute', 'Demonstrate', 'Apply', 'Implement'],
+          description: 'Alternative numerical computation, algorithm tracing, or applied scenario from Unit 2.',
+        },
+      },
+    ],
+  },
+  {
+    qNumber: 'Q 3',
+    title: 'Question 3: Unit – 3 Theory, Comprehension & Application',
+    unit: 'Unit – 3',
+    unitBadge: 'UNIT 3',
+    totalMarks: 16,
+    instruction: 'Unit 3 Comprehensive Split (04 + 06 + 06 = 16 Marks)',
+    instructionDetail: 'Sub-question 3(a) is compulsory (04M). Sub-questions 3(b) (06M) and 3(c) (06M) each offer an internal OR option.',
+    sections: [
+      {
+        partLabel: '3(a)',
+        syllabus: 'Unit – 3 (Cognitive Level – I)',
+        cognitiveLevel: 'Cognitive Level – I',
+        taxonomyName: 'Remember / Recall',
+        taxonomyBadge: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        marks: 4,
+        isOptional: false,
+        keywords: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+        description: 'Direct definitions, parameter listings, theorem statements, and structural overviews from Unit 3.',
+      },
+      {
+        partLabel: '3(b)',
+        syllabus: 'Unit – 3 (Cognitive Level – II)',
+        cognitiveLevel: 'Cognitive Level – II',
+        taxonomyName: 'Understanding / Comprehension',
+        taxonomyBadge: 'bg-sky-100 text-sky-900 border-sky-300',
+        marks: 6,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          label: 'Option 1',
+          text: 'Unit – 3 (Cognitive Level – II) 06',
+          keywords: ['Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast'],
+          description: 'System architectural explanation, trade-off analysis, or protocol interpretation from Unit 3.',
+        },
+        orOption: {
+          label: 'Option 2',
+          text: 'Unit – 3 (Cognitive Level – II) 06',
+          keywords: ['Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast'],
+          description: 'Alternative workflow comparison, descriptive diagram, or conceptual derivation from Unit 3.',
+        },
+      },
+      {
+        partLabel: '3(c)',
+        syllabus: 'Unit – 3 (Cognitive Level – III)',
+        cognitiveLevel: 'Cognitive Level – III',
+        taxonomyName: 'Application / Problem Solving',
+        taxonomyBadge: 'bg-purple-100 text-purple-900 border-purple-300',
+        marks: 6,
+        isOptional: true,
+        hasOrChoice: true,
+        primaryOption: {
+          label: 'Option 1',
+          text: 'Unit – 3 (Cognitive Level – III) 06',
+          keywords: ['Solve', 'Calculate', 'Compute', 'Demonstrate', 'Apply', 'Implement'],
+          description: 'Engineering numerical calculation, implementation problem, or real-world application from Unit 3.',
+        },
+        orOption: {
+          label: 'Option 2',
+          text: 'Unit – 3 (Cognitive Level – III) 06',
+          keywords: ['Solve', 'Calculate', 'Compute', 'Demonstrate', 'Apply', 'Implement'],
+          description: 'Alternative application problem, mathematical solution, or algorithmic design from Unit 3.',
+        },
+      },
+    ],
+  },
+];
+
+const MSE_COGNITIVE_SUMMARY = [
+  {
+    name: 'Cognitive Level – I (Remember)',
+    level: 'Bloom L1 Domain',
+    marks: 16,
+    percentage: '40% of Total Paper',
+    barWidth: 'w-[40%]',
+    badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-400',
+    dotColor: 'bg-emerald-500',
+    description: 'Knowledge recall, direct definitions, theorem statements, and list enumerations across Units 1, 2, and 3.',
+    paperCoverage: 'Q 1 [8M (4M + 4M)] + Q 2(a) [4M] + Q 3(a) [4M]',
+    keyActionVerbs: ['Define', 'List', 'State', 'Enumerate', 'Outline', 'Tabulate'],
+  },
+  {
+    name: 'Cognitive Level – II (Understanding)',
+    level: 'Bloom L2 Domain',
+    marks: 12,
+    percentage: '30% of Total Paper',
+    barWidth: 'w-[30%]',
+    badgeBg: 'bg-sky-100 text-sky-900 border-sky-400',
+    dotColor: 'bg-sky-500',
+    description: 'Comprehension, comparative analysis, workflow explanation, and interpretive reasoning with internal choice options.',
+    paperCoverage: 'Q 2(b) [6M with OR] + Q 3(b) [6M with OR]',
+    keyActionVerbs: ['Explain', 'Describe', 'Summarize', 'Interpret', 'Classify', 'Compare', 'Contrast'],
+  },
+  {
+    name: 'Cognitive Level – III (Application)',
+    level: 'Bloom L3 Domain',
+    marks: 12,
+    percentage: '30% of Total Paper',
+    barWidth: 'w-[30%]',
+    badgeBg: 'bg-purple-100 text-purple-900 border-purple-400',
+    dotColor: 'bg-purple-500',
+    description: 'Applied engineering calculations, mathematical problem solving, algorithm tracing, and practical implementations.',
+    paperCoverage: 'Q 2(c) [6M with OR] + Q 3(c) [6M with OR]',
+    keyActionVerbs: ['Solve', 'Calculate', 'Compute', 'Demonstrate', 'Apply', 'Implement'],
   },
 ];
 
 export default function Resources() {
   const navigate = useNavigate();
   const { toasts, addToast, removeToast } = useToast();
+
+  // Examination Mode Switcher ('ESE' = 100M End Sem, 'MSE' = 40M Mid Sem)
+  const [selectedExamMode, setSelectedExamMode] = useState('ESE'); // 'ESE' | 'MSE'
+
+  // Blueprint Tab and Filter state
+  const [blueprintTab, setBlueprintTab] = useState('questions'); // 'questions' | 'taxonomy'
+  const [selectedUnitFilter, setSelectedUnitFilter] = useState('ALL'); // 'ALL' | Unit filters
+
+  const handleExamModeChange = (mode) => {
+    setSelectedExamMode(mode);
+    setSelectedUnitFilter('ALL');
+  };
 
   // Dynamic Syllabus Catalog state
   const [dbCatalog, setDbCatalog] = useState(null);
@@ -443,7 +938,7 @@ export default function Resources() {
 
       setUploadStatus('success');
       addToast({
-        message: '🎉 Resource submitted! Sent to moderation queue with topper attribution.',
+        message: 'Resource submitted! Sent to moderation queue with topper attribution.',
         type: 'success',
         duration: 5000,
       });
@@ -471,7 +966,7 @@ export default function Resources() {
     e.preventDefault();
     if (!requestMessage.trim()) {
       addToast({
-        message: '⚠️ Please describe what resource or paper you need.',
+        message: 'Please describe what resource or paper you need.',
         type: 'error',
         duration: 3500,
       });
@@ -480,7 +975,7 @@ export default function Resources() {
 
     if (!requestEmail.trim() || !requestEmail.endsWith('@gmail.com')) {
       addToast({
-        message: '⚠️ A valid @gmail.com email is required for fulfillment alerts.',
+        message: 'A valid @gmail.com email is required for fulfillment alerts.',
         type: 'error',
         duration: 3500,
       });
@@ -501,7 +996,7 @@ export default function Resources() {
       }
 
       addToast({
-        message: '🚀 Request submitted! We will alert your email once material is uploaded.',
+        message: 'Request submitted! We will alert your email once material is uploaded.',
         type: 'success',
         duration: 4500,
       });
@@ -563,7 +1058,7 @@ export default function Resources() {
               
               {/* Pill Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FEF3D6] border border-amber-300/80 text-hub-navy text-[11px] font-extrabold uppercase tracking-widest shadow-2xs">
-                <span>📚</span>
+                <span className="material-symbols-outlined text-sm text-amber-600">menu_book</span>
                 <span>Academic Resources</span>
               </div>
 
@@ -640,7 +1135,7 @@ export default function Resources() {
           {/* Section Header */}
           <div className="text-center mb-12 space-y-2">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FEF08A] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0F172A] text-xs font-black uppercase tracking-wider mb-2">
-              <span>⚡</span>
+              <span className="material-symbols-outlined text-sm text-[#0F172A]">bolt</span>
               <span>CHOOSE YOUR STREAM</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-hub-navy leading-tight tracking-tight">
@@ -674,17 +1169,17 @@ export default function Resources() {
               return (
               <div
                 key={dept.code}
-                className="bg-white rounded-[32px] p-8 sm:p-9 border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A] hover:shadow-[8px_8px_0_#0F172A] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group relative overflow-hidden"
+                className="bg-white rounded-[32px] p-6 sm:p-9 border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A] hover:shadow-[8px_8px_0_#0F172A] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group relative overflow-hidden"
               >
-                {/* Status Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`${dept.statusBg} text-[10px] font-black px-3 py-1 rounded-full border border-[#0F172A] uppercase tracking-wider shadow-xs`}>
+                {/* Top Header Row with Status Badge (In-flow so it NEVER collides with center icon) */}
+                <div className="w-full flex items-center justify-end mb-2 sm:mb-3">
+                  <span className={`${dept.statusBg} text-[10px] font-black px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-[#0F172A] uppercase tracking-wider shadow-xs`}>
                     {dept.status}
                   </span>
                 </div>
 
                 {/* Amber Icon Badge */}
-                <div className="w-18 h-18 rounded-2xl bg-[#FEF3D6] text-hub-navy border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] flex items-center justify-center mb-6 mx-auto transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <div className="w-18 h-18 rounded-2xl bg-[#FEF3D6] text-hub-navy border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] flex items-center justify-center mb-5 sm:mb-6 mx-auto transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                   <span className="material-symbols-outlined text-4xl text-hub-navy">{dept.icon}</span>
                 </div>
 
@@ -756,118 +1251,970 @@ export default function Resources() {
       <section id="exam-strategy" className="py-14 sm:py-20 relative z-10 bg-[#FAF8FF] border-y-[3px] border-[#0F172A] scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
           
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
-            <div>
+          {/* Examination Mode Switcher Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div className="inline-flex p-1.5 bg-white border-[2.5px] border-[#0F172A] rounded-2xl shadow-[3.5px_3.5px_0_#0F172A]">
+              <button
+                type="button"
+                onClick={() => handleExamModeChange('ESE')}
+                className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase transition-all flex items-center gap-2 cursor-pointer ${
+                  selectedExamMode === 'ESE'
+                    ? 'bg-[#0F172A] text-white shadow-[2px_2px_0_#FF5722]'
+                    : 'text-[#0F172A] hover:bg-slate-100'
+                }`}
+              >
+                <span className="material-symbols-outlined text-base text-[#FEF08A]">school</span>
+                <span>End Sem Exam (ESE · 100M)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleExamModeChange('MSE')}
+                className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase transition-all flex items-center gap-2 cursor-pointer ${
+                  selectedExamMode === 'MSE'
+                    ? 'bg-[#0F172A] text-white shadow-[2px_2px_0_#38BDF8]'
+                    : 'text-[#0F172A] hover:bg-slate-100'
+                }`}
+              >
+                <span className="material-symbols-outlined text-base text-[#38BDF8]">assignment</span>
+                <span>Mid Sem Exam (MSE · 40M)</span>
+              </button>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold text-slate-700">
+              <span className="material-symbols-outlined text-sm text-[#FF5722]">bolt</span>
+              <span>Indus Examination Standard 2025–2026</span>
+            </div>
+          </div>
+
+          {/* Section Header */}
+          <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-8">
+            <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFEDD5] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0F172A] text-xs font-black uppercase tracking-wider mb-2.5">
                 <span className="material-symbols-outlined text-[15px] text-[#FF5722]">analytics</span>
                 <span>EXAM STRATEGY &amp; MARK SPLITS</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-hub-navy leading-tight tracking-tight">
-                Indus Paper Blueprint &amp; <span className="text-amber-500">Weightage Matrix</span>
+                {selectedExamMode === 'ESE' ? (
+                  <>
+                    Indus ESE Paper Style &amp; <span className="text-amber-500">Weightage Matrix</span>
+                  </>
+                ) : (
+                  <>
+                    Indus MSE Paper Style &amp; <span className="text-sky-500">Weightage Matrix</span>
+                  </>
+                )}
               </h2>
-              <p className="text-xs sm:text-sm font-semibold text-gray-600 mt-1">
-                100-Mark university examination distribution &amp; high-yield question pattern.
+              <p className="text-xs sm:text-sm font-semibold text-gray-600 mt-1 leading-relaxed">
+                {selectedExamMode === 'ESE'
+                  ? 'Official 100-Mark End Semester Examination question distribution with Bloom’s Taxonomy cognitive mapping.'
+                  : 'Official 40-Mark Mid Semester Examination question distribution across Units 1, 2, and 3 with internal choice options.'}
               </p>
             </div>
 
-            <div className="bg-white border-[2.5px] border-[#0F172A] p-4 shadow-[4px_4px_0_#0F172A] flex items-center gap-4 rounded-2xl">
-              <div className="w-13 h-13 bg-[#FACC15] border-2 border-[#0F172A] flex items-center justify-center font-mono font-black text-xl sm:text-2xl rounded-xl shadow-[2px_2px_0_#0F172A]">
-                100
-              </div>
-              <div>
-                <p className="text-xs uppercase font-black text-[#0F172A]">External Exam</p>
-                <p className="text-xs font-bold text-emerald-700">Passing Mark: 40/100</p>
-              </div>
+            {/* Quick Metrics Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 shrink-0 w-full xl:w-auto">
+              {selectedExamMode === 'ESE' ? (
+                <>
+                  <div className="bg-white border-[2.5px] border-[#0F172A] px-4 py-3 sm:py-3.5 shadow-[3.5px_3.5px_0_#0F172A] flex items-center gap-3.5 rounded-2xl">
+                    <div className="w-12 h-12 bg-[#FACC15] text-[#0F172A] border-2 border-[#0F172A] flex items-center justify-center font-mono font-black text-xl rounded-xl shadow-[2px_2px_0_#0F172A] shrink-0">
+                      100
+                    </div>
+                    <div className="flex flex-col justify-center min-w-0">
+                      <p className="text-[11px] uppercase font-black text-[#0F172A] tracking-wider leading-none mb-1">External ESE Paper</p>
+                      <p className="text-xs font-bold text-emerald-700 leading-none">Passing Mark: 40/100 (40%)</p>
+                    </div>
+                  </div>
+                  <div className="bg-[#E0E7FF] border-[2.5px] border-[#0F172A] px-4 py-3 sm:py-3.5 shadow-[3.5px_3.5px_0_#0F172A] flex items-center gap-3.5 rounded-2xl">
+                    <div className="w-12 h-12 bg-[#818CF8] text-white border-2 border-[#0F172A] flex items-center justify-center font-mono font-black text-lg rounded-xl shadow-[2px_2px_0_#0F172A] shrink-0">
+                      3h
+                    </div>
+                    <div className="flex flex-col justify-center min-w-0">
+                      <p className="text-[11px] uppercase font-black text-[#0F172A] tracking-wider leading-none mb-1">Exam Duration</p>
+                      <p className="text-xs font-bold text-indigo-900 leading-none">5 Questions × 20M</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="bg-white border-[2.5px] border-[#0F172A] px-4 py-3 sm:py-3.5 shadow-[3.5px_3.5px_0_#0F172A] flex items-center gap-3.5 rounded-2xl">
+                    <div className="w-12 h-12 bg-[#38BDF8] text-white border-2 border-[#0F172A] flex items-center justify-center font-mono font-black text-xl rounded-xl shadow-[2px_2px_0_#0F172A] shrink-0">
+                      40
+                    </div>
+                    <div className="flex flex-col justify-center min-w-0">
+                      <p className="text-[11px] uppercase font-black text-[#0F172A] tracking-wider leading-none mb-1">Mid Sem Exam (MSE)</p>
+                      <p className="text-xs font-bold text-emerald-700 leading-none">Passing Mark: 16/40 (40%)</p>
+                    </div>
+                  </div>
+                  <div className="bg-[#E0E7FF] border-[2.5px] border-[#0F172A] px-4 py-3 sm:py-3.5 shadow-[3.5px_3.5px_0_#0F172A] flex items-center gap-3.5 rounded-2xl">
+                    <div className="w-12 h-12 bg-[#6366F1] text-white border-2 border-[#0F172A] flex items-center justify-center font-mono font-black text-lg rounded-xl shadow-[2px_2px_0_#0F172A] shrink-0">
+                      1.5h
+                    </div>
+                    <div className="flex flex-col justify-center min-w-0">
+                      <p className="text-[11px] uppercase font-black text-[#0F172A] tracking-wider leading-none mb-1">Exam Duration</p>
+                      <p className="text-xs font-bold text-indigo-900 leading-none">3 Questions (40 Marks)</p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Blueprint Interactive Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-8 bg-white border-[3px] border-[#0F172A] shadow-[6px_6px_0_#0F172A] rounded-3xl p-6 sm:p-8">
-              <h3 className="text-lg font-black text-hub-navy uppercase mb-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#FF5722]">format_list_numbered</span>
-                Chapter-Wise Question Blueprint
-              </h3>
-              
-              <div className="space-y-4">
-                {CHAPTER_WEIGHTAGE_DATA.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[#FAF8FF] hover:bg-[#F3E8FF]/40 border-[2px] border-[#0F172A] p-4 sm:p-5 rounded-2xl transition-colors shadow-[2px_2px_0_#0F172A]"
+          {/* Interactive Navigation: Tabs + Filters */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 bg-white border-[2.5px] border-[#0F172A] p-3 rounded-2xl shadow-[4px_4px_0_#0F172A]">
+            {/* View Tabs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full lg:w-auto">
+              <button
+                type="button"
+                onClick={() => setBlueprintTab('questions')}
+                className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer w-full sm:w-auto ${
+                  blueprintTab === 'questions'
+                    ? 'bg-[#0F172A] text-white shadow-[2px_2px_0_#FF5722]'
+                    : 'text-[#0F172A] hover:bg-slate-100'
+                }`}
+              >
+                <span className="material-symbols-outlined text-sm">format_list_numbered</span>
+                <span>
+                  {selectedExamMode === 'ESE' ? 'Question Breakdown (Q.1 - Q.5)' : 'Question Breakdown (Q 1 - Q 3)'}
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setBlueprintTab('taxonomy')}
+                className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer w-full sm:w-auto ${
+                  blueprintTab === 'taxonomy'
+                    ? 'bg-[#0F172A] text-white shadow-[2px_2px_0_#FF5722]'
+                    : 'text-[#0F172A] hover:bg-slate-100'
+                }`}
+              >
+                <span className="material-symbols-outlined text-sm">psychology</span>
+                <span>
+                  {selectedExamMode === 'ESE'
+                    ? 'Bloom’s Taxonomy Matrix (40% / 40% / 20%)'
+                    : 'Cognitive Levels Matrix (40% / 30% / 30%)'}
+                </span>
+              </button>
+            </div>
+
+            {/* Unit Filters (Active when in Question Breakdown) */}
+            {blueprintTab === 'questions' && (
+              <div className="flex flex-wrap items-center gap-1.5">
+                {(selectedExamMode === 'ESE'
+                  ? [
+                      { id: 'ALL', label: 'All (Q1–Q5)' },
+                      { id: 'Unit – I', label: 'Unit I (Q1)' },
+                      { id: 'Unit – II', label: 'Unit II (Q2)' },
+                      { id: 'Unit – III', label: 'Unit III (Q3)' },
+                      { id: 'Unit – IV', label: 'Unit IV (Q4)' },
+                      { id: 'Q.5', label: 'Q.5 (Analysis Box)' },
+                    ]
+                  : [
+                      { id: 'ALL', label: 'All (Q1–Q3)' },
+                      { id: 'Unit - 1', label: 'Unit 1 (Q1)' },
+                      { id: 'Unit – 2', label: 'Unit 2 (Q2)' },
+                      { id: 'Unit – 3', label: 'Unit 3 (Q3)' },
+                    ]
+                ).map((flt) => (
+                  <button
+                    key={flt.id}
+                    type="button"
+                    onClick={() => setSelectedUnitFilter(flt.id)}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-black uppercase border transition-all cursor-pointer ${
+                      selectedUnitFilter === flt.id
+                        ? 'bg-[#FF5722] text-white border-[#0F172A] shadow-[1.5px_1.5px_0_#0F172A]'
+                        : 'bg-[#FAF8FF] text-[#0F172A] border-slate-300 hover:border-[#0F172A]'
+                    }`}
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                      <h4 className="font-black text-sm sm:text-base text-[#0F172A]">{item.chapter}</h4>
-                      <div className="flex items-center gap-2">
-                        <span className="bg-[#FEF08A] text-[#0F172A] text-[10px] font-black px-2 py-0.5 rounded border border-[#0F172A]">
-                          {item.weightage}
+                    {flt.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Blueprint Interactive Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            {/* Left Column: Blueprint Content */}
+            <div className="lg:col-span-8 space-y-6">
+
+              {blueprintTab === 'questions' ? (
+                /* TAB 1: QUESTION BREAKDOWN */
+                selectedExamMode === 'ESE' ? (
+                  /* ESE QUESTIONS (Q.1 to Q.5) */
+                  <div className="space-y-6">
+                    {INDUS_ESE_PAPER_STYLE
+                      .filter((q) => {
+                        if (selectedUnitFilter === 'ALL') return true;
+                        if (selectedUnitFilter === 'Q.5') return q.qNumber === 'Q.5';
+                        return q.unit === selectedUnitFilter;
+                      })
+                      .map((q) => (
+                        <div
+                          key={q.qNumber}
+                          className={`bg-white border-[3px] border-[#0F172A] rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0_#0F172A] transition-all ${
+                            q.isOptionalQuestion ? 'ring-2 ring-purple-400/50' : ''
+                          }`}
+                        >
+                          {/* Question Header */}
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b-2 border-slate-100">
+                            <div className="flex items-center gap-3">
+                              <span className="w-12 h-10 bg-[#FEF08A] text-[#0F172A] border-2 border-[#0F172A] rounded-xl flex items-center justify-center font-mono font-black text-sm shadow-[2px_2px_0_#0F172A]">
+                                {q.qNumber}
+                              </span>
+                              <div>
+                                <h3 className="font-black text-base text-[#0F172A] leading-tight">
+                                  {q.title}
+                                </h3>
+                                <p className="text-xs font-semibold text-slate-500 mt-0.5">
+                                  Coverage: <span className="text-[#0F172A] font-bold">{q.unit}</span>
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="bg-[#E2E8F0] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {q.unitBadge}
+                              </span>
+                              <span className="bg-[#4ADE80] text-[#0F172A] text-xs font-black px-3 py-1 rounded-lg border-2 border-[#0F172A] shadow-[1.5px_1.5px_0_#0F172A]">
+                                {q.totalMarks} Marks
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Optional Question Callout Banner for Q.5 */}
+                          {q.isOptionalQuestion && (
+                            <div className="mb-5 bg-gradient-to-r from-[#FAF5FF] to-[#F3E8FF] border-2 border-purple-600/60 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                              <div className="flex items-center gap-2.5">
+                                <span className="material-symbols-outlined text-purple-700 text-xl">psychology</span>
+                                <div>
+                                  <p className="text-xs font-black text-purple-950 uppercase tracking-wide">
+                                    {q.instruction}
+                                  </p>
+                                  <p className="text-[11px] font-semibold text-purple-800">
+                                    {q.instructionDetail}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className="inline-flex items-center self-start sm:self-auto px-3 py-1 rounded-full bg-purple-200 text-purple-900 border border-purple-400 text-[11px] font-black uppercase">
+                                Higher Order Thinking (L4)
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Sub-Questions Container */}
+                          {q.isOptionalQuestion ? (
+                            /* Q.5 4-Section Layout with Internal OR for Unit 3 & Unit 4 */
+                            <div className="space-y-4">
+                              {q.sections.map((sec, secIdx) => (
+                                <div
+                                  key={secIdx}
+                                  className="bg-[#FAF8FF] border-2 border-[#0F172A] rounded-2xl p-4 sm:p-5 shadow-[2.5px_2.5px_0_#0F172A]"
+                                >
+                                  {/* Section Header */}
+                                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                    <div className="flex items-center gap-2.5">
+                                      <span className="inline-flex items-center justify-center w-8 h-8 bg-[#0F172A] text-white border-2 border-[#0F172A] rounded-xl font-mono font-black text-xs shadow-xs">
+                                        {sec.partLabel}
+                                      </span>
+                                      <div>
+                                        <h4 className="font-black text-sm text-[#0F172A]">
+                                          {sec.syllabus}
+                                        </h4>
+                                        <span className={`inline-block mt-0.5 text-[10px] font-black uppercase px-2 py-0.5 rounded border ${sec.taxonomyBadge}`}>
+                                          {sec.taxonomyLevel}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <span className="self-start sm:self-auto bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                      0{sec.marks} Marks
+                                    </span>
+                                  </div>
+
+                                  {/* Compulsory Sub-Question (5a, 5b) */}
+                                  {!sec.hasOrChoice && (
+                                    <div>
+                                      <p className="text-xs font-medium text-slate-600 mb-3 leading-relaxed">
+                                        {sec.description}
+                                      </p>
+                                      <div className="bg-white border border-slate-200 rounded-xl p-3">
+                                        <p className="text-[11px] font-black uppercase text-slate-500 mb-2 flex items-center gap-1.5">
+                                          <span className="material-symbols-outlined text-sm text-[#FF5722]">fact_check</span>
+                                          <span>Action Keywords:</span>
+                                        </p>
+                                        <div className="flex flex-wrap gap-1.5">
+                                          {sec.keywords.map((kw, kwIdx) => (
+                                            <span
+                                              key={kwIdx}
+                                              className="px-2 py-0.5 bg-[#FAF8FF] border border-slate-300 rounded-md text-[11px] font-bold text-[#0F172A] shadow-2xs"
+                                            >
+                                              {kw}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Choice Sub-Questions with OR Divider (5c, 5d) */}
+                                  {sec.hasOrChoice && (
+                                    <div className="space-y-3">
+                                      {/* Primary Option */}
+                                      <div className="bg-white border-2 border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                                        <div className="flex items-center justify-between mb-1.5">
+                                          <span className="text-[11px] font-black text-purple-700 uppercase">{sec.primaryOption.label}</span>
+                                          <span className="text-xs font-black text-slate-800 font-mono">0{sec.marks} Marks</span>
+                                        </div>
+                                        <p className="text-xs font-black text-[#0F172A] mb-1.5">
+                                          {sec.primaryOption.text}
+                                        </p>
+                                        <p className="text-xs font-medium text-slate-600 mb-2 leading-relaxed">
+                                          {sec.primaryOption.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-1">
+                                          {sec.primaryOption.keywords.map((kw, kwIdx) => (
+                                            <span
+                                              key={kwIdx}
+                                              className="px-1.5 py-0.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-700"
+                                            >
+                                              {kw}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+
+                                      {/* OR Divider */}
+                                      <div className="flex items-center gap-3 my-2">
+                                        <div className="flex-1 h-0.5 bg-amber-400"></div>
+                                        <span className="px-3.5 py-0.5 bg-[#FACC15] text-[#0F172A] border-2 border-[#0F172A] rounded-full text-xs font-black shadow-[1.5px_1.5px_0_#0F172A]">
+                                          OR
+                                        </span>
+                                        <div className="flex-1 h-0.5 bg-amber-400"></div>
+                                      </div>
+
+                                      {/* Alternative Option */}
+                                      <div className="bg-white border-2 border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                                        <div className="flex items-center justify-between mb-1.5">
+                                          <span className="text-[11px] font-black text-purple-700 uppercase">{sec.orOption.label}</span>
+                                          <span className="text-xs font-black text-slate-800 font-mono">0{sec.marks} Marks</span>
+                                        </div>
+                                        <p className="text-xs font-black text-[#0F172A] mb-1.5">
+                                          {sec.orOption.text}
+                                        </p>
+                                        <p className="text-xs font-medium text-slate-600 mb-2 leading-relaxed">
+                                          {sec.orOption.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-1">
+                                          {sec.orOption.keywords.map((kw, kwIdx) => (
+                                            <span
+                                              key={kwIdx}
+                                              className="px-1.5 py-0.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-700"
+                                            >
+                                              {kw}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            /* Q.1 to Q.4 (Part A & Part B) */
+                            <div className="space-y-4">
+                              {q.parts.map((sub) => (
+                                <div
+                                  key={sub.part}
+                                  className="bg-[#FAF8FF] border-2 border-[#0F172A] rounded-2xl p-4 sm:p-5 shadow-[2.5px_2.5px_0_#0F172A] hover:bg-[#F8FAFC] transition-colors"
+                                >
+                                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                    <div className="flex items-center gap-2.5">
+                                      <span className="inline-flex items-center justify-center w-8 h-8 bg-[#0F172A] text-white border-2 border-[#0F172A] rounded-xl font-mono font-black text-xs shadow-xs">
+                                        {sub.part}
+                                      </span>
+                                      <div>
+                                        <h4 className="font-black text-sm text-[#0F172A]">
+                                          Sub-Question {sub.part} · {sub.syllabus}
+                                        </h4>
+                                        <span
+                                          className={`inline-block mt-0.5 text-[10px] font-black uppercase px-2 py-0.5 rounded border ${
+                                            sub.taxonomy === 'Remember'
+                                              ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                                              : 'bg-sky-100 text-sky-900 border-sky-300'
+                                          }`}
+                                        >
+                                          {sub.taxonomyLevel}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    <span className="self-start sm:self-auto bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                      {sub.marks} Marks
+                                    </span>
+                                  </div>
+
+                                  <p className="text-xs font-medium text-slate-600 mb-3 leading-relaxed">
+                                    {sub.description}
+                                  </p>
+
+                                  <div className="bg-white border border-slate-200 rounded-xl p-3">
+                                    <p className="text-[11px] font-black uppercase text-slate-500 mb-2 flex items-center gap-1.5">
+                                      <span className="material-symbols-outlined text-sm text-[#FF5722]">fact_check</span>
+                                      <span>Examination Action Verbs &amp; Keywords:</span>
+                                    </p>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {sub.keywords.map((kw, kwIdx) => (
+                                        <span
+                                          key={kwIdx}
+                                          className="px-2 py-0.5 bg-[#FAF8FF] border border-slate-300 rounded-md text-[11px] font-bold text-[#0F172A] hover:bg-[#FEF08A] transition-colors shadow-2xs"
+                                        >
+                                          {kw}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  /* MSE QUESTIONS (Q 1, Q 2, Q 3) */
+                  <div className="space-y-6">
+                    {INDUS_MSE_PAPER_STYLE
+                      .filter((q) => {
+                        if (selectedUnitFilter === 'ALL') return true;
+                        return q.unit === selectedUnitFilter;
+                      })
+                      .map((q) => (
+                        <div
+                          key={q.qNumber}
+                          className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0_#0F172A] transition-all"
+                        >
+                          {/* Question Header */}
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b-2 border-slate-100">
+                            <div className="flex items-center gap-3">
+                              <span className="w-12 h-10 bg-[#38BDF8] text-white border-2 border-[#0F172A] rounded-xl flex items-center justify-center font-mono font-black text-sm shadow-[2px_2px_0_#0F172A]">
+                                {q.qNumber}
+                              </span>
+                              <div>
+                                <h3 className="font-black text-base text-[#0F172A] leading-tight">
+                                  {q.title}
+                                </h3>
+                                <p className="text-xs font-semibold text-slate-500 mt-0.5">
+                                  Coverage: <span className="text-[#0F172A] font-bold">{q.unit}</span>
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="bg-[#E2E8F0] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {q.unitBadge}
+                              </span>
+                              <span className="bg-[#4ADE80] text-[#0F172A] text-xs font-black px-3 py-1 rounded-lg border-2 border-[#0F172A] shadow-[1.5px_1.5px_0_#0F172A]">
+                                0{q.totalMarks} Marks
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Instruction Callout Banner */}
+                          <div className="mb-5 bg-[#F0FDF4] border-2 border-emerald-600/50 p-3.5 sm:p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                            <div className="flex items-center gap-2.5">
+                              <span className="material-symbols-outlined text-emerald-700 text-xl">assignment_turned_in</span>
+                              <div>
+                                <p className="text-xs font-black text-emerald-950 uppercase tracking-wide">
+                                  {q.instruction}
+                                </p>
+                                <p className="text-[11px] font-semibold text-emerald-800">
+                                  {q.instructionDetail}
+                                </p>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center self-start sm:self-auto px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-400 text-[11px] font-black uppercase">
+                              Indus MSE Pattern
+                            </span>
+                          </div>
+
+                          {/* Sub-Questions Container */}
+                          <div className="space-y-4">
+                            {q.sections.map((sec, secIdx) => (
+                              <div
+                                key={secIdx}
+                                className="bg-[#FAF8FF] border-2 border-[#0F172A] rounded-2xl p-4 sm:p-5 shadow-[2.5px_2.5px_0_#0F172A]"
+                              >
+                                {/* Section Header */}
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                  <div className="flex items-center gap-2.5">
+                                    <span className="inline-flex items-center justify-center w-8 h-8 bg-[#0F172A] text-white border-2 border-[#0F172A] rounded-xl font-mono font-black text-xs shadow-xs">
+                                      {sec.partLabel}
+                                    </span>
+                                    <div>
+                                      <h4 className="font-black text-sm text-[#0F172A]">
+                                        {sec.syllabus}
+                                      </h4>
+                                      <span className={`inline-block mt-0.5 text-[10px] font-black uppercase px-2 py-0.5 rounded border ${sec.taxonomyBadge}`}>
+                                        {sec.cognitiveLevel} · {sec.taxonomyName}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <span className="self-start sm:self-auto bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                    0{sec.marks} Marks
+                                  </span>
+                                </div>
+
+                                {/* Compulsory Sub-Question */}
+                                {!sec.hasOrChoice && (
+                                  <div>
+                                    <p className="text-xs font-medium text-slate-600 mb-3 leading-relaxed">
+                                      {sec.description}
+                                    </p>
+                                    <div className="bg-white border border-slate-200 rounded-xl p-3">
+                                      <p className="text-[11px] font-black uppercase text-slate-500 mb-2 flex items-center gap-1.5">
+                                        <span className="material-symbols-outlined text-sm text-[#FF5722]">fact_check</span>
+                                        <span>Action Keywords:</span>
+                                      </p>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {sec.keywords.map((kw, kwIdx) => (
+                                          <span
+                                            key={kwIdx}
+                                            className="px-2 py-0.5 bg-[#FAF8FF] border border-slate-300 rounded-md text-[11px] font-bold text-[#0F172A] shadow-2xs"
+                                          >
+                                            {kw}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Choice Sub-Questions with OR Divider */}
+                                {sec.hasOrChoice && (
+                                  <div className="space-y-3">
+                                    {/* Primary Option */}
+                                    <div className="bg-white border-2 border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                                      <div className="flex items-center justify-between mb-1.5">
+                                        <span className="text-[11px] font-black text-slate-500 uppercase">{sec.primaryOption.label}</span>
+                                        <span className="text-xs font-black text-slate-800 font-mono">0{sec.marks} Marks</span>
+                                      </div>
+                                      <p className="text-xs font-black text-[#0F172A] mb-1.5">
+                                        {sec.primaryOption.text}
+                                      </p>
+                                      <p className="text-xs font-medium text-slate-600 mb-2 leading-relaxed">
+                                        {sec.primaryOption.description}
+                                      </p>
+                                      <div className="flex flex-wrap gap-1">
+                                        {sec.primaryOption.keywords.map((kw, kwIdx) => (
+                                          <span
+                                            key={kwIdx}
+                                            className="px-1.5 py-0.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-700"
+                                          >
+                                            {kw}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+
+                                    {/* OR Divider */}
+                                    <div className="flex items-center gap-3 my-2">
+                                      <div className="flex-1 h-0.5 bg-amber-400"></div>
+                                      <span className="px-3.5 py-0.5 bg-[#FACC15] text-[#0F172A] border-2 border-[#0F172A] rounded-full text-xs font-black shadow-[1.5px_1.5px_0_#0F172A]">
+                                        OR
+                                      </span>
+                                      <div className="flex-1 h-0.5 bg-amber-400"></div>
+                                    </div>
+
+                                    {/* Alternative Option */}
+                                    <div className="bg-white border-2 border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                                      <div className="flex items-center justify-between mb-1.5">
+                                        <span className="text-[11px] font-black text-slate-500 uppercase">{sec.orOption.label}</span>
+                                        <span className="text-xs font-black text-slate-800 font-mono">0{sec.marks} Marks</span>
+                                      </div>
+                                      <p className="text-xs font-black text-[#0F172A] mb-1.5">
+                                        {sec.orOption.text}
+                                      </p>
+                                      <p className="text-xs font-medium text-slate-600 mb-2 leading-relaxed">
+                                        {sec.orOption.description}
+                                      </p>
+                                      <div className="flex flex-wrap gap-1">
+                                        {sec.orOption.keywords.map((kw, kwIdx) => (
+                                          <span
+                                            key={kwIdx}
+                                            className="px-1.5 py-0.5 bg-slate-50 border border-slate-200 rounded text-[10px] font-bold text-slate-700"
+                                          >
+                                            {kw}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                )
+              ) : (
+                /* TAB 2: TAXONOMY / COGNITIVE MATRIX */
+                selectedExamMode === 'ESE' ? (
+                  /* ESE BLOOM’S TAXONOMY MATRIX (100M) */
+                  <div className="space-y-6">
+                    {/* Cognitive Distribution Progress Visualizer */}
+                    <div className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                          <h3 className="text-base font-black text-hub-navy uppercase">
+                            Overall 100-Mark Cognitive Level Ratio
+                          </h3>
+                          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                            Indus University ESE evaluation balance across Bloom’s Taxonomy tiers.
+                          </p>
+                        </div>
+                        <span className="text-xs font-mono font-black bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-300">
+                          Total: 100 Marks
                         </span>
-                        <span className="bg-[#4ADE80] text-[#0F172A] text-[10px] font-black px-2 py-0.5 rounded border border-[#0F172A]">
-                          {item.marks}
-                        </span>
+                      </div>
+
+                      {/* Stacked Progress Bar */}
+                      <div className="h-5 w-full bg-slate-100 rounded-xl border-2 border-[#0F172A] overflow-hidden flex shadow-xs mb-3">
+                        <div className="w-[40%] bg-emerald-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Remember: 40 Marks (40%)">
+                          40%
+                        </div>
+                        <div className="w-[40%] bg-sky-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Understanding / Application: 40 Marks (40%)">
+                          40%
+                        </div>
+                        <div className="w-[20%] bg-purple-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Analysis: 20 Marks (20%)">
+                          20%
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-bold pt-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-emerald-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Remember: 40M (40%)</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-sky-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Understanding / Application: 40M (40%)</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-purple-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Analysis: 20M (20%)</span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="space-y-1.5 mt-3 pt-2.5 border-t border-slate-200">
-                      {item.frequentQuestions.map((fq, fIdx) => (
-                        <p key={fIdx} className="text-xs font-semibold text-[#334155] flex items-start gap-2">
-                          <span className="text-[#FF5722] font-black">★</span>
-                          <span>{fq}</span>
-                        </p>
+                    {/* Taxonomy Detailed Cards */}
+                    <div className="space-y-4">
+                      {BLOOM_TAXONOMY_SUMMARY.map((tx) => (
+                        <div
+                          key={tx.name}
+                          className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A]"
+                        >
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b-2 border-slate-100">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`w-3 h-3 rounded-full ${tx.dotColor} border border-[#0F172A]`}></span>
+                                <h4 className="text-base font-black text-[#0F172A]">{tx.name}</h4>
+                                <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded border ${tx.badgeBg}`}>
+                                  {tx.level}
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-500 font-semibold mt-1">
+                                Exam Mapping: <strong className="text-slate-800">{tx.paperCoverage}</strong>
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {tx.marks} Marks
+                              </span>
+                              <span className="bg-[#E0E7FF] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {tx.percentage}
+                              </span>
+                            </div>
+                          </div>
+
+                          <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4">
+                            {tx.description}
+                          </p>
+
+                          <div className="bg-[#FAF8FF] border-2 border-slate-200 rounded-2xl p-3.5">
+                            <p className="text-[11px] font-black uppercase text-slate-500 mb-2 flex items-center gap-1.5">
+                              <span className="material-symbols-outlined text-sm text-[#FF5722]">key</span>
+                              <span>Associated Paper Keywords:</span>
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {tx.keyActionVerbs.map((kw, kwIdx) => (
+                                <span
+                                  key={kwIdx}
+                                  className="px-2 py-0.5 bg-white border border-slate-300 rounded-md text-[11px] font-bold text-[#0F172A] shadow-2xs"
+                                >
+                                  {kw}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
+                ) : (
+                  /* MSE COGNITIVE LEVELS MATRIX (40M) */
+                  <div className="space-y-6">
+                    {/* Cognitive Distribution Progress Visualizer */}
+                    <div className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                          <h3 className="text-base font-black text-hub-navy uppercase">
+                            MSE 40-Mark Cognitive Level Ratio
+                          </h3>
+                          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                            Indus University MSE evaluation distribution across Cognitive Levels I, II, and III.
+                          </p>
+                        </div>
+                        <span className="text-xs font-mono font-black bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-300">
+                          Total: 40 Marks
+                        </span>
+                      </div>
+
+                      {/* Stacked Progress Bar */}
+                      <div className="h-5 w-full bg-slate-100 rounded-xl border-2 border-[#0F172A] overflow-hidden flex shadow-xs mb-3">
+                        <div className="w-[40%] bg-emerald-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Cognitive Level – I: 16 Marks (40%)">
+                          40%
+                        </div>
+                        <div className="w-[30%] bg-sky-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Cognitive Level – II: 12 Marks (30%)">
+                          30%
+                        </div>
+                        <div className="w-[30%] bg-purple-500 flex items-center justify-center text-[10px] font-mono font-black text-white" title="Cognitive Level – III: 12 Marks (30%)">
+                          30%
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-bold pt-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-emerald-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Cognitive Level – I: 16M (40%)</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-sky-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Cognitive Level – II: 12M (30%)</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full bg-purple-500 border border-[#0F172A]"></span>
+                          <span className="text-slate-700">Cognitive Level – III: 12M (30%)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* MSE Cognitive Level Detailed Cards */}
+                    <div className="space-y-4">
+                      {MSE_COGNITIVE_SUMMARY.map((tx) => (
+                        <div
+                          key={tx.name}
+                          className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A]"
+                        >
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b-2 border-slate-100">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`w-3 h-3 rounded-full ${tx.dotColor} border border-[#0F172A]`}></span>
+                                <h4 className="text-base font-black text-[#0F172A]">{tx.name}</h4>
+                                <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded border ${tx.badgeBg}`}>
+                                  {tx.level}
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-500 font-semibold mt-1">
+                                Exam Mapping: <strong className="text-slate-800">{tx.paperCoverage}</strong>
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {tx.marks} Marks
+                              </span>
+                              <span className="bg-[#E0E7FF] text-[#0F172A] text-xs font-black px-2.5 py-1 rounded-lg border border-[#0F172A]">
+                                {tx.percentage}
+                              </span>
+                            </div>
+                          </div>
+
+                          <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4">
+                            {tx.description}
+                          </p>
+
+                          <div className="bg-[#FAF8FF] border-2 border-slate-200 rounded-2xl p-3.5">
+                            <p className="text-[11px] font-black uppercase text-slate-500 mb-2 flex items-center gap-1.5">
+                              <span className="material-symbols-outlined text-sm text-[#FF5722]">key</span>
+                              <span>Targeted Action Keywords:</span>
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {tx.keyActionVerbs.map((kw, kwIdx) => (
+                                <span
+                                  key={kwIdx}
+                                  className="px-2 py-0.5 bg-white border border-slate-300 rounded-md text-[11px] font-bold text-[#0F172A] shadow-2xs"
+                                >
+                                  {kw}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              )}
             </div>
 
-            {/* Right Column: Topper Strategy Card */}
-            <div className="lg:col-span-4 flex flex-col gap-6">
-              <div className="bg-[#FEF9C3] border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A] flex flex-col justify-between">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FACC15] border-2 border-[#0F172A] text-xs font-black uppercase mb-3 shadow-xs">
-                    <span className="material-symbols-outlined text-[15px] text-[#713F12]">lightbulb</span>
-                    <span>Topper Exam Strategy</span>
+            {/* Right Column: Topper Strategy & Exam Hall Guidelines */}
+            <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+              
+              {/* Topper Exam Strategy Card */}
+              {selectedExamMode === 'ESE' ? (
+                <div className="bg-[#FEF9C3] border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A] flex flex-col justify-between">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FACC15] border-2 border-[#0F172A] text-xs font-black uppercase mb-3 shadow-xs">
+                      <span className="material-symbols-outlined text-[15px] text-[#713F12]">lightbulb</span>
+                      <span>Topper ESE Strategy</span>
+                    </div>
+                    <h4 className="text-lg font-black text-[#713F12] uppercase mb-2">
+                      How to Score 85+ / 100
+                    </h4>
+                    <p className="text-xs font-bold text-amber-900 mb-3">
+                      Strategically conquer Bloom’s Taxonomy levels:
+                    </p>
+                    
+                    <ul className="space-y-3.5 text-xs font-semibold text-[#854D0E] leading-relaxed">
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 1: Secure 40 Marks Passing</strong>
+                          <span>Answer Part A of Q.1, Q.2, Q.3, Q.4 first. These 40 marks test direct recall (definitions, statements, lists).</span>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 2: Conquer 40M Application</strong>
+                          <span>Prepare step-by-step algorithms, comparison tables, and numerical derivations for Part B of Q.1 to Q.4.</span>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 3: Maximize Q.5 Analysis (20M)</strong>
+                          <span>Attempt compulsory Part A (Unit 1) &amp; Part B (Unit 2), then select your stronger options in the Unit 3 (Part C OR D) and Unit 4 (Part E OR F) internal choices.</span>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-                  <h4 className="text-lg font-black text-[#713F12] uppercase mb-2">
-                    How to Score 85+ / 100
-                  </h4>
-                  <ul className="space-y-3 text-xs font-semibold text-[#854D0E] leading-relaxed">
-                    <li className="flex items-start gap-2">
-                      <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
-                      <span><strong>Always draw boxed Safe Sequences</strong> in Banker’s algorithm questions.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
-                      <span><strong>Include Time Milestone timelines</strong> in SJF and Round Robin Gantt charts.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
-                      <span><strong>Compile POSIX C code</strong> with `-pthread` flag during practical examinations.</span>
-                    </li>
-                  </ul>
-                </div>
 
-                <div className="mt-6 pt-4 border-t-2 border-[#EAB308]/50 flex items-center justify-between">
-                  <span className="text-[11px] font-black uppercase text-[#713F12]">Indus Evaluation Standard</span>
-                  <span className="text-xs font-mono font-black bg-white px-2 py-0.5 rounded border border-[#0F172A]">Grade: AA (10)</span>
+                  <div className="mt-6 pt-4 border-t-2 border-[#EAB308]/50 flex items-center justify-between">
+                    <span className="text-[11px] font-black uppercase text-[#713F12]">Indus Evaluation Standard</span>
+                    <span className="text-xs font-mono font-black bg-white px-2 py-0.5 rounded border border-[#0F172A]">Grade: AA (10 SPI)</span>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="bg-[#E0F2FE] border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A] flex flex-col justify-between">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38BDF8] text-white border-2 border-[#0F172A] text-xs font-black uppercase mb-3 shadow-xs">
+                      <span className="material-symbols-outlined text-[15px] text-white">lightbulb</span>
+                      <span>Topper MSE Strategy</span>
+                    </div>
+                    <h4 className="text-lg font-black text-sky-950 uppercase mb-2">
+                      How to Score 35+ / 40
+                    </h4>
+                    <p className="text-xs font-bold text-sky-900 mb-3">
+                      Master the 40-Mark Mid Semester examination with precision:
+                    </p>
+                    
+                    <ul className="space-y-3.5 text-xs font-semibold text-sky-950 leading-relaxed">
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 1: Secure 16 Marks Passing Immediately</strong>
+                          <span>All 16 Level I marks are pure recall: Q 1 (4M + 4M) + Q 2(a) (4M) + Q 3(a) (4M) = 16 Marks. You hit the passing mark 16/40 (40%) on definitions, statements, and formulas alone!</span>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 2: Lock in 12M Understanding</strong>
+                          <span>Sub-questions 2(b) and 3(b) (06M each) both offer an internal OR option. Review both choices and answer the topic you have higher command on.</span>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="material-symbols-outlined text-sm text-[#FF5722] mt-0.5">check_circle</span>
+                        <div>
+                          <strong className="text-slate-900 block">Step 3: Master 12M Application</strong>
+                          <span>Sub-questions 2(c) and 3(c) (06M each) test practical problems and derivations. Solve numerical examples to attain a 35+ score.</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
 
+                  <div className="mt-6 pt-4 border-t-2 border-sky-300 flex items-center justify-between">
+                    <span className="text-[11px] font-black uppercase text-sky-900">Mid Sem Target</span>
+                    <span className="text-xs font-mono font-black bg-white px-2 py-0.5 rounded border border-[#0F172A]">Target: 38+/40</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Exam Hall Blueprint Summary */}
               <div className="bg-white border-[3px] border-[#0F172A] rounded-3xl p-6 shadow-[5px_5px_0_#0F172A]">
-                <h4 className="text-base font-black text-hub-navy uppercase mb-2 flex items-center gap-2">
+                <h4 className="text-base font-black text-hub-navy uppercase mb-3 flex items-center gap-2">
                   <span className="material-symbols-outlined text-emerald-600">verified</span>
-                  Need Specific Notes?
+                  <span>{selectedExamMode === 'ESE' ? 'ESE Blueprint Rules' : 'MSE Blueprint Rules'}</span>
                 </h4>
-                <p className="text-xs text-gray-600 font-medium leading-relaxed mb-4">
-                  Request missing chapters or question banks below and our rankers will upload them directly.
-                </p>
-                <a
-                  href="#community-hub"
-                  className="w-full font-black py-3 rounded-xl bg-hub-navy hover:bg-[#FF5722] text-white border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] flex items-center justify-center gap-1.5 text-xs uppercase transition-all cursor-pointer"
-                >
-                  <span>Post a Request ↓</span>
-                </a>
+                
+                <div className="space-y-2.5 text-xs font-semibold text-slate-600">
+                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span>Total Examination Marks</span>
+                    <strong className="text-slate-900 font-mono">
+                      {selectedExamMode === 'ESE' ? '100 Marks' : '40 Marks'}
+                    </strong>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span>Minimum Passing Marks</span>
+                    <strong className="text-emerald-700 font-mono">
+                      {selectedExamMode === 'ESE' ? '40/100 (40%)' : '16/40 (40%)'}
+                    </strong>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span>Compulsory Units</span>
+                    <strong className="text-slate-900 font-mono">
+                      {selectedExamMode === 'ESE' ? 'Units I – IV' : 'Units 1, 2 & 3'}
+                    </strong>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span>Optionality Format</span>
+                    <strong className="text-indigo-900 font-mono">
+                      {selectedExamMode === 'ESE' ? 'Q.5 Internal OR (05*4=20)' : 'Internal OR on 6M & 4M'}
+                    </strong>
+                  </div>
+                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200">
+                    <span>Exam Duration</span>
+                    <strong className="text-slate-900 font-mono">
+                      {selectedExamMode === 'ESE' ? '3 Hours' : '1.5 Hours (90 Mins)'}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-slate-200">
+                  <a
+                    href="#community-hub"
+                    className="w-full font-black py-3 rounded-xl bg-hub-navy hover:bg-[#FF5722] text-white border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] flex items-center justify-center gap-1.5 text-xs uppercase transition-all cursor-pointer"
+                  >
+                    <span>{selectedExamMode === 'ESE' ? 'Request ESE Material ↓' : 'Request MSE Material ↓'}</span>
+                  </a>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -1108,7 +2455,7 @@ export default function Resources() {
                       <button
                         type="submit"
                         disabled={uploadStatus === 'uploading'}
-                        className="bg-[#FF5722] hover:bg-[#E64A19] text-white font-black text-xs sm:text-sm uppercase px-8 py-3 rounded-xl border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-2"
+                        className="w-full sm:w-auto bg-[#FF5722] hover:bg-[#E64A19] text-white font-black text-xs sm:text-sm uppercase px-8 py-3 rounded-xl border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2"
                       >
                         {uploadStatus === 'uploading' ? 'Publishing...' : 'Publish Resource'}
                       </button>
@@ -1228,7 +2575,7 @@ export default function Resources() {
                   <button
                     type="submit"
                     disabled={requestLoading}
-                    className="bg-[#0F172A] hover:bg-[#FF5722] text-white font-black text-xs sm:text-sm uppercase px-8 py-3 rounded-xl border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-2"
+                    className="w-full sm:w-auto bg-[#0F172A] hover:bg-[#FF5722] text-white font-black text-xs sm:text-sm uppercase px-8 py-3 rounded-xl border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span className="material-symbols-outlined text-lg">send</span>
                     <span>{requestLoading ? 'Submitting...' : 'Submit Request'}</span>

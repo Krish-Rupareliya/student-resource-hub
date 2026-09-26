@@ -34,7 +34,7 @@ function SemesterDetails() {
         <div className="hidden md:block absolute top-[48%] right-[6%] w-6 h-6 rounded-full border-2 border-black/15 opacity-60" />
       </div>
 
-      <main className="relative z-10">
+      <div className="relative z-10">
         {/* Header Section Container Box */}
         <section className="relative pt-6 sm:pt-10 pb-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="bg-white/90 backdrop-blur-md border-2 border-black rounded-[28px] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.9)] relative overflow-hidden">
@@ -43,7 +43,7 @@ function SemesterDetails() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               
               {/* Left Column: Icon + Semester Info */}
-              <div className="flex items-start gap-3 sm:gap-6">
+              <div className="flex items-start gap-3 sm:gap-6 min-w-0 flex-1">
                 
                 {/* Semester Avatar Icon Badge */}
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-amber-400 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] flex items-center justify-center shrink-0 text-black">
@@ -52,7 +52,7 @@ function SemesterDetails() {
                   </span>
                 </div>
 
-                <div>
+                <div className="min-w-0 flex-1">
                   {/* Badges Row */}
                   <div className="flex items-center gap-2 flex-wrap mb-2">
                     <span className="bg-[#0F172A] text-[#FBBF24] border-2 border-[#FBBF24] px-2.5 py-0.5 rounded-lg text-xs font-black tracking-wider uppercase shadow-xs">
@@ -119,7 +119,7 @@ function SemesterDetails() {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

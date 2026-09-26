@@ -144,7 +144,7 @@ function SubjectDetails() {
         <div className="absolute bottom-[10%] left-[20%] w-[500px] h-[500px] bg-purple-200/30 rounded-full blur-3xl opacity-50" />
       </div>
 
-      <main className="relative z-10 py-6 sm:py-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 py-6 sm:py-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ─── Top Hero / Header Section ─── */}
         <section className="mb-8 sm:mb-10">
@@ -153,7 +153,7 @@ function SubjectDetails() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               
               {/* Left Column: Icon + Subject Info */}
-              <div className="flex items-start gap-3 sm:gap-6">
+              <div className="flex items-start gap-3 sm:gap-6 min-w-0 flex-1">
                 
                 {/* Subject Avatar Icon Badge */}
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-amber-400 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] flex items-center justify-center shrink-0 text-black">
@@ -162,7 +162,7 @@ function SubjectDetails() {
                   </span>
                 </div>
 
-                <div>
+                <div className="min-w-0 flex-1">
                   {/* Badges Row */}
                   <div className="flex items-center gap-2 flex-wrap mb-2">
                     {subject.code && (
@@ -475,7 +475,7 @@ function SubjectDetails() {
           </div>
         </section>
 
-      </main>
+      </div>
 
       {/* Upload Resource Modal */}
       <AnimatePresence>

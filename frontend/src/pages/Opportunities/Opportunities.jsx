@@ -384,7 +384,7 @@ function Opportunities() {
         <div className="absolute top-[65%] -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-purple-300/20 via-pink-300/10 to-transparent rounded-full blur-3xl opacity-50" />
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4 pt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4 pt-6">
         {/* ─── HERO HEADER SECTION WITH KINETIC TYPOGRAPHY ─── */}
         <section className="pt-4 pb-6 text-center max-w-4xl mx-auto">
           {/* Status Eyebrow Badge */}
@@ -632,7 +632,7 @@ function Opportunities() {
                       </div>
 
                       {/* Card Body: Large Bold Title & Description */}
-                      <div className="relative z-10 pr-24 sm:pr-36 md:pr-44 my-2">
+                      <div className="relative z-10 pr-6 sm:pr-36 md:pr-44 my-2">
                         <h2
                           className={`text-lg sm:text-xl md:text-2xl font-black text-slate-950 ${theme.titleHover} transition-colors tracking-tight leading-snug mb-2`}
                         >
@@ -834,7 +834,7 @@ function Opportunities() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* ─── BOTTOM CTA BANNER ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 relative z-10">

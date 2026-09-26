@@ -17,10 +17,10 @@ const RESOURCE_TYPES = [
 ];
 
 const PRESET_TOPICS = [
-  { label: '📝 Unit-Wise Notes', type: 'Notes', hint: 'I need unit-wise handwritten notes for ' },
-  { label: '📄 Mid-Sem PYQs', type: 'Previous Year Papers (PYQ)', hint: 'I need previous 3 years mid-sem question papers for ' },
-  { label: '🧪 Lab Manual & Codes', type: 'Lab Manual', hint: 'I need completed lab experiments and source code for ' },
-  { label: '🎯 Viva Question Bank', type: 'Viva Questions', hint: 'I need most frequently asked viva and oral exam questions for ' },
+  { label: 'Unit-Wise Notes', type: 'Notes', hint: 'I need unit-wise handwritten notes for ', icon: 'edit_note' },
+  { label: 'Mid-Sem PYQs', type: 'Previous Year Papers (PYQ)', hint: 'I need previous 3 years mid-sem question papers for ', icon: 'history_edu' },
+  { label: 'Lab Manual & Codes', type: 'Lab Manual', hint: 'I need completed lab experiments and source code for ', icon: 'terminal' },
+  { label: 'Viva Question Bank', type: 'Viva Questions', hint: 'I need most frequently asked viva and oral exam questions for ', icon: 'quiz' },
 ];
 
 const WORKFLOW_STEPS = [
@@ -67,7 +67,7 @@ function Contact() {
   useEffect(() => {
     if (status === 'success') {
       addToast({
-        message: '🎉 Request received! Our community will source this for you within 24h.',
+        message: 'Request received! Our community will source this for you within 24h.',
         type: 'success',
         duration: 5000,
       });
@@ -104,7 +104,7 @@ function Contact() {
         <div className="absolute top-[30%] -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-sky-300/25 via-indigo-300/15 to-transparent rounded-full blur-3xl opacity-65" />
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 pt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 pt-6">
         {/* ─── HERO HEADER ─── */}
         <section className="pt-4 pb-6 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
@@ -200,12 +200,13 @@ function Contact() {
                       key={idx}
                       type="button"
                       onClick={() => applyPreset(preset)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${formData.resourceType === preset.type
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${formData.resourceType === preset.type
                           ? 'bg-amber-400 text-slate-950 border-amber-400 shadow-xs'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-amber-50/70 hover:border-amber-300'
                         }`}
                     >
-                      {preset.label}
+                      {preset.icon && <span className="material-symbols-outlined text-[15px]">{preset.icon}</span>}
+                      <span>{preset.label}</span>
                     </button>
                   ))}
                 </div>
@@ -491,7 +492,7 @@ function Contact() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onDismiss={removeToast} />

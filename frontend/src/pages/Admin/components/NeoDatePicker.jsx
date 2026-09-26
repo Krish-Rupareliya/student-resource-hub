@@ -333,24 +333,26 @@ export default function NeoDatePicker({ value, onChange }) {
                 <button
                   type="button"
                   onClick={() => handleTimeChange(10, '30', 'AM')}
-                  className={`px-2 py-1 text-[10px] font-black uppercase rounded border border-[#0F172A] cursor-pointer transition ${
+                  className={`px-2 py-1 text-[10px] font-black uppercase rounded border border-[#0F172A] cursor-pointer transition inline-flex items-center gap-1 ${
                     hours === 10 && minutes === '30' && ampm === 'AM'
                       ? 'bg-[#BBF7D0] text-[#14532D] shadow-[1px_1px_0_#0F172A]'
                       : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
                   }`}
                 >
-                  🌅 10:30 AM (Morning)
+                  <span className="material-symbols-outlined text-[12px]">wb_sunny</span>
+                  <span>10:30 AM (Morning)</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => handleTimeChange(2, '30', 'PM')}
-                  className={`px-2 py-1 text-[10px] font-black uppercase rounded border border-[#0F172A] cursor-pointer transition ${
+                  className={`px-2 py-1 text-[10px] font-black uppercase rounded border border-[#0F172A] cursor-pointer transition inline-flex items-center gap-1 ${
                     hours === 2 && minutes === '30' && ampm === 'PM'
                       ? 'bg-[#BBF7D0] text-[#14532D] shadow-[1px_1px_0_#0F172A]'
                       : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
                   }`}
                 >
-                  🌇 02:30 PM (Noon)
+                  <span className="material-symbols-outlined text-[12px]">wb_twilight</span>
+                  <span>02:30 PM (Noon)</span>
                 </button>
               </div>
             </div>

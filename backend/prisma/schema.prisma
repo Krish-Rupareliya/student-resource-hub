@@ -63,7 +63,7 @@ model Subject {
   semesterId  Int
   code        String     @unique @db.VarChar(30)
   title       String
-  shortForm   String?    @db.VarChar(30)
+  shortForm   String?    @db.VarChar(100)
   description String?    @db.Text
   bgColor     String?    @db.VarChar(50)
   pinColor    String?    @db.VarChar(50)
