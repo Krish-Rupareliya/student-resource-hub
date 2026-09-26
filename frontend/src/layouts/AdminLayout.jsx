@@ -63,6 +63,7 @@ export default function AdminLayout() {
     { to: '/admin/homepage-settings', icon: 'tune',         label: 'Clock & Trending',    accent: '#FDE047' },
     { to: '/admin/submissions',       icon: 'inbox',        label: 'Submissions Queue',   accent: '#FBCFE8', badge: pendingCount },
     { to: '/admin/resources',         icon: 'folder_open',  label: 'Study Vault',         accent: '#B3D8A8' },
+    { to: '/admin/viva',              icon: 'quiz',         label: 'Viva Questions',      accent: '#F6E27B' },
     { to: '/admin/opportunities',     icon: 'work',         label: 'Opportunities',       accent: '#BFACE8' },
     { to: '/admin/polls',             icon: 'how_to_vote',  label: 'Polls & Referendums', accent: '#F6E27B' },
     { to: '/admin/catalog',           icon: 'account_tree', label: 'Academic Catalog',    accent: '#B3D8A8' },

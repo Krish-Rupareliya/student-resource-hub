@@ -1,0 +1,284 @@
+{
+  "questions": [
+    {
+      "question": "Draw and explain Internal Architecture of 8086 microprocessor",
+      "answer": "The 8086 microprocessor is internally divided into two major units: the Bus Interface Unit (BIU) and the Execution Unit (EU).\n\n1. Bus Interface Unit (BIU):\n- Generates the 20-bit physical address.\n- Fetches instructions from memory.\n- Contains the Segment Registers: CS, DS, SS and ES.\n- Contains the Instruction Pointer (IP).\n- Contains the 6-byte instruction prefetch queue.\n- Handles memory and I/O bus operations.\n\n2. Execution Unit (EU):\n- Takes instruction bytes from the prefetch queue, decodes them and executes them.\n- Contains the ALU.\n- Contains general-purpose registers AX, BX, CX and DX.\n- Contains pointer/index registers SP, BP, SI and DI.\n- Contains the Flag Register.\n- Contains the instruction decoder and control circuitry.\n\nThe BIU and EU can work in parallel. While the EU executes the current instruction, the BIU can fetch upcoming instructions. This increases throughput and is the basic principle behind 8086 pipelining.",
+      "diagram_or_format": "BIU: [CS][DS][SS][ES][IP] -> Address Generation -> Bus Control -> 6-byte Queue\n                         |\n                         v\nEU:  [Instruction Decoder] -> [ALU] -> [Registers] -> [Flags]"
+    },
+    {
+      "question": "Explain the general purpose register of 8086 in detail.",
+      "answer": "The 8086 has four 16-bit general-purpose registers: AX, BX, CX and DX. Each can be divided into two independent 8-bit registers.\n\n1. AX – Accumulator Register:\n- Used frequently in arithmetic, logical and I/O operations.\n- AX is divided into AH and AL.\n- Many instructions use AX implicitly.\n\n2. BX – Base Register:\n- Used as a base register for memory addressing.\n- BX can be divided into BH and BL.\n\n3. CX – Count Register:\n- Used as a loop counter.\n- Used by shift/rotate instructions.\n- Used in string and repeated operations.\n- CX is divided into CH and CL.\n\n4. DX – Data Register:\n- Used in multiplication and division.\n- DX:AX together can hold a 32-bit result/operand for some arithmetic operations.\n- Also used for I/O port addressing.\n- DX is divided into DH and DL.",
+      "key_points": [
+        "AX = AH + AL",
+        "BX = BH + BL",
+        "CX = CH + CL",
+        "DX = DH + DL"
+      ]
+    },
+    {
+      "question": "Explain Flag Register of 8086 microprocessor.",
+      "answer": "The 8086 has a 16-bit Flag Register. The important defined flags are six status flags and three control flags.\n\nStatus flags:\n1. CF (Carry Flag): Set when an arithmetic operation produces a carry from the most significant bit or a borrow.\n2. PF (Parity Flag): Set when the low-order byte of the result contains an even number of 1s.\n3. AF (Auxiliary Carry Flag): Set when there is a carry/borrow between bit 3 and bit 4; useful in BCD arithmetic.\n4. ZF (Zero Flag): Set when the result is zero.\n5. SF (Sign Flag): Copy of the most significant bit of the result; 1 indicates a negative result in signed representation.\n6. OF (Overflow Flag): Set when signed arithmetic produces a result outside the representable range.\n\nControl flags:\n7. TF (Trap Flag): Enables single-step operation.\n8. IF (Interrupt Enable Flag): Enables maskable hardware interrupts when set.\n9. DF (Direction Flag): Controls the direction of string operations. DF=0 increments SI/DI; DF=1 decrements SI/DI."
+    },
+    {
+      "question": "Explain segment registers of the 8086 processor.",
+      "answer": "8086 uses four 16-bit segment registers:\n\n1. CS (Code Segment):\nContains the base address of the code segment where program instructions are stored.\n\n2. DS (Data Segment):\nContains the base address of the data segment where variables and data are normally stored.\n\n3. SS (Stack Segment):\nContains the base address of the stack segment used by PUSH, POP, CALL, RET and related operations.\n\n4. ES (Extra Segment):\nAn additional data segment, commonly used as the destination segment in string operations.\n\nA segment register stores a segment value. The physical base address is obtained by shifting the segment value left by four bits (multiplying by 16) and then adding the offset.",
+      "key_points": [
+        "CS -> code",
+        "DS -> data",
+        "SS -> stack",
+        "ES -> extra data/string destination"
+      ]
+    },
+    {
+      "question": "Explain the concept of pipelining and its advantages.",
+      "answer": "Pipelining in 8086 means overlapping instruction fetching and instruction execution.\n\nThe BIU fetches instruction bytes and stores them in a 6-byte prefetch queue. At the same time, the EU takes previously fetched instruction bytes from the queue, decodes them and executes them.\n\nAdvantages:\n- Increases instruction throughput.\n- Reduces idle time of the EU.\n- Allows instruction fetch and execution to overlap.\n- Improves overall processor performance.\n\nThe queue is emptied or refilled when a control transfer such as a jump or call changes the program sequence."
+    },
+    {
+      "question": "Explain memory segmentation in detail. Which are the advantages of segmentation?",
+      "answer": "In 8086, the 1 MB physical memory space is divided logically into segments. A segment can contain up to 64 KB.\n\nMain segments:\n- Code Segment (CS): program instructions.\n- Data Segment (DS): data and variables.\n- Stack Segment (SS): stack.\n- Extra Segment (ES): additional data area.\n\nA logical address is written as Segment:Offset. The 20-bit physical address is:\nPhysical Address = Segment x 10H + Offset.\n\nAdvantages:\n- Allows a 16-bit processor to address 1 MB memory using 16-bit registers.\n- Separates code, data and stack areas.\n- Makes programs easier to organize.\n- Allows relocation of segments.\n- Provides a flexible memory management method."
+    },
+    {
+      "question": "How physical address can be calculated? Explain with one example.",
+      "answer": "8086 uses a 20-bit physical address.\n\nFormula:\nPhysical Address = Segment Address x 10H + Offset Address.\n\nExample:\nSuppose CS = 1234H and IP = 5678H.\n\nSegment base = 1234H x 10H = 12340H.\nPhysical address = 12340H + 5678H = 179B8H.\n\nTherefore, the physical address is 179B8H."
+    },
+    {
+      "question": "Draw and explain architecture of 8086 microprocessor",
+      "answer": "The architecture is divided into the Bus Interface Unit and Execution Unit.\n\nBIU contains CS, DS, SS, ES, IP, address-generation circuitry, bus-control logic and the 6-byte instruction queue.\n\nEU contains the instruction decoder, ALU, general-purpose registers, pointer/index registers and flag register.\n\nThe BIU performs bus operations and instruction fetching, while the EU performs decoding and execution.",
+      "diagram_or_format": "             8086\n       +------------------+\n       |       BIU        |\n       | CS DS SS ES IP   |\n       | Address Generator|\n       | 6-byte Queue     |\n       +--------+---------+\n                |\n       +--------v---------+\n       |       EU         |\n       | ALU              |\n       | AX BX CX DX      |\n       | SP BP SI DI      |\n       | Flags + Decoder  |\n       +------------------+"
+    },
+    {
+      "question": "Explain function of the following pins of 8086 microprocessor.",
+      "answer": "The important 8086 pins/functions are:\n\nAD0–AD15:\nMultiplexed address/data lines. During T1 they carry A0–A15; during later bus states they carry D0–D15.\n\nA19/S6, A18/S5, A17/S4, A16/S3:\nMultiplexed high-order address and status lines. During T1 they carry A19–A16; later they provide status information.\n\nBHE/S7:\nBus High Enable indicates access to the high byte of the 16-bit data bus. It works with A0 to select even/odd memory banks.\n\nRD:\nActive-low read control signal indicating that the processor is performing a read operation.\n\nREADY:\nWhen low, it causes wait states so that a slow memory or I/O device gets more time.\n\nRESET:\nResets the processor and initializes execution. The processor starts execution from the reset vector.\n\nINTR:\nMaskable hardware interrupt request input.\n\nNMI:\nNon-maskable interrupt input. It is used for high-priority hardware events.\n\nTEST:\nUsed with the WAIT instruction to synchronize the CPU with an external device.\n\nCLK:\nClock input used to provide timing.\n\nMN/MX:\nSelects minimum mode or maximum mode operation.\n\nDEN:\nData Enable signal used to enable external data transceivers.\n\nM/IO:\nIndicates whether the current bus cycle is for memory or I/O in minimum mode.\n\nHOLD:\nBus request input asking the processor to release control of the buses.\n\nRQ/GT1 and RQ/GT0:\nRequest/Grant lines used in maximum mode for bus arbitration by external processors or bus masters."
+    },
+    {
+      "question": "What is pipelining concept? What is Instruction queue?",
+      "answer": "Pipelining is the overlapping of instruction fetch and instruction execution. In 8086, the BIU fetches instruction bytes while the EU executes the current instruction.\n\nInstruction Queue:\nThe 8086 contains a 6-byte First-In-First-Out (FIFO) instruction queue in the BIU. The BIU fills the queue whenever bus access is available, and the EU removes instruction bytes from the queue for execution.\n\nIf a branch instruction changes the sequence of execution, the queue is flushed and the BIU begins fetching from the new address."
+    },
+    {
+      "question": "Explain Programming model of 8086 microprocessor.",
+      "answer": "The 8086 programming model consists of programmer-visible registers:\n\nGeneral-purpose registers:\nAX, BX, CX, DX.\n\nPointer and index registers:\nSP, BP, SI, DI.\n\nSegment registers:\nCS, DS, SS, ES.\n\nSpecial registers:\nIP and Flag Register.\n\nAX, BX, CX and DX are 16-bit registers and can be divided into high and low 8-bit parts. The segment registers identify memory segments. IP points to the next instruction. SP points to the top of the stack. The flag register records arithmetic results and controls processor operation."
+    },
+    {
+      "question": "Explain the function of Instruction Pointer and Stack Pointer register.",
+      "answer": "Instruction Pointer (IP):\n- 16-bit register.\n- Stores the offset address of the next instruction within the current code segment.\n- Works with CS.\n- Logical instruction address = CS:IP.\n\nStack Pointer (SP):\n- 16-bit register.\n- Stores the offset address of the top of the stack within the stack segment.\n- Works with SS.\n- It changes automatically during PUSH, POP, CALL and RET operations."
+    },
+    {
+      "question": "Describe Pointer & Index Registers.",
+      "answer": "Pointer registers:\n1. SP (Stack Pointer): points to the top of the stack.\n2. BP (Base Pointer): commonly used to access data in the stack, such as procedure parameters and local data.\n\nIndex registers:\n1. SI (Source Index): used mainly as a source index in string operations.\n2. DI (Destination Index): used mainly as a destination index in string operations.\n\nSI and DI can also participate in effective address calculations."
+    },
+    {
+      "question": "How many memory segments are there in 8086 processor? Explain them.",
+      "answer": "There are four main logical memory segments associated with the four segment registers:\n\n1. Code Segment: stores instructions.\n2. Data Segment: stores variables and data.\n3. Stack Segment: stores stack data, return addresses and saved registers.\n4. Extra Segment: additional data segment, especially useful in string operations.\n\nEach segment can be up to 64 KB and starts at a 16-byte-aligned physical base address."
+    },
+    {
+      "question": "What is physical and logical (effective) address in the 8086 Processor? How can we calculate physical & logical address?",
+      "answer": "Logical address is written in Segment:Offset form, for example 1200H:0040H. The offset is the effective address within the segment.\n\nPhysical address is the actual 20-bit address on the memory bus.\n\nFormula:\nPhysical Address = (Segment x 10H) + Offset.\n\nExample:\nDS = 1200H and offset = 0040H.\nSegment base = 12000H.\nPhysical address = 12000H + 0040H = 12040H."
+    },
+    {
+      "question": "Given CS=1111H, DS=3333H, SS=2526H, IP=1232H, SP=1100H, DI=0020H. Calculate the corresponding physical addresses for the address bytes in CS, DS and SS.",
+      "answer": "Using Physical Address = Segment x 10H + Offset:\n\n1. CS:IP = 1111H:1232H\nCS base = 11110H\nPhysical address = 11110H + 1232H = 12342H\n\n2. DS:DI = 3333H:0020H\nDS base = 33330H\nPhysical address = 33330H + 0020H = 33350H\n\n3. SS:SP = 2526H:1100H\nSS base = 25260H\nPhysical address = 25260H + 1100H = 26360H.",
+      "key_points": [
+        "CS:IP -> 12342H",
+        "DS:DI -> 33350H",
+        "SS:SP -> 26360H"
+      ]
+    },
+    {
+      "question": "Discuss Demultiplexing of buses with necessary diagram.",
+      "answer": "In 8086, AD0–AD15 are multiplexed. The same pins carry address during T1 and data during later clock states. Therefore, an external latch is used to separate the address from the data.\n\nALE (Address Latch Enable) becomes active during T1. The latch captures A0–A15 from AD0–AD15 and holds them for the rest of the bus cycle. The same AD lines can then be used for data transfer.\n\nA typical latch used for this purpose is the 74LS373/8282.",
+      "diagram_or_format": "8086 AD0-AD15 ----> Latch ----> A0-A15\n       |                ^\n       |                |\n       +-------------- ALE\n       |\n       +------------------------> D0-D15"
+    },
+    {
+      "question": "Draw and explain the minimum mode diagram of 8086.",
+      "answer": "Minimum mode is selected when MN/MX is connected for minimum-mode operation. It is used in a single-processor system. The 8086 itself generates the required bus control signals such as ALE, RD, WR, INTA, M/IO, DT/R and DEN.\n\nTypical interfacing includes address latches, data transceivers, memory and I/O devices.",
+      "diagram_or_format": "             8086\n      +------------------+\nAD0-15|                  |A0-15 -> Latch\n      |   Minimum Mode   |\nA16-19|                  |M/IO, RD, WR, ALE, DEN\n      +------------------+\n                 |\n        +--------+--------+\n        |                 |\n      Memory             I/O"
+    },
+    {
+      "question": "Draw and explain the maximum mode diagram of 8086.",
+      "answer": "Maximum mode is selected for multiprocessor or coprocessor-based systems. The 8086 does not directly generate all bus-control signals. Instead, status signals S2, S1 and S0 are decoded by the 8288 bus controller to produce commands such as MRDC, MWTC, IORC and IOWC.\n\nThe RQ/GT lines are used for bus arbitration.",
+      "diagram_or_format": "8086 (Maximum Mode)\n        |\n     S2 S1 S0\n        |\n      8288 Bus Controller\n        |\n   +----+----+----+----+\n   |    |    |    |    |\n  MRDC MWTC IORC IOWC\n        |\n      System Bus"
+    },
+    {
+      "question": "Draw and explain timing diagram of Memory Read cycle for minimum mode interface.",
+      "answer": "A minimum-mode memory read cycle normally contains T1, T2, T3 and T4.\n\nT1:\n- 8086 places the address on AD0–AD15 and A16–A19.\n- ALE goes high so the address can be latched.\n- M/IO indicates a memory operation.\n\nT2:\n- AD bus changes from address to data.\n- RD becomes active low.\n- The data transceiver is enabled.\n\nT3:\n- Memory places valid data on the data bus.\n- The processor samples the data.\n\nT4:\n- RD is deactivated.\n- Bus signals return to the inactive state.",
+      "diagram_or_format": "T-state:   T1        T2        T3        T4\nALE:       HIGH      LOW       LOW       LOW\nAddress:   VALID\nAD bus:    ADDRESS ->   DATA FROM MEMORY\nRD:                  ____ACTIVE____\nData:                          VALID\n"
+    },
+    {
+      "question": "Draw and explain timing diagram of Memory Write cycle for minimum mode interface.",
+      "answer": "T1:\n- Address is placed on the address bus.\n- ALE pulses high to latch the address.\n\nT2:\n- Processor places data on AD0–AD15.\n- WR becomes active low.\n- The memory is selected for a write operation.\n\nT3:\n- Data remains valid while WR is active.\n- Memory stores the data.\n\nT4:\n- WR returns inactive and the bus cycle ends.",
+      "diagram_or_format": "T-state:   T1        T2        T3        T4\nALE:       HIGH      LOW       LOW       LOW\nAddress:   VALID\nAD bus:    ADDRESS -> DATA FROM CPU\nWR:                  ____ACTIVE____\nData:                ===== VALID =====\n"
+    },
+    {
+      "question": "Draw and explain timing diagram of I/O Read cycle for minimum mode interface.",
+      "answer": "The I/O read cycle is similar to a memory read cycle, but the control signal indicates an I/O operation.\n\nT1: The I/O port address is placed on the bus and ALE latches it.\nT2: RD becomes active and the I/O device prepares data.\nT3: The CPU reads the valid data.\nT4: RD becomes inactive and the cycle finishes.",
+      "diagram_or_format": "T1: address + ALE\nT2: RD active, I/O device drives data\nT3: data valid and sampled\nT4: RD inactive"
+    },
+    {
+      "question": "Draw and explain timing diagram of I/O Write cycle for minimum mode interface.",
+      "answer": "T1: The port address is placed on the bus and ALE latches it.\nT2: The CPU puts output data on the data bus and asserts the write command.\nT3: The I/O device accepts the data.\nT4: Write control is removed and the cycle ends.",
+      "diagram_or_format": "T1: address + ALE\nT2: data from CPU, write active\nT3: data valid at I/O device\nT4: write inactive"
+    },
+    {
+      "question": "Discuss minimum mode interface of 8086 microprocessor with diagram.",
+      "answer": "Minimum mode is used mainly in a single-processor system. In this mode the 8086 itself generates bus-control signals.\n\nImportant signals include ALE, M/IO, RD, WR, INTA, DEN and DT/R. Since AD0–AD15 are multiplexed, an external latch is required to demultiplex the address. A bidirectional transceiver is normally used for the data bus.\n\nThe system interfaces the processor to memory and I/O devices using these control signals.",
+      "diagram_or_format": "                +-----------+\n                |   8086    |\n                +-----+-----+\n                      |\n        +-------------+-------------+\n        |             |             |\n      Latch       Transceiver   Control\n        |             |          ALE/RD/WR\n        |             |\n     Address         Data\n        |             |\n     +--+-------------+--+\n     |    Memory / I/O    |\n     +--------------------+"
+    },
+    {
+      "question": "Discuss maximum mode interface for 8086 microprocessor with diagram.",
+      "answer": "Maximum mode is used when the system contains more than one bus master, such as another processor or coprocessor.\n\nThe processor provides status signals S2, S1 and S0. The 8288 bus controller decodes these signals and generates the actual bus command signals. The RQ/GT0 and RQ/GT1 lines support bus request and bus grant operations.\n\nThis arrangement is suitable for multiprocessor systems.",
+      "diagram_or_format": "8086 -> S2,S1,S0 -> 8288 -> Memory/I/O control\n  |\n  +-> RQ/GT0, RQ/GT1 -> Bus arbitration"
+    },
+    {
+      "question": "Draw and explain timing diagram of Memory Read cycle for maximum mode interface.",
+      "answer": "The memory read cycle has the same basic T1-T4 sequence as minimum mode, but bus commands are generated through the 8288 controller.\n\nT1: Address is generated and latched.\nT2: 8288 generates the memory-read command.\nT3: Memory places data on the bus and the CPU samples it.\nT4: Command is deasserted and the cycle terminates.\n\nWait states may be inserted between T3 and T4 when READY is low.",
+      "diagram_or_format": "T1        T2        T3        T4\nAddress   Read cmd  Data valid Command off\nALE       pulse\n"
+    },
+    {
+      "question": "Draw and explain timing diagram of Memory Write cycle for maximum mode interface.",
+      "answer": "T1: Address is placed on the bus and latched.\nT2: The 8288 generates the memory-write command; the CPU places data on the bus.\nT3: Data is held valid and memory stores it.\nT4: Write command is removed.",
+      "diagram_or_format": "T1: address + ALE\nT2: write command + data\nT3: data held valid\nT4: write command inactive"
+    },
+    {
+      "question": "Draw and explain timing diagram of I/O Read cycle for maximum mode interface.",
+      "answer": "T1: Port address is generated and latched.\nT2: The 8288 issues the I/O read command.\nT3: The I/O device places data on the bus and the processor samples it.\nT4: The I/O read command is removed."
+    },
+    {
+      "question": "Draw and explain timing diagram of I/O Write cycle for maximum mode interface.",
+      "answer": "T1: Port address is generated and latched.\nT2: The 8288 issues the I/O write command and the CPU places data on the bus.\nT3: The device receives valid data.\nT4: The command is deasserted and the cycle ends."
+    },
+    {
+      "question": "Explain the function of 8284A clock generator IC and 8288 bus controller.",
+      "answer": "8284A Clock Generator:\n- Generates the clock signal required by the 8086.\n- Provides clock division and synchronization.\n- Generates RESET and READY-related timing support.\n- Uses an external crystal or clock source and provides the required processor clock.\n\n8288 Bus Controller:\n- Used with the 8086 in maximum mode.\n- Decodes status signals S2, S1 and S0.\n- Generates memory and I/O command signals.\n- Provides bus-control signals needed to interface memory and I/O devices.\n- Also supports bus-command timing and control in a multiprocessor system."
+    },
+    {
+      "question": "Discuss 8086 Memory Organization/Memory Bank of 8086 microprocessor with necessary diagram.",
+      "answer": "8086 has a 16-bit data bus but a 20-bit address bus. Its 1 MB memory is organized into two 8-bit banks:\n\n1. Even bank: stores bytes at even addresses and connects to D0-D7.\n2. Odd bank: stores bytes at odd addresses and connects to D8-D15.\n\nA0 and BHE are used together to select the required bank.\n\n- A0=0, BHE=1 -> even bank selected (low byte).\n- A0=1, BHE=0 -> odd bank selected (high byte).\n- A0=0, BHE=0 -> both banks selected for a 16-bit word at an even address.\n- A0=1, BHE=1 -> neither bank selected for a data transfer.",
+      "diagram_or_format": "              8086 Data Bus\n           D0-D7       D8-D15\n             |           |\n         Even Bank    Odd Bank\n             ^           ^\n             |           |\n             +-- A0/BHE --+"
+    },
+    {
+      "question": "What is even and odd memory bank of 8086? What is the need of a memory bank?",
+      "answer": "The 8086 memory system is split into two 8-bit banks because the processor has a 16-bit data bus.\n\nEven bank:\n- Connected to the low byte D0-D7.\n- Contains even-addressed bytes.\n\nOdd bank:\n- Connected to the high byte D8-D15.\n- Contains odd-addressed bytes.\n\nNeed for memory banks:\n- Allows the 16-bit processor to transfer a 16-bit word in one bus cycle when the word starts at an even address.\n- Separates low and high bytes of a word.\n- Makes efficient use of the 16-bit data bus."
+    },
+    {
+      "question": "Explain Addressing Modes of 8086 Processor with example.",
+      "answer": "Major 8086 addressing modes are:\n\n1. Immediate: MOV AX, 1234H\n2. Register: MOV AX, BX\n3. Direct memory: MOV AX, [1234H]\n4. Register indirect: MOV AX, [BX]\n5. Based: MOV AX, [BX+10H]\n6. Indexed: MOV AX, [SI+10H]\n7. Based-indexed: MOV AX, [BX+SI]\n8. Based-indexed with displacement: MOV AX, [BX+SI+20H]\n9. Implied: CLC\n10. Relative (used by control-transfer instructions): JMP SHORT LABEL\n\nThe effective address is calculated according to the selected addressing mode."
+    },
+    {
+      "question": "Explain all the instructions of 8086 microprocessor.",
+      "answer": "8086 instructions are commonly grouped as follows:\n\n1. Data Transfer:\nMOV, PUSH, POP, XCHG, IN, OUT, LEA, LDS, LES.\n\n2. Arithmetic:\nADD, ADC, INC, SUB, SBB, DEC, NEG, CMP, MUL, IMUL, DIV, IDIV, CLC/related carry-control operations.\n\n3. Logical:\nAND, OR, XOR, NOT, TEST.\n\n4. Shift and Rotate:\nSHL/SAL, SHR, SAR, ROL, ROR, RCL, RCR.\n\n5. String:\nMOVS, CMPS, SCAS, LODS, STOS and REP/REPE/REPNE prefixes.\n\n6. Branch and Control Transfer:\nJMP, CALL, RET, JE/JZ, JNE/JNZ, JC, JNC, JO, JNO, JS, JNS, LOOP, LOOPZ, LOOPNZ and related conditional jumps.\n\n7. Processor/Flag Control:\nCLC, STC, CMC, CLD, STD, CLI, STI, CLC, STC, HLT, NOP, WAIT, LOCK.\n\n8. Interrupt:\nINT, INTO, IRET.\n\nThe exact instruction chosen depends on whether the operation is data transfer, arithmetic, logic, string processing, branching or processor control."
+    },
+    {
+      "question": "Explain the assembler directives EVEN, OFFSET, ASSUME, END, ENDS, DUP, PTR, DW, DB, DQ, DT.",
+      "answer": "EVEN:\nAligns the next variable or instruction at an even memory address.\n\nOFFSET:\nReturns the offset address of a variable or label. Example: MOV SI, OFFSET ARRAY.\n\nASSUME:\nTells the assembler which segment register is associated with which segment. Example: ASSUME CS:CODE, DS:DATA.\n\nEND:\nMarks the end of the source program and can specify the entry label.\n\nENDS:\nMarks the end of a segment declaration.\n\nDUP:\nDuplicates a value or group of values. Example: ARRAY DB 10 DUP(0).\n\nPTR:\nExplicitly specifies the operand size or type when needed. Example: WORD PTR [BX].\n\nDB (Define Byte):\nDefines 8-bit data.\n\nDW (Define Word):\nDefines 16-bit data.\n\nDQ (Define Quadword):\nDefines 64-bit data.\n\nDT (Define Ten Bytes):\nDefines a 10-byte data item."
+    },
+    {
+      "question": "Write an 8086 ALP to transfer a given string from one location to another.",
+      "answer": "Example: copy 10 bytes from SOURCE to DESTINATION.\n\nMOV SI, OFFSET SOURCE\nMOV DI, OFFSET DEST\nMOV CX, 10\nCLD\nCOPY_LOOP:\n    MOV AL, [SI]\n    MOV [DI], AL\n    INC SI\n    INC DI\n    LOOP COPY_LOOP\nHLT\n\nThe source index SI points to the source string, DI points to the destination, and CX controls the number of bytes."
+    },
+    {
+      "question": "Write an 8086 ALP to find whether a given number is even or odd.",
+      "answer": "Assume the number is stored in NUM.\n\nMOV AL, NUM\nTEST AL, 01H\nJZ EVEN_NUM\n\n; Odd case\nMOV RESULT, 01H\nJMP DONE\n\nEVEN_NUM:\nMOV RESULT, 00H\n\nDONE:\nHLT\n\nThe least significant bit is 0 for an even number and 1 for an odd number."
+    },
+    {
+      "question": "Write an 8086 ALP to find if a given number is positive or negative.",
+      "answer": "Assume an 8-bit signed number is stored in NUM.\n\nMOV AL, NUM\nCMP AL, 00H\nJL NEGATIVE\nJZ ZERO\n\n; Positive\nMOV RESULT, 01H\nJMP DONE\n\nNEGATIVE:\nMOV RESULT, 02H\nJMP DONE\n\nZERO:\nMOV RESULT, 00H\n\nDONE:\nHLT\n\nThe sign is determined using signed comparison. JL branches when the value is negative."
+    },
+    {
+      "question": "Write an 8086 ALP to find the factorial of a number.",
+      "answer": "Assume N is in AL and the result is small enough to fit in 16 bits.\n\nMOV CL, AL\nMOV AX, 0001H\nMOV BX, 0001H\n\nFACT_LOOP:\n    MUL BX\n    INC BX\n    LOOP FACT_LOOP\n\nHLT\n\nA cleaner practical version saves N in CX and multiplies AX by an incrementing factor. The final result is in AX if it fits in 16 bits. For larger factorials, a multiword implementation is required."
+    },
+    {
+      "question": "Write an 8086 ALP to multiply two 16-bit numbers.",
+      "answer": "Assume NUM1 and NUM2 are 16-bit unsigned numbers.\n\nMOV AX, NUM1\nMOV BX, NUM2\nMUL BX\n\nThe MUL instruction multiplies AX by BX. The 32-bit result is stored in DX:AX.\nThus:\nDX = higher 16 bits\nAX = lower 16 bits\n\nHLT"
+    },
+    {
+      "question": "Write an 8086 ALP to ADD two 32-bit numbers.",
+      "answer": "A 32-bit addition is performed as two 16-bit additions.\n\nAssume first number = NUM1_LOW:NUM1_HIGH and second number = NUM2_LOW:NUM2_HIGH.\n\nMOV AX, NUM1_LOW\nADD AX, NUM2_LOW\nMOV RESULT_LOW, AX\n\nMOV AX, NUM1_HIGH\nADC AX, NUM2_HIGH\nMOV RESULT_HIGH, AX\n\nHLT\n\nADC is used for the high-word addition so that the carry from the low-word addition is included."
+    },
+    {
+      "question": "Write an 8086 ALP to ADD two 16-bit numbers.",
+      "answer": "MOV AX, NUM1\nADD AX, NUM2\nMOV RESULT, AX\nHLT\n\nThe ADD instruction adds the second operand to AX and updates the flags."
+    },
+    {
+      "question": "Write an 8086 ALP to find the smallest number from an array of 10 numbers.",
+      "answer": "Assume ARRAY contains 10 unsigned bytes.\n\nLEA SI, ARRAY\nMOV AL, [SI]\nINC SI\nMOV CX, 9\n\nNEXT:\n    CMP AL, [SI]\n    JBE SKIP\n    MOV AL, [SI]\nSKIP:\n    INC SI\n    LOOP NEXT\n\nMOV SMALLEST, AL\nHLT\n\nAL keeps the smallest value found so far."
+    },
+    {
+      "question": "Write an 8086 ALP to find the largest number from an array of 10 numbers.",
+      "answer": "Assume ARRAY contains 10 unsigned bytes.\n\nLEA SI, ARRAY\nMOV AL, [SI]\nINC SI\nMOV CX, 9\n\nNEXT:\n    CMP AL, [SI]\n    JAE SKIP\n    MOV AL, [SI]\nSKIP:\n    INC SI\n    LOOP NEXT\n\nMOV LARGEST, AL\nHLT\n\nAL keeps the largest value found so far."
+    },
+    {
+      "question": "Write an 8086 ALP to arrange an array of 10 numbers in ascending order.",
+      "answer": "Bubble sort for 10 unsigned bytes:\n\nMOV CX, 9\nOUTER:\n    LEA SI, ARRAY\n    MOV BX, CX\n\nINNER:\n    MOV AL, [SI]\n    CMP AL, [SI+1]\n    JBE NOSWAP\n\n    XCHG AL, [SI+1]\n    MOV [SI], AL\n\nNOSWAP:\n    INC SI\n    DEC BX\n    JNZ INNER\n    LOOP OUTER\n\nHLT\n\nAdjacent elements are compared and swapped whenever the left element is greater than the right element."
+    },
+    {
+      "question": "Write an 8086 ALP to arrange an array of 10 numbers in ascending order.",
+      "answer": "The question appears twice in the uploaded question bank. The same bubble-sort program used for Q45 can be used here.\n\nMOV CX, 9\nOUTER:\n    LEA SI, ARRAY\n    MOV BX, CX\nINNER:\n    MOV AL, [SI]\n    CMP AL, [SI+1]\n    JBE NOSWAP\n    XCHG AL, [SI+1]\n    MOV [SI], AL\nNOSWAP:\n    INC SI\n    DEC BX\n    JNZ INNER\n    LOOP OUTER\nHLT"
+    },
+    {
+      "question": "Define the following terms related to interrupts: ISR, IVT, Interrupt Priority, Interrupt Handler.",
+      "answer": "ISR (Interrupt Service Routine):\nA program routine executed in response to an interrupt request. It performs the required service and normally ends with IRET in 8086.\n\nIVT (Interrupt Vector Table):\nA table in memory from physical address 00000H to 003FFH containing the addresses of interrupt service routines. Each vector occupies 4 bytes.\n\nInterrupt Priority:\nThe order in which multiple interrupt sources are serviced when more than one interrupt occurs.\n\nInterrupt Handler:\nThe code or routine that handles a particular interrupt. In 8086, the interrupt handler is the ISR associated with the interrupt vector."
+    },
+    {
+      "question": "Give difference between Interrupt and polling.",
+      "answer": "Interrupt:\n- Device requests service by generating an interrupt signal.\n- CPU can continue other work until an interrupt occurs.\n- Generally more efficient for irregular or urgent events.\n- Hardware/software mechanism automatically transfers control to the ISR.\n\nPolling:\n- CPU repeatedly checks device status.\n- CPU spends execution time checking devices.\n- Simpler to implement but can waste processing time.\n- Response depends on the polling frequency.",
+      "key_points": [
+        "Interrupt = event driven",
+        "Polling = repeatedly checking status"
+      ]
+    },
+    {
+      "question": "Classify interrupt based on their types in 8086.",
+      "answer": "8086 interrupts can be classified as:\n\n1. Hardware interrupts:\n- NMI: non-maskable interrupt.\n- INTR: maskable interrupt.\n\n2. Software interrupts:\n- Generated by the INT instruction, such as INT n.\n\n3. Internal interrupts/exceptions:\n- Generated by conditions inside the processor, such as Type 0 divide error, Type 1 single-step, Type 3 breakpoint and Type 4 overflow.\n\nAnother common classification is maskable versus non-maskable."
+    },
+    {
+      "question": "Explain the procedure followed by an 8086 microprocessor when any interrupt arrives.",
+      "answer": "When an interrupt is accepted, the 8086 generally performs these steps:\n\n1. Completes the current instruction.\n2. Pushes the FLAGS register onto the stack.\n3. Clears IF and TF.\n4. Pushes CS onto the stack.\n5. Pushes IP onto the stack.\n6. Obtains the interrupt vector from the Interrupt Vector Table.\n7. Loads the new IP and CS values of the ISR.\n8. Executes the Interrupt Service Routine.\n9. The ISR ends with IRET, which restores IP, CS and FLAGS from the stack.\n\nFor an INTR interrupt, the processor performs interrupt-acknowledge bus cycles to identify the interrupt type."
+    },
+    {
+      "question": "Explain how the address of ISR is calculated in an 8086 microprocessor.",
+      "answer": "The Interrupt Vector Table starts at physical address 00000H. Each interrupt type has a 4-byte vector:\n\n- First 2 bytes = IP of ISR.\n- Next 2 bytes = CS of ISR.\n\nFor interrupt type N:\nVector address = N x 4.\n\nExample:\nFor INT 21H:\n21H x 4 = 84H.\nThe ISR IP is stored at 0084H and 0085H.\nThe ISR CS is stored at 0086H and 0087H.\n\nThe processor loads these values into IP and CS."
+    },
+    {
+      "question": "Explain the different types of decoding techniques in memory interfacing.",
+      "answer": "Address decoding determines which memory chip should respond to a particular address range.\n\nCommon techniques:\n1. Absolute decoding.\n2. Partial decoding.\n3. Block decoding.\n\nA decoder examines selected address lines and generates a chip-select signal for the memory or I/O device."
+    },
+    {
+      "question": "Explain Absolute decoding.",
+      "answer": "In absolute decoding, all required high-order address lines are decoded to generate a unique chip-select signal.\n\nAdvantages:\n- Each device gets a unique address range.\n- No address aliasing.\n- Clear and systematic memory map.\n\nDisadvantage:\n- Requires more decoding hardware and may increase cost and complexity."
+    },
+    {
+      "question": "Explain Partial decoding.",
+      "answer": "In partial decoding, only some of the address lines are decoded. The remaining lines are not used in chip selection.\n\nAdvantages:\n- Less hardware.\n- Lower cost.\n- Simpler circuit.\n\nDisadvantage:\n- The same device may appear at multiple addresses (address aliasing) because not all address bits are checked."
+    },
+    {
+      "question": "Explain Block decoding.",
+      "answer": "In block decoding, memory is selected in large blocks using a group of upper address bits. Additional lower address lines are used within the selected block for individual memory locations.\n\nAdvantages:\n- Simple address organization.\n- Useful for assigning larger address regions.\n- Reduces decoder complexity compared with full individual-address decoding.\n\nThe exact implementation depends on the size of the memory block and the selected address lines."
+    },
+    {
+      "question": "Give the difference between memory mapped I/O and peripheral mapped I/O technique.",
+      "answer": "Memory-mapped I/O:\n- I/O devices are assigned addresses in the same address space as memory.\n- Memory instructions such as MOV can be used for I/O access.\n- Uses the full memory address range, so some memory address space is consumed.\n- Can use a large address range and normal memory addressing modes.\n\nPeripheral-mapped I/O (I/O-mapped I/O):\n- I/O devices have a separate I/O address space.\n- IN and OUT instructions are used.\n- Does not consume memory address space.\n- The 8086 commonly uses an 8-bit I/O port number in IN/OUT instructions, with DX allowing a wider port address field."
+    },
+    {
+      "question": "Do examples of I/O and memory interfacing from PPT and will share a few more examples of it.",
+      "answer": "The uploaded Question Bank only contains a note asking to practice examples from a PPT; no PPT examples were provided with the uploaded files. Therefore, exact PPT-specific interfacing examples cannot be reproduced from the supplied material.\n\nFor standard preparation, focus on:\n- Address decoding and chip select.\n- Interfacing RAM/ROM with 8086.\n- Data bus width and even/odd memory-bank selection.\n- Memory-mapped I/O versus I/O-mapped I/O.\n- Generating address, data and control connections."
+    },
+    {
+      "question": "Draw and explain block diagram of 8255 programmable peripheral chip.",
+      "answer": "8255 is a programmable peripheral interface (PPI) used to provide 24 programmable I/O lines.\n\nPorts:\n- Port A: 8 bits.\n- Port B: 8 bits.\n- Port C: 8 bits, often divided into upper PC7-PC4 and lower PC3-PC0.\n\nOther blocks:\n- Data bus buffer for communication with the CPU.\n- Read/write control logic.\n- Group A control for Port A and upper Port C.\n- Group B control for Port B and lower Port C.\n\n8255 supports three main modes:\nMode 0: simple input/output.\nMode 1: strobed input/output.\nMode 2: bidirectional bus for Port A.",
+      "diagram_or_format": "CPU Data Bus <-> [Data Bus Buffer]\n                     |\n              [Read/Write Control]\n                /                     Group A Ctrl    Group B Ctrl\n           /      \\          /             Port A  PC7-PC4   Port B  PC3-PC0"
+    },
+    {
+      "question": "Draw and explain block diagram of 8254 programmable timer IC.",
+      "answer": "8254 is a programmable interval timer containing three independent 16-bit counters: Counter 0, Counter 1 and Counter 2.\n\nEach counter has:\n- Clock input (CLK).\n- Gate control input (GATE).\n- Output (OUT).\n\nThe chip also contains:\n- Data bus buffer.\n- Read/Write control logic.\n- Control word register.\n\nEach counter can be programmed independently for functions such as delays, event counting and periodic waveform generation.",
+      "diagram_or_format": "CPU Data Bus <-> Data Bus Buffer\n                  |\n           Read/Write Control\n                  |\n        +---------+---------+\n        |         |         |\n     Counter0  Counter1  Counter2\n     CLK/GATE  CLK/GATE  CLK/GATE\n       OUT       OUT       OUT"
+    },
+    {
+      "question": "Explain any two modes of operation of 8254 programmable timer IC.",
+      "answer": "Mode 0 – Interrupt on Terminal Count:\n- The counter is loaded with a count.\n- OUT initially goes low.\n- The counter decrements on clock pulses.\n- When the count reaches zero, OUT goes high.\n- Used for generating a delay or terminal-count indication.\n\nMode 2 – Rate Generator:\n- Used as a periodic rate generator.\n- OUT generates a repetitive waveform based on the programmed count.\n- Commonly used for periodic interrupts or baud-rate related timing applications.\n\nOther 8254 modes include Mode 1 (hardware retriggerable one-shot), Mode 3 (square-wave generator), Mode 4 (software-triggered strobe) and Mode 5 (hardware-triggered strobe)."
+    }
+  ],
+  "subjectCode": "CE0517",
+  "subjectTitle": "Microprocessing and Interfacing",
+  "semester": 5
+}

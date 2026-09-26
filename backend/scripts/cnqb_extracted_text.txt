@@ -1,0 +1,124 @@
+Indus Institute of Technology & Engineering
+Indus University
+CE/IT/CSE
+Subject:Computer Networks(CE0518)
+End Sem Exam Question Bank(Unit 1-4)
+This is for your reference only.
+Kindly consider the whole syllabus first.
+Unit 1
+Introduction to Computer Networks, Data Link Layer
+Q.1 	What is network topology? Explain different types of network topology.
+Q.2 	What is bit and byte stuffing? Explain with example.
+Q.3 	Explain CRC code generation with example
+Q.4 	Draw the OSI reference model. Explain the functionality of each layer in
+brief.
+Q.5 	Give differences between Connection oriented versus Connection less
+Services.
+Q.6 	Explain functionality of Repeater, HUB, Bridge, Switch, Router and
+Gateway.
+Q.7 	Describe Go Back N and Selective Repeat protocol.
+Q.8 	Discuss the parity checks for error detection in data transfer.
+Q.9 	What are the issues of stop and wait protocol? How selective repeat
+protocol resolves issues of stop and wait protocol?
+Q.10 	Discuss different types of guided and unguided media used to transmit
+data in network.
+Q.11 	What is Hamming Code? Explain how it is useful in error correction.
+
+-- 1 of 5 --
+
+Q.12 What is the difference between error detection and correction? Explain
+any One error correction technique with suitable example.
+Q.13 Explain TCP/IP Reference Model. Compare TCP/IP with OSI Model
+Q.14 Compute CRC for a data sequence 10110111 for which the generator is
+110011.
+Q.15 What are the reasons for using layered protocols in networks?
+Q.16 What is the purpose of cladding in an optical fiber? Discuss its density
+relative to the core.
+Q.17 What is Computer Networks? How is it differing from distributed system?
+Q.18 Explain Error Correction Codes at data link layer.
+Q.19 Explain different types of Errors?
+Q.20 Explain the simplex protocol for noisy channels.
+Q.21 Explain one-bit sliding window protocol. Explain one-bit sliding window
+protocol.
+Q.22 What kinds of errors can vertical redundancy check determine? What
+kind of errors it cannot determine?
+Q.23 Explain framing and design issues in data link layer.
+Q.24 Let the given data bits are 00111001. Compute the hamming code.
+Q.25 Given a 6-bit data pattern 100100 and a divisor of 1101, answer the
+following.
+i. What will be the dividend at the sender end?
+ii. Determine the CRC.
+iii. What will be the transmitted data sequence?
+iv. What will be remainder at receiver end (assuming no error) ?
+
+-- 2 of 5 --
+
+Unit 2 Medium Access Sub-layer
+Q.1 	Name and categorizes different multiple access protocols.
+Q.2 	Compare and explain the pure and slotted ALOHA system.
+Q.3 	Explain different CSMA protocols
+Q.4 	What is CSMA/CA?
+Q.6 	Explain Manchester encoding for the bit stream 1001110100.
+Q.7 	How CSMA/CA differs from CSMA/CD. Explain in brief
+Q.8 	Explain Reservation, Token Passing and POLLING.
+Q.9 	Explain Binary back off algorithm.
+Q.10 Explain controlled Access protocols
+Q.11 	Compare static vs dynamic channel allocation.
+Unit-3 Network Layer
+Q.1 	Compare IPv4 & IPv6.
+Q.2 	Explain about the IPV4 Header.
+Q.3 	Explain IP addressing method.
+Q.4 	Compare Classful and classless IP address.
+Q.5 	Explain ARP protocol.
+Q.6 	Explain subnetting.
+Q.7 	Define routing & explain distance vector routing and link state routing.
+Q.8 	Write a note on ICMP.
+Q.9 	Write a note on RIP.
+Q.10 Write a note on OSPF.
+Q.11 Compare distance vector routing and link state routing.
+
+-- 3 of 5 --
+
+Q.12 To solve the examples related to identify netid, hostid, subnet mask.
+Q.13 Explain internetworking.
+Q.14 Explain shortest path routing algorithm.
+Q.15 Explain IPv6.
+Q.16 Write a note on working of ICMP protocol.
+Q.17 With a real time scenario explain IP addressing and subnetting.
+Q.18 Explain leaky bucket algorithm.
+Q.19 Explain shortest path routing algorithm.
+Q.20 What is meant by congestion? List the ways of avoiding congestion.
+Q.21 What is flooding? What are its disadvantages?
+Q.22 Explain flow based routing
+Unit-4 Transport Layer, Application Layer
+Q.1 	Define the socket. List the types of sockets.
+Q.2 	List the duties of the transport layer and explain each in brief.
+Q.3 	Compare UDP & TCP.
+Q.4 	What is meant by congestion?
+Q.5 	What is function of transport layer?
+Q.6 	Give the structure of UDP header.
+Q.7 	Explain TCP header and the working of the TCP protocol.
+Q.9 	Explain world wide web.
+Q.10 Explain HyperText Transfer Protocol.
+Q.11 Explain the SMTP.
+Q.12 Write a note on DNS.
+Q.13 Explain about HTTP.
+
+-- 4 of 5 --
+
+Q.14 Write short notes on FTP.
+Q.15 Write short notes on FTP.
+Q.16 Explain internet transport protocol.
+Q.17 Explain TCP segment header.
+.18 	Difference between absolute domain name and relative domain name.
+Q.19 What is domain name system?
+Q.20 Explain about MIME.
+Q.21 Explain Principle of Congestion Control
+Q.22 Draw and explain TCP Header.
+Q.23 Draw and explain UDP Header.
+Q.24 Difference between leaky bucket and token bucket.
+Q.25 Explain with example working of DHCP
+Q.26 Explain Leaky Bucket algorithm.
+
+-- 5 of 5 --
+

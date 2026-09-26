@@ -1,0 +1,95 @@
+[
+  {
+    "unitId": "unit-1",
+    "section": "Unit 1: INTRODUCTION TO COMPUTER NETWORKS & PHYSICAL LAYER",
+    "category": "theory",
+    "difficulty": "basic",
+    "questionNumber": "Q.1",
+    "question": "What is the difference between OSI and TCP/IP reference models?",
+    "shortAnswer": "OSI has 7 theoretical reference layers; TCP/IP has 4 practical implementation layers used in real-wo",
+    "detailedAnswer": "1. Architecture:\n- OSI Model (Open Systems Interconnection) is an ISO standard developed in 1984 with 7 distinct l\n- TCP/IP Model (Transmission Control Protocol / Internet Protocol) was designed by DoD with 4 pra\n2. Conceptual vs Real-world:\n- OSI model strictly separates services, interfaces, and protocols.\n- TCP/IP protocols were created first, and the model was just a description of them.",
+    "quickRevision": "OSI is a 7-layer reference model; TCP/IP is a 4-layer working protocol suite.",
+    "diagram": "+-------------------+ +-------------------+\n| OSI (7 Layers) | | TCP/IP (4 Layers)|\n+-------------------+ +-------------------+\n| Application | <--> | |\n| Presentation | <--> | Application |\n| Session | <--> | |\n+-------------------+ +-------------------+\n| Transport | <--> | Transport (TCP/UDP|\n+-------------------+ +-------------------+\n| Network | <--> | Internet (IP) |\n+-------------------+ +-------------------+\n| Data Link | <--> | Link / Network |\n| Physical | <--> | Interface |\n+-------------------+ +-------------------+",
+    "tags": [
+      "osi",
+      "tcp-ip",
+      "networking",
+      "architecture"
+    ],
+    "followUpQuestions": [
+      {
+        "question": "Which layer in OSI performs encryption and data compression?",
+        "answer": "The Presentation layer (Layer 6)."
+      },
+      {
+        "question": "At which layer do IP addresses operate?",
+        "answer": "The Network layer (Layer 3 in OSI, Internet layer in TCP/IP)."
+      }
+    ],
+    "isPublished": true
+  },
+  {
+    "unitId": "unit-1",
+    "section": "Unit 1: INTRODUCTION TO COMPUTER NETWORKS & PHYSICAL LAYER",
+    "category": "theory",
+    "difficulty": "intermediate",
+    "questionNumber": "Q.2",
+    "question": "What is the difference between TCP and UDP?",
+    "shortAnswer": "TCP is connection-oriented, reliable, and uses a 3-way handshake; UDP is connectionless, lightweight",
+    "detailedAnswer": "1. TCP (Transmission Control Protocol):\n- Establishes a reliable full-duplex byte stream connection via a 3-way handshake (SYN, SYN-ACK,\n- Features checksums, sequence numbers, flow control (sliding window), and retransmission of lost\n- Typical use cases: HTTP/HTTPS (Web), SMTP (Email), SSH, FTP.\n2. UDP (User Datagram Protocol):\n- Unreliable, lightweight, header size only 8 bytes vs 20-60 bytes in TCP.\n- Packets are fired independently without acknowledgments or flow control.\n- Typical use cases: DNS queries, VoIP (audio calls), Video Streaming, Gaming.",
+    "quickRevision": "TCP = reliable with overhead; UDP = fast and lightweight without guarantees.",
+    "diagram": null,
+    "tags": [
+      "tcp",
+      "udp",
+      "transport-layer"
+    ],
+    "followUpQuestions": [
+      {
+        "question": "What is the TCP 3-way handshake sequence?",
+        "answer": "1. SYN from Client -> 2. SYN-ACK from Server -> 3. ACK from Client."
+      }
+    ],
+    "isPublished": true
+  },
+  {
+    "unitId": "unit-2",
+    "section": "Unit 2: DATA LINK LAYER & MEDIA ACCESS CONTROL",
+    "category": "theory",
+    "difficulty": "intermediate",
+    "questionNumber": "Q.3",
+    "question": "What is CSMA/CD and how does it handle packet collisions?",
+    "shortAnswer": "Carrier Sense Multiple Access with Collision Detection listens to the wire before and during transmi",
+    "detailedAnswer": "CSMA/CD is the classical MAC protocol used in half-duplex Ethernet:\n1. Carrier Sense: Station listens to the wire. If busy, it waits. If idle, it transmits.\n2. Collision Detection: While transmitting, the station keeps monitoring the voltage/signal level.\n3. Jam Signal: If a collision is sensed, it transmits a 32-bit jam signal so all stations detect the\n4. Binary Exponential Backoff: Each colliding station waits a random time interval (0 to 2^k - 1 slo",
+    "quickRevision": "Listen before talk, listen while talk; if collision, jam and back off exponentially.",
+    "diagram": null,
+    "tags": [
+      "csma-cd",
+      "ethernet",
+      "collisions",
+      "mac"
+    ],
+    "followUpQuestions": [],
+    "isPublished": true
+  },
+  {
+    "unitId": "unit-2",
+    "section": "Unit 2: DATA LINK LAYER & MEDIA ACCESS CONTROL",
+    "category": "theory",
+    "difficulty": "basic",
+    "questionNumber": "Q.4",
+    "question": "What is the difference between a Hub, a Switch, and a Router?",
+    "shortAnswer": "A Hub operates at Layer 1 (broadcasts to all ports); a Switch operates at Layer 2 (forwards by MAC a",
+    "detailedAnswer": "1. Hub (Layer 1 - Physical):\n- Passive or active repeater. Any frame received on one port is forwarded to all other ports (sin\n2. Switch (Layer 2 - Data Link):\n- Intelligent multi-port bridge. Maintains a MAC Address Table (CAM) and sends frames directly to\n3. Router (Layer 3 - Network):\n- Connects different network subnets. Reads IP packet headers and uses routing algorithms (OSPF,",
+    "quickRevision": "Hub = Layer 1 broadcast; Switch = Layer 2 MAC forwarding; Router = Layer 3 IP routing.",
+    "diagram": null,
+    "tags": [
+      "hub",
+      "switch",
+      "router",
+      "hardware"
+    ],
+    "followUpQuestions": [],
+    "isPublished": true
+  }
+]

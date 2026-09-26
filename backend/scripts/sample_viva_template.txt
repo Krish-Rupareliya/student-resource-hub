@@ -1,0 +1,112 @@
+=== UNIT 1: INTRODUCTION TO COMPUTER NETWORKS & PHYSICAL LAYER ===
+
+[Q.1] What is the difference between OSI and TCP/IP reference models?
+Difficulty: basic
+Category: theory
+Tags: osi, tcp-ip, networking, architecture
+
+Punchline:
+OSI has 7 theoretical reference layers; TCP/IP has 4 practical implementation layers used in real-world networks.
+
+Detailed Answer:
+1. Architecture:
+   - OSI Model (Open Systems Interconnection) is an ISO standard developed in 1984 with 7 distinct layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application.
+   - TCP/IP Model (Transmission Control Protocol / Internet Protocol) was designed by DoD with 4 practical layers: Network Access, Internet, Transport, and Application.
+2. Conceptual vs Real-world:
+   - OSI model strictly separates services, interfaces, and protocols.
+   - TCP/IP protocols were created first, and the model was just a description of them.
+
+Quick Revision:
+OSI is a 7-layer reference model; TCP/IP is a 4-layer working protocol suite.
+
+Diagram:
++-------------------+      +-------------------+
+|  OSI (7 Layers)   |      |  TCP/IP (4 Layers)|
++-------------------+      +-------------------+
+| Application       | <--> |                   |
+| Presentation      | <--> | Application       |
+| Session           | <--> |                   |
++-------------------+      +-------------------+
+| Transport         | <--> | Transport (TCP/UDP|
++-------------------+      +-------------------+
+| Network           | <--> | Internet (IP)     |
++-------------------+      +-------------------+
+| Data Link         | <--> | Link / Network    |
+| Physical          | <--> | Interface         |
++-------------------+      +-------------------+
+
+Follow-up Questions:
+Q: Which layer in OSI performs encryption and data compression?
+A: The Presentation layer (Layer 6).
+Q: At which layer do IP addresses operate?
+A: The Network layer (Layer 3 in OSI, Internet layer in TCP/IP).
+
+---
+
+[Q.2] What is the difference between TCP and UDP?
+Difficulty: intermediate
+Category: theory
+Tags: tcp, udp, transport-layer
+
+Punchline:
+TCP is connection-oriented, reliable, and uses a 3-way handshake; UDP is connectionless, lightweight, and prioritizes speed.
+
+Detailed Answer:
+1. TCP (Transmission Control Protocol):
+   - Establishes a reliable full-duplex byte stream connection via a 3-way handshake (SYN, SYN-ACK, ACK).
+   - Features checksums, sequence numbers, flow control (sliding window), and retransmission of lost packets.
+   - Typical use cases: HTTP/HTTPS (Web), SMTP (Email), SSH, FTP.
+2. UDP (User Datagram Protocol):
+   - Unreliable, lightweight, header size only 8 bytes vs 20-60 bytes in TCP.
+   - Packets are fired independently without acknowledgments or flow control.
+   - Typical use cases: DNS queries, VoIP (audio calls), Video Streaming, Gaming.
+
+Quick Revision:
+TCP = reliable with overhead; UDP = fast and lightweight without guarantees.
+
+Follow-up Questions:
+Q: What is the TCP 3-way handshake sequence?
+A: 1. SYN from Client -> 2. SYN-ACK from Server -> 3. ACK from Client.
+
+---
+
+=== UNIT 2: DATA LINK LAYER & MEDIA ACCESS CONTROL ===
+
+[Q.3] What is CSMA/CD and how does it handle packet collisions?
+Difficulty: intermediate
+Category: theory
+Tags: csma-cd, ethernet, collisions, mac
+
+Punchline:
+Carrier Sense Multiple Access with Collision Detection listens to the wire before and during transmission, aborting and applying exponential backoff if a collision occurs.
+
+Detailed Answer:
+CSMA/CD is the classical MAC protocol used in half-duplex Ethernet:
+1. Carrier Sense: Station listens to the wire. If busy, it waits. If idle, it transmits.
+2. Collision Detection: While transmitting, the station keeps monitoring the voltage/signal level.
+3. Jam Signal: If a collision is sensed, it transmits a 32-bit jam signal so all stations detect the collision.
+4. Binary Exponential Backoff: Each colliding station waits a random time interval (0 to 2^k - 1 slots) before retrying to prevent repeated collisions.
+
+Quick Revision:
+Listen before talk, listen while talk; if collision, jam and back off exponentially.
+
+---
+
+[Q.4] What is the difference between a Hub, a Switch, and a Router?
+Difficulty: basic
+Category: theory
+Tags: hub, switch, router, hardware
+
+Punchline:
+A Hub operates at Layer 1 (broadcasts to all ports); a Switch operates at Layer 2 (forwards by MAC address); a Router operates at Layer 3 (routes by IP address).
+
+Detailed Answer:
+1. Hub (Layer 1 - Physical):
+   - Passive or active repeater. Any frame received on one port is forwarded to all other ports (single collision domain, single broadcast domain).
+2. Switch (Layer 2 - Data Link):
+   - Intelligent multi-port bridge. Maintains a MAC Address Table (CAM) and sends frames directly to the intended destination port (separate collision domain per port).
+3. Router (Layer 3 - Network):
+   - Connects different network subnets. Reads IP packet headers and uses routing algorithms (OSPF, BGP) to forward traffic across networks (separate broadcast domain).
+
+Quick Revision:
+Hub = Layer 1 broadcast; Switch = Layer 2 MAC forwarding; Router = Layer 3 IP routing.
