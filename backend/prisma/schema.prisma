@@ -104,6 +104,7 @@ model Resource {
 
 model Opportunity {
   id          String   @id @default(uuid())
+  seedKey     String?  @unique @db.VarChar(100) // stable slug for idempotent seeding
   title       String
   description String?  @db.Text
   category    String?  @db.VarChar(50)
@@ -121,6 +122,7 @@ model Opportunity {
 
 model Announcement {
   id        String    @id @default(uuid())
+  seedKey   String?   @unique @db.VarChar(100) // stable slug for idempotent seeding
   text      String    @db.Text
   badge     String?   @db.VarChar(50)
   color     String?   @db.VarChar(50)

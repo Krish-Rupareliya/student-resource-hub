@@ -109,13 +109,15 @@ const SUBJECT_STYLES = [
 
 const ANNOUNCEMENTS = [
   {
+    seedKey: 'sem5-midterm-exam-alert',   // ← stable slug, never changes
     text: 'Mid-semester exam timetable for Semester 5 has been released. Check the notice board for details.',
     badge: 'Exam Alert',
     color: 'bg-red-100 text-red-700',
-    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     isActive: true,
   },
   {
+    seedKey: 'ds-study-materials-uploaded', // ← stable slug, never changes
     text: 'New study materials for Data Structures (Semester 2) have been uploaded by seniors. Explore the resources tab!',
     badge: 'New Content',
     color: 'bg-green-100 text-green-700',
@@ -126,6 +128,7 @@ const ANNOUNCEMENTS = [
 
 const OPPORTUNITIES = [
   {
+    seedKey: 'gsoc-2025',              // ← stable slug, never changes
     title: 'Google Summer of Code 2025',
     description: 'Contribute to open-source projects under Google mentorship. Applications open for all CS/IT students.',
     category: 'Internship',
@@ -134,6 +137,7 @@ const OPPORTUNITIES = [
     isActive: true,
   },
   {
+    seedKey: 'sih-2025',              // ← stable slug, never changes
     title: 'Smart India Hackathon 2025',
     description: 'National-level hackathon hosted by the Government of India. Form teams of 2–6 and solve real-world problems.',
     category: 'Hackathon',
@@ -142,6 +146,7 @@ const OPPORTUNITIES = [
     isActive: true,
   },
   {
+    seedKey: 'campus-placement-tcs-infosys', // ← stable slug, never changes
     title: 'Campus Placement Drive — TCS & Infosys',
     description: 'On-campus placement drive for final-year students. Eligible: CGPA ≥ 6.0, no active backlogs.',
     category: 'Placement',
@@ -152,19 +157,24 @@ const OPPORTUNITIES = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-//  HELPER: upsert with find-first pattern for non-unique fields
+//  HELPER: idempotent upsert using seedKey (stable slug)
+//  Running db:seed any number of times will NEVER create duplicates.
 // ─────────────────────────────────────────────────────────────
 
-async function upsertAnnouncement(data) {
-  const existing = await prisma.announcement.findFirst({ where: { text: data.text } });
-  if (existing) return existing;
-  return prisma.announcement.create({ data });
+async function upsertAnnouncement({ seedKey, ...data }) {
+  return prisma.announcement.upsert({
+    where: { seedKey },
+    update: { badge: data.badge, color: data.color, isActive: data.isActive },
+    create: { seedKey, ...data },
+  });
 }
 
-async function upsertOpportunity(data) {
-  const existing = await prisma.opportunity.findFirst({ where: { title: data.title } });
-  if (existing) return existing;
-  return prisma.opportunity.create({ data });
+async function upsertOpportunity({ seedKey, ...data }) {
+  return prisma.opportunity.upsert({
+    where: { seedKey },
+    update: { title: data.title, description: data.description, category: data.category, tag: data.tag, pinBg: data.pinBg, isActive: data.isActive },
+    create: { seedKey, ...data },
+  });
 }
 
 // ─────────────────────────────────────────────────────────────
