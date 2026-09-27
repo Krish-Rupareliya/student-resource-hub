@@ -90,7 +90,7 @@ export default function FolderSubjectCard({ subject, index, semesterNumber = 5 }
       whileHover={{ scale: 1.03, y: -5, zIndex: 40 }}
       whileDrag={{ scale: 1.05, rotate: 2, zIndex: 50, cursor: 'grabbing' }}
       onClick={handleCardClick}
-      className="group relative w-full max-w-xs sm:max-w-sm mx-auto cursor-grab active:cursor-grabbing select-none my-3 sm:my-4"
+      className="group relative w-full max-w-[310px] sm:max-w-[330px] md:max-w-[340px] mx-auto cursor-grab active:cursor-grabbing select-none my-2 sm:my-3"
     >
       {/* ─── Top Brand Header ─── */}
       <div className="flex items-center justify-between text-[10px] font-black tracking-widest text-black/50 uppercase mb-1.5 px-1">

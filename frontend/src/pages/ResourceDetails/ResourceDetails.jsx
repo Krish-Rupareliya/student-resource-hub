@@ -58,13 +58,16 @@ function SemesterDetails() {
                     <span className="bg-[#0F172A] text-[#FBBF24] border-2 border-[#FBBF24] px-2.5 py-0.5 rounded-lg text-xs font-black tracking-wider uppercase shadow-xs">
                       SEM 0{semester?.semesterNumber || semesterId}
                     </span>
-                    <span className="bg-emerald-100 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-lg text-xs font-extrabold flex items-center gap-1.5">
+                    <Link
+                      to={`/semesters?dept=${semester?.department?.code || 'CE'}`}
+                      className="bg-emerald-100 hover:bg-emerald-200 transition-colors text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-lg text-xs font-extrabold flex items-center gap-1.5"
+                    >
                       <span className="relative flex h-2 w-2 shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                       </span>
-                      Computer Engineering
-                    </span>
+                      {semester?.department?.name || 'Computer Engineering'}
+                    </Link>
                   </div>
 
                   {/* Main Title */}
@@ -99,10 +102,10 @@ function SemesterDetails() {
         </section>
 
         {/* The "Bulletin Board" Grid Section */}
-        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 relative space-y-8">
+        <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative space-y-8">
           
           {/* Subjects Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6 sm:gap-x-6 sm:gap-y-8 relative z-10 max-w-7xl mx-auto justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 sm:gap-x-12 lg:gap-x-16 xl:gap-x-20 gap-y-12 sm:gap-y-16 lg:gap-y-20 relative z-10 max-w-7xl mx-auto justify-items-center">
             {/* Loading skeletons */}
             {loading && Array.from({ length: 6 }).map((_, i) => (
               <SubjectCardSkeleton key={i} />

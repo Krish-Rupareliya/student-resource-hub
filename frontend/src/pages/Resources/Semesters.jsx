@@ -398,7 +398,7 @@ function Semesters() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
           {/* Dark CTA Box */}
           <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl bg-[#0B132B] border border-white/10">
-            
+
             {/* Top Left Yellow Ring Accent */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 sm:border-[3px] border-[#FBBF24] opacity-90 pointer-events-none" />
 

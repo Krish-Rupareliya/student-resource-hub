@@ -26,7 +26,7 @@ const DEFAULT_TAGS = [
 ];
 
 function getTagIcon(iconName) {
-  const props = { className: 'w-3 h-3 text-amber-500 shrink-0' };
+  const props = { className: 'w-3.5 h-3.5 text-amber-600 shrink-0' };
   switch (iconName?.toLowerCase()) {
     case 'code': return <Code {...props} />;
     case 'database': return <Database {...props} />;
@@ -146,23 +146,29 @@ function HeroSection() {
               />
             </div>
 
-            {/* Quick Search Tag Chips */}
+            {/* Quick Search Tag Chips - Clean 2x2 Grid (No Outer Box) */}
             {heroTags.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="text-[11px] font-black uppercase text-gray-500 flex items-center gap-1">
-                  <Flame className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                  <span>Popular:</span>
-                </span>
-                {heroTags.map((tag, idx) => (
-                  <Link
-                    key={idx}
-                    to={`/resources?search=${encodeURIComponent(tag.query || tag.label)}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-white hover:bg-[#FEF08A] text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 hover:-rotate-1 transition-all active:scale-95 cursor-pointer"
-                  >
-                    {getTagIcon(tag.icon)}
-                    <span>{tag.label}</span>
-                  </Link>
-                ))}
+              <div className="pt-1 space-y-2">
+                <div className="flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-400 shrink-0" />
+                  <span className="text-[11px] font-black uppercase tracking-wider text-slate-500">
+                    Popular:
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 max-w-lg">
+                  {heroTags.map((tag, idx) => (
+                    <Link
+                      key={idx}
+                      to={`/resources?search=${encodeURIComponent(tag.query || tag.label)}`}
+                      title={tag.label}
+                      className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-black bg-white hover:bg-[#FEF08A] text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 transition-all active:scale-95 cursor-pointer min-w-0"
+                    >
+                      {getTagIcon(tag.icon)}
+                      <span className="truncate">{tag.label}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
 

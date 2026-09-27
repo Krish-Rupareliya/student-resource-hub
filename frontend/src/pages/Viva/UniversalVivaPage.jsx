@@ -108,7 +108,7 @@ export default function UniversalVivaPage() {
 
   return (
     <div className="pt-20 min-h-screen bulletin-board-bg text-gray-900 selection:bg-amber-300 selection:text-black">
-      
+
       {/* ─── Ambient Glows ─── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
         <div className="absolute top-10 left-[5%] w-[450px] h-[450px] bg-amber-200/40 rounded-full blur-3xl opacity-60" />
@@ -116,10 +116,10 @@ export default function UniversalVivaPage() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
+
         {/* ─── 1. Header Card (CampusHub Dossier Banner) ─── */}
         <section className="bg-white/95 border-2 border-black rounded-[26px] p-5 sm:p-7 shadow-[6px_6px_0px_#000] mb-8">
-          
+
           {/* Breadcrumb Navigation */}
           <nav className="flex items-center flex-wrap gap-1.5 text-xs text-gray-600 font-bold mb-4">
             <Link to="/" className="hover:text-amber-600 transition-colors">Home</Link>
@@ -191,11 +191,10 @@ export default function UniversalVivaPage() {
                     setActiveSectionId(sec.id);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 border-2 ${
-                    isActive
+                  className={`px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 border-2 ${isActive
                       ? 'bg-[#0F172A] text-[#FBBF24] border-black shadow-[3px_3px_0px_#FBBF24] -translate-y-0.5'
                       : 'bg-white hover:bg-amber-50 text-gray-900 border-black shadow-[2px_2px_0px_#000] hover:shadow-[3px_3px_0px_#000]'
-                  }`}
+                    }`}
                 >
                   <span>{shortName}</span>
                 </button>
@@ -222,7 +221,7 @@ export default function UniversalVivaPage() {
 
         {/* ─── 2. Main 2-Column Responsive Reading Layout ─── */}
         <div className="flex flex-col lg:flex-row items-start gap-8">
-          
+
           {/* Left Sticky Index Navigator */}
           <VivaDossierSidebar
             questions={currentQuestions}
@@ -233,7 +232,7 @@ export default function UniversalVivaPage() {
 
           {/* Right Reading Canvas: Directly Visible Questions & Answers */}
           <main className="flex-1 w-full min-w-0 space-y-6">
-            
+
             {/* Active Unit Section Heading */}
             <div className="bg-[#FEF3D6] border-2 border-black rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#000] flex items-center justify-between gap-4">
               <div>

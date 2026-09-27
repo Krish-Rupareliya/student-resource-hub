@@ -11,9 +11,9 @@ export default defineConfig({
     },
   },
   server: {
-    host: '127.0.0.1',
+    host: true,
     port: 5173,
-    allowedHosts: ['smirk-guise-frigidity.ngrok-free.dev'],
+    allowedHosts: true,
   },
   build: {
     target: 'es2020',
