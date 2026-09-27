@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getPublicHomepageSettings } from '../../../services/settings/settingsApi';
 import { fetchSemestersCatalog } from '../../../services/resources/resourcesApi';
 
@@ -422,8 +422,59 @@ export default function ExamCountdownAndCalculator() {
   const [customSubjectCredits, setCustomSubjectCredits] = useState(4);
   const [showAddCustom, setShowAddCustom] = useState(false);
 
+  const sgpaBoxRef = useRef(null);
+  const courseListRef = useRef(null);
+
+  // Enable scrolling the SGPA predictor courses when hovering anywhere over the SGPA predictor card
+  useEffect(() => {
+    const boxEl = sgpaBoxRef.current;
+    const listEl = courseListRef.current;
+    if (!boxEl || !listEl) return;
+
+    const handleWheel = (e) => {
+      const isScrollable = listEl.scrollHeight > listEl.clientHeight;
+      if (!isScrollable) return;
+
+      const delta = e.deltaY;
+      if (delta === 0) return;
+
+      const isScrollingDown = delta > 0;
+      const isScrollingUp = delta < 0;
+
+      const canScrollDown = listEl.scrollTop + listEl.clientHeight < listEl.scrollHeight - 1;
+      const canScrollUp = listEl.scrollTop > 1;
+
+      const isInsideList = listEl.contains(e.target);
+
+      if (isInsideList) {
+        // Native scrolling handles the list when cursor is inside it;
+        // stop propagation so the outer window / Lenis does not scroll
+        if ((isScrollingDown && canScrollDown) || (isScrollingUp && canScrollUp)) {
+          e.stopPropagation();
+        }
+        return;
+      }
+
+      // Cursor is hovering elsewhere on the SGPA predictor card (header, pills, title, padding, scorecard)
+      if ((isScrollingDown && canScrollDown) || (isScrollingUp && canScrollUp)) {
+        e.preventDefault();
+        e.stopPropagation();
+        listEl.scrollTop += delta;
+      }
+    };
+
+    boxEl.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      boxEl.removeEventListener('wheel', handleWheel);
+    };
+  }, [subjects]);
+
   const handleSemChange = (sem) => {
     setSelectedSem(sem);
+    if (courseListRef.current) {
+      courseListRef.current.scrollTop = 0;
+    }
     if (sem === 4) {
       setSubjects(OFFICIAL_SEM4_SAMPLE);
     } else if (SEMESTER_PRESETS[sem]) {
@@ -524,9 +575,15 @@ export default function ExamCountdownAndCalculator() {
   const loadSampleMarksheet = () => {
     setSelectedSem(4);
     setSubjects(OFFICIAL_SEM4_SAMPLE);
+    if (courseListRef.current) {
+      courseListRef.current.scrollTop = 0;
+    }
   };
 
   const resetToDefaultPreset = () => {
+    if (courseListRef.current) {
+      courseListRef.current.scrollTop = 0;
+    }
     if (selectedSem === 4) {
       setSubjects(OFFICIAL_SEM4_SAMPLE);
     } else if (SEMESTER_PRESETS[selectedSem]) {
@@ -599,7 +656,7 @@ export default function ExamCountdownAndCalculator() {
   return (
     <section className="py-12 sm:py-16 md:py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
@@ -618,10 +675,9 @@ export default function ExamCountdownAndCalculator() {
 
         {/* 2-Column Bento Grid with Balanced items-start Alignment */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          
           {/* Box 1: Live Exam Countdown Clock */}
           <div className="lg:col-span-5 bg-white border-[3px] border-[#0F172A] shadow-[6px_6px_0_#0F172A] hover:shadow-[8px_8px_0_#0F172A] p-6 sm:p-7 rounded-[32px] flex flex-col justify-between transition-all duration-300 relative overflow-hidden">
-            
+
             {/* Background watermark icon */}
             <div className="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none text-[#0F172A]">
               <span className="material-symbols-outlined text-[220px]">alarm</span>
@@ -630,11 +686,10 @@ export default function ExamCountdownAndCalculator() {
             <div>
               {/* Top Status Header */}
               <div className="flex items-center justify-between gap-2 mb-5">
-                <div className={`flex items-center gap-2 px-3 py-1 rounded-full border-[1.5px] text-xs font-black ${
-                  timeLeft.isExpired
+                <div className={`flex items-center gap-2 px-3 py-1 rounded-full border-[1.5px] text-xs font-black ${timeLeft.isExpired
                     ? 'bg-amber-50 border-amber-300 text-amber-800'
                     : 'bg-red-50 border-red-300 text-red-600'
-                }`}>
+                  }`}>
                   <span className={`w-2 h-2 rounded-full ${timeLeft.isExpired ? 'bg-amber-500' : 'bg-red-500 animate-ping'}`}></span>
                   <span className="uppercase tracking-wide">{timeLeft.isExpired ? 'EXAM DATE REACHED' : 'LIVE COUNTDOWN'}</span>
                 </div>
@@ -710,11 +765,10 @@ export default function ExamCountdownAndCalculator() {
                       {paper.code ? `${paper.code} · ` : ''}{paper.name}
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase shrink-0 border border-[#0F172A] ${
-                        idx === 0
+                      className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase shrink-0 border border-[#0F172A] ${idx === 0
                           ? 'bg-[#FEE2E2] text-red-700'
                           : 'bg-[#FEF08A] text-[#0F172A]'
-                      }`}
+                        }`}
                     >
                       {paper.deadline || 'Upcoming'}
                     </span>
@@ -726,6 +780,8 @@ export default function ExamCountdownAndCalculator() {
 
           {/* Box 2: Interactive SGPA Predictor Matrix */}
           <div
+            ref={sgpaBoxRef}
+            data-lenis-prevent="true"
             className="lg:col-span-7 bg-white border-[3px] border-[#0F172A] shadow-[6px_6px_0_#0F172A] hover:shadow-[8px_8px_0_#0F172A] p-6 sm:p-7 rounded-[32px] flex flex-col justify-between transition-all duration-300"
             id="sgpa-calculator"
           >
@@ -769,54 +825,73 @@ export default function ExamCountdownAndCalculator() {
                 </div>
               </div>
 
-              {/* Semester Pill Track (Neatly displayed S1 to S8 without cutting off) */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4 pb-2.5 border-b border-slate-200">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[11px] font-bold text-gray-500 uppercase mr-1">Sem:</span>
+              {/* Semester Navigation & Presets Grid */}
+              <div className="mb-4 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-[15px] text-[#FF5722]">school</span>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-700">
+                      Select Semester
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-300">
+                      Indus Syllabus
+                    </span>
+                  </div>
+
+                  {/* Quick Presets Action */}
+                  <div className="flex items-center gap-1.5 self-start sm:self-auto">
+                    <button
+                      type="button"
+                      onClick={loadSampleMarksheet}
+                      className="px-2.5 py-1 rounded-lg bg-sky-100 hover:bg-sky-200 text-sky-950 border border-sky-400 text-[11px] font-black uppercase transition-all cursor-pointer flex items-center gap-1 shadow-2xs"
+                      title="Load official Indus sample semester with 8.28 SGPA"
+                    >
+                      <span className="material-symbols-outlined text-[13px] text-sky-700">fact_check</span>
+                      <span>Sample Sem 4 (8.28 SGPA)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={resetToDefaultPreset}
+                      className="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 border border-slate-300 text-[11px] font-bold uppercase transition-all cursor-pointer"
+                      title="Reset courses to semester defaults"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+
+                {/* 8-Column True CSS Grid: S1 through S8 with equal widths, zero awkward wrapping */}
+                <div className="grid grid-cols-8 gap-1 sm:gap-1.5 p-1 bg-slate-100 rounded-xl border-[2px] border-[#0F172A] shadow-xs">
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
                     <button
                       key={sem}
                       type="button"
                       onClick={() => handleSemChange(sem)}
-                      className={`px-2.5 py-1 text-xs font-black uppercase rounded-lg border-[1.5px] border-[#0F172A] transition-all cursor-pointer ${
+                      className={`py-1.5 text-xs font-black uppercase rounded-lg border transition-all cursor-pointer text-center ${
                         selectedSem === sem
-                          ? 'bg-[#FF5722] text-white shadow-[2px_2px_0_#0F172A] -translate-y-0.5'
-                          : 'bg-slate-100 hover:bg-[#FEF08A] text-[#0F172A]'
+                          ? 'bg-[#FF5722] text-white border-[#0F172A] shadow-[2px_2px_0_#0F172A] -translate-y-0.5'
+                          : 'bg-white/70 hover:bg-[#FEF08A] text-[#0F172A] border-slate-200 hover:border-[#0F172A]'
                       }`}
                     >
                       S{sem}
                     </button>
                   ))}
                 </div>
-
-                {/* Quick Presets Action */}
-                <div className="flex items-center gap-2 self-start sm:self-auto w-full sm:w-auto justify-between sm:justify-end">
-                  <button
-                    type="button"
-                    onClick={loadSampleMarksheet}
-                    className="px-2.5 py-1 rounded-lg bg-sky-100 hover:bg-sky-200 text-sky-950 border border-sky-400 text-[11px] font-black uppercase transition-all cursor-pointer flex items-center gap-1 shadow-2xs"
-                  >
-                    <span className="material-symbols-outlined text-[13px] text-sky-700">fact_check</span>
-                    <span className="hidden sm:inline">Load Sample (8.28 SGPA · 774/1100 Marks)</span>
-                    <span className="sm:hidden">Sample Sem 4 (8.28 SGPA)</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={resetToDefaultPreset}
-                    className="px-2.5 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 border border-slate-300 text-[11px] font-bold uppercase transition-all cursor-pointer"
-                  >
-                    Reset
-                  </button>
-                </div>
               </div>
 
               {/* Title & Info */}
-              <div className="flex items-baseline justify-between mb-3">
-                <h3 className="text-xl sm:text-2xl font-black text-hub-navy uppercase leading-tight">
-                  Semester {selectedSem} Course List
-                </h3>
-                <span className="text-xs font-bold text-slate-500">
-                  {totalCredits} Credits Total
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-hub-navy uppercase leading-tight">
+                    Semester {selectedSem} Course List
+                  </h3>
+                  <span className="text-xs font-bold text-slate-400 hidden sm:inline">
+                    · {subjects.length} Subjects
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1 bg-[#FEF08A] text-[#0F172A] text-xs font-black px-2.5 py-0.5 rounded-lg border-[1.5px] border-[#0F172A] shadow-xs">
+                  <span className="material-symbols-outlined text-[13px] text-[#FF5722]">workspace_premium</span>
+                  <span>{totalCredits} Credits Total</span>
                 </span>
               </div>
 
@@ -832,7 +907,11 @@ export default function ExamCountdownAndCalculator() {
               )}
 
               {/* ─── SIMPLIFIED & INTUITIVE COURSE LIST ─── */}
-              <div className="space-y-2.5 mb-4 max-h-none sm:max-h-[500px] overflow-visible sm:overflow-y-auto pr-0 sm:pr-1.5 [scrollbar-width:thin] [scrollbar-color:#CBD5E1_transparent]">
+              <div
+                ref={courseListRef}
+                data-lenis-prevent="true"
+                className="space-y-2.5 mb-4 max-h-[440px] sm:max-h-[480px] lg:max-h-[500px] overflow-y-auto overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              >
                 {subjects.map((sub, idx) => {
                   const maxMarks = sub.totalMarks?.max || 100;
                   const obtMarks = sub.totalMarks?.obt ?? 0;
@@ -896,7 +975,8 @@ export default function ExamCountdownAndCalculator() {
                         <div className="pt-2.5 mt-2.5 border-t border-slate-200/80 flex items-center gap-2">
                           <div className="relative flex-1">
                             <select
-                              className="w-full appearance-none bg-white text-xs font-black text-[#0F172A] pl-3 pr-8 py-2 rounded-xl border-[1.5px] border-[#0F172A] shadow-xs focus:outline-none focus:ring-2 focus:ring-[#FF5722] cursor-pointer"
+                              style={{ backgroundImage: 'none' }}
+                              className="w-full appearance-none bg-none ![background-image:none] bg-white text-xs font-black text-[#0F172A] pl-3 pr-9 py-2 rounded-xl border-[1.5px] border-[#0F172A] shadow-xs focus:outline-none focus:ring-2 focus:ring-[#FF5722] cursor-pointer"
                               value={sub.grade}
                               onChange={(e) => handleGradeChange(idx, e.target.value)}
                               aria-label={`Select grade for ${sub.name}`}
@@ -907,7 +987,7 @@ export default function ExamCountdownAndCalculator() {
                                 </option>
                               ))}
                             </select>
-                            <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 material-symbols-outlined text-base">
+                            <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-600 material-symbols-outlined text-[18px] leading-none select-none flex items-center justify-center">
                               unfold_more
                             </span>
                           </div>

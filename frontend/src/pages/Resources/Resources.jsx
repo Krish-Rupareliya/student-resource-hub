@@ -1044,7 +1044,7 @@ export default function Resources() {
       {/* ─── 1. HERO SECTION ─── */}
       <section className="relative pt-6 pb-16 lg:pt-8 lg:pb-20 z-10">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-          
+
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="flex items-center text-xs font-semibold text-gray-500 mb-6">
             <Link to="/" className="hover:text-amber-500 transition-colors">Home</Link>
@@ -1055,7 +1055,7 @@ export default function Resources() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-5 space-y-6 max-w-[560px]">
-              
+
               {/* Pill Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FEF3D6] border border-amber-300/80 text-hub-navy text-[11px] font-extrabold uppercase tracking-widest shadow-2xs">
                 <span className="material-symbols-outlined text-sm text-amber-600">menu_book</span>
@@ -1131,7 +1131,7 @@ export default function Resources() {
       {/* ─── 2. CHOOSE YOUR DEPARTMENT SECTION ─── */}
       <section id="departments" className="py-14 sm:py-20 relative scroll-mt-24 z-10">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-          
+
           {/* Section Header */}
           <div className="text-center mb-12 space-y-2">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FEF08A] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0F172A] text-xs font-black uppercase tracking-wider mb-2">
@@ -1209,7 +1209,8 @@ export default function Resources() {
                   </span>
                 </button>
               </div>
-            );})}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1217,7 +1218,7 @@ export default function Resources() {
       {/* ─── 3. WHY CHOOSE OUR RESOURCES (4 Feature Cards) ─── */}
       <section className="py-12 sm:py-16 relative z-10">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-          
+
           <div className="text-center mb-10 space-y-2">
             <h2 className="text-2xl sm:text-3xl font-black text-hub-navy tracking-tight">
               Why Students Trust Our Repository
@@ -1250,7 +1251,6 @@ export default function Resources() {
       {/* ─── 4. EXAM STRATEGY & MARK SPLITS SECTION ─── */}
       <section id="exam-strategy" className="py-14 sm:py-20 relative z-10 bg-[#FAF8FF] border-y-[3px] border-[#0F172A] scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-          
           {/* Examination Mode Switcher Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div className="inline-flex p-1.5 bg-white border-[2.5px] border-[#0F172A] rounded-2xl shadow-[3.5px_3.5px_0_#0F172A]">
@@ -2223,7 +2223,7 @@ export default function Resources() {
       {/* ─── 5. COMMUNITY CONTRIBUTOR HUB (Upload & Request Tabs with Semester Gating) ─── */}
       <section id="community-hub" className="py-14 sm:py-20 relative z-10 scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-          
+
           <div className="bg-white border-[3px] border-[#0F172A] rounded-[36px] shadow-[8px_8px_0_#0F172A] p-6 sm:p-10">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b-2 border-slate-100">
@@ -2242,22 +2242,20 @@ export default function Resources() {
                 <button
                   type="button"
                   onClick={() => setVaultTab('upload')}
-                  className={`px-5 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${
-                    vaultTab === 'upload'
+                  className={`px-5 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${vaultTab === 'upload'
                       ? 'bg-[#0F172A] text-white shadow-xs'
                       : 'text-[#0F172A] hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   Upload Material
                 </button>
                 <button
                   type="button"
                   onClick={() => setVaultTab('request')}
-                  className={`px-5 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${
-                    vaultTab === 'request'
+                  className={`px-5 py-2 rounded-xl text-xs font-black uppercase transition-all cursor-pointer ${vaultTab === 'request'
                       ? 'bg-[#FF5722] text-white shadow-xs'
                       : 'text-[#0F172A] hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   Request Notes
                 </button>

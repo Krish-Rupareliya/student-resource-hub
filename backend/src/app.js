@@ -52,7 +52,12 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl, server-to-server)
-      if (!origin || allowedOrigins.includes(origin)) {
+      // In development / local testing, allow any local network origin (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+      const isLocalNetwork =
+        process.env.NODE_ENV !== 'production' &&
+        /^http:\/\/(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+|localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+
+      if (!origin || allowedOrigins.includes(origin) || isLocalNetwork) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));

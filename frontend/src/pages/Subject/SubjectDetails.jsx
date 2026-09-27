@@ -145,16 +145,14 @@ function SubjectDetails() {
       </div>
 
       <div className="relative z-10 py-6 sm:py-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* ─── Top Hero / Header Section ─── */}
         <section className="mb-8 sm:mb-10">
           <div className="bg-white/90 backdrop-blur-md border-2 border-black rounded-[28px] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.9)] relative overflow-hidden">
             {/* Main Header Content Grid */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              
+
               {/* Left Column: Icon + Subject Info */}
               <div className="flex items-start gap-3 sm:gap-6 min-w-0 flex-1">
-                
                 {/* Subject Avatar Icon Badge */}
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-amber-400 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] flex items-center justify-center shrink-0 text-black">
                   <span className="material-symbols-outlined text-[28px] sm:text-[44px]">
@@ -228,7 +226,7 @@ function SubjectDetails() {
 
         {/* ─── Resource Categories Section ─── */}
         <section className="mb-10 sm:mb-12">
-          
+
           <div className="flex items-center justify-between mb-4 sm:mb-6">
             <h2 className="text-lg sm:text-2xl font-black text-black flex items-center gap-2 tracking-tight">
               <span className="material-symbols-outlined text-amber-500 text-xl sm:text-2xl">category</span>
@@ -285,33 +283,30 @@ function SubjectDetails() {
                   onClick={() => selectCategory(cat.dbType)}
                   whileHover={{ y: -5, scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`relative p-3.5 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[24px] text-left flex flex-col justify-between min-h-[140px] sm:min-h-[180px] transition-all duration-300 cursor-pointer select-none group border-2 ${
-                    isSelected
+                  className={`relative p-3.5 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[24px] text-left flex flex-col justify-between min-h-[140px] sm:min-h-[180px] transition-all duration-300 cursor-pointer select-none group border-2 ${isSelected
                       ? 'bg-[#0F172A] text-white border-black shadow-[6px_6px_0px_#FBBF24] ring-2 ring-[#FBBF24]'
                       : 'bg-white hover:bg-[#FFFDF5] text-black border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]'
-                  }`}
+                    }`}
                 >
                   <div>
                     {/* Top Row: Icon Badge & Counter Badge */}
                     <div className="flex items-center justify-between mb-2.5 sm:mb-4">
-                      
+
                       <div
-                        className={`w-9 h-9 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center border-2 border-black transition-transform duration-300 group-hover:scale-110 shadow-[2px_2px_0px_rgba(0,0,0,1)] ${
-                          isSelected
+                        className={`w-9 h-9 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center border-2 border-black transition-transform duration-300 group-hover:scale-110 shadow-[2px_2px_0px_rgba(0,0,0,1)] ${isSelected
                             ? 'bg-[#FBBF24] text-black'
                             : `${cat.badgeBg}`
-                        }`}
+                          }`}
                       >
                         <span className="material-symbols-outlined text-[20px] sm:text-[26px]">{cat.icon}</span>
                       </div>
 
                       {/* Material Count Pill */}
                       <span
-                        className={`text-[10px] sm:text-xs font-black px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border-2 ${
-                          isSelected
+                        className={`text-[10px] sm:text-xs font-black px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border-2 ${isSelected
                             ? 'bg-[#FBBF24] text-black border-black'
                             : 'bg-[#FEF3D6] text-black border-black'
-                        }`}
+                          }`}
                       >
                         {catCount < 10 ? `0${catCount}` : catCount} {catCount === 1 ? 'Resource' : 'Resources'}
                       </span>
@@ -330,11 +325,10 @@ function SubjectDetails() {
 
                   {/* Bottom Action Strip */}
                   <div
-                    className={`pt-2.5 sm:pt-4 border-t flex items-center justify-between text-xs sm:text-sm font-black transition-colors ${
-                      isSelected
+                    className={`pt-2.5 sm:pt-4 border-t flex items-center justify-between text-xs sm:text-sm font-black transition-colors ${isSelected
                         ? 'border-white/15 text-[#FBBF24]'
                         : 'border-black/10 text-black group-hover:text-amber-600'
-                    }`}
+                      }`}
                   >
                     <span className="tracking-wide">Explore {cat.title}</span>
                     <div className="flex items-center gap-1">
@@ -354,10 +348,10 @@ function SubjectDetails() {
         {/* ─── Active Category Resources List Section ─── */}
         <section ref={resourcesPanelRef} className="scroll-mt-6">
           <div className="bg-white/95 backdrop-blur-md rounded-[24px] sm:rounded-[28px] p-3.5 sm:p-6 md:p-10 border-2 border-black shadow-[8px_8px_0px_rgba(0,0,0,0.12)] min-h-[300px] sm:min-h-[360px] relative">
-            
+
             {/* Header of Resources Panel */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8 pb-4 sm:pb-5 border-b-2 border-black/10">
-              
+
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-400 border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] flex items-center justify-center text-black shrink-0">
                   <span className="material-symbols-outlined text-xl sm:text-2xl">folder_open</span>
@@ -483,7 +477,7 @@ function SubjectDetails() {
             {/* Empty State */}
             {!resourcesLoading && !error && filteredResources.length === 0 && (
               <div className="text-center py-12 px-4 border-2 border-dashed border-black/20 rounded-2xl bg-[#FFFDF5]/60 space-y-4">
-                
+
                 <div className="w-16 h-16 rounded-2xl bg-[#FEF3D6] border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] flex items-center justify-center mx-auto text-black">
                   <span className="material-symbols-outlined text-3xl">folder_off</span>
                 </div>

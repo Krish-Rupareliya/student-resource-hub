@@ -5,9 +5,14 @@
 export let API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
 
 // Dynamic host resolution: If accessing via local IP (e.g. from a phone),
-// replace "localhost" in the API URL with the actual local IP.
-if (API_BASE_URL.includes('localhost') && typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-  API_BASE_URL = API_BASE_URL.replace('localhost', window.location.hostname);
+// replace "localhost" or "127.0.0.1" in the API URL with the actual host IP/domain.
+if (
+  (API_BASE_URL.includes('localhost') || API_BASE_URL.includes('127.0.0.1')) &&
+  typeof window !== 'undefined' &&
+  window.location.hostname !== 'localhost' &&
+  window.location.hostname !== '127.0.0.1'
+) {
+  API_BASE_URL = API_BASE_URL.replace(/localhost|127\.0\.0\.1/, window.location.hostname);
 }
 
 /**
