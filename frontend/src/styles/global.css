@@ -677,3 +677,24 @@ body {
     transform: translateX(250%);
   }
 }
+
+/* ─── Cross-Browser Native Select Reset ──────────────────────────
+   Suppresses duplicate browser dropdown arrows when custom icons are used */
+select.appearance-none,
+.appearance-none {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+select.appearance-none::-ms-expand,
+.appearance-none::-ms-expand {
+  display: none !important;
+}
+
+/* ─── Lenis Nested Scroll Helpers ────────────────────────────────
+   Prevents Lenis smooth scroll from hijacking wheel events in inner scroll areas */
+[data-lenis-prevent],
+.lenis-prevent {
+  overscroll-behavior: contain !important;
+}

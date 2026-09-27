@@ -296,6 +296,39 @@ function renderTagIcon(iconName) {
   }
 }
 
+export function parseLocalDate(dateStr) {
+  if (!dateStr) return null;
+  const match = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (match) {
+    return new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, parseInt(match[3], 10));
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
+export function formatLocalDate(date) {
+  const d = date || new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function computeDaysFromDate(dateStr) {
+  if (!dateStr) return '';
+  const targetDay = parseLocalDate(dateStr);
+  if (!targetDay) return '';
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diffMs = targetDay.getTime() - today.getTime();
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0) return 'Concluded';
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Tomorrow';
+  return `In ${diffDays} Days`;
+}
+
 export default function AdminHomepageSettingsView() {
   const [activeTab, setActiveTab] = useState('trending'); // 'clock' | 'trending' | 'video' | 'platforms' | 'groups' | 'preview'
   const [loading, setLoading] = useState(true);
@@ -306,14 +339,15 @@ export default function AdminHomepageSettingsView() {
   const [liveClock, setLiveClock] = useState(() => {
     const futureDate = new Date(Date.now() + 45 * 24 * 60 * 60 * 1000);
     futureDate.setHours(10, 30, 0, 0);
+    const now = new Date();
     return {
       examTitle: 'Indus Winter Finals',
       targetDate: futureDate.toISOString(),
       subtitle: 'Target exam date approaching. Be prepared before server crashes and dead WhatsApp groups strike.',
       papersSchedule: [
-        { code: 'CE0402', name: 'Computer Networks', deadline: 'In 3 Days' },
-        { code: 'CE0404', name: 'Software Engineering', deadline: 'In 7 Days' },
-        { code: 'CE0401', name: 'Operating Systems', deadline: 'In 12 Days' },
+        { code: 'CE0402', name: 'Computer Networks', date: formatLocalDate(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 3)), deadline: 'In 3 Days' },
+        { code: 'CE0404', name: 'Software Engineering', date: formatLocalDate(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7)), deadline: 'In 7 Days' },
+        { code: 'CE0401', name: 'Operating Systems', date: formatLocalDate(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 12)), deadline: 'In 12 Days' },
       ],
     };
   });
@@ -426,16 +460,33 @@ export default function AdminHomepageSettingsView() {
   // Handlers for Live Clock
   const handlePaperChange = (index, field, value) => {
     const updated = [...(liveClock.papersSchedule || [])];
-    updated[index] = { ...updated[index], [field]: value };
+    if (field === 'date') {
+      const autoDays = computeDaysFromDate(value);
+      updated[index] = {
+        ...updated[index],
+        date: value,
+        deadline: autoDays || updated[index].deadline || 'Upcoming',
+      };
+    } else {
+      updated[index] = { ...updated[index], [field]: value };
+    }
     setLiveClock({ ...liveClock, papersSchedule: updated });
   };
 
   const handleAddPaper = () => {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 5);
+    const defaultDate = formatLocalDate(targetDate);
     setLiveClock({
       ...liveClock,
       papersSchedule: [
         ...(liveClock.papersSchedule || []),
-        { code: 'CE0401', name: 'New Subject Name', deadline: 'In 5 Days' },
+        {
+          code: 'CE0401',
+          name: 'New Subject Name',
+          date: defaultDate,
+          deadline: 'In 5 Days',
+        },
       ],
     });
   };
@@ -1593,48 +1644,79 @@ export default function AdminHomepageSettingsView() {
               </div>
 
               <div className="space-y-3">
-                {(liveClock.papersSchedule || []).map((paper, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 bg-slate-50 border-[2px] border-[#0F172A] rounded-xl shadow-[2px_2px_0px_#0F172A]"
-                  >
-                    <div className="w-full sm:w-28">
-                      <input
-                        type="text"
-                        value={paper.code || ''}
-                        onChange={(e) => handlePaperChange(idx, 'code', e.target.value)}
-                        placeholder="Code (CE0401)"
-                        className="w-full px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-mono font-bold text-xs"
-                      />
-                    </div>
-                    <div className="flex-1 w-full">
-                      <input
-                        type="text"
-                        value={paper.name || ''}
-                        onChange={(e) => handlePaperChange(idx, 'name', e.target.value)}
-                        placeholder="Subject Name"
-                        className="w-full px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-bold text-xs"
-                      />
-                    </div>
-                    <div className="w-full sm:w-32">
-                      <input
-                        type="text"
-                        value={paper.deadline || ''}
-                        onChange={(e) => handlePaperChange(idx, 'deadline', e.target.value)}
-                        placeholder="In 3 Days"
-                        className="w-full px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-bold text-xs text-amber-600"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleRemovePaper(idx)}
-                      className="text-red-500 hover:text-red-700 p-1 cursor-pointer self-end sm:self-center"
-                      title="Remove paper"
+                {(liveClock.papersSchedule || []).map((paper, idx) => {
+                  const computedDays = computeDaysFromDate(paper.date);
+                  const displayBadge = computedDays || paper.deadline || 'Upcoming';
+                  const isUrgent = displayBadge === 'Today' || displayBadge === 'Tomorrow' || displayBadge === 'In 1 Day' || displayBadge === 'In 2 Days' || displayBadge === 'In 3 Days';
+                  const isConcluded = displayBadge === 'Concluded';
+
+                  return (
+                    <div
+                      key={idx}
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 p-3 bg-slate-50 border-[2px] border-[#0F172A] rounded-xl shadow-[2px_2px_0px_#0F172A]"
                     >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
+                      <div className="w-full sm:w-28">
+                        <label className="block text-[10px] font-black uppercase text-slate-500 mb-1 sm:hidden">
+                          Course Code
+                        </label>
+                        <input
+                          type="text"
+                          value={paper.code || ''}
+                          onChange={(e) => handlePaperChange(idx, 'code', e.target.value)}
+                          placeholder="Code (CE0401)"
+                          className="w-full px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-mono font-bold text-xs"
+                        />
+                      </div>
+                      <div className="flex-1 w-full">
+                        <label className="block text-[10px] font-black uppercase text-slate-500 mb-1 sm:hidden">
+                          Subject Title
+                        </label>
+                        <input
+                          type="text"
+                          value={paper.name || ''}
+                          onChange={(e) => handlePaperChange(idx, 'name', e.target.value)}
+                          placeholder="Subject Name"
+                          className="w-full px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-bold text-xs"
+                        />
+                      </div>
+                      <div className="w-full sm:w-auto flex items-center gap-2">
+                        <div className="relative">
+                          <label className="block text-[10px] font-black uppercase text-slate-500 mb-1 sm:hidden">
+                            Exam Date
+                          </label>
+                          <input
+                            type="date"
+                            value={paper.date || (paper.deadline && /^\d{4}-\d{2}-\d{2}/.test(paper.deadline) ? paper.deadline : '')}
+                            onChange={(e) => handlePaperChange(idx, 'date', e.target.value)}
+                            className="px-2.5 py-1.5 bg-white border border-[#0F172A] rounded-lg font-bold text-xs cursor-pointer text-[#0F172A]"
+                            title="Pick Exam Date to auto-calculate remaining days dynamically"
+                          />
+                        </div>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1.5">
+                          <span
+                            className={`px-2.5 py-1 rounded-lg text-[11px] font-black uppercase border border-[#0F172A] shadow-2xs whitespace-nowrap ${
+                              isUrgent
+                                ? 'bg-red-100 text-red-700'
+                                : isConcluded
+                                ? 'bg-slate-200 text-slate-600'
+                                : 'bg-[#FEF08A] text-[#0F172A]'
+                            }`}
+                          >
+                            {displayBadge}
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleRemovePaper(idx)}
+                        className="text-red-500 hover:text-red-700 p-1 cursor-pointer self-end sm:self-center ml-auto"
+                        title="Remove paper"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

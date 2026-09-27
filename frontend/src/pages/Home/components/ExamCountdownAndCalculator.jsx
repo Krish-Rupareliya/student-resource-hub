@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ChevronsUpDown } from 'lucide-react';
 import { getPublicHomepageSettings } from '../../../services/settings/settingsApi';
 import { fetchSemestersCatalog } from '../../../services/resources/resourcesApi';
 
@@ -49,6 +50,52 @@ export function computeGradeFromTotalMarks(obt, max) {
     failed: true,
     failReason: 'Below passing threshold',
   };
+}
+
+export function parseLocalDate(dateStr) {
+  if (!dateStr) return null;
+  const match = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (match) {
+    return new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, parseInt(match[3], 10));
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
+export function formatLocalDate(date) {
+  const d = date || new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Helper: Dynamically compute days remaining from target date or legacy deadline string
+export function getPaperDeadlineText(paper) {
+  if (!paper) return 'Upcoming';
+
+  const rawDate = paper.date || (typeof paper.deadline === 'string' && /^\d{4}-\d{2}-\d{2}/.test(paper.deadline.trim()) ? paper.deadline.trim() : null);
+
+  if (rawDate) {
+    const targetDay = parseLocalDate(rawDate);
+    if (targetDay) {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const diffMs = targetDay.getTime() - today.getTime();
+      const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+      if (diffDays < 0) return 'Concluded';
+      if (diffDays === 0) return 'Today';
+      if (diffDays === 1) return 'Tomorrow';
+      return `In ${diffDays} Days`;
+    }
+  }
+
+  if (paper.deadline && typeof paper.deadline === 'string' && paper.deadline.trim()) {
+    return paper.deadline.trim();
+  }
+
+  return 'Upcoming';
 }
 
 // Backward-compatible component evaluator (Theory min 24/60, ESE min 16/40)
@@ -701,25 +748,33 @@ export default function ExamCountdownAndCalculator() {
                 <span className="text-[11px] font-bold text-slate-500">Indus Schedule</span>
               </div>
               <div className="space-y-2">
-                {(clockConfig.papersSchedule || []).map((paper, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between bg-white p-2.5 rounded-xl border-[1.5px] border-[#0F172A] text-xs font-bold"
-                  >
-                    <span className="text-[#0F172A] truncate pr-2">
-                      {paper.code ? `${paper.code} · ` : ''}{paper.name}
-                    </span>
-                    <span
-                      className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase shrink-0 border border-[#0F172A] ${
-                        idx === 0
-                          ? 'bg-[#FEE2E2] text-red-700'
-                          : 'bg-[#FEF08A] text-[#0F172A]'
-                      }`}
+                {(clockConfig.papersSchedule || []).map((paper, idx) => {
+                  const deadlineText = getPaperDeadlineText(paper);
+                  const isUrgent = deadlineText === 'Today' || deadlineText === 'Tomorrow' || deadlineText === 'In 1 Day' || deadlineText === 'In 2 Days' || deadlineText === 'In 3 Days';
+                  const isConcluded = deadlineText === 'Concluded';
+
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between bg-white p-2.5 rounded-xl border-[1.5px] border-[#0F172A] text-xs font-bold"
                     >
-                      {paper.deadline || 'Upcoming'}
-                    </span>
-                  </div>
-                ))}
+                      <span className="text-[#0F172A] truncate pr-2">
+                        {paper.code ? `${paper.code} · ` : ''}{paper.name}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase shrink-0 border border-[#0F172A] ${
+                          isUrgent
+                            ? 'bg-[#FEE2E2] text-red-700'
+                            : isConcluded
+                            ? 'bg-slate-100 text-slate-500'
+                            : 'bg-[#FEF08A] text-[#0F172A]'
+                        }`}
+                      >
+                        {deadlineText}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -832,7 +887,13 @@ export default function ExamCountdownAndCalculator() {
               )}
 
               {/* ─── SIMPLIFIED & INTUITIVE COURSE LIST ─── */}
-              <div className="space-y-2.5 mb-4 max-h-none sm:max-h-[500px] overflow-visible sm:overflow-y-auto pr-0 sm:pr-1.5 [scrollbar-width:thin] [scrollbar-color:#CBD5E1_transparent]">
+              <div
+                data-lenis-prevent="true"
+                data-lenis-prevent-wheel="true"
+                data-lenis-prevent-touch="true"
+                onWheel={(e) => e.stopPropagation()}
+                className="space-y-2.5 mb-4 max-h-none sm:max-h-[500px] overflow-visible sm:overflow-y-auto pr-0 sm:pr-1.5 [scrollbar-width:thin] [scrollbar-color:#CBD5E1_transparent] overscroll-contain"
+              >
                 {subjects.map((sub, idx) => {
                   const maxMarks = sub.totalMarks?.max || 100;
                   const obtMarks = sub.totalMarks?.obt ?? 0;
@@ -897,6 +958,11 @@ export default function ExamCountdownAndCalculator() {
                           <div className="relative flex-1">
                             <select
                               className="w-full appearance-none bg-white text-xs font-black text-[#0F172A] pl-3 pr-8 py-2 rounded-xl border-[1.5px] border-[#0F172A] shadow-xs focus:outline-none focus:ring-2 focus:ring-[#FF5722] cursor-pointer"
+                              style={{
+                                WebkitAppearance: 'none',
+                                MozAppearance: 'none',
+                                appearance: 'none',
+                              }}
                               value={sub.grade}
                               onChange={(e) => handleGradeChange(idx, e.target.value)}
                               aria-label={`Select grade for ${sub.name}`}
@@ -907,9 +973,7 @@ export default function ExamCountdownAndCalculator() {
                                 </option>
                               ))}
                             </select>
-                            <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 material-symbols-outlined text-base">
-                              unfold_more
-                            </span>
+                            <ChevronsUpDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 stroke-[2.2]" />
                           </div>
                           <div className={`px-2.5 py-1.5 rounded-xl text-xs font-black border-[1.5px] shrink-0 ${
                             sub.hasBacklog
