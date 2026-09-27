@@ -68,18 +68,25 @@ function Navbar({ onOpenCommandPalette }) {
               }
             >
               {({ isActive }) => (
-                <motion.div
-                  className="flex flex-col items-center justify-center relative"
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  transition={{ type: 'spring', stiffness: 450, damping: 22 }}
-                >
-                  <span>{link.name}</span>
+                <div className="flex flex-col items-center justify-center relative group">
+                  {/* Framer Dual-Text Slide Up Animation */}
+                  <span className="relative inline-block overflow-hidden py-0.5">
+                    <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(.44,0,.56,1)] group-hover:-translate-y-full">
+                      {link.name}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 ease-[cubic-bezier(.44,0,.56,1)] group-hover:translate-y-0 text-[#FF5722] font-black"
+                    >
+                      {link.name}
+                    </span>
+                  </span>
 
-                  {/* Apple Dock Hover Sliding Underline */}
+                  {/* Sliding Underline */}
                   {hoveredPath === link.path && (
                     <motion.div
                       layoutId="dock-hover-underline"
-                      className="absolute -bottom-1 left-0 right-0 h-[3px] bg-amber-400 rounded-full shadow-xs"
+                      className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-[#0F172A] rounded-full shadow-xs"
                       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                     />
                   )}
@@ -89,10 +96,10 @@ function Navbar({ onOpenCommandPalette }) {
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -bottom-1.5 w-1.5 h-1.5 bg-amber-500 rounded-full shadow-xs"
+                      className="absolute -bottom-1.5 w-1.5 h-1.5 bg-[#FF5722] rounded-full shadow-xs"
                     />
                   )}
-                </motion.div>
+                </div>
               )}
             </NavLink>
           ))}

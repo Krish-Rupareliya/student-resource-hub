@@ -124,7 +124,9 @@ assert(examCountdownCode.includes('data-lenis-prevent-wheel="true"'), 'Course li
 assert(examCountdownCode.includes('overscroll-contain'), 'Course list has overscroll-contain');
 assert(examCountdownCode.includes('onWheel={(e) => e.stopPropagation()}'), 'Course list has onWheel stopPropagation');
 assert(examCountdownCode.includes('WebkitAppearance'), 'Select element has WebkitAppearance none override');
-assert(examCountdownCode.includes('ChevronsUpDown'), 'Select element uses ChevronsUpDown icon from lucide-react');
+assert(examCountdownCode.includes('backgroundImage: \'none\''), 'Select element has explicit backgroundImage none override');
+assert(examCountdownCode.includes('ChevronDown'), 'Select element uses single clean ChevronDown icon from lucide-react');
+assert(!examCountdownCode.includes('ChevronsUpDown'), 'ChevronsUpDown (two-arrow collapsing glyph) has been eliminated');
 assert(!examCountdownCode.includes('>unfold_more<'), 'Old unfold_more material icon has been completely removed');
 assert(examCountdownCode.includes('getPaperDeadlineText'), 'ExamCountdown uses getPaperDeadlineText for dynamic schedule labels');
 
@@ -152,6 +154,7 @@ assert(globalCssCode.includes('select.appearance-none'), 'global.css defines sel
 assert(globalCssCode.includes('-webkit-appearance: none !important'), 'global.css enforces -webkit-appearance: none !important');
 assert(globalCssCode.includes('-moz-appearance: none !important'), 'global.css enforces -moz-appearance: none !important');
 assert(globalCssCode.includes('appearance: none !important'), 'global.css enforces appearance: none !important');
+assert(globalCssCode.includes('background-image: none !important'), 'global.css strips @tailwindcss/forms background-image');
 assert(globalCssCode.includes('select.appearance-none::-ms-expand'), 'global.css disables ::-ms-expand');
 assert(globalCssCode.includes('[data-lenis-prevent]'), 'global.css provides [data-lenis-prevent] containment rule');
 

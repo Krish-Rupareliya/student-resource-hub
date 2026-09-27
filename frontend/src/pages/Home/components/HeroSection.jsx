@@ -16,6 +16,7 @@ import {
   Star,
 } from 'lucide-react';
 import { getPublicOverviewStats, getPublicHomepageSettings } from '../../../services/settings/settingsApi';
+import FramerButton from '../../../components/ui/FramerButton';
 
 const DEFAULT_TAGS = [
   { label: 'OS 100-Mark Imp', query: 'Operating Systems', icon: 'zap' },
@@ -127,19 +128,22 @@ function HeroSection() {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 w-full sm:w-auto">
-              <Link
+              <FramerButton
                 to="/resources"
-                className="bg-hub-navy hover:bg-slate-800 text-white font-bold px-6 sm:px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 text-sm sm:text-base border border-hub-navy cursor-pointer w-full sm:w-auto text-center"
-              >
-                <span>Explore Resources</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-              </Link>
-              <Link
+                text="Explore Resources"
+                variant="navy"
+                size="lg"
+                icon={ArrowRight}
+                iconPosition="right"
+                className="w-full sm:w-auto shadow-[4px_4px_0_#FF5722] hover:shadow-[6px_6px_0_#FF5722]"
+              />
+              <FramerButton
                 to="/semesters"
-                className="bg-white hover:bg-amber-50 text-hub-navy font-bold px-6 sm:px-8 py-3.5 rounded-full shadow-sm hover:shadow-md border-2 border-amber-300 transition-all duration-300 hover:-translate-y-0.5 text-sm sm:text-base cursor-pointer text-center w-full sm:w-auto"
-              >
-                Explore Semesters
-              </Link>
+                text="Explore Semesters"
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto shadow-[3.5px_3.5px_0_#0F172A] hover:shadow-[5px_5px_0_#0F172A]"
+              />
             </div>
 
             {/* Quick Search Tag Chips */}
@@ -153,7 +157,7 @@ function HeroSection() {
                   <Link
                     key={idx}
                     to={`/resources?search=${encodeURIComponent(tag.query || tag.label)}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white hover:bg-amber-100 text-hub-navy border border-amber-300/80 shadow-2xs hover:shadow-xs hover:border-amber-400 transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-white hover:bg-[#FEF08A] text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:shadow-[3px_3px_0_#0F172A] hover:-translate-y-0.5 hover:-rotate-1 transition-all active:scale-95 cursor-pointer"
                   >
                     {getTagIcon(tag.icon)}
                     <span>{tag.label}</span>

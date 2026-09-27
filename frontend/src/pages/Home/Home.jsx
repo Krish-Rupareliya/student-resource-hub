@@ -8,6 +8,7 @@ import TrendingPacksSection from './components/TrendingPacksSection';
 import LearningPlatformsSection from './components/Free Courses Platforms Section';
 import VideoSection from './components/VideoSection';
 import FeatureStrip from './components/FeatureStrip';
+import FramerProcessSection from '../../components/common/FramerProcessSection';
 import TestimonialsSection from './components/TestimonialsSection';
 
 function Home() {
@@ -27,22 +28,27 @@ function Home() {
         {/* 3. Category Marquee (Bouncy Category Cards) */}
         <CategoryMarquee />
 
-        {/* 4. Live Semester Clock & SGPA Predictor */}
+
+
+        {/* 5. Live Semester Clock & SGPA Predictor */}
         <ExamCountdownAndCalculator />
 
-        {/* 5. Trending High-Demand Study Packs */}
+        {/* 6. Trending High-Demand Study Packs */}
         <TrendingPacksSection />
 
-        {/* 6. Free Courses & Learning Platforms */}
+        {/* 7. Free Courses & Learning Platforms */}
         <LearningPlatformsSection />
 
-        {/* 7. Video Walkthrough & Tour */}
+        {/* 8. Video Walkthrough & Tour */}
         <VideoSection />
 
-        {/* 8. Key Feature Strip */}
+        {/* 9. Framer 4-Step Academic Success Blueprint Section */}
+        <FramerProcessSection />
+
+        {/* 10. Key Feature Strip */}
         <FeatureStrip />
 
-        {/* 9. Student Testimonials */}
+        {/* 11. Student Testimonials */}
         <TestimonialsSection />
       </div>
     </div>

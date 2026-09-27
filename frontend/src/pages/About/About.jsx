@@ -37,6 +37,7 @@ import {
 import { ScallopedCap, StickerTag, PillButton } from './components/ScallopedFrame';
 import { NeoBadge } from '../../components/common/BrandIcons';
 import { CardStack, CardStackItem } from '../../components/common/CardStack';
+import FramerButton from '../../components/ui/FramerButton';
 
 export default function About() {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -390,21 +391,7 @@ export default function About() {
           </div>
         </motion.section>
 
-        {/* ── Marquee Ticker ── */}
-        <div className="py-1 overflow-hidden -mx-4 sm:mx-0 select-none">
-          <div className="bg-[#111111] text-[#FACC15] py-2 px-4 rounded-xl border-2 border-[#111111] shadow-[3px_3px_0px_#FACC15] rotate-[-0.8deg] flex items-center overflow-hidden">
-            <div className="flex shrink-0 gap-6 animate-marquee font-black uppercase tracking-wider text-xs">
-              <span className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-[#A3E635]" /> 100% FREE VAULT</span>
-              <span className="flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5 text-[#FF5722]" /> OCR VERIFIED NOTES</span>
-              <span className="flex items-center gap-2"><Flame className="w-3.5 h-3.5 text-[#FACC15]" /> ZERO ADS</span>
-              <span className="flex items-center gap-2"><Users className="w-3.5 h-3.5 text-[#C084FC]" /> 5,000+ ENGINEERS</span>
-              <span className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-[#A3E635]" /> 100% FREE VAULT</span>
-              <span className="flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5 text-[#FF5722]" /> OCR VERIFIED NOTES</span>
-              <span className="flex items-center gap-2"><Flame className="w-3.5 h-3.5 text-[#FACC15]" /> ZERO ADS</span>
-              <span className="flex items-center gap-2"><Users className="w-3.5 h-3.5 text-[#C084FC]" /> 5,000+ ENGINEERS</span>
-            </div>
-          </div>
-        </div>
+
 
         {/* ══════════════════════════════════════════════════════════════════════════
             2. CARD STACK ORIGIN STORY (Sticky Stacking Scroll & Reveal)
@@ -792,17 +779,25 @@ export default function About() {
               </p>
 
               <div className="flex items-center justify-center gap-3 flex-wrap pt-2">
-                <PillButton to="/resources" bgColor="#FACC15" textColor="#111111" iconComponent={BookOpen}>
+                <FramerButton
+                  to="/resources"
+                  variant="secondary"
+                  size="lg"
+                  icon="menu_book"
+                  shadow="md"
+                >
                   Browse Vault
-                </PillButton>
-                <PillButton
+                </FramerButton>
+                <FramerButton
                   href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
-                  bgColor="#FFFFFF"
-                  textColor="#111111"
-                  iconComponent={MessageSquare}
+                  variant="outline"
+                  size="lg"
+                  icon="forum"
+                  shadow="md"
+                  className="bg-white hover:bg-slate-100 text-[#111111]"
                 >
                   Join WhatsApp Squad
-                </PillButton>
+                </FramerButton>
               </div>
             </div>
           </div>

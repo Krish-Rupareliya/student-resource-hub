@@ -679,12 +679,13 @@ body {
 }
 
 /* ─── Cross-Browser Native Select Reset ──────────────────────────
-   Suppresses duplicate browser dropdown arrows when custom icons are used */
+   Suppresses duplicate browser dropdown arrows and @tailwindcss/forms SVGs */
 select.appearance-none,
 .appearance-none {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
+  background-image: none !important;
 }
 
 select.appearance-none::-ms-expand,

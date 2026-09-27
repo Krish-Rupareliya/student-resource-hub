@@ -5,6 +5,7 @@ import { ToastContainer, useToast } from '../../components/ui/Toast';
 import { SPOTIFY_STUDY_CATEGORIES } from '../../data/spotifyStudyPlaylists';
 import { getActivePoll, castVote } from '../../services/polls/pollsApi';
 import { getPublicHomepageSettings } from '../../services/settings/settingsApi';
+import FramerButton from '../../components/ui/FramerButton';
 
 const DEFAULT_GROUP_LINKS = {
   whatsappSem1_4: 'https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB',
@@ -387,27 +388,31 @@ export default function Community() {
 
               {/* Primary High-Energy Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-3">
-                <a
+                <FramerButton
                   href={groupLinks.whatsappSem1_4 || groupLinks.whatsappSem5_8 || DEFAULT_GROUP_LINKS.whatsappSem1_4}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black px-6 sm:px-7 py-3.5 rounded-2xl inline-flex items-center gap-2.5 shadow-[4px_4px_0px_#0F172A] transition-all duration-200 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer border-2 border-[#0F172A]"
+                  variant="primary"
+                  size="lg"
+                  icon="arrow_forward"
+                  shadow="md"
+                  className="bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black border-2 border-[#0F172A]"
                 >
-                  <WhatsAppIcon className="w-5 h-5 text-slate-950" />
-                  <span>Join WhatsApp Community</span>
-                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
-                </a>
+                  Join WhatsApp Community
+                </FramerButton>
 
-                <a
+                <FramerButton
                   href={groupLinks.telegramMain || DEFAULT_GROUP_LINKS.telegramMain}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#0B132B] hover:bg-[#152244] text-[#FACC15] font-black px-6 sm:px-7 py-3.5 rounded-2xl inline-flex items-center gap-2.5 shadow-[4px_4px_0px_#0F172A] transition-all duration-200 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer border-2 border-[#FACC15]"
+                  variant="navy"
+                  size="lg"
+                  icon="arrow_forward"
+                  shadow="md"
+                  className="bg-[#0B132B] hover:bg-[#152244] text-[#FACC15] font-black border-2 border-[#FACC15]"
                 >
-                  <TelegramIcon className="w-5 h-5 text-[#FACC15]" />
-                  <span>Join Telegram Channel</span>
-                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
-                </a>
+                  Join Telegram Channel
+                </FramerButton>
               </div>
             </div>
 
@@ -532,6 +537,8 @@ export default function Community() {
             </motion.div>
           ))}
         </div>
+
+
 
         {/* ══════════════════════════════════════════════════════════════════════════
             SECTION 3: THE QUAD ACOUSTIC STAGE & STUDENT BALLOT BOX
@@ -943,25 +950,31 @@ export default function Community() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <a
+              <FramerButton
                 href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#0F172A] hover:bg-slate-800 text-[#FACC15] font-black px-7 py-3.5 rounded-2xl inline-flex items-center gap-2.5 shadow-[4px_4px_0px_#0F172A] transition-all duration-200 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer border-2 border-[#0F172A] text-xs sm:text-sm"
+                variant="navy"
+                size="lg"
+                icon="arrow_forward"
+                shadow="md"
+                className="bg-[#0F172A] hover:bg-slate-800 text-[#FACC15] border-2 border-[#0F172A]"
               >
-                <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
-                <span>Join Official WhatsApp</span>
-              </a>
+                Join Official WhatsApp
+              </FramerButton>
 
-              <a
+              <FramerButton
                 href="https://t.me/+fP4hKU69AQIwZjI1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white hover:bg-slate-50 text-slate-950 font-black px-7 py-3.5 rounded-2xl inline-flex items-center gap-2.5 shadow-[4px_4px_0px_#0F172A] transition-all duration-200 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer border-2 border-[#0F172A] text-xs sm:text-sm"
+                variant="outline"
+                size="lg"
+                icon="arrow_forward"
+                shadow="md"
+                className="bg-white hover:bg-slate-50 text-slate-950 border-2 border-[#0F172A]"
               >
-                <TelegramIcon className="w-5 h-5 text-[#229ED9]" />
-                <span>Join Official Telegram</span>
-              </a>
+                Join Official Telegram
+              </FramerButton>
             </div>
           </div>
         </div>

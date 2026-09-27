@@ -11,12 +11,13 @@ import Banner from '@/components/ui/astryx-banner';
 import AnimatedList from '@/components/ui/animated-list';
 import AcademicCalendar from './components/AcademicCalendar';
 import { SplitText } from './components/CharacterText';
+import { ChevronDown, ExternalLink, Share2, Sparkles } from 'lucide-react';
 import schoolSvg from './components/school.svg';
 import universitySvg from './components/university.svg';
 import indiaSvg from './components/india.svg';
 import screwSvg from './components/screw.svg';
 import campusSvg from './components/campus.svg';
-
+import FramerButton from '../../components/ui/FramerButton';
 
 const CATEGORY_TABS = [
   { id: 'All', label: 'All Postings', icon: 'auto_awesome' },
@@ -227,11 +228,11 @@ function Opportunities() {
     return counts;
   }, [opportunities]);
 
-  // Visual Theme Helpers with Clean High-Contrast Palettes Matching Surrounding Theme
+  // Curated Retro-Modern Neo-Brutalist Category Theme Definition
   const getCategoryTheme = (category, tag) => {
     const text = `${category || ''} ${tag || ''}`.toLowerCase();
 
-    // 1. Internships / Placements / Jobs / Companies -> Warm Gold & Amber (University / Campus)
+    // 1. Internships / Placements / Jobs -> Butter Yellow with Ink Border
     if (
       text.includes('company') ||
       text.includes('companies') ||
@@ -243,24 +244,19 @@ function Opportunities() {
     ) {
       return {
         cardName: 'Internships & Careers',
-        tagDotColor: 'bg-amber-500 shadow-[0_0_6px_#f59e0b]',
-        tagBg: 'bg-amber-50 text-amber-900 border-amber-300/80',
-        backgroundGradient: 'from-amber-500/[0.06] via-orange-500/[0.02] to-transparent',
-        borderHover: 'hover:border-amber-400/80',
-        glow: 'hover:shadow-[0_16px_36px_rgba(245,158,11,0.12)]',
-        ctaColor: 'text-amber-700 group-hover:text-amber-950',
-        titleHover: 'group-hover:text-amber-600',
-        pillColor: 'bg-amber-400',
-        badge: 'bg-amber-50 text-amber-900 border-amber-300/80',
-        btnBg: 'bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold',
+        badgeBg: 'bg-[#FEF08A] text-[#713F12] border-[#0F172A]',
+        accentColor: '#FF5722',
+        accentBg: 'bg-[#FEF08A]',
+        pillColor: 'bg-[#FEF08A]',
+        backgroundGradient: 'from-amber-400/25 via-orange-300/15 to-transparent',
         icon: 'work',
         svgIcon: universitySvg,
         tagText: 'Open for Applications',
-        ctaText: 'Explore role',
+        ctaText: 'Explore Role',
       };
     }
 
-    // 2. Hackathons / Coding / Open Source / Builders -> Tech Sky Blue & Cyan (India / Hackathons)
+    // 2. Hackathons / Coding / Open Source -> Fresh Sky Blue
     if (
       text.includes('builder') ||
       text.includes('hackathon') ||
@@ -272,24 +268,19 @@ function Opportunities() {
     ) {
       return {
         cardName: 'Hackathons & Coding',
-        tagDotColor: 'bg-sky-500 shadow-[0_0_6px_#0284c7]',
-        tagBg: 'bg-sky-50 text-sky-900 border-sky-300/80',
-        backgroundGradient: 'from-sky-500/[0.06] via-indigo-500/[0.02] to-transparent',
-        borderHover: 'hover:border-sky-400/80',
-        glow: 'hover:shadow-[0_16px_36px_rgba(14,165,233,0.12)]',
-        ctaColor: 'text-sky-700 group-hover:text-sky-950',
-        titleHover: 'group-hover:text-sky-600',
-        pillColor: 'bg-sky-500',
-        badge: 'bg-sky-50 text-sky-900 border-sky-300/80',
-        btnBg: 'bg-sky-500 hover:bg-sky-600 text-white font-bold',
-        icon: 'code',
+        badgeBg: 'bg-[#BAE6FD] text-[#0369A1] border-[#0F172A]',
+        accentColor: '#0284c7',
+        accentBg: 'bg-[#BAE6FD]',
+        pillColor: 'bg-[#38BDF8]',
+        backgroundGradient: 'from-sky-400/25 via-indigo-300/15 to-transparent',
+        icon: 'terminal',
         svgIcon: indiaSvg,
-        tagText: 'Open for Registration',
-        ctaText: 'View hackathon',
+        tagText: 'Tech Challenge',
+        ctaText: 'View Challenge',
       };
     }
 
-    // 3. Scholarships / Grants / Fellowships / Scouts -> Royal Purple & Lavender (School / Grants)
+    // 3. Scholarships / Grants / Fellowships -> Fresh Mint Emerald
     if (
       text.includes('scout') ||
       text.includes('scholarship') ||
@@ -300,24 +291,19 @@ function Opportunities() {
     ) {
       return {
         cardName: 'Scholarships & Grants',
-        tagDotColor: 'bg-purple-500 shadow-[0_0_6px_#9333ea]',
-        tagBg: 'bg-purple-50 text-purple-900 border-purple-300/80',
-        backgroundGradient: 'from-purple-500/[0.06] via-pink-500/[0.02] to-transparent',
-        borderHover: 'hover:border-purple-400/80',
-        glow: 'hover:shadow-[0_16px_36px_rgba(168,85,247,0.12)]',
-        ctaColor: 'text-purple-700 group-hover:text-purple-950',
-        titleHover: 'group-hover:text-purple-600',
-        pillColor: 'bg-purple-500',
-        badge: 'bg-purple-50 text-purple-900 border-purple-300/80',
-        btnBg: 'bg-purple-600 hover:bg-purple-700 text-white font-bold',
+        badgeBg: 'bg-[#BBF7D0] text-[#14532D] border-[#0F172A]',
+        accentColor: '#16a34a',
+        accentBg: 'bg-[#BBF7D0]',
+        pillColor: 'bg-[#4ADE80]',
+        backgroundGradient: 'from-emerald-400/25 via-teal-300/15 to-transparent',
         icon: 'school',
         svgIcon: schoolSvg,
         tagText: 'Scholarship Grant',
-        ctaText: 'Apply for grant',
+        ctaText: 'Apply for Grant',
       };
     }
 
-    // 4. Workshops / Webinars / Engineering & Tools -> Fresh Emerald (Screw / Tools)
+    // 4. Workshops / Webinars / Training -> Warm Peach
     if (
       text.includes('workshop') ||
       text.includes('webinar') ||
@@ -328,128 +314,103 @@ function Opportunities() {
     ) {
       return {
         cardName: 'Workshops & Events',
-        tagDotColor: 'bg-emerald-500 shadow-[0_0_6px_#10b981]',
-        tagBg: 'bg-emerald-50 text-emerald-900 border-emerald-300/80',
-        backgroundGradient: 'from-emerald-500/[0.06] via-teal-500/[0.02] to-transparent',
-        borderHover: 'hover:border-emerald-400/80',
-        glow: 'hover:shadow-[0_16px_36px_rgba(16,185,129,0.12)]',
-        ctaColor: 'text-emerald-700 group-hover:text-emerald-950',
-        titleHover: 'group-hover:text-emerald-600',
-        pillColor: 'bg-emerald-500',
-        badge: 'bg-emerald-50 text-emerald-900 border-emerald-300/80',
-        btnBg: 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold',
+        badgeBg: 'bg-[#FED7AA] text-[#7C2D12] border-[#0F172A]',
+        accentColor: '#ea580c',
+        accentBg: 'bg-[#FED7AA]',
+        pillColor: 'bg-[#FB923C]',
+        backgroundGradient: 'from-orange-400/25 via-amber-300/15 to-transparent',
         icon: 'psychology',
         svgIcon: screwSvg,
         tagText: 'Live Workshop',
-        ctaText: 'Reserve seat',
+        ctaText: 'Reserve Seat',
       };
     }
 
-    // Default / General (Campus)
+    // Default / General -> Bubblegum Rose
     return {
       cardName: 'Opportunities Hub',
-      tagDotColor: 'bg-indigo-500 shadow-[0_0_6px_#6366f1]',
-      tagBg: 'bg-indigo-50 text-indigo-900 border-indigo-300/80',
-      backgroundGradient: 'from-indigo-500/[0.06] via-sky-500/[0.02] to-transparent',
-      borderHover: 'hover:border-indigo-400/80',
-      glow: 'hover:shadow-[0_16px_36px_rgba(99,102,241,0.12)]',
-      ctaColor: 'text-indigo-700 group-hover:text-indigo-950',
-      titleHover: 'group-hover:text-indigo-600',
-      pillColor: 'bg-indigo-500',
-      badge: 'bg-indigo-50 text-indigo-900 border-indigo-300/80',
-      btnBg: 'bg-indigo-600 hover:bg-indigo-700 text-white font-bold',
+      badgeBg: 'bg-[#FBCFE8] text-[#831843] border-[#0F172A]',
+      accentColor: '#db2777',
+      accentBg: 'bg-[#FBCFE8]',
+      pillColor: 'bg-[#F472B6]',
+      backgroundGradient: 'from-pink-400/25 via-purple-300/15 to-transparent',
       icon: 'auto_awesome',
       svgIcon: campusSvg,
-      tagText: 'Featured Post',
-      ctaText: 'Explore opportunity',
+      tagText: 'Campus Opportunity',
+      ctaText: 'Explore Details',
     };
   };
 
-
-
   return (
-    <div className="pt-20 bg-[#f8fafc] text-slate-800 font-sans min-h-screen pb-20 relative overflow-x-clip selection:bg-amber-300 selection:text-slate-900">
-      {/* ─── Ambient Canvas & Subtle Grid Pattern ─── */}
+    <div className="pt-20 bg-[#FDFBF7] text-hub-navy font-poppins min-h-screen pb-20 relative overflow-x-clip selection:bg-amber-300 selection:text-hub-navy">
+      {/* ─── Architectural Dot Bulletin Canvas Pattern ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
         <div
-          className="absolute inset-0 opacity-[0.35]"
+          className="absolute inset-0 opacity-[0.045]"
           style={{
-            backgroundImage:
-              'linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px)',
-            backgroundSize: '36px 36px',
+            backgroundImage: 'radial-gradient(#0F172A 1.2px, transparent 1.2px)',
+            backgroundSize: '24px 24px',
           }}
         />
-        <div className="absolute -top-32 -left-20 w-[600px] h-[600px] bg-gradient-to-br from-amber-300/25 via-orange-300/15 to-transparent rounded-full blur-3xl opacity-75" />
-        <div className="absolute top-[25%] -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-sky-300/25 via-indigo-300/15 to-transparent rounded-full blur-3xl opacity-65" />
-        <div className="absolute top-[65%] -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-purple-300/20 via-pink-300/10 to-transparent rounded-full blur-3xl opacity-50" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4 pt-6">
-        {/* ─── HERO HEADER SECTION WITH KINETIC TYPOGRAPHY ─── */}
-        <section className="pt-4 pb-6 text-center max-w-4xl mx-auto">
-          {/* Status Eyebrow Badge */}
-          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-800 text-xs font-bold uppercase tracking-wider mb-5 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0" />
-            <span>Discover Top Opportunities</span>
-            <span className="text-amber-400">•</span>
-            <span className="text-slate-600 font-semibold">Updated Daily</span>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative z-10 space-y-4 pt-4 sm:pt-6">
+        {/* ─── HERO HEADER SECTION (CAMPUS BULLETIN RADAR) ─── */}
+        <section className="pt-2 pb-6 text-center max-w-5xl mx-auto px-2">
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#FEF08A] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0F172A] text-xs font-black uppercase tracking-wider mb-4">
+            <span className="material-symbols-outlined text-[16px] text-[#FF5722]">bolt</span>
+            <span>Campus Opportunities Radar</span>
+            <span className="text-slate-400">•</span>
+            <span className="text-[#0F172A]">Updated Daily</span>
           </div>
 
-          {/* Headline with Per-Character Kinetic Text Effect */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-tight mb-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          {/* Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-hub-navy tracking-tight leading-tight mb-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <SplitText
               text="Accelerate Your"
-              className="text-slate-900"
-              charClassName="hover:text-amber-500 transition-colors"
-              stagger={0.025}
+              className="text-hub-navy"
+              charClassName="hover:text-[#FF5722] transition-colors"
+              stagger={0.02}
               delay={0.05}
             />
             <span className="relative inline-flex items-baseline pb-1">
               <SplitText
                 text="Career Journey"
-                className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 drop-shadow-xs"
-                charClassName="hover:scale-110 transition-transform"
-                stagger={0.03}
-                delay={0.2}
+                className="text-[#FF5722] underline decoration-[#FEF08A] decoration-[6px] underline-offset-4"
+                charClassName="hover:scale-105 transition-transform"
+                stagger={0.025}
+                delay={0.15}
               />
-              <svg
-                className="absolute -bottom-1 left-0 w-full h-2.5 sm:h-3 text-amber-400/80 pointer-events-none"
-                viewBox="0 0 100 12"
-                preserveAspectRatio="none"
-              >
-                <path d="M0 6 Q 50 0 100 6" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-              </svg>
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium mb-8">
-            Curated internships, high-impact hackathons, prestigious scholarships, campus placement drives, and open-source grants.
+          <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-medium mb-6">
+            Hand-curated internships, top hackathons, prestigious scholarships, campus placement drives, and open-source grants verified for Indus students.
           </p>
 
           {/* Metrics Ribbon */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mb-7 text-xs sm:text-sm font-semibold text-slate-700">
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mb-6 text-xs sm:text-sm font-black text-[#0F172A]">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] hover:-translate-y-0.5 transition-transform">
               <span className="material-symbols-outlined text-amber-500 text-[18px]">verified</span>
               <span>{opportunities.length || '50+'} Verified Opportunities</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-              <span className="material-symbols-outlined text-emerald-500 text-[18px]">update</span>
-              <span>Updated Daily</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#BBF7D0] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#14532D] hover:-translate-y-0.5 transition-transform">
+              <span className="material-symbols-outlined text-emerald-700 text-[18px]">update</span>
+              <span>Active Deadlines</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-2xs">
-              <span className="material-symbols-outlined text-sky-500 text-[18px]">public</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#BAE6FD] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0369A1] hover:-translate-y-0.5 transition-transform">
+              <span className="material-symbols-outlined text-sky-700 text-[18px]">public</span>
               <span>100% Free &amp; Open Access</span>
             </div>
           </div>
 
           {/* Instant Search Bar */}
-          <div className="relative max-w-2xl mx-auto mb-7">
-            <div className="relative flex items-center">
+          <div className="relative max-w-3xl mx-auto mb-6">
+            <div className="relative flex items-center bg-white border-[2.5px] border-[#0F172A] shadow-[4px_4px_0_#0F172A] focus-within:shadow-[6px_6px_0_#FF5722] focus-within:-translate-y-0.5 rounded-2xl transition-all">
               <div className="absolute left-4 flex items-center gap-1.5 pointer-events-none">
-                <span className="material-symbols-outlined text-slate-400 text-[22px]">
-                  search
-                </span>
+                <span className="material-symbols-outlined text-slate-400 text-[22px]">search</span>
               </div>
 
               <input
@@ -457,7 +418,7 @@ function Opportunities() {
                 id="opportunity-search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 rounded-2xl border-2 border-slate-200/90 bg-white/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.06)] focus:outline-none focus:border-amber-400 focus:ring-4 focus:ring-amber-400/15 text-sm sm:text-base font-medium text-slate-900 placeholder:text-slate-400 transition-all"
+                className="w-full pl-12 pr-12 py-3.5 rounded-2xl bg-transparent focus:outline-none text-sm sm:text-base font-bold text-[#0F172A] placeholder:text-slate-400"
                 placeholder="Search opportunities by title, category, company, or keywords..."
                 aria-label="Search opportunities"
               />
@@ -465,13 +426,13 @@ function Opportunities() {
               {searchQuery ? (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+                  className="absolute right-3.5 p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#0F172A] transition-colors cursor-pointer"
                   aria-label="Clear search"
                 >
                   <span className="material-symbols-outlined text-[18px]">close</span>
                 </button>
               ) : (
-                <span className="hidden sm:inline-block absolute right-4 px-2 py-0.5 rounded bg-slate-100 text-[10px] font-mono font-bold text-slate-400 border border-slate-200 pointer-events-none">
+                <span className="hidden sm:inline-block absolute right-3.5 px-2 py-0.5 rounded-md bg-[#FEF08A] text-[10px] font-mono font-black text-[#0F172A] border border-[#0F172A] pointer-events-none">
                   SEARCH
                 </span>
               )}
@@ -479,7 +440,7 @@ function Opportunities() {
           </div>
 
           {/* Categorized Filter Tabs */}
-          <div className="flex flex-wrap justify-center items-center gap-2" role="group" aria-label="Filter opportunities">
+          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 max-w-5xl mx-auto" role="group" aria-label="Filter opportunities">
             {CATEGORY_TABS.map((tab) => {
               const isActive = activeFilter === tab.id;
               const count = tab.id === 'All' ? categoryCounts.All : categoryCounts[tab.id];
@@ -489,17 +450,21 @@ function Opportunities() {
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
                   aria-pressed={isActive}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${isActive
-                      ? 'bg-amber-400 text-slate-950 shadow-sm shadow-amber-400/30 border border-amber-400 scale-[1.03]'
-                      : 'bg-white/90 text-slate-600 hover:text-slate-900 border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 shadow-2xs'
-                    }`}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black uppercase transition-all duration-200 cursor-pointer border-2 border-[#0F172A] ${
+                    isActive
+                      ? 'bg-[#0F172A] text-white shadow-[3px_3px_0_#FF5722] -translate-y-0.5 scale-[1.02]'
+                      : 'bg-white hover:bg-[#FEF08A] text-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:-translate-y-0.5'
+                  }`}
                 >
                   <span className="material-symbols-outlined text-[16px] leading-none">{tab.icon}</span>
                   <span>{tab.label}</span>
                   {typeof count === 'number' && count > 0 && (
                     <span
-                      className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${isActive ? 'bg-slate-900 text-amber-300' : 'bg-slate-100 text-slate-600'
-                        }`}
+                      className={`text-[10px] font-mono font-black px-1.5 py-0.2 rounded border ${
+                        isActive
+                          ? 'bg-[#FEF08A] text-[#0F172A] border-[#FEF08A]'
+                          : 'bg-slate-100 text-[#0F172A] border-slate-300'
+                      }`}
                     >
                       {count}
                     </span>
@@ -510,16 +475,18 @@ function Opportunities() {
           </div>
         </section>
 
+
+
         {/* ─── MAIN FEED & SIDEBAR GRID ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start mt-4 sm:mt-6">
           {/* Main Feed (8 Columns) */}
           <div className="lg:col-span-8 space-y-4">
             {/* Feed Status Header */}
-            <div className="flex items-center justify-between px-1 pb-1 text-xs sm:text-sm text-slate-500 font-semibold">
+            <div className="flex items-center justify-between px-1 pb-1 text-xs sm:text-sm text-slate-600 font-bold">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#0F172A]" />
                 <span>
-                  Showing <strong className="text-slate-900 font-bold">{filteredOpportunities.length}</strong>{' '}
+                  Showing <strong className="text-[#0F172A] font-black">{filteredOpportunities.length}</strong>{' '}
                   {activeFilter === 'All'
                     ? 'opportunities'
                     : CATEGORY_TABS.find((t) => t.id === activeFilter)?.label || activeFilter}
@@ -531,7 +498,7 @@ function Opportunities() {
                     setSearchQuery('');
                     setActiveFilter('All');
                   }}
-                  className="text-amber-700 hover:text-amber-950 hover:underline text-xs cursor-pointer font-bold flex items-center gap-1"
+                  className="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-[#0F172A] border border-[#0F172A] font-black text-xs shadow-2xs cursor-pointer flex items-center gap-1 transition-all"
                 >
                   <span className="material-symbols-outlined text-[14px]">refresh</span>
                   <span>Reset Filter</span>
@@ -550,19 +517,19 @@ function Opportunities() {
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="animate-pulse rounded-[22px] sm:rounded-[26px] bg-white/80 border border-slate-200/80 p-6 sm:p-7 flex flex-col justify-between min-h-[190px] shadow-2xs"
+                    className="animate-pulse rounded-[24px] bg-white border-2 border-[#0F172A] p-6 sm:p-7 flex flex-col justify-between min-h-[190px] shadow-[4px_4px_0_#0F172A]"
                   >
                     <div className="flex justify-between items-center">
-                      <div className="h-7 w-36 rounded-full bg-slate-200/70" />
-                      <div className="h-7 w-7 rounded-full bg-slate-200/70" />
+                      <div className="h-6 w-36 rounded-md bg-slate-200" />
+                      <div className="h-6 w-16 rounded-md bg-slate-200" />
                     </div>
                     <div className="space-y-3 my-4">
-                      <div className="h-6 w-3/4 rounded-lg bg-slate-200/80" />
-                      <div className="h-4 w-full rounded bg-slate-200/60" />
+                      <div className="h-6 w-3/4 rounded-lg bg-slate-200" />
+                      <div className="h-4 w-full rounded bg-slate-100" />
                     </div>
-                    <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                      <div className="h-4 w-20 rounded bg-slate-200/60" />
-                      <div className="h-4 w-24 rounded bg-slate-200/60" />
+                    <div className="flex justify-between items-center pt-4 border-t border-slate-200">
+                      <div className="h-4 w-20 rounded bg-slate-200" />
+                      <div className="h-6 w-24 rounded-lg bg-slate-200" />
                     </div>
                   </div>
                 ))}
@@ -580,41 +547,46 @@ function Opportunities() {
                       key={opp.id}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.985 }}
+                      whileHover={{ y: -4 }}
                       transition={{ duration: 0.2 }}
                       onClick={() => setSelectedOpp(opp)}
-                      className={`group relative bg-white/95 backdrop-blur-md rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 md:p-8 border border-slate-200/90 ${theme.borderHover} shadow-[0_4px_24px_rgba(0,0,0,0.04)] ${theme.glow} transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between`}
+                      className="group relative bg-white rounded-[24px] p-6 sm:p-7 border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A] hover:shadow-[8px_8px_0_#0F172A] transition-all duration-200 overflow-hidden cursor-pointer flex flex-col justify-between"
                     >
-                      {/* Ambient Gradient Background Layer */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${theme.backgroundGradient} pointer-events-none transition-opacity duration-300`} />
+                      {/* Corner Screw Accent */}
+                      <img
+                        src={screwSvg}
+                        alt=""
+                        className="absolute top-3.5 right-3.5 w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all select-none pointer-events-none z-10"
+                      />
 
-                      {/* SVG Illustration Artwork */}
-                      <div
-                        className="absolute top-4 sm:top-6 right-3 sm:right-6 md:right-8 w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 pointer-events-none opacity-25 sm:opacity-35 group-hover:opacity-85 group-hover:scale-110 group-active:scale-125 transition-opacity duration-300 select-none overflow-hidden flex items-center justify-center z-0"
-                      >
+                      {/* Background Watermark Artwork */}
+                      <div className="absolute top-1/2 -translate-y-1/2 -right-4 sm:right-4 md:right-6 w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 opacity-15 sm:opacity-20 group-hover:opacity-35 group-hover:scale-105 transition-all duration-300 pointer-events-none select-none z-0">
                         <img
                           src={opp.image || opp.imageUrl || opp.logo || theme.svgIcon}
                           alt=""
-                          className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.06)] group-hover:rotate-3 group-active:rotate-[-6deg] transition-transform duration-500 ease-out"
+                          className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
                           loading="lazy"
                         />
                       </div>
 
                       {/* Top Bar Header */}
-                      <div className="flex items-center justify-between gap-3 mb-3.5 relative z-10">
-                        {/* Status Pill Tag with Glowing Dot */}
-                        <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ${theme.tagBg} backdrop-blur-md border text-xs font-semibold shadow-2xs`}>
-                          <span className={`w-2 h-2 rounded-full ${theme.tagDotColor}`} />
+                      <div className="flex items-center justify-between gap-3 mb-3 relative z-10 pr-2 sm:pr-4">
+                        <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg ${theme.badgeBg} border-[1.5px] text-xs font-black uppercase tracking-wider shadow-2xs`}>
+                          <span className="material-symbols-outlined text-[15px]">{theme.icon}</span>
                           <span className="truncate max-w-[160px] sm:max-w-[260px]">
                             {opp.tag || opp.category || theme.tagText}
                           </span>
                         </div>
 
-                        {/* Top Right Badges & Share */}
                         <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                           {opp.deadline && (
-                            <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200 shrink-0">
+                            <span
+                              className={`inline-flex items-center gap-1 text-[11px] font-black uppercase px-2.5 py-1 rounded-lg border-[1.5px] shadow-2xs ${
+                                opp.urgent
+                                  ? 'bg-red-100 text-red-800 border-red-400'
+                                  : 'bg-[#FEF08A] text-[#713F12] border-[#0F172A]'
+                              }`}
+                            >
                               <span className="material-symbols-outlined text-[13px]">timer</span>
                               <span>{opp.deadline}</span>
                             </span>
@@ -622,31 +594,28 @@ function Opportunities() {
 
                           <button
                             onClick={(e) => handleShareLink(opp, e)}
-                            className="p-1.5 sm:p-2 rounded-full border border-slate-200 bg-slate-50/80 text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all cursor-pointer"
+                            className="p-1.5 rounded-lg border-[1.5px] border-[#0F172A] bg-white hover:bg-[#FEF08A] text-[#0F172A] shadow-[1.5px_1.5px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
                             title="Copy link"
                             aria-label="Share opportunity"
                           >
-                            <span className="material-symbols-outlined text-[15px] leading-none">share</span>
+                            <Share2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
 
-                      {/* Card Body: Large Bold Title & Description */}
-                      <div className="relative z-10 pr-6 sm:pr-36 md:pr-44 my-2">
-                        <h2
-                          className={`text-lg sm:text-xl md:text-2xl font-black text-slate-950 ${theme.titleHover} transition-colors tracking-tight leading-snug mb-2`}
-                        >
+                      {/* Card Body */}
+                      <div className="relative z-10 pr-2 sm:pr-8 my-1.5">
+                        <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] group-hover:text-[#FF5722] transition-colors leading-snug tracking-tight mb-2">
                           {opp.title}
                         </h2>
-
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3 font-medium max-w-2xl">
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3 font-medium">
                           {opp.description}
                         </p>
                       </div>
 
-                      {/* Card Footer Call to Action */}
-                      <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 relative z-10">
-                        <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-400">
+                      {/* Card Footer */}
+                      <div className="flex items-center justify-between pt-3.5 mt-3.5 border-t border-slate-200 relative z-10">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500">
                           <span className="material-symbols-outlined text-[14px]">schedule</span>
                           <span>
                             {opp.created_at || opp.createdAt
@@ -656,36 +625,28 @@ function Opportunities() {
                         </div>
 
                         <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-                          <button
-                            type="button"
+                          <FramerButton
                             onClick={() => setSelectedOpp(opp)}
-                            className="text-xs font-bold text-slate-600 hover:text-slate-950 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition cursor-pointer"
-                          >
-                            Details
-                          </button>
+                            text="Details"
+                            variant="outline"
+                            size="sm"
+                          />
                           {opp.link ? (
-                            <a
+                            <FramerButton
                               href={opp.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`inline-flex items-center gap-1.5 ${theme.ctaColor} hover:opacity-90 font-bold text-xs sm:text-sm tracking-wide bg-amber-50 hover:bg-amber-100 border border-amber-300/80 px-3 py-1 rounded-full shadow-2xs transition-all`}
-                            >
-                              <span>Apply now</span>
-                              <span className="text-base leading-none transition-transform duration-200 group-hover:translate-x-1">
-                                →
-                              </span>
-                            </a>
+                              text="Apply now"
+                              variant="primary"
+                              size="sm"
+                              icon={ExternalLink}
+                              iconPosition="right"
+                            />
                           ) : (
-                            <button
-                              type="button"
+                            <FramerButton
                               onClick={() => setSelectedOpp(opp)}
-                              className={`inline-flex items-center gap-1.5 ${theme.ctaColor} font-bold text-xs sm:text-sm tracking-wide cursor-pointer`}
-                            >
-                              <span>{theme.ctaText}</span>
-                              <span className="text-base leading-none transition-transform duration-200 group-hover:translate-x-1.5">
-                                →
-                              </span>
-                            </button>
+                              text={theme.ctaText}
+                              variant="navy"
+                              size="sm"
+                            />
                           )}
                         </div>
                       </div>
@@ -695,12 +656,12 @@ function Opportunities() {
 
                 {/* Empty State */}
                 {filteredOpportunities.length === 0 && (
-                  <div className="bg-white/95 backdrop-blur-md rounded-3xl p-12 text-center border border-slate-200 shadow-sm">
-                    <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto mb-4 border border-amber-400/20">
+                  <div className="bg-white rounded-[24px] p-12 text-center border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A]">
+                    <div className="w-16 h-16 rounded-2xl bg-[#FEF08A] text-[#0F172A] border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center mx-auto mb-4">
                       <span className="material-symbols-outlined text-[32px]">search_off</span>
                     </div>
-                    <h3 className="font-bold text-slate-900 text-lg mb-1">No matching opportunities found</h3>
-                    <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto mb-6">
+                    <h3 className="font-black text-[#0F172A] text-lg mb-1">No matching opportunities found</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto mb-6 font-medium">
                       No results found for &quot;{searchQuery || activeFilter}&quot;. Try adjusting your keywords or category filters.
                     </p>
                     <button
@@ -708,7 +669,7 @@ function Opportunities() {
                         setSearchQuery('');
                         setActiveFilter('All');
                       }}
-                      className="px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 hover:bg-amber-300 font-bold text-xs transition-all shadow-md cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl bg-[#0F172A] text-white hover:bg-[#FF5722] font-black text-xs uppercase border-2 border-[#0F172A] shadow-[3px_3px_0_#FF5722] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
                     >
                       Reset All Filters
                     </button>
@@ -721,22 +682,26 @@ function Opportunities() {
           {/* ─── RIGHT SIDEBAR (4 Columns) ─── */}
           <div className="lg:col-span-4 space-y-6">
             {/* 1. Live Announcements Widget */}
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative overflow-hidden">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-white rounded-[24px] border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A] p-5 sm:p-6 relative">
+              <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <h2 className="text-base font-bold text-slate-900 tracking-tight">
-                    Live Announcements
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse border border-[#0F172A]" />
+                  <h2 className="text-sm font-black text-[#0F172A] uppercase tracking-wide">
+                    Live Campus Updates
                   </h2>
                 </div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                  Campus Updates
+                <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded bg-[#FEF08A] text-[#0F172A] border border-[#0F172A]">
+                  Notices
                 </span>
               </div>
 
-              <div className="space-y-3">
+              <div
+                data-lenis-prevent="true"
+                data-lenis-prevent-wheel="true"
+                className="space-y-3 overscroll-contain"
+              >
                 {annLoading && Array.from({ length: 3 }).map((_, i) => (
-                  <div key={i} className="animate-pulse h-20 rounded-2xl bg-slate-100 border border-slate-200" />
+                  <div key={i} className="animate-pulse h-16 rounded-xl bg-slate-100 border border-slate-200" />
                 ))}
 
                 {!annLoading && !annError && (
@@ -769,7 +734,7 @@ function Opportunities() {
                           })}
                       </AnimatedList>
                     ) : (
-                      <div className="p-4 text-center rounded-2xl bg-slate-50 border border-dashed border-slate-200 text-xs text-slate-400 font-medium">
+                      <div className="p-4 text-center rounded-xl bg-slate-50 border border-dashed border-slate-300 text-xs text-slate-500 font-medium">
                         All announcements acknowledged for now.
                       </div>
                     )}
@@ -777,49 +742,46 @@ function Opportunities() {
                 )}
 
                 {annError && !annLoading && (
-                  <p className="text-xs text-rose-500 font-medium">Could not load announcements.</p>
+                  <p className="text-xs text-rose-600 font-bold">Could not load announcements.</p>
                 )}
               </div>
             </div>
 
-
-
-
             {/* 2. Urgent / Closing Soon Widget */}
-            <div className="bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent rounded-3xl p-5 sm:p-6 border border-amber-300/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-[#FEF08A] rounded-[24px] border-[2.5px] border-[#0F172A] shadow-[5px_5px_0_#0F172A] p-5 sm:p-6 relative overflow-hidden">
+              <div className="flex items-center justify-between pb-3 mb-4 border-b-2 border-[#0F172A]">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-amber-600 text-[20px] animate-bounce">
+                  <span className="material-symbols-outlined text-red-600 text-[20px]">
                     local_fire_department
                   </span>
-                  <h2 className="text-base font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-sm font-black text-[#0F172A] uppercase tracking-wide">
                     Closing This Week
                   </h2>
                 </div>
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
-                  Critical Deadlines
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-red-500 text-white border border-[#0F172A]">
+                  Urgent
                 </span>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {CLOSING_SOON_DATA.map((item) => (
                   <a
                     key={item.id}
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block p-3.5 rounded-2xl bg-white/90 hover:bg-white border border-amber-200/80 hover:border-amber-400 shadow-2xs hover:shadow-xs transition-all group"
+                    className="block p-3 rounded-xl bg-white hover:bg-slate-50 border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:-translate-y-0.5 transition-all group"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-amber-600 transition-colors leading-tight">
+                        <h3 className="text-xs sm:text-sm font-black text-[#0F172A] group-hover:text-[#FF5722] transition-colors leading-tight">
                           {item.title}
                         </h3>
-                        <p className="text-[11px] font-semibold text-slate-500 mt-0.5">
+                        <p className="text-[11px] font-bold text-slate-500 mt-0.5">
                           {item.tag}
                         </p>
                       </div>
-                      <span className="shrink-0 text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200">
+                      <span className="shrink-0 text-[10px] font-black px-2 py-0.5 rounded-md bg-red-100 text-red-800 border border-red-300">
                         {item.deadline}
                       </span>
                     </div>
@@ -829,27 +791,18 @@ function Opportunities() {
             </div>
 
             {/* 3. Academic Calendar Widget */}
-            <div className="bg-white rounded-3xl p-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200/80">
+            <div className="bg-white rounded-[24px] p-1 shadow-[5px_5px_0_#0F172A] border-[2.5px] border-[#0F172A]">
               <AcademicCalendar />
             </div>
           </div>
         </div>
       </div>
 
-      {/* ─── BOTTOM CTA BANNER ─── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 relative z-10">
-        <div className="bg-[#0B132B] rounded-3xl p-8 sm:p-12 md:p-14 text-center relative overflow-hidden shadow-2xl border border-white/10 text-white">
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <svg className="w-full h-full stroke-white" xmlns="http://www.w3.org/2000/svg" fill="none">
-              <pattern id="cta-grid-opp-clean" width="30" height="30" patternUnits="userSpaceOnUse">
-                <path d="M 30 0 L 0 0 0 30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#cta-grid-opp-clean)" />
-            </svg>
-          </div>
-
+      {/* ─── BOTTOM COMMUNITY CALLOUT BANNER ─── */}
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mt-14 sm:mt-18 relative z-10">
+        <div className="bg-[#0F172A] rounded-[32px] border-[3px] border-[#0F172A] shadow-[8px_8px_0_#FF5722] p-8 sm:p-12 md:p-14 text-center relative overflow-hidden text-white">
           <div className="relative z-10 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#FEF08A] text-xs font-black uppercase tracking-wider mb-4 border border-white/20">
               <span className="material-symbols-outlined text-[16px]">volunteer_activism</span>
               <span>Community-Driven Hub</span>
             </div>
@@ -864,14 +817,14 @@ function Opportunities() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <button
                 onClick={() => setIsSubmitModalOpen(true)}
-                className="w-full sm:w-auto bg-[#FACC15] hover:bg-yellow-400 text-slate-950 font-black px-8 py-3.5 rounded-full text-sm shadow-lg hover:shadow-yellow-400/20 hover:-translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-[#FEF08A] hover:bg-yellow-300 text-[#0F172A] font-black px-8 py-3 rounded-xl text-xs uppercase border-2 border-white shadow-[3px_3px_0_#FF5722] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-[18px]">add_circle</span>
                 <span>Submit Opportunity</span>
               </button>
               <Link
                 to="/contact"
-                className="w-full sm:w-auto bg-transparent hover:bg-white/10 text-white font-bold border-2 border-white/40 hover:border-white px-8 py-3.5 rounded-full text-sm transition-all text-center inline-flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-transparent hover:bg-white/10 text-white font-black px-8 py-3 rounded-xl text-xs uppercase border-2 border-white/40 hover:border-white transition-all text-center inline-flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-[18px]">contact_support</span>
                 <span>Request a Resource</span>
@@ -889,13 +842,13 @@ function Opportunities() {
 
             return (
               <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-                {/* Click backdrop to close */}
+                {/* Backdrop */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="fixed inset-0 bg-slate-950/45 backdrop-blur-sm cursor-pointer"
+                  className="fixed inset-0 bg-[#0F172A]/70 backdrop-blur-xs cursor-pointer"
                   onClick={() => setSelectedOpp(null)}
                 />
 
@@ -904,19 +857,19 @@ function Opportunities() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: 15 }}
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative bg-white rounded-3xl p-6 sm:p-8 md:p-9 max-w-xl w-full border-2 border-amber-300/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 overflow-hidden my-auto max-h-[90vh] flex flex-col justify-between"
+                  className="relative bg-white rounded-[28px] p-6 sm:p-8 max-w-xl w-full border-[3px] border-[#0F172A] shadow-[8px_8px_0_#0F172A] z-10 overflow-hidden my-auto max-h-[90vh] flex flex-col justify-between"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Top Accent Strip */}
-                  <div className={`absolute top-0 left-0 right-0 h-2 ${theme.pillColor} z-20`} />
+                  <div className={`absolute top-0 left-0 right-0 h-2.5 ${theme.pillColor} z-20`} />
 
-                  {/* ── Ambient Screen-Covering Vector Wave with Undulating Low Opacity ── */}
+                  {/* ── Ambient Screen-Covering Vector Wave with Undulating Motion ── */}
                   <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden flex items-center justify-center">
                     {/* Expanding Ambient Radial Color Wave */}
                     <motion.div
                       initial={{ scale: 0.3, opacity: 0 }}
                       animate={{ scale: [0.8, 1.4, 1.1], opacity: [0.35, 0.15, 0.25] }}
-                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      transition={{ duration: 1.2, ease: 'easeOut' }}
                       className={`absolute w-[420px] h-[420px] sm:w-[540px] sm:h-[540px] rounded-full bg-gradient-to-tr ${theme.backgroundGradient} blur-3xl`}
                     />
 
@@ -925,7 +878,7 @@ function Opportunities() {
                       initial={{ scale: 0.5, opacity: 0.3, rotate: -12 }}
                       animate={{
                         scale: [1, 1.08, 0.98, 1],
-                        opacity: [0.10, 0.17, 0.09, 0.10],
+                        opacity: [0.10, 0.18, 0.08, 0.10],
                         rotate: [-3, 4, -2, -3],
                         y: [0, -10, 6, 0],
                         x: [0, 8, -6, 0],
@@ -945,40 +898,54 @@ function Opportunities() {
                         className="w-full h-full object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.08)]"
                       />
                     </motion.div>
+
+                    {/* Undulating Background SVG Wave */}
+                    <svg
+                      className="absolute -bottom-6 left-0 right-0 w-full h-28 opacity-[0.08] pointer-events-none"
+                      viewBox="0 0 1440 320"
+                      preserveAspectRatio="none"
+                    >
+                      <motion.path
+                        animate={{
+                          d: [
+                            "M0,192L48,197.3C96,203,192,213,288,197.3C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L0,320Z",
+                            "M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,160C672,149,768,171,864,186.7C960,203,1056,213,1152,197.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L0,320Z",
+                            "M0,192L48,197.3C96,203,192,213,288,197.3C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L0,320Z",
+                          ],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                        fill="currentColor"
+                        className="text-[#0F172A]"
+                      />
+                    </svg>
                   </div>
 
                   {/* Close Button */}
                   <button
                     onClick={() => setSelectedOpp(null)}
-                    className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-all cursor-pointer z-20 shadow-2xs hover:scale-105"
+                    className="absolute top-5 right-5 w-8 h-8 rounded-xl bg-white hover:bg-red-500 hover:text-white text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center transition-all cursor-pointer z-20"
                     aria-label="Close dialog"
                   >
                     <span className="material-symbols-outlined text-[18px]">close</span>
                   </button>
 
-                  {/* ── Cascading Text Content Layer ── */}
-                  {/* 1. Header Metadata Pill Badges */}
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.12, duration: 0.35, ease: 'easeOut' }}
-                    className="flex items-center gap-2 mb-4 flex-wrap pt-2 relative z-10"
-                  >
+                  {/* Header Metadata Pill Badges */}
+                  <div className="flex items-center gap-2 mb-4 flex-wrap pt-1 relative z-10 pr-10">
                     <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${theme.badge} shadow-2xs backdrop-blur-md`}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black uppercase border-[1.5px] ${theme.badgeBg} shadow-2xs`}
                     >
                       <span className="material-symbols-outlined text-[14px]">{theme.icon}</span>
                       <span>{selectedOpp.tag || selectedOpp.category || 'Opportunity'}</span>
                     </span>
 
                     {selectedOpp.deadline && (
-                      <span className="inline-flex items-center gap-1 text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200 text-xs font-bold">
+                      <span className="inline-flex items-center gap-1 text-red-800 bg-red-100 px-2.5 py-1 rounded-lg border-[1.5px] border-red-300 text-xs font-black uppercase shadow-2xs">
                         <span className="material-symbols-outlined text-[13px]">timer</span>
                         <span>Deadline: {selectedOpp.deadline}</span>
                       </span>
                     )}
 
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-500">
                       <span className="material-symbols-outlined text-[14px]">schedule</span>
                       <span>
                         {selectedOpp.created_at || selectedOpp.createdAt
@@ -986,76 +953,58 @@ function Opportunities() {
                           : 'Recently added'}
                       </span>
                     </span>
+                  </div>
 
-                    <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 text-xs font-bold">
-                      <span className="material-symbols-outlined text-[13px]">verified</span>
-                      <span>Verified Post</span>
-                    </span>
-                  </motion.div>
-
-                  {/* 2. Expanded Title with Illustration Thumbnail */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.4, ease: 'easeOut' }}
-                    className="flex items-start gap-3.5 mb-4 relative z-10"
-                  >
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-slate-100 p-2 flex items-center justify-center shrink-0 shadow-2xs">
+                  {/* Expanded Title with Illustration Thumbnail */}
+                  <div className="flex items-start gap-3.5 mb-4 relative z-10">
+                    <div className="w-14 h-14 rounded-2xl border-2 border-[#0F172A] bg-white p-2 flex items-center justify-center shrink-0 shadow-[2px_2px_0_#0F172A]">
                       <img
                         src={selectedOpp.image || selectedOpp.imageUrl || selectedOpp.logo || theme.svgIcon}
                         alt={selectedOpp.title}
-                        className="w-full h-full object-contain filter drop-shadow-xs"
+                        className="w-full h-full object-contain"
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h2
-                        className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 leading-snug tracking-tight"
-                      >
+                    <div className="flex-1 min-w-0 pr-4">
+                      <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] leading-snug tracking-tight">
                         {selectedOpp.title}
                       </h2>
                     </div>
-                  </motion.div>
+                  </div>
 
-                  {/* 3. Full Description Box & Official Link */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.28, duration: 0.4, ease: 'easeOut' }}
-                    className="relative z-10 space-y-3 mb-4"
-                  >
-                    <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/90 backdrop-blur-md border border-slate-200/80 max-h-[260px] overflow-y-auto shadow-inner">
-                      <p className="text-slate-700 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-medium">
+                  {/* Full Description Box with Lenis Scroll Bypass */}
+                  <div className="relative z-10 space-y-3 mb-4">
+                    <div
+                      data-lenis-prevent="true"
+                      data-lenis-prevent-wheel="true"
+                      className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#0F172A] max-h-[260px] overflow-y-auto overscroll-contain shadow-xs"
+                    >
+                      <p className="text-slate-800 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-medium">
                         {selectedOpp.description}
                       </p>
                     </div>
 
                     {selectedOpp.link && (
-                      <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-amber-50/90 backdrop-blur-sm border border-amber-200/80 text-xs text-amber-900 shadow-2xs">
-                        <span className="material-symbols-outlined text-[16px] text-amber-600 shrink-0">link</span>
-                        <span className="font-bold shrink-0">Official URL:</span>
+                      <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-amber-50 border-2 border-[#0F172A] text-xs text-[#0F172A] shadow-2xs">
+                        <span className="material-symbols-outlined text-[16px] text-[#FF5722] shrink-0">link</span>
+                        <span className="font-black shrink-0">Official URL:</span>
                         <a
                           href={selectedOpp.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="truncate text-amber-700 underline font-mono text-[11px] hover:text-amber-900 font-semibold"
+                          className="truncate text-[#FF5722] underline font-mono text-[11px] hover:text-[#0F172A] font-bold"
                         >
                           {selectedOpp.link}
                         </a>
                       </div>
                     )}
-                  </motion.div>
+                  </div>
 
-                  {/* 4. Action Row (Share, Social, Apply) */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35, duration: 0.4, ease: 'easeOut' }}
-                    className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-100 relative z-10"
-                  >
+                  {/* Action Row */}
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200 relative z-10">
                     <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
                       <button
                         onClick={(e) => handleShareLink(selectedOpp, e)}
-                        className="p-2 px-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+                        className="p-2 px-3 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-[#0F172A] hover:bg-[#FEF08A] shadow-[1.5px_1.5px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-black uppercase"
                         title="Copy link"
                       >
                         <span className="material-symbols-outlined text-[16px]">content_copy</span>
@@ -1067,10 +1016,10 @@ function Opportunities() {
                           const text = `*${selectedOpp.title}*\n${selectedOpp.description || ''}\n\nCategory: ${selectedOpp.category || 'Opportunity'}\nDeadline: ${selectedOpp.deadline || 'Apply Soon'}\nLink: ${selectedOpp.link || window.location.href}`;
                           window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
                         }}
-                        className="p-2 px-3 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-950 hover:bg-emerald-100 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+                        className="p-2 px-3 rounded-xl border-[1.5px] border-[#0F172A] bg-[#BBF7D0] text-[#14532D] hover:bg-emerald-200 shadow-[1.5px_1.5px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-black uppercase"
                         title="Share to WhatsApp"
                       >
-                        <span className="material-symbols-outlined text-[16px] text-emerald-600">chat</span>
+                        <span className="material-symbols-outlined text-[16px]">chat</span>
                         <span>WhatsApp</span>
                       </button>
 
@@ -1079,36 +1028,36 @@ function Opportunities() {
                           const text = `*${selectedOpp.title}*\n${selectedOpp.description || ''}\n\nCategory: ${selectedOpp.category || 'Opportunity'}\nDeadline: ${selectedOpp.deadline || 'Apply Soon'}`;
                           window.open(`https://t.me/share/url?url=${encodeURIComponent(selectedOpp.link || window.location.href)}&text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
                         }}
-                        className="p-2 px-3 rounded-xl border border-sky-300 bg-sky-50 text-sky-950 hover:bg-sky-100 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+                        className="p-2 px-3 rounded-xl border-[1.5px] border-[#0F172A] bg-[#BAE6FD] text-[#0369A1] hover:bg-sky-200 shadow-[1.5px_1.5px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-black uppercase"
                         title="Share to Telegram"
                       >
-                        <span className="material-symbols-outlined text-[16px] text-sky-600">send</span>
+                        <span className="material-symbols-outlined text-[16px]">send</span>
                         <span>Telegram</span>
                       </button>
                     </div>
 
                     <div className="flex items-center gap-2 w-full sm:w-auto">
                       {selectedOpp.link ? (
-                        <a
+                        <FramerButton
                           href={selectedOpp.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-2 text-center cursor-pointer hover:shadow-lg"
-                        >
-                          <span>Direct Apply / Portal</span>
-                          <span className="material-symbols-outlined text-[16px]">open_in_new</span>
-                        </a>
+                          text="Direct Apply"
+                          variant="primary"
+                          size="md"
+                          icon={ExternalLink}
+                          iconPosition="right"
+                          className="w-full sm:w-auto"
+                        />
                       ) : (
-                        <Link
+                        <FramerButton
                           to="/contact"
-                          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-md flex items-center justify-center gap-2 text-center"
-                        >
-                          <span>Inquire with Admin</span>
-                          <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </Link>
+                          text="Inquire with Admin"
+                          variant="navy"
+                          size="md"
+                          className="w-full sm:w-auto"
+                        />
                       )}
                     </div>
-                  </motion.div>
+                  </div>
                 </motion.div>
               </div>
             );
@@ -1127,7 +1076,7 @@ function Opportunities() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-slate-950/45 backdrop-blur-sm cursor-pointer"
+                className="fixed inset-0 bg-[#0F172A]/70 backdrop-blur-xs cursor-pointer"
                 onClick={() => {
                   setIsSubmitModalOpen(false);
                   resetForm();
@@ -1138,7 +1087,9 @@ function Opportunities() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
                 transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-amber-300 shadow-2xl relative z-10 my-auto max-h-[90vh] overflow-y-auto"
+                className="bg-[#FDFBF7] rounded-[28px] p-6 sm:p-8 max-w-lg w-full border-[3px] border-[#0F172A] shadow-[8px_8px_0_#0F172A] relative z-10 my-auto max-h-[90vh] overflow-y-auto overscroll-contain"
+                data-lenis-prevent="true"
+                data-lenis-prevent-wheel="true"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
@@ -1146,26 +1097,26 @@ function Opportunities() {
                     setIsSubmitModalOpen(false);
                     resetForm();
                   }}
-                  className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors cursor-pointer"
+                  className="absolute top-5 right-5 w-8 h-8 rounded-xl bg-white hover:bg-red-500 hover:text-white text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center transition-all cursor-pointer"
                   aria-label="Close modal"
                 >
                   <span className="material-symbols-outlined text-[18px]">close</span>
                 </button>
 
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#FEF08A] text-[#0F172A] border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center">
                     <span className="material-symbols-outlined text-[22px]">publish</span>
                   </div>
                   <div>
-                    <h3 className="font-black text-xl text-slate-900 leading-none">Submit Opportunity</h3>
-                    <p className="text-xs text-slate-500 mt-1">Help peers discover new programs and jobs</p>
+                    <h3 className="font-black text-xl text-[#0F172A] leading-none">Submit Opportunity</h3>
+                    <p className="text-xs text-slate-600 font-bold mt-1">Help peers discover new programs and jobs</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                   <div>
-                    <label htmlFor="opp-title" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
-                      Opportunity Title <span className="text-rose-500">*</span>
+                    <label htmlFor="opp-title" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
+                      Opportunity Title <span className="text-red-500">*</span>
                     </label>
                     <input
                       id="opp-title"
@@ -1173,7 +1124,7 @@ function Opportunities() {
                       value={formData.title}
                       onChange={(e) => handleChange('title', e.target.value)}
                       placeholder="e.g. Google Summer of Code 2026"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800"
+                      className="w-full px-4 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none"
                       disabled={submitStatus === 'loading'}
                       required
                     />
@@ -1181,27 +1132,36 @@ function Opportunities() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="opp-category" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
-                        Category <span className="text-rose-500">*</span>
+                      <label htmlFor="opp-category" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
+                        Category <span className="text-red-500">*</span>
                       </label>
-                      <select
-                        id="opp-category"
-                        value={formData.category}
-                        onChange={(e) => handleChange('category', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800 cursor-pointer"
-                        disabled={submitStatus === 'loading'}
-                      >
-                        {SUBMIT_CATEGORIES.map((cat) => (
-                          <option key={cat.id} value={cat.id}>
-                            {cat.label}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          id="opp-category"
+                          value={formData.category}
+                          onChange={(e) => handleChange('category', e.target.value)}
+                          className="w-full appearance-none px-3.5 pr-8 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none cursor-pointer"
+                          style={{
+                            WebkitAppearance: 'none',
+                            MozAppearance: 'none',
+                            appearance: 'none',
+                            backgroundImage: 'none',
+                          }}
+                          disabled={submitStatus === 'loading'}
+                        >
+                          {SUBMIT_CATEGORIES.map((cat) => (
+                            <option key={cat.id} value={cat.id}>
+                              {cat.label}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 stroke-[2.5]" />
+                      </div>
                     </div>
 
                     <div>
-                      <label htmlFor="opp-email" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
-                        Your Email <span className="text-rose-500">*</span>
+                      <label htmlFor="opp-email" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
+                        Your Email <span className="text-red-500">*</span>
                       </label>
                       <input
                         id="opp-email"
@@ -1212,7 +1172,7 @@ function Opportunities() {
                         pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
                         title="Please enter a valid @gmail.com address"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800"
+                        className="w-full px-4 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none"
                         disabled={submitStatus === 'loading'}
                       />
                     </div>
@@ -1220,7 +1180,7 @@ function Opportunities() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="opp-link" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
+                      <label htmlFor="opp-link" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
                         Apply / Official Link
                       </label>
                       <input
@@ -1229,13 +1189,13 @@ function Opportunities() {
                         value={formData.link || ''}
                         onChange={(e) => handleChange('link', e.target.value)}
                         placeholder="https://company.com/apply"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800"
+                        className="w-full px-4 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none"
                         disabled={submitStatus === 'loading'}
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="opp-deadline" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
+                      <label htmlFor="opp-deadline" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
                         Deadline / Due Date
                       </label>
                       <input
@@ -1244,15 +1204,15 @@ function Opportunities() {
                         value={formData.deadline || ''}
                         onChange={(e) => handleChange('deadline', e.target.value)}
                         placeholder="e.g. Oct 31, 2026 or In 3 days"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800"
+                        className="w-full px-4 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none"
                         disabled={submitStatus === 'loading'}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="opp-desc" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
-                      Description &amp; Details <span className="text-rose-500">*</span>
+                    <label htmlFor="opp-desc" className="block font-black text-xs uppercase tracking-wider text-[#0F172A] mb-1.5">
+                      Description &amp; Details <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="opp-desc"
@@ -1260,38 +1220,38 @@ function Opportunities() {
                       onChange={(e) => handleChange('description', e.target.value)}
                       placeholder="Provide details about the role, eligibility, stipend, and selection process..."
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-800 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl border-[1.5px] border-[#0F172A] bg-white text-xs font-bold text-[#0F172A] focus:shadow-[3px_3px_0_#FF5722] focus:outline-none resize-none"
                       disabled={submitStatus === 'loading'}
                       required
                     />
                   </div>
 
-                  <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                  <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
                     <button
                       type="button"
                       onClick={() => {
                         setIsSubmitModalOpen(false);
                         resetForm();
                       }}
-                      className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
+                      className="px-4 py-2 rounded-xl text-xs font-black uppercase text-[#0F172A] hover:bg-[#FEF08A] border-[1.5px] border-[#0F172A] shadow-[1.5px_1.5px_0_#0F172A] transition-all cursor-pointer"
                       disabled={submitStatus === 'loading'}
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black px-6 py-2.5 rounded-xl text-xs shadow-md flex items-center gap-2 cursor-pointer transition-all disabled:opacity-50"
+                      className="bg-[#FF5722] hover:bg-[#E64A19] text-white font-black px-6 py-2 rounded-xl text-xs uppercase border-[1.5px] border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] hover:shadow-[4px_4px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 flex items-center gap-2 cursor-pointer transition-all disabled:opacity-50"
                       disabled={submitStatus === 'loading'}
                     >
                       {submitStatus === 'loading' ? (
                         <>
-                          <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                          Submitting...
+                          <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>Submitting...</span>
                         </>
                       ) : (
                         <>
                           <span className="material-symbols-outlined text-[16px]">send</span>
-                          Submit for Review
+                          <span>Submit for Review</span>
                         </>
                       )}
                     </button>

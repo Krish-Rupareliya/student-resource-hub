@@ -178,33 +178,31 @@ export default function AcademicCalendar() {
         animate={{ opacity: 1, y: 0, rotateZ: -1 }}
         whileHover={{ rotateZ: 0, scale: 1.01 }}
         transition={{ duration: 0.5, type: "spring", bounce: 0.3 }}
-        className="bg-[#fdfcf8] rounded-[24px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] border border-amber-900/5 relative overflow-hidden"
+        className="bg-white rounded-[24px] shadow-[5px_5px_0_#0F172A] border-[2.5px] border-[#0F172A] relative overflow-hidden"
       >
         {/* Header Block */}
-        <div className="bg-amber-500 px-5 py-4 flex justify-between items-end border-b-[4px] border-amber-600 relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/30 to-transparent pointer-events-none"></div>
-
+        <div className="bg-[#0F172A] px-5 py-4 flex justify-between items-end border-b-[3px] border-[#0F172A] relative text-white">
           <div className="flex gap-1 items-center relative z-10">
-            <button onClick={handlePrevMonth} disabled={currentYear === 2026 && currentMonth === 6} className="text-amber-900 hover:text-white transition-colors disabled:opacity-30 p-1">
+            <button onClick={handlePrevMonth} disabled={currentYear === 2026 && currentMonth === 6} className="text-white/70 hover:text-white transition-colors disabled:opacity-30 p-1 cursor-pointer">
               <span className="material-symbols-outlined text-[28px]">chevron_left</span>
             </button>
-            <span className="text-5xl md:text-6xl font-black text-white tracking-tighter drop-shadow-md leading-none">
+            <span className="text-5xl md:text-6xl font-black text-[#FEF08A] tracking-tighter drop-shadow-md leading-none">
               {currentMonth + 1}
             </span>
-            <button onClick={handleNextMonth} disabled={currentYear === 2026 && currentMonth === 11} className="text-amber-900 hover:text-white transition-colors disabled:opacity-30 p-1">
+            <button onClick={handleNextMonth} disabled={currentYear === 2026 && currentMonth === 11} className="text-white/70 hover:text-white transition-colors disabled:opacity-30 p-1 cursor-pointer">
               <span className="material-symbols-outlined text-[28px]">chevron_right</span>
             </button>
           </div>
 
           <div className="flex gap-1 items-center relative z-10">
-            <span className="text-3xl md:text-4xl font-black text-white/90 drop-shadow-sm tracking-tight leading-none mb-1">
+            <span className="text-2xl md:text-3xl font-black text-white/90 drop-shadow-sm tracking-tight leading-none mb-1">
               {currentYear}
             </span>
           </div>
         </div>
 
         {/* Body */}
-        <div className="p-4 md:p-5">
+        <div className="p-4 md:p-5 bg-white">
           {/* Weekdays */}
           <div className="grid grid-cols-7 mb-1">
             {WEEKDAYS.map((day, idx) => (
@@ -287,19 +285,20 @@ export default function AcademicCalendar() {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#fdfcf8] rounded-3xl p-6 md:p-8 max-w-sm w-full shadow-2xl relative overflow-hidden border border-amber-200"
+                className="bg-[#FDFBF7] rounded-[24px] p-6 md:p-7 max-w-sm w-full shadow-[8px_8px_0_#0F172A] relative overflow-hidden border-[3px] border-[#0F172A] overscroll-contain"
+                data-lenis-prevent="true"
+                data-lenis-prevent-wheel="true"
               >
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-amber-400/20 rounded-full blur-3xl pointer-events-none"></div>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors z-10"
+                  className="absolute top-4 right-4 w-8 h-8 rounded-xl bg-white hover:bg-red-500 hover:text-white text-[#0F172A] border-[1.5px] border-[#0F172A] shadow-[2px_2px_0_#0F172A] flex items-center justify-center transition-all cursor-pointer z-20"
                 >
                   <span className="material-symbols-outlined text-[18px]">close</span>
                 </button>
 
-                <div className="text-xs font-black text-amber-600/80 uppercase tracking-widest mb-4 flex items-center gap-1.5 relative z-10">
-                  <span className="material-symbols-outlined text-[16px]">event_available</span>
-                  {selectedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                <div className="text-xs font-black text-[#0F172A] uppercase tracking-wider mb-4 flex items-center gap-1.5 relative z-10">
+                  <span className="material-symbols-outlined text-[16px] text-[#FF5722]">event_available</span>
+                  <span>{selectedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                 </div>
 
                 <div className="relative z-10">

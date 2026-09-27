@@ -5,6 +5,7 @@ import { useSubjectResources } from '../../hooks/useResources';
 import { getSubjectByCode } from '../../services/resources/resourcesApi';
 import { ErrorState } from '../../components/ui/ErrorState';
 import UploadResourceModal from '../../components/resources/UploadResourceModal';
+import FramerButton from '../../components/ui/FramerButton';
 import { API_BASE_URL } from '../../lib/api';
 
 // Backend proxy base — never expose raw Drive URLs to the browser
@@ -203,21 +204,24 @@ function SubjectDetails() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap sm:flex-nowrap">
-                  <Link
+                  <FramerButton
                     to={`/subject/${(subject.code || code).toLowerCase()}/viva`}
-                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press shadow-xs cursor-pointer w-full sm:w-auto bg-[#F6E27B] text-black border-2 border-black hover:bg-amber-400 transition"
-                    title="Open Viva Questions & Solutions platform"
+                    variant="secondary"
+                    size="sm"
+                    icon="quiz"
+                    className="w-full sm:w-auto"
                   >
-                    <span className="material-symbols-outlined text-[18px]">quiz</span>
                     Viva Prep
-                  </Link>
-                  <button
+                  </FramerButton>
+                  <FramerButton
                     onClick={() => setShowUpload(true)}
-                    className="btn-black-yellow px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press shadow-xs cursor-pointer w-full sm:w-auto"
+                    variant="primary"
+                    size="sm"
+                    icon="upload_file"
+                    className="w-full sm:w-auto"
                   >
-                    <span className="material-symbols-outlined text-[18px]">upload_file</span>
                     Contribute
-                  </button>
+                  </FramerButton>
                 </div>
               </div>
 
@@ -373,13 +377,14 @@ function SubjectDetails() {
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
-                <button
+                <FramerButton
                   onClick={() => setShowUpload(true)}
-                  className="btn-black-yellow px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-1.5 active-press cursor-pointer"
+                  variant="primary"
+                  size="sm"
+                  icon="upload_file"
                 >
-                  <span className="material-symbols-outlined text-[16px]">upload_file</span>
                   Upload {selectedCategory}
-                </button>
+                </FramerButton>
 
                 <span className="text-[11px] sm:text-xs font-black bg-black text-[#FBBF24] border-2 border-[#FBBF24] px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-xs shrink-0">
                   {resourcesLoading ? '...' : filteredResources.length} {filteredResources.length === 1 ? 'Resource' : 'Resources'}
@@ -457,14 +462,16 @@ function SubjectDetails() {
 
                       {/* Action Buttons */}
                       <div className="flex items-center gap-2.5 sm:gap-3 pt-2.5 sm:pt-3 border-t border-black/10">
-                        <Link
+                        <FramerButton
                           to={`/resource/${res.id}`}
                           state={{ resource: res }}
-                          className="btn-black-yellow px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 active-press flex-1"
+                          variant="navy"
+                          size="sm"
+                          icon="visibility"
+                          className="flex-1 justify-center"
                         >
-                          <span className="material-symbols-outlined text-[15px] sm:text-[16px]">visibility</span>
                           View Material
-                        </Link>
+                        </FramerButton>
                         <a
                           href={downloadUrl}
                           download

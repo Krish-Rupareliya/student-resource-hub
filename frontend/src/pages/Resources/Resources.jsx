@@ -4,6 +4,7 @@ import { fetchSemestersCatalog } from '../../services/resources/resourcesApi';
 import { submitResourceUpload } from '../../services/uploads/uploadsApi';
 import { submitResourceRequest } from '../../services/requests/requestsApi';
 import { ToastContainer, useToast } from '../../components/ui/Toast';
+import FramerButton from '../../components/ui/FramerButton';
 
 // ─── Department Stream Definitions ──────────────────────────────
 const DEPARTMENTS = [
@@ -1096,21 +1097,25 @@ export default function Resources() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <a
+                <FramerButton
                   href="#departments"
-                  className="inline-flex items-center gap-2.5 bg-hub-navy hover:bg-slate-800 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-sm cursor-pointer"
+                  variant="navy"
+                  size="lg"
+                  icon="arrow_forward"
+                  shadow="lg"
                 >
-                  <span>Explore Departments</span>
-                  <span className="material-symbols-outlined text-lg leading-none">arrow_forward</span>
-                </a>
+                  Explore Departments
+                </FramerButton>
 
-                <a
+                <FramerButton
                   href="#exam-strategy"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-amber-50 text-hub-navy font-bold px-7 py-3.5 rounded-full border-2 border-amber-300 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 text-sm cursor-pointer"
+                  variant="outline"
+                  size="lg"
+                  icon="analytics"
+                  shadow="sm"
                 >
-                  <span>Exam Blueprint</span>
-                  <span className="material-symbols-outlined text-lg text-amber-600">analytics</span>
-                </a>
+                  Exam Blueprint
+                </FramerButton>
               </div>
             </div>
 
@@ -1127,6 +1132,8 @@ export default function Resources() {
           </div>
         </div>
       </section>
+
+
 
       {/* ─── 2. CHOOSE YOUR DEPARTMENT SECTION ─── */}
       <section id="departments" className="py-14 sm:py-20 relative scroll-mt-24 z-10">
@@ -1198,16 +1205,18 @@ export default function Resources() {
                 </div>
 
                 {/* Action button */}
-                <button
-                  type="button"
-                  onClick={() => navigate(dept.targetRoute)}
-                  className="w-full sm:w-[90%] font-black py-3.5 rounded-full bg-hub-navy hover:bg-[#FF5722] text-white border-2 border-[#0F172A] shadow-[3px_3px_0_#0F172A] hover:shadow-[5px_5px_0_#0F172A] transition-all duration-200 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 flex items-center justify-center gap-2 text-sm mt-auto cursor-pointer"
-                >
-                  <span>Explore Vault</span>
-                  <span className="material-symbols-outlined text-base leading-none transition-transform duration-200 group-hover:translate-x-1">
-                    arrow_forward
-                  </span>
-                </button>
+                <div className="w-full sm:w-[90%] mt-auto">
+                  <FramerButton
+                    onClick={() => navigate(dept.targetRoute)}
+                    variant="primary"
+                    size="md"
+                    icon="arrow_forward"
+                    className="w-full justify-center"
+                    shadow="sm"
+                  >
+                    Explore Vault
+                  </FramerButton>
+                </div>
               </div>
             );})}
           </div>

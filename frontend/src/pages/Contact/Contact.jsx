@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useResourceRequest } from '../../hooks/useResourceRequest';
 import { InlineError } from '../../components/ui/ErrorState';
 import { ToastContainer, useToast } from '../../components/ui/Toast';
-import { ConversationalHeading } from '../../components/ui/TextAnimations';
+import FramerButton from '../../components/ui/FramerButton';
 
 const RESOURCE_TYPES = [
   { id: 'Notes', label: 'Handwritten Notes', icon: 'edit_note' },
@@ -29,18 +29,21 @@ const WORKFLOW_STEPS = [
     title: 'Instant Dispatch',
     desc: 'Your request is categorized and queued in our priority moderation dashboard.',
     icon: 'send',
+    color: 'bg-[#FEF08A] text-[#713F12]',
   },
   {
     step: '02',
     title: 'Peer & Senior Search',
     desc: 'Verified senior contributors and coordinators source or digitize the document.',
     icon: 'manage_search',
+    color: 'bg-[#BAE6FD] text-[#0369A1]',
   },
   {
     step: '03',
     title: 'Verified & Published',
     desc: 'Quality-checked file is uploaded to the Hub and you receive an email link.',
     icon: 'verified',
+    color: 'bg-[#BBF7D0] text-[#14532D]',
   },
 ];
 
@@ -51,11 +54,15 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Are all requested resources free?',
-    a: 'Yes, 100% free. CampusHub is an open student initiative — no paywalls, no premium subscriptions, ever.',
+    a: 'Yes, 100% free. CampusHub is an open student initiative — zero paywalls, zero locked PDFs, and no mandatory fees.',
   },
   {
     q: 'Can I upload my own notes to help other students?',
-    a: 'Absolutely! You can share your notes directly via our community links or reach out through the WhatsApp/Discord channels.',
+    a: 'Absolutely! You can share your notes directly via our community links or reach out through the official WhatsApp & Telegram channels.',
+  },
+  {
+    q: 'Who reviews and verifies the requested files?',
+    a: 'Every file is checked by senior engineering alumni and student coordinators for syllabus alignment, OCR readability, and accuracy before publishing.',
   },
 ];
 
@@ -75,8 +82,7 @@ function Contact() {
     if (status === 'error' && errorMessage) {
       addToast({ message: errorMessage, type: 'error', duration: 5000 });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, errorMessage]);
+  }, [status, errorMessage, addToast]);
 
   const isLoading = status === 'loading';
   const isSuccess = status === 'success';
@@ -89,75 +95,114 @@ function Contact() {
   };
 
   return (
-    <div className="pt-20 bg-[#f8fafc] text-slate-800 font-sans min-h-screen pb-24 relative overflow-x-clip selection:bg-amber-300 selection:text-slate-900">
-      {/* ─── Ambient Canvas & Subtle Grid Pattern ─── */}
+    <div className="pt-20 bg-[#FDFBF7] text-hub-navy font-poppins min-h-screen pb-24 relative overflow-x-clip selection:bg-amber-300 selection:text-hub-navy">
+      {/* ─── Ambient Canvas Vector Layers ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+        {/* Subtle Neo-Brutalist Dot Matrix */}
         <div
-          className="absolute inset-0 opacity-[0.35]"
+          className="absolute inset-0 opacity-[0.3]"
           style={{
             backgroundImage:
-              'linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px)',
-            backgroundSize: '36px 36px',
+              'radial-gradient(#0F172A 1.2px, transparent 1.2px)',
+            backgroundSize: '24px 24px',
           }}
         />
-        <div className="absolute -top-32 -left-20 w-[600px] h-[600px] bg-gradient-to-br from-amber-300/25 via-orange-300/15 to-transparent rounded-full blur-3xl opacity-75" />
-        <div className="absolute top-[30%] -right-24 w-[550px] h-[550px] bg-gradient-to-bl from-sky-300/25 via-indigo-300/15 to-transparent rounded-full blur-3xl opacity-65" />
+        {/* Blurred Organic Blobs */}
+        <div className="absolute top-16 -left-20 w-[480px] h-[480px] bg-amber-200/35 rounded-full blur-3xl lofty-pulse" />
+        <div className="absolute top-[40%] -right-24 w-[520px] h-[520px] bg-sky-200/30 rounded-full blur-3xl lofty-pulse" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 pt-6">
-        {/* ─── HERO HEADER ─── */}
-        <section className="pt-4 pb-6 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 pt-6">
+        {/* ─── 1. BREADCRUMBS & HERO HEADER ─── */}
+        <section className="pt-4 pb-4 max-w-4xl mx-auto text-center space-y-4">
+          {/* Breadcrumb Navigation */}
+          <nav aria-label="Breadcrumb" className="flex items-center justify-center text-xs font-bold text-gray-500 mb-2">
+            <Link to="/" className="hover:text-amber-500 transition-colors">Home</Link>
+            <span className="mx-2 text-gray-400">/</span>
+            <span className="text-hub-navy font-black">Contact &amp; Resource Desk</span>
+          </nav>
+
+          {/* Fulfillment Status Pill */}
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#FEF08A] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] text-[#0F172A] text-xs font-black uppercase tracking-wider">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5722] animate-ping shrink-0" />
             <span>24-Hour Fulfillment Desk</span>
-            <span className="text-amber-400">•</span>
-            <span className="text-slate-600 font-semibold">Community Verified</span>
+            <span className="text-[#0F172A]/40">•</span>
+            <span>Community Verified</span>
           </div>
 
-          <ConversationalHeading
-            prefix="Can't Find What You"
-            highlight="Need?"
-            className="text-3xl sm:text-4xl md:text-5xl text-slate-950 mb-4"
-          />
+          {/* Main Headline with Brush Underline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-hub-navy leading-[1.14] tracking-tight">
+            Can't Find What You{' '}
+            <span className="relative inline-block text-amber-500">
+              Need?
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-amber-400 opacity-90"
+                viewBox="0 0 100 10"
+                preserveAspectRatio="none"
+              >
+                <path d="M 0 7 Q 25 1 50 7 Q 75 13 100 7" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              </svg>
+            </span>
+          </h1>
 
-          <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium mb-6">
-            Submit your subject request below. Our network of student contributors, seniors, and coordinators will track down and verify the material for you.
+          <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium pt-1">
+            Submit your subject request below. Our network of student contributors, seniors, and coordinators will track down, verify, and upload the material for you.
           </p>
 
-          {/* Quick Instant Channels Alert Bar */}
-          <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-bold text-amber-950 max-w-2xl mx-auto shadow-2xs">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-amber-600 text-[20px]">bolt</span>
-              <span>Need urgent mid-sem exam papers in under 5 minutes?</span>
+          {/* Urgent Exam Channel Ticket Bar */}
+          <div className="p-4 rounded-2xl bg-white border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A] flex flex-col sm:flex-row items-center justify-between gap-3.5 text-xs font-black text-[#0F172A] max-w-2xl mx-auto text-left mt-2">
+            <div className="flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-[#FF5722] text-2xl shrink-0">bolt</span>
+              <div>
+                <span className="block font-black text-slate-900">Need urgent mid-sem exam papers in under 5 minutes?</span>
+                <span className="text-[11px] text-slate-500 font-semibold">Join live peer groups for immediate file sharing</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
               <a
                 href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1 rounded-xl bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-black text-[11px] border border-slate-900 shadow-2xs"
+                className="px-3.5 py-1.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5"
               >
-                WhatsApp ↗
+                <span>WhatsApp ↗</span>
               </a>
               <a
                 href="https://t.me/+fP4hKU69AQIwZjI1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1 rounded-xl bg-sky-400 hover:bg-sky-500 text-slate-950 font-black text-[11px] border border-slate-900 shadow-2xs"
+                className="px-3.5 py-1.5 rounded-xl bg-[#38BDF8] hover:bg-sky-400 text-slate-950 font-black text-xs border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5"
               >
-                Telegram ↗
+                <span>Telegram ↗</span>
               </a>
             </div>
           </div>
         </section>
 
-        {/* ─── MAIN GRID (Form + Sidebar) ─── */}
+        {/* ─── 2. MAIN GRID (Interactive Request Form + Sidebar) ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Form Column (7 Cols) */}
+          
+          {/* ── Left Column: Form + Resolution Pipeline (7 Cols) ── */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative overflow-hidden">
-              {/* Left Color Indicator Strip */}
-              <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-400 via-orange-500 to-amber-500" />
+            
+            {/* The Neo-Brutalist Request Form Card */}
+            <div className="bg-white rounded-[32px] p-6 sm:p-8 md:p-10 border-[2.5px] border-[#0F172A] shadow-[6px_6px_0_#0F172A] relative overflow-hidden">
+              
+              {/* Form Card Header */}
+              <div className="flex items-center justify-between pb-5 mb-6 border-b-2 border-slate-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-2xl bg-[#FEF08A] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] flex items-center justify-center text-[#0F172A] shrink-0">
+                    <span className="material-symbols-outlined text-2xl">edit_document</span>
+                  </div>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-black text-hub-navy tracking-tight">Direct Resource Request</h2>
+                    <p className="text-xs text-slate-500 font-semibold">Free student-to-student fulfillment pipeline</p>
+                  </div>
+                </div>
+                <span className="hidden sm:inline-flex px-3 py-1 rounded-full bg-[#0F172A] text-[#FEF08A] text-[10px] font-black uppercase tracking-wider border border-[#0F172A]">
+                  TICKET #DESK-2026
+                </span>
+              </div>
 
               {/* Success Notification Banner */}
               <AnimatePresence>
@@ -166,22 +211,23 @@ function Contact() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="mb-8 p-5 bg-emerald-50 border-2 border-emerald-300 rounded-2xl flex items-start gap-3.5 shadow-xs"
+                    className="mb-8 p-5 bg-[#DCFCE7] border-2 border-[#0F172A] rounded-2xl flex items-start gap-3.5 shadow-[3px_3px_0_#0F172A]"
                   >
-                    <span className="material-symbols-outlined text-emerald-600 text-[28px] shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-emerald-700 text-3xl shrink-0 mt-0.5">
                       check_circle
                     </span>
                     <div className="flex-1">
-                      <h4 className="font-extrabold text-emerald-950 text-base">Request Dispatched Successfully!</h4>
-                      <p className="text-emerald-800 text-xs sm:text-sm mt-1 leading-relaxed font-medium">
+                      <h4 className="font-black text-[#0F172A] text-base">Request Dispatched Successfully!</h4>
+                      <p className="text-emerald-900 text-xs sm:text-sm mt-1 leading-relaxed font-semibold">
                         Our student coordinators have received your request. We will notify you at your email as soon as the file is verified and published.
                       </p>
                       <button
+                        type="button"
                         onClick={reset}
-                        className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors cursor-pointer"
+                        className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-[#FEF08A] text-xs font-black transition-transform hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer shadow-[2px_2px_0_#0F172A]"
                       >
                         <span>Submit Another Request</span>
-                        <span className="material-symbols-outlined text-[14px]">add</span>
+                        <span className="material-symbols-outlined text-sm">add</span>
                       </button>
                     </div>
                   </motion.div>
@@ -190,25 +236,29 @@ function Contact() {
 
               {/* Quick Topic Autofill Presets */}
               <div className="mb-6">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-amber-500 text-[16px]">auto_awesome</span>
-                  <span>Quick-Select Resource Type:</span>
+                <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2.5 flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[#FF5722] text-base">auto_awesome</span>
+                  <span>Quick-Select Resource Category:</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {PRESET_TOPICS.map((preset, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => applyPreset(preset)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${formData.resourceType === preset.type
-                          ? 'bg-amber-400 text-slate-950 border-amber-400 shadow-xs'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-amber-50/70 hover:border-amber-300'
+                  {PRESET_TOPICS.map((preset, idx) => {
+                    const isActive = formData.resourceType === preset.type;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => applyPreset(preset)}
+                        className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black border-2 border-[#0F172A] transition-all cursor-pointer ${
+                          isActive
+                            ? 'bg-[#FF5722] text-white shadow-[2px_2px_0_#0F172A] translate-x-0.5 translate-y-0.5'
+                            : 'bg-[#FFFDF8] text-slate-800 shadow-[3px_3px_0_#0F172A] hover:shadow-[4px_4px_0_#0F172A] hover:-translate-y-0.5 hover:bg-amber-50'
                         }`}
-                    >
-                      {preset.icon && <span className="material-symbols-outlined text-[15px]">{preset.icon}</span>}
-                      <span>{preset.label}</span>
-                    </button>
-                  ))}
+                      >
+                        {preset.icon && <span className="material-symbols-outlined text-base leading-none">{preset.icon}</span>}
+                        <span>{preset.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -218,8 +268,8 @@ function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Subject Code */}
                   <div>
-                    <label htmlFor="subjectCode" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
-                      Subject Code / Name <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                    <label htmlFor="subjectCode" className="block font-black text-xs uppercase tracking-wider text-slate-700 mb-1.5">
+                      Subject Code / Name <span className="text-slate-400 font-bold lowercase">(optional)</span>
                     </label>
                     <input
                       id="subjectCode"
@@ -227,21 +277,21 @@ function Contact() {
                       value={formData.subjectCode}
                       onChange={(e) => handleChange('subjectCode', e.target.value.toUpperCase())}
                       placeholder="e.g. CE0516 or Data Structures"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-semibold text-slate-900 placeholder:text-slate-400"
+                      className="w-full px-4 py-3 rounded-2xl border-2 border-[#0F172A] bg-[#FFFDF8] focus:bg-white focus:shadow-[4px_4px_0_#FF5722] outline-none transition-all text-sm font-bold text-slate-900 placeholder:text-slate-400"
                       disabled={isLoading}
                     />
                   </div>
 
                   {/* Resource Type */}
                   <div>
-                    <label htmlFor="resourceType" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
+                    <label htmlFor="resourceType" className="block font-black text-xs uppercase tracking-wider text-slate-700 mb-1.5">
                       Resource Type <span className="text-rose-500">*</span>
                     </label>
                     <select
                       id="resourceType"
                       value={formData.resourceType}
                       onChange={(e) => handleChange('resourceType', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-semibold text-slate-900 cursor-pointer"
+                      className="w-full px-4 py-3 rounded-2xl border-2 border-[#0F172A] bg-[#FFFDF8] focus:bg-white focus:shadow-[4px_4px_0_#FF5722] outline-none transition-all text-sm font-bold text-slate-900 cursor-pointer"
                       disabled={isLoading}
                     >
                       {RESOURCE_TYPES.map((type) => (
@@ -256,10 +306,10 @@ function Contact() {
                 {/* Message / Description */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label htmlFor="message" className="block font-bold text-xs uppercase tracking-wider text-slate-700">
+                    <label htmlFor="message" className="block font-black text-xs uppercase tracking-wider text-slate-700">
                       Describe What You Need <span className="text-rose-500">*</span>
                     </label>
-                    <span className="text-[11px] font-medium text-slate-400">
+                    <span className="text-[11px] font-mono font-bold text-slate-400">
                       {formData.message?.length || 0} characters
                     </span>
                   </div>
@@ -269,7 +319,7 @@ function Contact() {
                     onChange={(e) => handleChange('message', e.target.value)}
                     placeholder="e.g. Need handwritten notes for Unit 3 of Operating Systems (CE0512) — specifically CPU Scheduling & Deadlocks with diagrams..."
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-medium text-slate-900 placeholder:text-slate-400 resize-none leading-relaxed"
+                    className="w-full px-4 py-3 rounded-2xl border-2 border-[#0F172A] bg-[#FFFDF8] focus:bg-white focus:shadow-[4px_4px_0_#FF5722] outline-none transition-all text-sm font-medium text-slate-900 placeholder:text-slate-400 resize-none leading-relaxed"
                     disabled={isLoading}
                     required
                     aria-required="true"
@@ -279,9 +329,9 @@ function Contact() {
 
                 {/* Email Address */}
                 <div>
-                  <label htmlFor="requesterEmail" className="block font-bold text-xs uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label htmlFor="requesterEmail" className="block font-black text-xs uppercase tracking-wider text-slate-700 mb-1.5">
                     Your Email Address <span className="text-rose-500">*</span>{' '}
-                    <span className="text-slate-400 font-normal lowercase">(must be @gmail.com)</span>
+                    <span className="text-slate-400 font-bold lowercase">(must be @gmail.com)</span>
                   </label>
                   <div className="relative">
                     <input
@@ -292,156 +342,184 @@ function Contact() {
                       placeholder="student@gmail.com"
                       pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
                       title="Please enter a valid @gmail.com address"
-                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50/80 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all text-sm font-semibold text-slate-900 placeholder:text-slate-400"
+                      className="w-full pl-11 pr-4 py-3 rounded-2xl border-2 border-[#0F172A] bg-[#FFFDF8] focus:bg-white focus:shadow-[4px_4px_0_#FF5722] outline-none transition-all text-sm font-bold text-slate-900 placeholder:text-slate-400"
                       disabled={isLoading}
                       required
                       aria-required="true"
                     />
-                    <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] pointer-events-none">
+                    <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none">
                       mail
                     </span>
                   </div>
                 </div>
 
-                {/* Submit Action */}
+                {/* Submit Action Button with Framer Dual-Text Slide Up */}
                 <div className="pt-2">
                   <button
                     type="submit"
                     disabled={isLoading || isSuccess}
-                    className="w-full bg-slate-950 hover:bg-amber-400 text-white hover:text-slate-950 font-black py-4 rounded-2xl text-sm transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                    className="w-full group relative overflow-hidden bg-[#0F172A] hover:bg-[#FF5722] text-white font-black py-4 px-6 rounded-2xl border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A] hover:shadow-[6px_6px_0_#0F172A] hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm uppercase tracking-wider flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
-                      <>
-                        <span className="w-5 h-5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                      <span className="flex items-center gap-2">
+                        <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         <span>Queuing Request...</span>
-                      </>
+                      </span>
                     ) : isSuccess ? (
-                      <>
-                        <span className="material-symbols-outlined text-[20px] text-emerald-400">check_circle</span>
+                      <span className="flex items-center gap-2 text-[#4ADE80]">
+                        <span className="material-symbols-outlined text-xl">check_circle</span>
                         <span>Request Queued in Dashboard!</span>
-                      </>
+                      </span>
                     ) : (
-                      <>
-                        <span className="material-symbols-outlined text-[18px]">send</span>
-                        <span>Submit Resource Request</span>
-                      </>
+                      <span className="relative inline-block overflow-hidden leading-tight py-0.5 flex items-center gap-2">
+                        <span className="inline-flex items-center gap-2 transition-transform duration-300 ease-[cubic-bezier(.44,0,.56,1)] group-hover:-translate-y-full">
+                          <span className="material-symbols-outlined text-lg leading-none">send</span>
+                          <span>Submit Resource Request</span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 inline-flex items-center justify-center gap-2 translate-y-full transition-transform duration-300 ease-[cubic-bezier(.44,0,.56,1)] group-hover:translate-y-0 text-white"
+                        >
+                          <span className="material-symbols-outlined text-lg leading-none">rocket_launch</span>
+                          <span>Dispatch to Coordinators</span>
+                        </span>
+                      </span>
                     )}
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Workflow Pipeline Process Bar */}
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-900 mb-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-amber-500 text-[18px]">sync_alt</span>
+            {/* Workflow Pipeline Process Bar (3 Bento Cards) */}
+            <div className="bg-white rounded-[28px] p-6 sm:p-7 border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+              <h3 className="font-black text-sm uppercase tracking-wider text-hub-navy mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-amber-500 text-xl">sync_alt</span>
                 <span>How Your Request Gets Resolved</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {WORKFLOW_STEPS.map((step) => (
-                  <div key={step.step} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col justify-between">
+                  <div
+                    key={step.step}
+                    className="p-4 rounded-2xl bg-[#FFFDF8] border-2 border-[#0F172A] shadow-[2.5px_2.5px_0_#0F172A] hover:-translate-y-1 hover:shadow-[4px_4px_0_#0F172A] transition-all flex flex-col justify-between"
+                  >
                     <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-black font-mono text-amber-600 bg-amber-100 px-2 py-0.5 rounded-md">
+                      <div className="flex items-center justify-between mb-2.5">
+                        <span className="text-[10px] font-black font-mono px-2 py-0.5 rounded-md border border-[#0F172A] shadow-xs bg-[#0F172A] text-[#FEF08A]">
                           STEP {step.step}
                         </span>
-                        <span className="material-symbols-outlined text-[18px] text-slate-400">{step.icon}</span>
+                        <div className={`w-8 h-8 rounded-lg border border-[#0F172A] flex items-center justify-center ${step.color}`}>
+                          <span className="material-symbols-outlined text-base leading-none">{step.icon}</span>
+                        </div>
                       </div>
-                      <h4 className="font-bold text-xs text-slate-900 mb-1">{step.title}</h4>
-                      <p className="text-slate-500 text-[11px] leading-relaxed font-medium">{step.desc}</p>
+                      <h4 className="font-black text-xs text-slate-900 mb-1">{step.title}</h4>
+                      <p className="text-slate-600 text-[11px] leading-relaxed font-semibold">{step.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
           </div>
 
-          {/* Sidebar Column (5 Cols) */}
+          {/* ── Right Column: Direct Community & Guarantee Sidebar (5 Cols) ── */}
           <div className="lg:col-span-5 space-y-6">
+            
             {/* Live Community Direct Connect Card */}
-            <div className="bg-[#0B132B] rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-xl border border-white/10">
-              <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <svg className="w-full h-full stroke-white" xmlns="http://www.w3.org/2000/svg" fill="none">
-                  <pattern id="request-side-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                    <path d="M 24 0 L 0 0 0 24" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                  </pattern>
-                  <rect width="100%" height="100%" fill="url(#request-side-grid)" />
-                </svg>
-              </div>
-
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="bg-[#0F172A] text-white rounded-[32px] p-6 sm:p-8 border-2 border-[#0F172A] shadow-[6px_6px_0_#FF5722] relative overflow-hidden">
+              <div className="relative z-10 space-y-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF08A] text-[#0F172A] text-xs font-black uppercase tracking-wider border-2 border-[#0F172A]">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>Real-Time Peer Help</span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black mb-2 tracking-tight text-white">
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
                   Need an Answer in Minutes?
                 </h3>
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
-                  Connect with batch seniors, top students, and subject moderators on our official WhatsApp &amp; Discord student groups.
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium">
+                  Connect with batch seniors, rank holders, and subject moderators on our official student channels.
                 </p>
 
-                <div className="space-y-3">
-                  <a
+                <div className="space-y-3 pt-2">
+                  <FramerButton
                     href="https://chat.whatsapp.com/GwqyqTTNYQK18JsJSfnmFB"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-5 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
+                    variant="primary"
+                    size="md"
+                    icon="chat"
+                    shadow="sm"
+                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black border-2 border-[#0F172A]"
                   >
-                    <span className="material-symbols-outlined text-[18px]">chat</span>
-                    <span>Join WhatsApp Student Community</span>
-                  </a>
+                    Join WhatsApp Community
+                  </FramerButton>
 
-                  <a
+                  <FramerButton
                     href="https://t.me/+fP4hKU69AQIwZjI1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-5 rounded-2xl bg-[#229ED9] hover:bg-[#1d8bc0] text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
+                    variant="sky"
+                    size="md"
+                    icon="send"
+                    shadow="sm"
+                    className="w-full bg-[#38BDF8] hover:bg-sky-400 text-slate-950 font-black border-2 border-[#0F172A]"
                   >
-                    <span className="material-symbols-outlined text-[18px]">send</span>
-                    <span>Join Telegram Channel</span>
-                  </a>
+                    Join Telegram Channel
+                  </FramerButton>
 
-                  <Link
+                  <FramerButton
                     to="/resources"
-                    className="w-full py-3.5 px-5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/20 transition-all text-center"
+                    variant="outline"
+                    size="md"
+                    icon="grid_view"
+                    shadow="sm"
+                    className="w-full bg-white hover:bg-slate-100 text-slate-950 font-black border-2 border-[#0F172A]"
                   >
-                    <span className="material-symbols-outlined text-[18px]">grid_view</span>
-                    <span>Browse Existing Catalog</span>
-                  </Link>
+                    Browse Existing Catalog
+                  </FramerButton>
                 </div>
               </div>
             </div>
 
             {/* Quality & Trust Cards */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-4">
-              <h3 className="font-extrabold text-sm text-slate-900 tracking-tight flex items-center gap-2 mb-3">
-                <span className="material-symbols-outlined text-emerald-500 text-[20px]">verified_user</span>
+            <div className="bg-white rounded-[28px] p-6 border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A] space-y-4">
+              <h3 className="font-black text-sm text-hub-navy uppercase tracking-wider flex items-center gap-2 mb-2">
+                <span className="material-symbols-outlined text-emerald-600 text-xl">verified_user</span>
                 <span>The CampusHub Guarantee</span>
               </h3>
 
               <div className="space-y-3 text-xs">
-                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200/60">
-                  <span className="material-symbols-outlined text-amber-500 text-[20px] shrink-0 mt-0.5">
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FFFDF8] border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A]">
+                  <span className="material-symbols-outlined text-amber-500 text-xl shrink-0 mt-0.5">
                     timer
                   </span>
                   <div>
-                    <h4 className="font-bold text-slate-900 mb-0.5">24-Hour Moderation Cycle</h4>
-                    <p className="text-slate-500 leading-relaxed font-medium">
+                    <h4 className="font-black text-slate-900 mb-0.5">24-Hour Moderation Cycle</h4>
+                    <p className="text-slate-600 leading-relaxed font-semibold">
                       Requests are directly reviewed by department coordinators every morning and evening.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200/60">
-                  <span className="material-symbols-outlined text-sky-500 text-[20px] shrink-0 mt-0.5">
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FFFDF8] border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A]">
+                  <span className="material-symbols-outlined text-sky-500 text-xl shrink-0 mt-0.5">
                     rule
                   </span>
                   <div>
-                    <h4 className="font-bold text-slate-900 mb-0.5">Handwritten &amp; OCR Quality Check</h4>
-                    <p className="text-slate-500 leading-relaxed font-medium">
+                    <h4 className="font-black text-slate-900 mb-0.5">Handwritten &amp; OCR Quality Check</h4>
+                    <p className="text-slate-600 leading-relaxed font-semibold">
                       No blurry photocopies. Notes and PYQs are scanned, indexed, and formatted for optimal printing.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FFFDF8] border-2 border-[#0F172A] shadow-[2px_2px_0_#0F172A]">
+                  <span className="material-symbols-outlined text-emerald-500 text-xl shrink-0 mt-0.5">
+                    lock_open
+                  </span>
+                  <div>
+                    <h4 className="font-black text-slate-900 mb-0.5">100% Free &amp; Open Forever</h4>
+                    <p className="text-slate-600 leading-relaxed font-semibold">
+                      Zero paywalls, zero premium tiers. All community fulfilled files are published for all students.
                     </p>
                   </div>
                 </div>
@@ -449,29 +527,33 @@ function Contact() {
             </div>
 
             {/* Interactive FAQs Accordion */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              <h3 className="font-extrabold text-sm text-slate-900 tracking-tight mb-3 flex items-center gap-2">
-                <span className="material-symbols-outlined text-slate-400 text-[18px]">help</span>
+            <div className="bg-white rounded-[28px] p-6 border-2 border-[#0F172A] shadow-[4px_4px_0_#0F172A]">
+              <h3 className="font-black text-sm text-hub-navy uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-amber-500 text-xl">help</span>
                 <span>Frequently Asked Questions</span>
               </h3>
 
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {FAQ_ITEMS.map((faq, index) => {
                   const isOpen = openFaq === index;
                   return (
                     <div
                       key={index}
-                      className="rounded-2xl border border-slate-200/70 overflow-hidden transition-colors"
+                      className="rounded-2xl border-2 border-[#0F172A] bg-[#FFFDF8] overflow-hidden shadow-[2px_2px_0_#0F172A] transition-all"
                     >
                       <button
                         type="button"
                         onClick={() => setOpenFaq(isOpen ? null : index)}
-                        className="w-full p-3.5 text-left text-xs font-bold text-slate-900 hover:bg-slate-50 flex items-center justify-between gap-2 cursor-pointer transition-colors"
+                        className="w-full p-3.5 text-left text-xs font-black text-slate-900 hover:bg-amber-50/50 flex items-center justify-between gap-2 cursor-pointer transition-colors"
                       >
                         <span>{faq.q}</span>
-                        <span className={`material-symbols-outlined text-[16px] text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                          className="material-symbols-outlined text-base text-slate-600 shrink-0"
+                        >
                           expand_more
-                        </span>
+                        </motion.span>
                       </button>
                       <AnimatePresence>
                         {isOpen && (
@@ -479,7 +561,8 @@ function Contact() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="px-3.5 pb-3.5 text-[11px] text-slate-600 leading-relaxed font-medium border-t border-slate-100"
+                            transition={{ duration: 0.2 }}
+                            className="px-3.5 pb-3.5 text-[11px] text-slate-700 leading-relaxed font-semibold border-t-2 border-[#0F172A]/10 pt-2.5"
                           >
                             {faq.a}
                           </motion.div>
@@ -490,7 +573,9 @@ function Contact() {
                 })}
               </div>
             </div>
+
           </div>
+
         </div>
       </div>
 
