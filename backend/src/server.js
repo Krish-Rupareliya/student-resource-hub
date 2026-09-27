@@ -14,11 +14,22 @@ async function startServer() {
     await prisma.$connect();
     console.log('✅  Database connected');
 
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`🚀  Server running on http://localhost:${PORT}`);
       console.log(`📁  Uploads served at http://localhost:${PORT}/uploads`);
       console.log(`🩺  Health check at http://localhost:${PORT}/health`);
       console.log(`🌍  Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+
+    server.on('error', async (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.error(`❌  Port ${PORT} is already in use by another running process.`);
+        console.error(`👉  Close the other process or run: Stop-Process -Id (Get-NetTCPConnection -LocalPort ${PORT} -State Listen).OwningProcess -Force`);
+      } else {
+        console.error('❌  Server error:', err);
+      }
+      await prisma.$disconnect();
+      process.exit(1);
     });
   } catch (err) {
     console.error('❌  Failed to start server:', err);
