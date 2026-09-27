@@ -77,6 +77,9 @@ const SUBJECTS_BY_SEMESTER = {
     { code: 'CE0504', title: 'Mobile Application Development',   shortForm: 'MAD',     icon: 'smartphone', cardType: 'premium-card', path: '/subject/mobile-dev',    sortOrder: 4, description: 'Android/iOS development fundamentals' },
     { code: 'CE0505', title: 'Information Security',             shortForm: 'IS',      icon: 'lock', cardType: 'premium-card', path: '/subject/info-security', sortOrder: 5, description: 'Cryptography, network security, and ethical hacking' },
     { code: 'CE0516', title: 'Design and Analysis of Algorithms',shortForm: 'DAA',     icon: 'account_tree', cardType: 'premium-card',   path: '/subject/daa',       sortOrder: 6, description: 'Advanced algorithms and complexity theory' },
+    { code: 'CE0517', title: 'Microprocessing and Interfacing',  shortForm: 'MPI',     icon: 'memory', cardType: 'premium-card', path: '/subject/mpi',       sortOrder: 7, description: 'Microprocessor 8085 and 8086 architectures and interfacing' },
+    { code: 'CE0518', title: 'Computer Networks',                shortForm: 'CN',      icon: 'router', cardType: 'premium-card',   path: '/subject/cn',        sortOrder: 8, description: 'Computer Networks protocols, layers, and architectures' },
+    { code: 'CE0522', title: 'Web Technology',                   shortForm: 'WT',      icon: 'language', cardType: 'premium-card', path: '/subject/wt',        sortOrder: 9, description: 'HTML5, CSS3, JavaScript, AngularJS, PHP, and MySQL' },
   ],
   6: [
     { code: 'CE0601', title: 'Machine Learning',                 shortForm: 'ML',      icon: 'model_training', cardType: 'pinned-card',   path: '/subject/ml',            sortOrder: 1, description: 'Supervised, unsupervised, and reinforcement learning' },
