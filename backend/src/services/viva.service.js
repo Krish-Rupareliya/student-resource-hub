@@ -71,12 +71,40 @@ const VIVA_KNOWLEDGE_BASE = {
   }
 };
 
+// ─── High-Concurrency In-Memory Cache for Viva ──────────────
+const vivaCache = new Map();
+const inFlightVivaPromises = new Map();
+const VIVA_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+function clearVivaCache(subjectCode = null) {
+  if (subjectCode) {
+    vivaCache.delete(subjectCode.toUpperCase().trim());
+  } else {
+    vivaCache.clear();
+  }
+}
+
 /**
  * Fetch viva metadata, questions, and experiments for any subject.
  * Automatically adapts if subject exists in knowledge base or dynamically builds template.
+ * Protected by 10-minute cache & in-flight Promise deduplication for 100 concurrent users.
  */
 async function getVivaDataForSubject(subjectCode) {
   const code = (subjectCode || '').toUpperCase().trim();
+  if (!code) return null;
+
+  const now = Date.now();
+  const cached = vivaCache.get(code);
+  if (cached && now - cached.timestamp < VIVA_CACHE_TTL) {
+    return cached.data;
+  }
+
+  if (inFlightVivaPromises.has(code)) {
+    return inFlightVivaPromises.get(code);
+  }
+
+  const promise = (async () => {
+    try {
   
   // Also check if subject exists in Prisma DB to get live subject details
   let dbSubject = null;
@@ -210,21 +238,36 @@ function slugifySection(section) {
     defaultSecs.forEach((sec) => dynamicSectionsMap.set(sec.id, sec));
   }
 
-  return {
-    subjectCode: code,
-    subjectName: dbSubject?.title || baseData?.subjectName || `Subject ${code}`,
-    department: dbSubject?.semester?.department?.name || baseData?.department || 'Engineering',
-    semester: dbSubject?.semester?.semesterNumber || baseData?.semester || 5,
-    syllabusOverview: dbSubject?.description || baseData?.syllabusOverview || 'Course viva questions and solutions.',
-    hasPracticals: true,
-    sections: Array.from(dynamicSectionsMap.values()),
-    experiments: baseData?.experiments || [],
-    questions: formattedQuestions, // Purely dynamic from DB!
-    isDbManaged: true,
-  };
+    const result = {
+      subjectCode: code,
+      subjectName: dbSubject?.title || baseData?.subjectName || `Subject ${code}`,
+      department: dbSubject?.semester?.department?.name || baseData?.department || 'Engineering',
+      semester: dbSubject?.semester?.semesterNumber || baseData?.semester || 5,
+      syllabusOverview: dbSubject?.description || baseData?.syllabusOverview || 'Course viva questions and solutions.',
+      hasPracticals: true,
+      sections: Array.from(dynamicSectionsMap.values()),
+      experiments: baseData?.experiments || [],
+      questions: formattedQuestions, // Purely dynamic from DB!
+      isDbManaged: true,
+    };
+
+    vivaCache.set(code, { data: result, timestamp: Date.now() });
+    return result;
+  } catch (err) {
+    console.error(`[viva.service] Error building viva data for ${code}:`, err.message);
+    if (cached) return cached.data;
+    throw err;
+  } finally {
+    inFlightVivaPromises.delete(code);
+  }
+  })();
+
+  inFlightVivaPromises.set(code, promise);
+  return promise;
 }
 
 module.exports = {
   getVivaDataForSubject,
+  clearVivaCache,
   VIVA_KNOWLEDGE_BASE
 };

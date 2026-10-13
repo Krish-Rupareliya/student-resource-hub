@@ -28,6 +28,16 @@ let cachedHomepageSettingsTime = 0;
 let inFlightHomepageSettingsPromise = null;
 const HOMEPAGE_SETTINGS_CACHE_TTL = 60 * 1000; // 60 seconds
 
+let cachedOverviewStats = null;
+let cachedOverviewStatsTime = 0;
+let inFlightOverviewStatsPromise = null;
+const OVERVIEW_STATS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+let cachedAnnouncements = null;
+let cachedAnnouncementsTime = 0;
+let inFlightAnnouncementsPromise = null;
+const ANNOUNCEMENTS_CACHE_TTL = 3 * 60 * 1000; // 3 minutes
+
 const resourcesCache = new Map();
 const resourceDetailCache = new Map();
 const RESOURCES_CACHE_TTL = 30 * 1000; // 30 seconds
@@ -55,6 +65,14 @@ function clearPublicCache(tag = 'all') {
   if (tag === 'settings' || tag === 'all') {
     cachedHomepageSettings = null;
     cachedHomepageSettingsTime = 0;
+  }
+  if (tag === 'announcements' || tag === 'all') {
+    cachedAnnouncements = null;
+    cachedAnnouncementsTime = 0;
+  }
+  if (tag === 'stats' || tag === 'all' || tag === 'resources' || tag === 'catalog') {
+    cachedOverviewStats = null;
+    cachedOverviewStatsTime = 0;
   }
   if (tag === 'resources') {
     resourcesCache.clear();
@@ -631,62 +649,101 @@ async function getHomepageSettings() {
 }
 
 /**
- * Public Platform Overview Telemetry & Resource Counts
+ * Public Platform Overview Telemetry & Resource Counts.
+ * Protected by 5-minute in-memory cache and in-flight Promise deduplication.
+ * Prevents 100 concurrent students from saturating Aiven free-tier connection pool.
  */
 async function getOverviewStats() {
-  try {
-    const [resourceCount, subjectCount, departmentCount, oppCount, subCount] = await Promise.all([
-      prisma.resource.count({ where: { isActive: true } }),
-      prisma.subject.count(),
-      prisma.department.count(),
-      prisma.opportunity.count({ where: { isActive: true } }),
-      prisma.subscriber.count(),
-    ]);
-
-    return {
-      totalResources: resourceCount,
-      totalSubjects: subjectCount,
-      totalDepartments: departmentCount,
-      activeOpportunities: oppCount,
-      totalSubscribers: subCount,
-      displayResources: resourceCount > 0 ? `${resourceCount}+` : '10K+',
-      displayStudents: subCount > 0 ? `${subCount}+` : '2,500+',
-      displaySubjects: subjectCount > 0 ? `${subjectCount}+` : '38+',
-      displayOpportunities: oppCount > 0 ? `${oppCount}+` : '100+',
-      passRate: '99.2%',
-    };
-  } catch (err) {
-    console.error('[public.service] getOverviewStats failed:', err.message);
-    return {
-      totalResources: 1200,
-      totalSubjects: 38,
-      totalDepartments: 3,
-      activeOpportunities: 25,
-      totalSubscribers: 2500,
-      displayResources: '10K+',
-      displayStudents: '2,500+',
-      displaySubjects: '38+',
-      displayOpportunities: '100+',
-      passRate: '99.2%',
-    };
+  const now = Date.now();
+  if (cachedOverviewStats && now - cachedOverviewStatsTime < OVERVIEW_STATS_CACHE_TTL) {
+    return cachedOverviewStats;
   }
+  if (inFlightOverviewStatsPromise) {
+    return inFlightOverviewStatsPromise;
+  }
+
+  inFlightOverviewStatsPromise = (async () => {
+    try {
+      const [resourceCount, subjectCount, departmentCount, oppCount, subCount] = await Promise.all([
+        prisma.resource.count({ where: { isActive: true } }),
+        prisma.subject.count(),
+        prisma.department.count(),
+        prisma.opportunity.count({ where: { isActive: true } }),
+        prisma.subscriber.count(),
+      ]);
+
+      const result = {
+        totalResources: resourceCount,
+        totalSubjects: subjectCount,
+        totalDepartments: departmentCount,
+        activeOpportunities: oppCount,
+        totalSubscribers: subCount,
+        displayResources: resourceCount > 0 ? `${resourceCount}+` : '10K+',
+        displayStudents: subCount > 0 ? `${subCount}+` : '2,500+',
+        displaySubjects: subjectCount > 0 ? `${subjectCount}+` : '38+',
+        displayOpportunities: oppCount > 0 ? `${oppCount}+` : '100+',
+        passRate: '99.2%',
+      };
+
+      cachedOverviewStats = result;
+      cachedOverviewStatsTime = Date.now();
+      return result;
+    } catch (err) {
+      console.error('[public.service] getOverviewStats failed:', err.message);
+      if (cachedOverviewStats) return cachedOverviewStats;
+      return {
+        totalResources: 1200,
+        totalSubjects: 38,
+        totalDepartments: 3,
+        activeOpportunities: 25,
+        totalSubscribers: 2500,
+        displayResources: '10K+',
+        displayStudents: '2,500+',
+        displaySubjects: '38+',
+        displayOpportunities: '100+',
+        passRate: '99.2%',
+      };
+    } finally {
+      inFlightOverviewStatsPromise = null;
+    }
+  })();
+
+  return inFlightOverviewStatsPromise;
 }
 
 /**
- * Retrieve public announcements for ticker tape and alerts
+ * Retrieve public announcements for ticker tape and alerts.
+ * Protected by 3-minute in-memory cache and in-flight Promise deduplication.
  */
 async function getAnnouncements() {
-  try {
-    const items = await prisma.announcement.findMany({
-      where: { isActive: true },
-      orderBy: { createdAt: 'desc' },
-      take: 10,
-    });
-    return items;
-  } catch (err) {
-    console.error('[public.service] getAnnouncements failed:', err.message);
-    return [];
+  const now = Date.now();
+  if (cachedAnnouncements && now - cachedAnnouncementsTime < ANNOUNCEMENTS_CACHE_TTL) {
+    return cachedAnnouncements;
   }
+  if (inFlightAnnouncementsPromise) {
+    return inFlightAnnouncementsPromise;
+  }
+
+  inFlightAnnouncementsPromise = (async () => {
+    try {
+      const items = await prisma.announcement.findMany({
+        where: { isActive: true },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+      });
+      cachedAnnouncements = items;
+      cachedAnnouncementsTime = Date.now();
+      return items;
+    } catch (err) {
+      console.error('[public.service] getAnnouncements failed:', err.message);
+      if (cachedAnnouncements) return cachedAnnouncements;
+      return [];
+    } finally {
+      inFlightAnnouncementsPromise = null;
+    }
+  })();
+
+  return inFlightAnnouncementsPromise;
 }
 
 module.exports = {

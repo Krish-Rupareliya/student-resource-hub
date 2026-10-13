@@ -104,8 +104,9 @@ export default function CommandPalette({ isOpen, onClose }) {
   const itemRefs = useRef([]);
   const navigate = useNavigate();
 
-  // Load live catalog dynamically whenever the command palette is opened or mounted
+  // Load live catalog dynamically only when the command palette is opened
   useEffect(() => {
+    if (!isOpen) return;
     let isMounted = true;
     fetchSemestersCatalog()
       .then((data) => {

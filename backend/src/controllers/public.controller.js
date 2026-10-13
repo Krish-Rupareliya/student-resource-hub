@@ -208,6 +208,28 @@ async function getAnnouncements(req, res, next) {
   }
 }
 
+// GET /api/ping — Database Keepalive & Pool Warmer for 14-min cron
+async function pingDatabase(req, res) {
+  try {
+    const startTime = Date.now();
+    await prisma.$queryRaw`SELECT 1`;
+    const latencyMs = Date.now() - startTime;
+    return res.json({
+      status: 'ok',
+      db: 'connected',
+      latencyMs,
+      timestamp: new Date().toISOString(),
+      message: 'Aiven MySQL connection pool is warm and active.',
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 'error',
+      db: 'disconnected',
+      message: err.message,
+    });
+  }
+}
+
 module.exports = {
   getSemesters,
   getResources,
@@ -221,5 +243,6 @@ module.exports = {
   getHomepageSettings,
   getOverviewStats,
   getAnnouncements,
+  pingDatabase,
 };
 

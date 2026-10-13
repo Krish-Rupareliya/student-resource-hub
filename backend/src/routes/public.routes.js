@@ -27,6 +27,9 @@ const submissionLimiter = rateLimit({
   },
 });
 
+// ─── GET /api/ping (Database Pool Warmer & Cron Keepalive) ────
+router.get('/ping', publicController.pingDatabase);
+
 // ─── GET /api/categories/semesters ───────────────────────────
 router.get('/categories/semesters', publicController.getSemesters);
 
